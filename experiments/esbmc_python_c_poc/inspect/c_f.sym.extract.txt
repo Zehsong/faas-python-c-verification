@@ -1,0 +1,894 @@
+1-Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+2-Parsing simple.c
+3-Converting
+4-
+5-Symbols:
+6:Number of symbols: 87
+7-
+8-Symbol......: c:@F@__ESBMC_assume
+9-Module......: esbmc_intrinsics
+10-Base name...: __ESBMC_assume
+11-Mode........: C
+12-Type........: void (_Bool)
+13-Value.......: 
+14-Flags.......: lvalue
+15:Location....: file esbmc_intrinsics.h line 1 column 1
+16-
+17-Symbol......: c:@F@__ESBMC_assert
+18-Module......: esbmc_intrinsics
+19-Base name...: __ESBMC_assert
+20-Mode........: C
+21-Type........: void (_Bool, const signed char *)
+22-Value.......: 
+23-Flags.......: lvalue
+24:Location....: file esbmc_intrinsics.h line 2 column 1
+25-
+26-Symbol......: c:@F@__ESBMC_cover
+27-Module......: esbmc_intrinsics
+28-Base name...: __ESBMC_cover
+29-Mode........: C
+30-Type........: void (_Bool)
+31-Value.......: 
+32-Flags.......: lvalue
+33:Location....: file esbmc_intrinsics.h line 3 column 1
+34-
+35-Symbol......: c:@F@__ESBMC_same_object
+36-Module......: esbmc_intrinsics
+37-Base name...: __ESBMC_same_object
+38-Mode........: C
+39-Type........: _Bool (const void *, const void *)
+40-Value.......: 
+41-Flags.......: lvalue
+42:Location....: file esbmc_intrinsics.h line 4 column 1
+43-
+44-Symbol......: c:@F@__ESBMC_yield
+45-Module......: esbmc_intrinsics
+46-Base name...: __ESBMC_yield
+47-Mode........: C
+48-Type........: void ()
+49-Value.......: 
+50-Flags.......: lvalue
+51:Location....: file esbmc_intrinsics.h line 5 column 1
+52-
+53-Symbol......: c:@F@__ESBMC_atomic_begin
+54-Module......: esbmc_intrinsics
+55-Base name...: __ESBMC_atomic_begin
+56-Mode........: C
+57-Type........: void ()
+58-Value.......: 
+59-Flags.......: lvalue
+60:Location....: file esbmc_intrinsics.h line 6 column 1
+61-
+62-Symbol......: c:@F@__ESBMC_atomic_end
+63-Module......: esbmc_intrinsics
+64-Base name...: __ESBMC_atomic_end
+65-Mode........: C
+66-Type........: void ()
+67-Value.......: 
+68-Flags.......: lvalue
+69:Location....: file esbmc_intrinsics.h line 7 column 1
+70-
+71-Symbol......: c:@F@__ESBMC_init_object
+72-Module......: esbmc_intrinsics
+73-Base name...: __ESBMC_init_object
+74-Mode........: C
+75-Type........: void (void *)
+76-Value.......: 
+77-Flags.......: lvalue
+78:Location....: file esbmc_intrinsics.h line 10 column 1
+79-
+80-Symbol......: c:@F@__ESBMC_POINTER_OBJECT
+81-Module......: esbmc_intrinsics
+82-Base name...: __ESBMC_POINTER_OBJECT
+83-Mode........: C
+84-Type........: unsigned long int (const void *)
+85-Value.......: 
+86-Flags.......: lvalue
+87:Location....: file esbmc_intrinsics.h line 13 column 1
+88-
+89-Symbol......: c:@F@__ESBMC_POINTER_OFFSET
+90-Module......: esbmc_intrinsics
+91-Base name...: __ESBMC_POINTER_OFFSET
+92-Mode........: C
+93-Type........: signed long int (const void *)
+94-Value.......: 
+95-Flags.......: lvalue
+96:Location....: file esbmc_intrinsics.h line 14 column 1
+97-
+98-Symbol......: c:@__ESBMC_alloc
+99-Module......: esbmc_intrinsics
+100-Base name...: __ESBMC_alloc
+101-Mode........: C
+102-Type........: _Bool [INFINITY()]
+103-Value.......: ARRAY_OF(0)
+104:Flags.......: lvalue static_lifetime
+105:Location....: file esbmc_intrinsics.h line 17 column 1
+106-
+107-Symbol......: c:@__ESBMC_is_dynamic
+108-Module......: esbmc_intrinsics
+109-Base name...: __ESBMC_is_dynamic
+110-Mode........: C
+111-Type........: _Bool [INFINITY()]
+112-Value.......: ARRAY_OF(0)
+113:Flags.......: lvalue static_lifetime
+114:Location....: file esbmc_intrinsics.h line 20 column 1
+115-
+116-Symbol......: c:@__ESBMC_alloc_size
+117-Module......: esbmc_intrinsics
+118-Base name...: __ESBMC_alloc_size
+119-Mode........: C
+120-Type........: unsigned long int [INFINITY()]
+121-Value.......: { 0 }
+122:Flags.......: lvalue static_lifetime
+123:Location....: file esbmc_intrinsics.h line 23 column 1
+124-
+125-Symbol......: c:@F@__ESBMC_get_object_size
+126-Module......: esbmc_intrinsics
+127-Base name...: __ESBMC_get_object_size
+128-Mode........: C
+129-Type........: unsigned long int (const void *)
+130-Value.......: 
+131-Flags.......: lvalue
+132:Location....: file esbmc_intrinsics.h line 27 column 1
+133-
+134:Symbol......: c:@F@__ESBMC_is_fresh
+135-Module......: esbmc_intrinsics
+136:Base name...: __ESBMC_is_fresh
+137-Mode........: C
+138-Type........: _Bool (void *, unsigned long int)
+139-Value.......: 
+140-Flags.......: lvalue
+141:Location....: file esbmc_intrinsics.h line 35 column 1
+142-
+143-Symbol......: c:@F@__ESBMC_is_little_endian
+144-Module......: esbmc_intrinsics
+145-Base name...: __ESBMC_is_little_endian
+146-Mode........: C
+147-Type........: _Bool ()
+148-Value.......: 
+149-Flags.......: lvalue
+150:Location....: file esbmc_intrinsics.h line 37 column 1
+151-
+152-Symbol......: c:@__ESBMC_rounding_mode
+153-Module......: esbmc_intrinsics
+154-Base name...: __ESBMC_rounding_mode
+155-Mode........: C
+156-Type........: signed int
+157-Value.......: 0
+158:Flags.......: lvalue static_lifetime
+159:Location....: file esbmc_intrinsics.h line 39 column 1
+160-
+161-Symbol......: c:@F@__ESBMC_memset
+162-Module......: esbmc_intrinsics
+163-Base name...: __ESBMC_memset
+164-Mode........: C
+165-Type........: void * (void *, signed int, unsigned long int)
+166-Value.......: 
+167-Flags.......: lvalue
+168:Location....: file esbmc_intrinsics.h line 41 column 1
+169-
+170-Symbol......: c:@F@__ESBMC_memcpy
+171-Module......: esbmc_intrinsics
+172-Base name...: __ESBMC_memcpy
+173-Mode........: C
+174-Type........: void * (void *, const void *, unsigned long int)
+175-Value.......: 
+176-Flags.......: lvalue
+177:Location....: file esbmc_intrinsics.h line 42 column 1
+178-
+179-Symbol......: c:@F@__ESBMC_memmove
+180-Module......: esbmc_intrinsics
+181-Base name...: __ESBMC_memmove
+182-Mode........: C
+183-Type........: void * (void *, const void *, unsigned long int)
+184-Value.......: 
+185-Flags.......: lvalue
+186:Location....: file esbmc_intrinsics.h line 43 column 1
+187-
+188-Symbol......: c:@F@__ESBMC_memchr
+189-Module......: esbmc_intrinsics
+190-Base name...: __ESBMC_memchr
+191-Mode........: C
+192-Type........: void * (const void *, signed int, unsigned long int)
+193-Value.......: 
+194-Flags.......: lvalue
+195:Location....: file esbmc_intrinsics.h line 44 column 1
+196-
+197-Symbol......: c:@F@__ESBMC_memcmp
+198-Module......: esbmc_intrinsics
+199-Base name...: __ESBMC_memcmp
+200-Mode........: C
+201-Type........: signed int (const void *, const void *, unsigned long int)
+202-Value.......: 
+203-Flags.......: lvalue
+204:Location....: file esbmc_intrinsics.h line 45 column 1
+205-
+206-Symbol......: c:@F@__ESBMC_bitcast
+207-Module......: esbmc_intrinsics
+208-Base name...: __ESBMC_bitcast
+209-Mode........: C
+210-Type........: void (void *, void *)
+211-Value.......: 
+212-Flags.......: lvalue
+213:Location....: file esbmc_intrinsics.h line 49 column 1
+214-
+215-Symbol......: c:@F@__ESBMC_memory_leak_checks
+216-Module......: esbmc_intrinsics
+217-Base name...: __ESBMC_memory_leak_checks
+218-Mode........: C
+219-Type........: void ()
+220-Value.......: 
+221-Flags.......: lvalue
+222:Location....: file esbmc_intrinsics.h line 53 column 1
+223-
+224-Symbol......: c:@F@__ESBMC_pthread_start_main_hook
+225-Module......: esbmc_intrinsics
+226-Base name...: __ESBMC_pthread_start_main_hook
+227-Mode........: C
+228-Type........: void ()
+229-Value.......: 
+230-{
+231-
+232-__ESBMC_HIDE:
+233-  ;
+234-
+235-atomic_begin();
+236-
+237-num_total_threads++;
+238-
+239-num_threads_running++;
+240-
+241-atomic_end();
+242-
+243-}
+244-Flags.......: lvalue
+245:Location....: file esbmc_intrinsics.h line 58 column 1
+246-
+247-Symbol......: c:@F@__ESBMC_pthread_end_main_hook
+248-Module......: esbmc_intrinsics
+249-Base name...: __ESBMC_pthread_end_main_hook
+250-Mode........: C
+251-Type........: void ()
+252-Value.......: 
+253-{
+254-
+255-__ESBMC_HIDE:
+256-  ;
+257-
+258-atomic_begin();
+259-
+260-num_threads_running--;
+261-
+262-}
+263-Flags.......: lvalue
+264:Location....: file esbmc_intrinsics.h line 59 column 1
+265-
+266-Symbol......: c:@F@__ESBMC_atexit_handler
+267-Module......: esbmc_intrinsics
+268-Base name...: __ESBMC_atexit_handler
+269-Mode........: C
+270-Type........: void ()
+271-Value.......: 
+272-{
+273-
+274-__ESBMC_HIDE:
+275-  ;
+276-
+277-while(atexit_count > 0)
+278-  
+279-{
+280-  atexit_count--;
+281-
+282:  *stdlib_atexit_key[(signed long int)atexit_count].atexit_func();
+283-
+284-  }
+285-
+286-}
+287-Flags.......: lvalue
+288:Location....: file esbmc_intrinsics.h line 63 column 1
+289-
+290-Symbol......: c:@F@nondet_int
+291-Module......: esbmc_intrinsics
+292-Base name...: nondet_int
+293-Mode........: C
+294-Type........: signed int ()
+295-Value.......: 
+296-Flags.......: lvalue
+297:Location....: file esbmc_intrinsics.h line 79 column 1
+298-
+299-Symbol......: c:@F@nondet_uint
+300-Module......: esbmc_intrinsics
+301-Base name...: nondet_uint
+302-Mode........: C
+303-Type........: unsigned int ()
+304-Value.......: 
+305-Flags.......: lvalue
+306:Location....: file esbmc_intrinsics.h line 80 column 1
+307-
+308-Symbol......: c:@F@nondet_long
+309-Module......: esbmc_intrinsics
+310-Base name...: nondet_long
+311-Mode........: C
+312-Type........: signed long int ()
+313-Value.......: 
+314-Flags.......: lvalue
+315:Location....: file esbmc_intrinsics.h line 81 column 1
+316-
+317-Symbol......: c:@F@nondet_ulong
+318-Module......: esbmc_intrinsics
+319-Base name...: nondet_ulong
+320-Mode........: C
+321-Type........: unsigned long int ()
+322-Value.......: 
+323-Flags.......: lvalue
+324:Location....: file esbmc_intrinsics.h line 82 column 1
+325-
+326-Symbol......: c:@F@nondet_short
+327-Module......: esbmc_intrinsics
+328-Base name...: nondet_short
+329-Mode........: C
+330-Type........: signed short int ()
+331-Value.......: 
+332-Flags.......: lvalue
+333:Location....: file esbmc_intrinsics.h line 83 column 1
+334-
+335-Symbol......: c:@F@nondet_ushort
+336-Module......: esbmc_intrinsics
+337-Base name...: nondet_ushort
+338-Mode........: C
+339-Type........: unsigned short int ()
+340-Value.......: 
+341-Flags.......: lvalue
+342:Location....: file esbmc_intrinsics.h line 84 column 1
+343-
+344-Symbol......: c:@F@nondet_char
+345-Module......: esbmc_intrinsics
+346-Base name...: nondet_char
+347-Mode........: C
+348-Type........: signed char ()
+349-Value.......: 
+350-Flags.......: lvalue
+351:Location....: file esbmc_intrinsics.h line 85 column 1
+352-
+353-Symbol......: c:@F@nondet_uchar
+354-Module......: esbmc_intrinsics
+355-Base name...: nondet_uchar
+356-Mode........: C
+357-Type........: unsigned char ()
+358-Value.......: 
+359-Flags.......: lvalue
+360:Location....: file esbmc_intrinsics.h line 86 column 1
+361-
+362-Symbol......: c:@F@nondet_schar
+363-Module......: esbmc_intrinsics
+364-Base name...: nondet_schar
+365-Mode........: C
+366-Type........: signed char ()
+367-Value.......: 
+368-Flags.......: lvalue
+369:Location....: file esbmc_intrinsics.h line 87 column 1
+370-
+371-Symbol......: c:@F@nondet_bool
+372-Module......: esbmc_intrinsics
+373-Base name...: nondet_bool
+374-Mode........: C
+375-Type........: _Bool ()
+376-Value.......: 
+377-Flags.......: lvalue
+378:Location....: file esbmc_intrinsics.h line 88 column 1
+379-
+380:Symbol......: c:@F@nondet_float
+381-Module......: esbmc_intrinsics
+382:Base name...: nondet_float
+383-Mode........: C
+384:Type........: float ()
+385-Value.......: 
+386-Flags.......: lvalue
+387:Location....: file esbmc_intrinsics.h line 89 column 1
+388-
+389-Symbol......: c:@F@nondet_double
+390-Module......: esbmc_intrinsics
+391-Base name...: nondet_double
+392-Mode........: C
+393-Type........: double ()
+394-Value.......: 
+395-Flags.......: lvalue
+396:Location....: file esbmc_intrinsics.h line 90 column 1
+397-
+398-Symbol......: c:@F@__VERIFIER_nondet_int
+399-Module......: esbmc_intrinsics
+400-Base name...: __VERIFIER_nondet_int
+401-Mode........: C
+402-Type........: signed int ()
+403-Value.......: 
+404-Flags.......: lvalue
+405:Location....: file esbmc_intrinsics.h line 93 column 1
+406-
+407-Symbol......: c:@F@__VERIFIER_nondet_uint
+408-Module......: esbmc_intrinsics
+409-Base name...: __VERIFIER_nondet_uint
+410-Mode........: C
+411-Type........: unsigned int ()
+412-Value.......: 
+413-Flags.......: lvalue
+414:Location....: file esbmc_intrinsics.h line 94 column 1
+415-
+416-Symbol......: c:@F@__VERIFIER_nondet_long
+417-Module......: esbmc_intrinsics
+418-Base name...: __VERIFIER_nondet_long
+419-Mode........: C
+420-Type........: signed long int ()
+421-Value.......: 
+422-Flags.......: lvalue
+423:Location....: file esbmc_intrinsics.h line 95 column 1
+424-
+425-Symbol......: c:@F@__VERIFIER_nondet_ulong
+426-Module......: esbmc_intrinsics
+427-Base name...: __VERIFIER_nondet_ulong
+428-Mode........: C
+429-Type........: unsigned long int ()
+430-Value.......: 
+431-Flags.......: lvalue
+432:Location....: file esbmc_intrinsics.h line 96 column 1
+433-
+434-Symbol......: c:@F@__VERIFIER_nondet_short
+435-Module......: esbmc_intrinsics
+436-Base name...: __VERIFIER_nondet_short
+437-Mode........: C
+438-Type........: signed short int ()
+439-Value.......: 
+440-Flags.......: lvalue
+441:Location....: file esbmc_intrinsics.h line 97 column 1
+442-
+443-Symbol......: c:@F@__VERIFIER_nondet_ushort
+444-Module......: esbmc_intrinsics
+445-Base name...: __VERIFIER_nondet_ushort
+446-Mode........: C
+447-Type........: unsigned short int ()
+448-Value.......: 
+449-Flags.......: lvalue
+450:Location....: file esbmc_intrinsics.h line 98 column 1
+451-
+452-Symbol......: c:@F@__VERIFIER_nondet_char
+453-Module......: esbmc_intrinsics
+454-Base name...: __VERIFIER_nondet_char
+455-Mode........: C
+456-Type........: signed char ()
+457-Value.......: 
+458-Flags.......: lvalue
+459:Location....: file esbmc_intrinsics.h line 99 column 1
+460-
+461-Symbol......: c:@F@__VERIFIER_nondet_uchar
+462-Module......: esbmc_intrinsics
+463-Base name...: __VERIFIER_nondet_uchar
+464-Mode........: C
+465-Type........: unsigned char ()
+466-Value.......: 
+467-Flags.......: lvalue
+468:Location....: file esbmc_intrinsics.h line 100 column 1
+469-
+470-Symbol......: c:@F@__VERIFIER_nondet_schar
+471-Module......: esbmc_intrinsics
+472-Base name...: __VERIFIER_nondet_schar
+473-Mode........: C
+474-Type........: signed char ()
+475-Value.......: 
+476-Flags.......: lvalue
+477:Location....: file esbmc_intrinsics.h line 101 column 1
+478-
+479-Symbol......: c:@F@__VERIFIER_nondet_bool
+480-Module......: esbmc_intrinsics
+481-Base name...: __VERIFIER_nondet_bool
+482-Mode........: C
+483-Type........: _Bool ()
+484-Value.......: 
+485-Flags.......: lvalue
+486:Location....: file esbmc_intrinsics.h line 102 column 1
+487-
+488:Symbol......: c:@F@__VERIFIER_nondet_float
+489-Module......: esbmc_intrinsics
+490:Base name...: __VERIFIER_nondet_float
+491-Mode........: C
+492:Type........: float ()
+493-Value.......: 
+494-Flags.......: lvalue
+495:Location....: file esbmc_intrinsics.h line 103 column 1
+496-
+497-Symbol......: c:@F@__VERIFIER_nondet_double
+498-Module......: esbmc_intrinsics
+499-Base name...: __VERIFIER_nondet_double
+500-Mode........: C
+501-Type........: double ()
+502-Value.......: 
+503-Flags.......: lvalue
+504:Location....: file esbmc_intrinsics.h line 104 column 1
+505-
+506-Symbol......: c:@F@__VERIFIER_nondet_memory
+507-Module......: esbmc_intrinsics
+508-Base name...: __VERIFIER_nondet_memory
+509-Mode........: C
+510-Type........: void (void *, unsigned long int)
+511-Value.......: 
+512-{
+513-
+514-__ESBMC_HIDE:
+515-  ;
+516-
+517-unsigned char * p=(unsigned char *)mem;
+518-
+519-  
+520-{
+521-    unsigned long int i=0;
+522-
+523:  for(; i < size; i++;
+524-)
+525-    p[(signed long int)i] = __VERIFIER_nondet_uchar();
+526-
+527-
+528-  }
+529-}
+530-Flags.......: lvalue
+531:Location....: file esbmc_intrinsics.h line 106 column 1
+532-
+533-Symbol......: c:@F@__VERIFIER_error
+534-Module......: esbmc_intrinsics
+535-Base name...: __VERIFIER_error
+536-Mode........: C
+537-Type........: void ()
+538-Value.......: 
+539-Flags.......: lvalue
+540:Location....: file esbmc_intrinsics.h line 108 column 1
+541-
+542-Symbol......: c:@F@__VERIFIER_assume
+543-Module......: esbmc_intrinsics
+544-Base name...: __VERIFIER_assume
+545-Mode........: C
+546-Type........: void (signed int)
+547-Value.......: 
+548-Flags.......: lvalue
+549:Location....: file esbmc_intrinsics.h line 109 column 1
+550-
+551-Symbol......: c:@F@__VERIFIER_atomic_begin
+552-Module......: esbmc_intrinsics
+553-Base name...: __VERIFIER_atomic_begin
+554-Mode........: C
+555-Type........: void ()
+556-Value.......: 
+557-Flags.......: lvalue
+558:Location....: file esbmc_intrinsics.h line 110 column 1
+559-
+560-Symbol......: c:@F@__VERIFIER_atomic_end
+561-Module......: esbmc_intrinsics
+562-Base name...: __VERIFIER_atomic_end
+563-Mode........: C
+564-Type........: void ()
+565-Value.......: 
+566-Flags.......: lvalue
+567:Location....: file esbmc_intrinsics.h line 111 column 1
+568-
+569-Symbol......: c:@F@__ESBMC_r_ok
+570-Module......: esbmc_intrinsics
+571-Base name...: __ESBMC_r_ok
+572-Mode........: C
+573-Type........: _Bool (void *, unsigned long int)
+574-Value.......: 
+575-Flags.......: lvalue
+576:Location....: file esbmc_intrinsics.h line 116 column 1
+577-
+578-Symbol......: c:@F@__ESBMC_unreachable
+579-Module......: esbmc_intrinsics
+580-Base name...: __ESBMC_unreachable
+581-Mode........: C
+582-Type........: void ()
+583-Value.......: 
+584-Flags.......: lvalue
+585:Location....: file esbmc_intrinsics.h line 120 column 1
+586-
+587:Symbol......: c:@F@__ESBMC_forall
+588-Module......: esbmc_intrinsics
+589:Base name...: __ESBMC_forall
+590-Mode........: C
+591-Type........: _Bool (void *, _Bool)
+592-Value.......: 
+593-Flags.......: lvalue
+594:Location....: file esbmc_intrinsics.h line 130 column 1
+595-
+596-Symbol......: c:@F@__ESBMC_exists
+597-Module......: esbmc_intrinsics
+598-Base name...: __ESBMC_exists
+599-Mode........: C
+600-Type........: _Bool (void *, _Bool)
+601-Value.......: 
+602-Flags.......: lvalue
+603:Location....: file esbmc_intrinsics.h line 131 column 1
+604-
+605-Symbol......: c:@F@__ESBMC_loop_invariant
+606-Module......: esbmc_intrinsics
+607-Base name...: __ESBMC_loop_invariant
+608-Mode........: C
+609-Type........: void (_Bool)
+610-Value.......: 
+611-Flags.......: lvalue
+612:Location....: file esbmc_intrinsics.h line 138 column 1
+613-
+614-Symbol......: c:@F@__ESBMC_witness_assume
+615-Module......: esbmc_intrinsics
+616-Base name...: __ESBMC_witness_assume
+617-Mode........: C
+618-Type........: void (signed int, _Bool)
+619-Value.......: 
+620-Flags.......: lvalue
+621:Location....: file esbmc_intrinsics.h line 141 column 1
+622-
+623-Symbol......: c:@F@__ESBMC_loop_assigns_impl
+624-Module......: esbmc_intrinsics
+625-Base name...: __ESBMC_loop_assigns_impl
+626-Mode........: C
+627-Type........: void (const void *)
+628-Value.......: 
+629-Flags.......: lvalue
+630:Location....: file esbmc_intrinsics.h line 152 column 1
+631-
+632-Symbol......: c:@F@__ESBMC_unroll
+633-Module......: esbmc_intrinsics
+634-Base name...: __ESBMC_unroll
+635-Mode........: C
+636-Type........: void (signed int)
+637-Value.......: 
+638-Flags.......: lvalue
+639:Location....: file esbmc_intrinsics.h line 169 column 1
+640-
+641-Symbol......: c:@F@__ESBMC_requires
+642-Module......: esbmc_intrinsics
+643-Base name...: __ESBMC_requires
+644-Mode........: C
+645-Type........: void (_Bool)
+646-Value.......: 
+647-Flags.......: lvalue
+648:Location....: file esbmc_intrinsics.h line 177 column 1
+649-
+650-Symbol......: c:@F@__ESBMC_ensures
+651-Module......: esbmc_intrinsics
+652-Base name...: __ESBMC_ensures
+653-Mode........: C
+654-Type........: void (_Bool)
+655-Value.......: 
+656-Flags.......: lvalue
+657:Location....: file esbmc_intrinsics.h line 178 column 1
+658-
+659-Symbol......: c:@__ESBMC_return_value
+660-Module......: esbmc_intrinsics
+661-Base name...: __ESBMC_return_value
+662-Mode........: C
+663-Type........: signed int
+664-Value.......: 0
+665:Flags.......: lvalue static_lifetime
+666:Location....: file esbmc_intrinsics.h line 179 column 1
+667-
+668-Symbol......: c:@F@__ESBMC_old_raw
+669-Module......: esbmc_intrinsics
+670-Base name...: __ESBMC_old_raw
+671-Mode........: C
+672-Type........: void * (void *)
+673-Value.......: 
+674-Flags.......: lvalue
+675:Location....: file esbmc_intrinsics.h line 180 column 1
+676-
+677-Symbol......: c:@F@__ESBMC_assigns_impl
+678-Module......: esbmc_intrinsics
+679-Base name...: __ESBMC_assigns_impl
+680-Mode........: C
+681-Type........: void (const void *)
+682-Value.......: 
+683-Flags.......: lvalue
+684:Location....: file esbmc_intrinsics.h line 185 column 1
+685-
+686:Symbol......: c:@F@__assert_fail
+687-Module......: assert
+688:Base name...: __assert_fail
+689-Mode........: C
+690-Type........: void (const signed char *, const signed char *, unsigned int, const signed char *)
+691-Value.......: 
+692-Flags.......: lvalue extern
+693:Location....: file /usr/include/assert.h line 69 column 1
+694-
+695:Symbol......: c:@F@__assert_perror_fail
+696-Module......: assert
+697:Base name...: __assert_perror_fail
+698-Mode........: C
+699-Type........: void (signed int, const signed char *, unsigned int, const signed char *)
+700-Value.......: 
+701-Flags.......: lvalue extern
+702:Location....: file /usr/include/assert.h line 74 column 1
+703-
+704-Symbol......: c:@F@__assert
+705-Module......: assert
+706-Base name...: __assert
+707-Mode........: C
+708-Type........: void (const signed char *, const signed char *, signed int)
+709-Value.......: 
+710-Flags.......: lvalue extern
+711:Location....: file /usr/include/assert.h line 81 column 1
+712-
+713:Symbol......: c:@F@f
+714-Module......: simple
+715:Base name...: f
+716-Mode........: C
+717-Type........: signed int (signed int)
+718-Value.......: 
+719-{
+720:if(x < 100)
+721-  return x + 1;
+722-
+723-
+724-return 0;
+725-
+726-}
+727-Flags.......: lvalue
+728:Location....: file simple.c line 5 column 1
+729-
+730:Symbol......: c:simple.c@50@F@f@x
+731-Module......: simple
+732-Base name...: x
+733-Mode........: C
+734-Type........: signed int
+735-Value.......: 
+736:Flags.......: lvalue file_local
+737:Location....: file simple.c line 5 column 7 function f
+738-
+739-Symbol......: c:@F@main
+740-Module......: simple
+741-Base name...: main
+742-Mode........: C
+743-Type........: signed int ()
+744-Value.......: 
+745-{
+746-signed int x=nondet_int();
+747-
+748-assume(x >= -1000);
+749-
+750-assume(x <= 1000);
+751-
+752:signed int r=f(x);
+753-
+754:sizeof(signed int),  (
+755-{
+756:if(x < 100 && r == x + 1 || x >= 100 && r == 0)
+757-  ;
+758-else
+759:  __assert_fail(&"(x < 100 && r == x + 1) || (x >= 100 && r == 0)"[0], &"simple.c"[0], 25, &"int main(void)"[0]);
+760-
+761-
+762-});
+763-
+764-return 0;
+765-
+766-}
+767-Flags.......: lvalue
+768:Location....: file simple.c line 13 column 1
+769-
+770-Symbol......: c:simple.c@137@F@main@x
+771-Module......: simple
+772-Base name...: x
+773-Mode........: C
+774-Type........: signed int
+775-Value.......: nondet_int()
+776:Flags.......: lvalue file_local
+777:Location....: file simple.c line 15 column 5 function main
+778-
+779-Symbol......: c:simple.c@228@F@main@r
+780-Module......: simple
+781-Base name...: r
+782-Mode........: C
+783-Type........: signed int
+784:Value.......: f(x)
+785:Flags.......: lvalue file_local
+786:Location....: file simple.c line 20 column 5 function main
+787-
+788-Symbol......: c:@__ESBMC_num_total_threads
+789-Module......: pthread_lib
+790-Base name...: __ESBMC_num_total_threads
+791-Mode........: C
+792-Type........: unsigned short int
+793-Value.......: 0
+794:Flags.......: lvalue static_lifetime
+795:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 51 column 1
+796-
+797-Symbol......: c:@__ESBMC_num_threads_running
+798-Module......: pthread_lib
+799-Base name...: __ESBMC_num_threads_running
+800-Mode........: C
+801-Type........: unsigned short int
+802-Value.......: 0
+803:Flags.......: lvalue static_lifetime
+804:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 52 column 1
+805-
+806-Symbol......: c:stdlib.c@__ESBMC_atexit_count
+807-Module......: stdlib
+808-Base name...: __ESBMC_atexit_count
+809-Mode........: C
+810-Type........: unsigned long int
+811-Value.......: 0
+812:Flags.......: lvalue static_lifetime file_local
+813:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 31 column 1
+814-
+815-Symbol......: tag-struct atexit_key
+816-Module......: stdlib
+817-Base name...: struct atexit_key
+818-Mode........: C
+819-Type........:  struct atexit_key { void (*)(); }
+820-Value.......: 
+821-Flags.......: type
+822:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 23 column 9
+823-
+824-Symbol......: c:stdlib.c@__ESBMC_stdlib_atexit_key
+825-Module......: stdlib
+826-Base name...: __ESBMC_stdlib_atexit_key
+827-Mode........: C
+828-Type........:  struct atexit_key [INFINITY()]
+829:Value.......: { { .atexit_func = 0 } }
+830:Flags.......: lvalue static_lifetime file_local
+831:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 29 column 1
+832-
+833:Symbol......: c:verifier.c@80@F@__VERIFIER_nondet_memory@p
+834:Module......: verifier
+835-Base name...: p
+836-Mode........: C
+837-Type........: unsigned char *
+838-Value.......: (unsigned char *)mem
+839:Flags.......: lvalue file_local
+840:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 4 column 3 function __VERIFIER_nondet_memory
+841-
+842:Symbol......: c:verifier.c@30@F@__VERIFIER_nondet_memory@mem
+843:Module......: verifier
+844-Base name...: mem
+845-Mode........: C
+846-Type........: void *
+847-Value.......: 
+848:Flags.......: lvalue file_local
+849:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 1 column 31 function __VERIFIER_nondet_memory
+850-
+851:Symbol......: c:verifier.c@128@F@__VERIFIER_nondet_memory@i
+852:Module......: verifier
+853-Base name...: i
+854-Mode........: C
+855-Type........: unsigned long int
+856-Value.......: 0
+857:Flags.......: lvalue file_local
+858:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 8 function __VERIFIER_nondet_memory
+859-
+860:Symbol......: c:verifier.c@41@F@__VERIFIER_nondet_memory@size
+861:Module......: verifier
+862-Base name...: size
+863-Mode........: C
+864-Type........: unsigned long int
+865-Value.......: 
+866:Flags.......: lvalue file_local
+867:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 1 column 42 function __VERIFIER_nondet_memory
+868-
+869-Symbol......: __ESBMC_main
+870-Module......: 
+871-Base name...: __ESBMC_main
+872-Mode........: 
+873-Type........: void ()
+874-Value.......: 
+875-{
+876-alloc=ARRAY_OF(0);
+877-is_dynamic=ARRAY_OF(0);
+878-alloc_size={ 0 };
+879-rounding_mode=0;
+880-return_value=0;
+881-num_total_threads=0;
+882-num_threads_running=0;
+883-atexit_count=0;
+884:stdlib_atexit_key={ { .atexit_func = 0 } };
+885-pthread_start_main_hook()
+886-main()
+887-atexit_handler()
+888-pthread_end_main_hook()
+889-}
+890-Flags.......:
+891-Location....: 
+892-
+893-
+894-ESBMC version 8.4.0 64-bit x86_64 linux

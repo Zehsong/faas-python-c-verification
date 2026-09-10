@@ -1,0 +1,47 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-031637/python.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-031637/c.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-031637/harness.gb --equiv-py-target adler4 --equiv-c-target adler4 --function c:@F@equiv_main --unwind 4 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python module entry as `c:@F@__ESBMC_PY_MODULE_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/python.py@F@adler4`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@adler4`
+GOTO program creation time: 0.121s
+GOTO program processing time: 0.014s
+Starting Bounded Model Checking
+Symex completed in: 0.002s (180 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 93 assignments)
+Generated 35 VCC(s), 35 remaining after simplification (87 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 50.009s
+BMC program time: 50.018s
+
+** Results:
+/workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-031637/equiv_harness.c, function equiv_main
+  PASSED       [equiv_main.assertion.1]             line 55  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+/workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/python.py, function adler4
+  PASSED       [adler4.arithmetic-overflow.1]       line  6  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.2]       line  6  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.3]       line  7  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.4]       line  7  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.5]       line 10  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.6]       line 10  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.7]       line 11  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.8]       line 11  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.9]       line 14  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.10]      line 14  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.11]      line 15  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.12]      line 15  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.13]      line 18  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.14]      line 18  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.15]      line 19  arithmetic overflow on add
+  PASSED       [adler4.arithmetic-overflow.16]      line 19  arithmetic overflow on modulus
+  PASSED       [adler4.arithmetic-overflow.17]      line 21  arithmetic overflow on shl
+  PASSED       [adler4.shift-undefined-behavior.1]  line 21  undefined behavior on shift operation shl
+
+** 0 of 19 properties failed, 19 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

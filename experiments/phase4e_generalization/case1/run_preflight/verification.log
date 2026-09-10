@@ -1,0 +1,59 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/python.gb /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/c.gb /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/harness.gb --equiv-py-target f --equiv-c-target f --function c:@F@equiv_main --unwind 12 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/good.py@F@f`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@f`
+GOTO program creation time: 0.102s
+GOTO program processing time: 0.012s
+Starting Bounded Model Checking
+Symex completed in: 0.001s (50 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 23 assignments)
+Generated 3 VCC(s), 3 remaining after simplification (27 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.001s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c line 16 column 5 function equiv_main thread 0
+----------------------------------------------------
+  x = 1073741824 (01000000 00000000 00000000 00000000)
+
+State 2 file /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c line 17 column 5 function equiv_main thread 0
+----------------------------------------------------
+  y = 1 (00000000 00000000 00000000 00000001)
+
+State 3 file /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c line 19 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_py = 1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 4 file /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c line 20 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_c = 2 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000010)
+
+State 5 file /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c line 22 column 5 function equiv_main thread 0
+----------------------------------------------------
+Violated property:
+  file /workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c line 22 column 5 function equiv_main
+  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+  r_py == r_c
+
+
+** Results:
+/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/bad.c, function compare_helper
+  NOT CHECKED  [compare_helper.arithmetic-overflow.1]  line  4  arithmetic overflow on neg
+/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/run_preflight/equiv_harness.c, function equiv_main
+  FAILED       [equiv_main.assertion.1]                line 22  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/good.py, function compare_helper
+  NOT CHECKED  [compare_helper.arithmetic-overflow.2]  line  3  arithmetic overflow on neg
+
+** 1 of 3 properties failed, 2 not checked
+   (this mode stops at the first violation; use --multi-property for a verdict on every property)
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

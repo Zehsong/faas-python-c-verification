@@ -1,0 +1,32 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/experiments/regression_runs/helper_multi_good/python.gb /workspaces/faas-python-c-verification/experiments/regression_runs/helper_multi_good/c.gb /workspaces/faas-python-c-verification/experiments/regression_runs/helper_multi_good/harness.gb --equiv-py-target f --equiv-c-target f --function c:@F@equiv_main --unwind 12 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python module entry as `c:@F@__ESBMC_PY_MODULE_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/good.py@F@f`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@f`
+GOTO program creation time: 0.107s
+GOTO program processing time: 0.012s
+Starting Bounded Model Checking
+Symex completed in: 0.002s (127 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 100 assignments)
+Generated 3 VCC(s), 3 remaining after simplification (27 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.730s
+BMC program time: 4.259s
+
+** Results:
+/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/good.c, function compare_helper
+  PASSED       [compare_helper.arithmetic-overflow.1]  line  4  arithmetic overflow on neg
+/workspaces/faas-python-c-verification/experiments/regression_runs/helper_multi_good/equiv_harness.c, function equiv_main
+  PASSED       [equiv_main.assertion.1]                line 43  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+/workspaces/faas-python-c-verification/experiments/phase4e_generalization/case1/good.py, function compare_helper
+  PASSED       [compare_helper.arithmetic-overflow.2]  line  3  arithmetic overflow on neg
+
+** 0 of 3 properties failed, 3 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

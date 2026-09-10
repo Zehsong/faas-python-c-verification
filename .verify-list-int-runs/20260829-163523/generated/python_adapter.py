@@ -1,0 +1,29 @@
+# Normalized form of:
+#
+# def f(b: bytes) -> int:
+#     count = 0
+#     for x in b:
+#         if x == 0:
+#             count += 1
+#     return count
+
+def f(b: list[int]) -> int:
+    count: int = 0
+    for x in b:
+        if x == 0:
+            count += 1
+    return count
+
+
+
+def __VEQ_PY_LIST_INT_ADAPTER(selector: int, e0: int, e1: int, e2: int, e3: int) -> int:
+    xs: list[int] = []
+    if selector >= 1:
+        xs.append(e0)
+    if selector >= 2:
+        xs.append(e1)
+    if selector >= 3:
+        xs.append(e2)
+    if selector >= 4:
+        xs.append(e3)
+    return f(xs)

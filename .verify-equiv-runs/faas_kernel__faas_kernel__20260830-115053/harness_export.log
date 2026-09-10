@@ -1,0 +1,9 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115053/equiv_harness.c --output-goto /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115053/harness.gb
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115053/equiv_harness.c
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.111s
+GOTO program processing time: 0.000s
+Writing GOTO program to file
+ESBMC version 8.4.0 64-bit x86_64 linux

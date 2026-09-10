@@ -1,0 +1,23 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing cases/03_list_array/good.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.086s
+GOTO program processing time: 0.016s
+Starting Bounded Model Checking
+Symex completed in: 0.017s (370 assignments)
+Caching time: 0.000s (removed 55 assertions)
+Slicing time: 0.002s (removed 169 assignments)
+Generated 185 VCC(s), 40 remaining after simplification (146 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.009s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 0.354s
+BMC program time: 0.387s
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux
+
+RUNNER_EXIT_CODE=0
+RUNNER_ELAPSED_SECONDS=1

@@ -1,0 +1,39 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing phase2_cases/05_string_index/bad.c
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.186s
+GOTO program processing time: 0.000s
+Starting Bounded Model Checking
+Symex completed in: 0.001s (38 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 21 assignments)
+Generated 5 VCC(s), 3 remaining after simplification (17 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 0.003s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file phase2_cases/05_string_index/bad.c line 18 column 5 function main thread 0
+----------------------------------------------------
+  idx = 1 (00000000 00000000 00000000 00000001)
+
+State 5 file phase2_cases/05_string_index/bad.c line 24 column 5 function main thread 0
+----------------------------------------------------
+  r = 9 (00000000 00000000 00000000 00001001)
+
+State 6 file phase2_cases/05_string_index/bad.c line 33 column 5 function main thread 0
+----------------------------------------------------
+Violated property:
+  file phase2_cases/05_string_index/bad.c line 33 column 5 function main
+  assertion r == expected
+  r == expected
+
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

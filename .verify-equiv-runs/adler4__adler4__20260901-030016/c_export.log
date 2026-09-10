@@ -1,0 +1,8 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc /workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/c.c --function adler4 --output-goto /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-030016/c.gb
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/c.c
+/workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/c.c:1:10: fatal error: '../../../../../third_party/zlib-v1.3/adler32.c' file not found
+    1 | #include "../../../../../third_party/zlib-v1.3/adler32.c"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ERROR: PARSING ERROR
+ESBMC version 8.4.0 64-bit x86_64 linux

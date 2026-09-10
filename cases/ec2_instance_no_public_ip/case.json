@@ -1,0 +1,34 @@
+{
+  "name": "EC2_INSTANCE_NO_PUBLIC_IP",
+
+  "logical_inputs": {
+    "message_type": {
+      "type": "enum",
+      "values": ["CHANGE", "SCHEDULED", "OVERSIZED", "OTHER"]
+    },
+    "config_status": {
+      "type": "enum",
+      "values": ["OK", "DISCOVERED", "DELETED", "OTHER"]
+    },
+    "event_left_scope": {
+      "type": "bool"
+    },
+    "has_public_ip": {
+      "type": "bool"
+    },
+    "test_mode": {
+      "type": "bool"
+    }
+  },
+
+  "dependencies": [
+    "json.loads",
+    "re.findall",
+    "boto3.config"
+  ],
+
+  "observables": [
+    "return",
+    "put_evaluations"
+  ]
+}

@@ -1,0 +1,22 @@
+f (py:cases/02_loop/good.py@F@f):
+        // 4474 file cases/02_loop/good.py line 2 column 4 function f
+        DECL signed long int acc;
+        // 4475 file cases/02_loop/good.py line 2 column 4 function f
+        ASSIGN acc=0;
+        // 4476 file cases/02_loop/good.py line 3 column 4 function f
+        DECL signed long int i;
+        // 4477 file cases/02_loop/good.py line 3 column 4 function f
+        ASSIGN i=0;
+        // 4478 file cases/02_loop/good.py line 5 column 4 function f
+     1: IF !(i < n) THEN GOTO 2
+        // 4479 file cases/02_loop/good.py line 6 column 8 function f
+        ASSIGN acc=acc + x + i;
+        // 4480 file cases/02_loop/good.py line 7 column 8 function f
+        ASSIGN i=i + 1;
+        // 4481 file cases/02_loop/good.py line 5 column 4 function f
+        GOTO 1
+        // 4482 file cases/02_loop/good.py line 9 column 4 function f
+     2: RETURN: acc
+        // 4483 no location
+        END_FUNCTION
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

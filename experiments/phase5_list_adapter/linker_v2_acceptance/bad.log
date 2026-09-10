@@ -1,0 +1,28 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python initialization entry as `c:@F@__ESBMC_PY_INIT_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py@F@__VEQ_PY_LIST_INT_ADAPTER`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@__VEQ_C_LIST_INT_ADAPTER`
+GOTO program creation time: 0.106s
+GOTO program processing time: 0.013s
+Starting Bounded Model Checking
+Unwinding loop 158 iteration 1   file experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 2   file experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 3   file experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 4   file experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 5   file experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py line 4 column 4 function f
+Not unwinding loop 158 iteration 6   file experiments/phase5_list_adapter/linker_v2_acceptance/python_adapter.py line 4 column 4 function f
+Unwinding loop 129 iteration 1   file experiments/phase5_list_adapter/linker_v2_acceptance/c_bad.c line 5 column 5 function f
+Unwinding loop 129 iteration 2   file experiments/phase5_list_adapter/linker_v2_acceptance/c_bad.c line 5 column 5 function f
+Unwinding loop 129 iteration 3   file experiments/phase5_list_adapter/linker_v2_acceptance/c_bad.c line 5 column 5 function f
+Unwinding loop 129 iteration 4   file experiments/phase5_list_adapter/linker_v2_acceptance/c_bad.c line 5 column 5 function f
+Unwinding loop 129 iteration 5   file experiments/phase5_list_adapter/linker_v2_acceptance/c_bad.c line 5 column 5 function f
+Not unwinding loop 129 iteration 6   file experiments/phase5_list_adapter/linker_v2_acceptance/c_bad.c line 5 column 5 function f
+Symex completed in: 0.041s (847 assignments)
+Caching time: 0.000s (removed 79 assertions)
+Slicing time: 0.004s (removed 360 assignments)
+Generated 369 VCC(s), 141 remaining after simplification (408 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.006s
+Solving with solver Z3 v4.13.3

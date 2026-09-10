@@ -1,0 +1,8 @@
+case	good	mutant	good_rc	bad_rc	good_sec	bad_sec	goto_lines	unsupported_hits
+08_local_import	SUCCESS	FAILED	0	1	1	2	16293	0
+09_math_gcd	SUCCESS	FAILED	0	1	15	4	19116	0
+10_regex	ERROR	ERROR	1	1	17	12	217	0
+11_json	UNSUPPORTED	UNSUPPORTED	1	1	12	12	257	2
+12_hashlib	ERROR	ERROR	1	1	12	13	193	0
+13_hmac	ERROR	ERROR	1	1	12	13	210	0
+14_base64	ERROR	ERROR	1	1	14	13	224	0

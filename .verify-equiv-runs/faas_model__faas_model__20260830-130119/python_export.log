@@ -1,0 +1,9 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py --output-goto /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130119/python.gb
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.197s
+GOTO program processing time: 0.032s
+Writing GOTO program to file
+ESBMC version 8.4.0 64-bit x86_64 linux

@@ -1,0 +1,29 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/phase4_product_probe/py_side.py@F@py_f`
+GOTO program creation time: 0.132s
+GOTO program processing time: 0.013s
+Starting Bounded Model Checking
+Symex completed in: 0.000s (29 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 14 assignments)
+Generated 3 VCC(s), 3 remaining after simplification (15 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.703s
+BMC program time: 4.274s
+
+** Results:
+/workspaces/faas-python-c-verification/experiments/phase4_product_probe/c_side.c, function c_f
+  PASSED       [c_f.arithmetic-overflow.1]   line  4  arithmetic overflow on add
+/workspaces/faas-python-c-verification/experiments/phase4_product_probe/phase4d_v0_good/equiv_harness.c, function equiv_main
+  PASSED       [equiv_main.assertion.1]      line 21  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+/workspaces/faas-python-c-verification/experiments/phase4_product_probe/py_side.py, function py_f
+  PASSED       [py_f.arithmetic-overflow.1]  line  3  arithmetic overflow on add
+
+** 0 of 3 properties failed, 3 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

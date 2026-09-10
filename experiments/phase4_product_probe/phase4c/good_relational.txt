@@ -1,0 +1,25 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:py_side.py@F@py_f`
+GOTO program creation time: 0.109s
+GOTO program processing time: 0.010s
+Starting Bounded Model Checking
+Symex completed in: 0.000s (27 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 14 assignments)
+Generated 1 VCC(s), 1 remaining after simplification (13 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 2.378s
+BMC program time: 5.958s
+
+** Results:
+phase4c/equiv_harness.c, function equiv_main
+  PASSED       [equiv_main.assertion.1]  line 23  Python and C outputs must be equivalent
+
+** 0 of 1 properties failed, 1 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

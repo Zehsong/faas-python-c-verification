@@ -1,0 +1,58 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/check/python.gb /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/check/c.gb /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/check/harness.gb --equiv-py-target __VEQ_PY_LIST_INT_ADAPTER --equiv-c-target __VEQ_C_LIST_INT_ADAPTER --function c:@F@equiv_main --unwind 20 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py@F@__VEQ_PY_LIST_INT_ADAPTER`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@__VEQ_C_LIST_INT_ADAPTER`
+GOTO program creation time: 0.139s
+GOTO program processing time: 0.016s
+Starting Bounded Model Checking
+Unwinding loop 158 iteration 1   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 2   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 3   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 4   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 5   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 6   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 7   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 8   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 9   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 10   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 11   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 12   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 13   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 14   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 15   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 16   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 17   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 18   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 158 iteration 19   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Not unwinding loop 158 iteration 20   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/python_adapter.py line 4 column 4 function f
+Unwinding loop 129 iteration 1   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 2   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 3   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 4   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 5   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 6   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 7   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 8   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 9   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 10   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 11   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 12   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 13   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 14   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 15   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 16   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 17   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 18   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Unwinding loop 129 iteration 19   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Not unwinding loop 129 iteration 20   file /workspaces/faas-python-c-verification/experiments/phase5_list_adapter/run_good/generated/c_adapter.c line 5 column 5 function f
+Symex completed in: 0.182s (3064 assignments)
+Caching time: 0.006s (removed 650 assertions)
+Slicing time: 0.028s (removed 839 assignments)
+Generated 2523 VCC(s), 997 remaining after simplification (1575 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.023s
+Solving with solver Z3 v4.13.3
+
+VERIFY_EQUIV_INTERNAL: timeout after 180s

@@ -1,0 +1,8 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing experiments/phase5_list_adapter/linker_isolation/python_sanity_harness.c
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.139s
+GOTO program processing time: 0.000s
+Writing GOTO program to file
+ESBMC version 8.4.0 64-bit x86_64 linux

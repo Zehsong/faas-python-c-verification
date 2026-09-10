@@ -1,0 +1,9 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py --output-goto /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115135/python.gb
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.107s
+GOTO program processing time: 0.019s
+Writing GOTO program to file
+ESBMC version 8.4.0 64-bit x86_64 linux

@@ -1,0 +1,23 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing experiments/phase6_string_bytes/bytes_len.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.130s
+GOTO program processing time: 0.019s
+Starting Bounded Model Checking
+Symex completed in: 0.001s (77 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 77 assignments)
+Generated 3 VCC(s), 0 remaining after simplification (0 assignments)
+BMC program time: 0.001s
+
+** Results:
+experiments/phase6_string_bytes/bytes_len.py
+  PASSED       [global.assertion.1]  line 4  assertion proven by constant evaluation
+  PASSED       [global.assertion.2]  line 5  assertion proven by constant evaluation
+  PASSED       [global.assertion.3]  line 6  assertion proven by constant evaluation
+
+** 0 of 3 properties failed, 3 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

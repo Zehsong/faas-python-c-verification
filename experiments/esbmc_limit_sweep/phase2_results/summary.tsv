@@ -1,0 +1,5 @@
+case	py_good	py_mutant	c_good	c_mutant	py_rc_good	py_rc_bad	c_rc_good	c_rc_bad	py_goto	c_goto
+04_list_parameter	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	16422	198
+05_string_index	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	16382	170
+06_dict	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	16528	170
+07_exception	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	16358	161

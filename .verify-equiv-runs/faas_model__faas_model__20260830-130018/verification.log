@@ -1,0 +1,133 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/python.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/c.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/harness.gb --equiv-py-target faas_model --equiv-c-target faas_model --function c:@F@equiv_main --unwind 4 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python module entry as `c:@F@__ESBMC_PY_MODULE_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@faas_model`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@faas_model`
+GOTO program creation time: 0.111s
+GOTO program processing time: 0.013s
+Starting Bounded Model Checking
+Symex completed in: 0.004s (203 assignments)
+Caching time: 0.000s (removed 1 assertions)
+Slicing time: 0.001s (removed 112 assignments)
+Generated 48 VCC(s), 47 remaining after simplification (90 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.018s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/equiv_harness.c line 35 column 5 function equiv_main thread 0
+----------------------------------------------------
+  state_id = 73 (00000000 00000000 00000000 01001001)
+
+State 12 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py line 5 column 4 function faas_model thread 0
+----------------------------------------------------
+  message_type = 2 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000010)
+
+State 21 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py line 6 column 4 function faas_model thread 0
+----------------------------------------------------
+  config_status = 1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 30 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py line 7 column 4 function faas_model thread 0
+----------------------------------------------------
+  event_left_scope = 0 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 39 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py line 8 column 4 function faas_model thread 0
+----------------------------------------------------
+  has_public_ip = 0 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 41 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py line 9 column 4 function faas_model thread 0
+----------------------------------------------------
+  test_mode = 1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 42 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py line 20 column 4 function faas_model thread 0
+----------------------------------------------------
+  applicable = 1
+
+State 44 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/equiv_harness.c line 40 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_py = 1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 47 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c line 6 column 5 function faas_model thread 0
+----------------------------------------------------
+  message_type = 2 (00000000 00000000 00000000 00000010)
+
+State 50 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c line 7 column 5 function faas_model thread 0
+----------------------------------------------------
+  config_status = 1 (00000000 00000000 00000000 00000001)
+
+State 53 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c line 8 column 5 function faas_model thread 0
+----------------------------------------------------
+  event_left_scope = 0 (00000000 00000000 00000000 00000000)
+
+State 56 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c line 9 column 5 function faas_model thread 0
+----------------------------------------------------
+  has_public_ip = 0 (00000000 00000000 00000000 00000000)
+
+State 58 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c line 10 column 5 function faas_model thread 0
+----------------------------------------------------
+  test_mode = 1 (00000000 00000000 00000000 00000001)
+
+State 59 file /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c line 18 column 5 function faas_model thread 0
+----------------------------------------------------
+  applicable = 0 (00000000 00000000 00000000 00000000)
+
+State 61 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/equiv_harness.c line 43 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_c = 5 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)
+
+State 62 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/equiv_harness.c line 46 column 5 function equiv_main thread 0
+----------------------------------------------------
+Violated property:
+  file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/equiv_harness.c line 46 column 5 function equiv_main
+  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+  r_py == r_c
+
+
+** Results:
+/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130018/equiv_harness.c, function equiv_main
+  FAILED       [equiv_main.assertion.1]             line 46  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/mutant.c, function faas_model
+  NOT CHECKED  [faas_model.arithmetic-overflow.1]   line  4  arithmetic overflow on neg
+  NOT CHECKED  [faas_model.arithmetic-overflow.2]   line  6  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.3]   line  6  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.4]   line  7  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.5]   line  7  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.6]   line  8  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.7]   line  8  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.8]   line  9  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.9]   line  9  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.10]  line 10  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.11]  line 31  arithmetic overflow on add
+/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py, function faas_model
+  NOT CHECKED  [faas_model.arithmetic-overflow.12]  line  3  arithmetic overflow on neg
+  NOT CHECKED  [faas_model.arithmetic-overflow.13]  line  5  arithmetic overflow on add
+  NOT CHECKED  [faas_model.arithmetic-overflow.14]  line  5  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.15]  line  5  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.16]  line  5  arithmetic overflow on sub
+  NOT CHECKED  [faas_model.arithmetic-overflow.17]  line  6  arithmetic overflow on add
+  NOT CHECKED  [faas_model.arithmetic-overflow.18]  line  6  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.19]  line  6  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.20]  line  6  arithmetic overflow on sub
+  NOT CHECKED  [faas_model.arithmetic-overflow.21]  line  7  arithmetic overflow on add
+  NOT CHECKED  [faas_model.arithmetic-overflow.22]  line  7  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.23]  line  7  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.24]  line  7  arithmetic overflow on sub
+  NOT CHECKED  [faas_model.arithmetic-overflow.25]  line  8  arithmetic overflow on add
+  NOT CHECKED  [faas_model.arithmetic-overflow.26]  line  8  arithmetic overflow on div
+  NOT CHECKED  [faas_model.arithmetic-overflow.27]  line  8  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.28]  line  8  arithmetic overflow on sub
+  NOT CHECKED  [faas_model.arithmetic-overflow.29]  line  9  arithmetic overflow on add
+  NOT CHECKED  [faas_model.arithmetic-overflow.30]  line  9  arithmetic overflow on modulus
+  NOT CHECKED  [faas_model.arithmetic-overflow.31]  line 32  arithmetic overflow on add
+
+** 1 of 32 properties failed, 31 not checked
+   (this mode stops at the first violation; use --multi-property for a verdict on every property)
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

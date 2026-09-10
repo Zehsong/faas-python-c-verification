@@ -1,0 +1,148 @@
+f (py:cases/03_list_array/good.py@F@f):
+        // 4476 file cases/03_list_array/good.py line 2 column 4 function f
+        DECL  struct __ESBMC_PyListObj * values;
+        // 4477 file cases/03_list_array/good.py line 2 column 18 function f
+        DECL  struct __ESBMC_PyListObj * cases/03_list_array/good.py:2$py_list$169;
+        // 4478 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$py_list$169=NONDET( struct __ESBMC_PyListObj *);
+        // 4479 file cases/03_list_array/good.py line 2 column 18 function f
+        FUNCTION_CALL:  cases/03_list_array/good.py:2$py_list$169=list_create()
+        // 4480 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$list_elem_type$170=0xAED305094B3D4A9F;
+        // 4481 file cases/03_list_array/good.py line 2 column 18 function f
+        DECL signed long int cases/03_list_array/good.py:2$list_elem$171;
+        // 4482 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$list_elem$171=a;
+        // 4483 file cases/03_list_array/good.py line 2 column 18 function f
+        FUNCTION_CALL:  list_push(cases/03_list_array/good.py:2$py_list$169, &cases/03_list_array/good.py:2$list_elem$171, cases/03_list_array/good.py:2$list_elem_type$170, 8, 0, 1)
+        // 4484 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$list_elem_type$172=0xAED305094B3D4A9F;
+        // 4485 file cases/03_list_array/good.py line 2 column 18 function f
+        DECL signed long int cases/03_list_array/good.py:2$list_elem$173;
+        // 4486 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$list_elem$173=b;
+        // 4487 file cases/03_list_array/good.py line 2 column 18 function f
+        FUNCTION_CALL:  list_push(cases/03_list_array/good.py:2$py_list$169, &cases/03_list_array/good.py:2$list_elem$173, cases/03_list_array/good.py:2$list_elem_type$172, 8, 0, 1)
+        // 4488 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$list_elem_type$174=0xAED305094B3D4A9F;
+        // 4489 file cases/03_list_array/good.py line 2 column 18 function f
+        DECL signed long int cases/03_list_array/good.py:2$list_elem$175;
+        // 4490 file cases/03_list_array/good.py line 2 column 18 function f
+        ASSIGN cases/03_list_array/good.py:2$list_elem$175=c;
+        // 4491 file cases/03_list_array/good.py line 2 column 18 function f
+        FUNCTION_CALL:  list_push(cases/03_list_array/good.py:2$py_list$169, &cases/03_list_array/good.py:2$list_elem$175, cases/03_list_array/good.py:2$list_elem_type$174, 8, 0, 1)
+        // 4492 file cases/03_list_array/good.py line 2 column 4 function f
+        ASSIGN values=cases/03_list_array/good.py:2$py_list$169;
+        // 4493 file cases/03_list_array/good.py line 4 column 4 function f
+        DECL unsigned long int cases/03_list_array/good.py:4$list_size$176;
+        // 4494 file cases/03_list_array/good.py line 4 column 4 function f
+        FUNCTION_CALL:  cases/03_list_array/good.py:4$list_size$176=list_size(values)
+        // 4495 file cases/03_list_array/good.py line 4 column 4 function f
+        IF !(1 < 0 && (1 < 0 ? cases/03_list_array/good.py:4$list_size$176 + (unsigned long int)1 : (unsigned long int)1) >= cases/03_list_array/good.py:4$list_size$176) THEN GOTO 1
+        // 4496 
+        DEAD python_converter::cases/03_list_array/good.py:4$list_size$176
+        // 4497 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$175
+        // 4498 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$173
+        // 4499 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$171
+        // 4500 
+        DEAD python_converter::cases/03_list_array/good.py:2$py_list$169
+        // 4501 
+        DEAD py:cases/03_list_array/good.py@F@f@values
+        // 4502 
+        ASSIGN c:@__ESBMC_exc_thrown=1;
+        // 4503 
+        ASSIGN c:@__ESBMC_exc_typeid=11;
+        // 4504 
+        ASSIGN c:@__ESBMC_exc_obj$6={ .message=&"list index out of range"[0] };
+        // 4505 
+        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$6);
+        // 4506 
+        GOTO 4
+        // 4507 file cases/03_list_array/good.py line 4 column 16 function f
+     1: DECL unsigned long int cases/03_list_array/good.py:4$list_size$177;
+        // 4508 file cases/03_list_array/good.py line 4 column 16 function f
+        FUNCTION_CALL:  cases/03_list_array/good.py:4$list_size$177=list_size(values)
+        // 4509 file cases/03_list_array/good.py line 4 column 16 function f
+        IF !(1 < 0 && (1 < 0 ? cases/03_list_array/good.py:4$list_size$177 + (unsigned long int)1 : (unsigned long int)1) >= cases/03_list_array/good.py:4$list_size$177) THEN GOTO 2
+        // 4510 
+        DEAD python_converter::cases/03_list_array/good.py:4$list_size$177
+        // 4511 
+        DEAD python_converter::cases/03_list_array/good.py:4$list_size$176
+        // 4512 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$175
+        // 4513 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$173
+        // 4514 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$171
+        // 4515 
+        DEAD python_converter::cases/03_list_array/good.py:2$py_list$169
+        // 4516 
+        DEAD py:cases/03_list_array/good.py@F@f@values
+        // 4517 
+        ASSIGN c:@__ESBMC_exc_thrown=1;
+        // 4518 
+        ASSIGN c:@__ESBMC_exc_typeid=11;
+        // 4519 
+        ASSIGN c:@__ESBMC_exc_obj$7={ .message=&"list index out of range"[0] };
+        // 4520 
+        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$7);
+        // 4521 
+        GOTO 4
+        // 4522 
+     2: DECL  struct __ESBMC_PyObj * return_value$___ESBMC_list_at$1;
+        // 4523 
+        FUNCTION_CALL:  return_value$___ESBMC_list_at$1=list_at(values, 1 < 0 ? cases/03_list_array/good.py:4$list_size$176 + (unsigned long int)1 : (unsigned long int)1)
+        // 4524 
+        DECL  struct __ESBMC_PyObj * return_value$___ESBMC_list_at$2;
+        // 4525 
+        FUNCTION_CALL:  return_value$___ESBMC_list_at$2=list_at(values, 1 < 0 ? cases/03_list_array/good.py:4$list_size$177 + (unsigned long int)1 : (unsigned long int)1)
+        // 4526 file cases/03_list_array/good.py line 4 column 4 function f
+        ASSIGN *(signed long int *)return_value$___ESBMC_list_at$1->value=*(signed long int *)return_value$___ESBMC_list_at$2->value + 1;
+        // 4527 file cases/03_list_array/good.py line 6 column 11 function f
+        DECL unsigned long int cases/03_list_array/good.py:6$list_size$178;
+        // 4528 file cases/03_list_array/good.py line 6 column 11 function f
+        FUNCTION_CALL:  cases/03_list_array/good.py:6$list_size$178=list_size(values)
+        // 4529 file cases/03_list_array/good.py line 6 column 11 function f
+        IF !(idx < 0 && (idx < 0 ? cases/03_list_array/good.py:6$list_size$178 + (unsigned long int)idx : (unsigned long int)idx) >= cases/03_list_array/good.py:6$list_size$178) THEN GOTO 3
+        // 4530 
+        DEAD python_converter::cases/03_list_array/good.py:6$list_size$178
+        // 4531 
+        DEAD py:cases/03_list_array/good.py@F@f::$tmp::return_value$___ESBMC_list_at$2
+        // 4532 
+        DEAD py:cases/03_list_array/good.py@F@f::$tmp::return_value$___ESBMC_list_at$1
+        // 4533 
+        DEAD python_converter::cases/03_list_array/good.py:4$list_size$177
+        // 4534 
+        DEAD python_converter::cases/03_list_array/good.py:4$list_size$176
+        // 4535 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$175
+        // 4536 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$173
+        // 4537 
+        DEAD python_converter::cases/03_list_array/good.py:2$list_elem$171
+        // 4538 
+        DEAD python_converter::cases/03_list_array/good.py:2$py_list$169
+        // 4539 
+        DEAD py:cases/03_list_array/good.py@F@f@values
+        // 4540 
+        ASSIGN c:@__ESBMC_exc_thrown=1;
+        // 4541 
+        ASSIGN c:@__ESBMC_exc_typeid=11;
+        // 4542 
+        ASSIGN c:@__ESBMC_exc_obj$8={ .message=&"list index out of range"[0] };
+        // 4543 
+        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$8);
+        // 4544 
+        GOTO 4
+        // 4545 
+     3: DECL  struct __ESBMC_PyObj * return_value$___ESBMC_list_at$3;
+        // 4546 
+        FUNCTION_CALL:  return_value$___ESBMC_list_at$3=list_at(values, idx < 0 ? cases/03_list_array/good.py:6$list_size$178 + (unsigned long int)idx : (unsigned long int)idx)
+        // 4547 file cases/03_list_array/good.py line 6 column 4 function f
+        RETURN: *(signed long int *)return_value$___ESBMC_list_at$3->value
+        // 4548 no location
+     4: END_FUNCTION
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

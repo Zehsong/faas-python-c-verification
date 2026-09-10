@@ -1,0 +1,48 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:py_side.py@F@py_f`
+GOTO program creation time: 0.122s
+GOTO program processing time: 0.010s
+Starting Bounded Model Checking
+Symex completed in: 0.001s (27 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 14 assignments)
+Generated 1 VCC(s), 1 remaining after simplification (13 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.005s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file phase4c/equiv_harness.c line 18 column 5 function equiv_main thread 0
+----------------------------------------------------
+  x = 1073741827 (01000000 00000000 00000000 00000011)
+
+State 2 file phase4c/equiv_harness.c line 20 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_py = 0 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 3 file phase4c/equiv_harness.c line 21 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_c = 1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 4 file phase4c/equiv_harness.c line 23 column 5 function equiv_main thread 0
+----------------------------------------------------
+Violated property:
+  file phase4c/equiv_harness.c line 23 column 5 function equiv_main
+  Python and C outputs must be equivalent
+  r_py == r_c
+
+
+** Results:
+phase4c/equiv_harness.c, function equiv_main
+  FAILED       [equiv_main.assertion.1]  line 23  Python and C outputs must be equivalent
+
+** 1 of 1 properties failed
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

@@ -1,0 +1,4 @@
+case	py_good	py_mutant	c_good	c_mutant	py_f_goto_lines	c_f_goto_lines
+01_helper_branch	UNKNOWN	UNKNOWN	UNKNOWN	UNKNOWN	14	14
+02_loop	UNKNOWN	UNKNOWN	UNKNOWN	UNKNOWN	22	22
+03_list_array	UNKNOWN	UNKNOWN	UNKNOWN	UNKNOWN	148	16

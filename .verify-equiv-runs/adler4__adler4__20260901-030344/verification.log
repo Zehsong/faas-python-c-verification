@@ -1,0 +1,23 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-030344/python.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-030344/c.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/adler4__adler4__20260901-030344/harness.gb --equiv-py-target adler4 --equiv-c-target adler4 --function c:@F@equiv_main --unwind 8 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python module entry as `c:@F@__ESBMC_PY_MODULE_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/python.py@F@adler4`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@adler4`
+GOTO program creation time: 0.167s
+GOTO program processing time: 0.018s
+Starting Bounded Model Checking
+Unwinding loop 121 iteration 1   file /workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/../../../../third_party/zlib-v1.3/adler32.c line 86 column 9 function adler32_z
+Unwinding loop 121 iteration 2   file /workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/../../../../third_party/zlib-v1.3/adler32.c line 86 column 9 function adler32_z
+Unwinding loop 121 iteration 3   file /workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/../../../../third_party/zlib-v1.3/adler32.c line 86 column 9 function adler32_z
+Unwinding loop 121 iteration 4   file /workspaces/faas-python-c-verification/experiments/library_alignment/zlib/verify/../../../../third_party/zlib-v1.3/adler32.c line 86 column 9 function adler32_z
+Symex completed in: 0.004s (233 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 145 assignments)
+Generated 43 VCC(s), 35 remaining after simplification (88 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Z3 v4.13.3
+
+VERIFY_EQUIV_INTERNAL: timeout after 120s

@@ -1,0 +1,622 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/python.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/c.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/harness.gb --equiv-py-target faas_model --equiv-c-target faas_model --function c:@F@equiv_main --show-call-sites
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python module entry as `c:@F@__ESBMC_PY_MODULE_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@faas_model`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@faas_model`
+GOTO program creation time: 0.117s
+GOTO program processing time: 0.013s
+__ESBMC_main -> c:@F@__ESBMC_pthread_start_main_hook() [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:54]
+__ESBMC_main -> c:@F@equiv_main() [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:54]
+__ESBMC_main -> c:@F@__ESBMC_atexit_handler() [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:54]
+__ESBMC_main -> c:@F@__ESBMC_pthread_end_main_hook() [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:54]
+c:@F@__ESBMC_PY_MODULE_ENTRY -> python_init()
+c:@F@__ESBMC_PY_MODULE_ENTRY -> c:@F@__ESBMC_pthread_start_main_hook() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py]
+c:@F@__ESBMC_PY_MODULE_ENTRY -> python_user_main()
+c:@F@__ESBMC_PY_MODULE_ENTRY -> c:@F@__ESBMC_pthread_end_main_hook() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py]
+c:@F@__ESBMC_acos -> c:@F@acos(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:41]
+c:@F@__ESBMC_acosh -> c:@F@acosh(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:177]
+c:@F@__ESBMC_asin -> c:@F@asin(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:104]
+c:@F@__ESBMC_asinh -> c:@F@asinh(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:170]
+c:@F@__ESBMC_atan -> c:@F@atan(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:47]
+c:@F@__ESBMC_atan2 -> c:@F@atan2(y, x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:53]
+c:@F@__ESBMC_atanh -> c:@F@atanh(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:184]
+c:@F@__ESBMC_atexit_handler -> *stdlib_atexit_key[(signed long int)atexit_count].atexit_func() [/esbmc-vfs/libc/library/stdlib.c:41]
+c:@F@__ESBMC_copysign -> c:@F@copysign(x, y) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:90]
+c:@F@__ESBMC_cos -> c:@F@cos(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:13]
+c:@F@__ESBMC_cosh -> c:@F@cosh(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:118]
+c:@F@__ESBMC_dict_eq -> c:@F@__ESBMC_list_try_find_index(rhs_keys, lhs_key->value, lhs_key->type_id, lhs_key->size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:890]
+c:@F@__ESBMC_dict_eq -> c:@F@__ESBMC_list_eq(lhs_list, rhs_list, 0, 0, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:925]
+c:@F@__ESBMC_dict_eq -> c:list.c@F@__ESBMC_values_equal(lhs_value->value, rhs_value->value, lhs_value->size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:953]
+c:@F@__ESBMC_exp -> c:@F@exp(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:25]
+c:@F@__ESBMC_exp2 -> c:@F@exp2(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:164]
+c:@F@__ESBMC_expm1 -> c:@F@expm1(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:151]
+c:@F@__ESBMC_fmod -> c:@F@fmod(x, y) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:84]
+c:@F@__ESBMC_hypot -> c:@F@hypot(x, y) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:190]
+c:@F@__ESBMC_list_contains -> c:list.c@F@__ESBMC_values_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:593]
+c:@F@__ESBMC_list_copy -> c:@F@__ESBMC_list_create() [/workspaces/esbmc-current/src/c2goto/library/python/list.c:970]
+c:@F@__ESBMC_list_copy -> c:list.c@F@__ESBMC_copy_value(elem->value, elem->size, 0, 0, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:980]
+c:@F@__ESBMC_list_copy_shallow -> c:@F@__ESBMC_list_copy_shallow_sz(l, list_type_id, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1024]
+c:@F@__ESBMC_list_copy_shallow_sz -> c:@F@__ESBMC_list_create() [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1011]
+c:@F@__ESBMC_list_copy_shallow_sz -> c:list.c@F@__ESBMC_list_push_shallow_sz(copied, &l->items[(signed long int)i], list_type_id, elem_size, float_type_id) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1015]
+c:@F@__ESBMC_list_count -> c:list.c@F@__ESBMC_values_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:616]
+c:@F@__ESBMC_list_create -> c:@F@__ESBMC_create_inf_obj() [/workspaces/esbmc-current/src/c2goto/library/python/list.c:88]
+c:@F@__ESBMC_list_eq -> c:list.c@F@__ESBMC_values_equal(a->value, b->value, a->size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:380]
+c:@F@__ESBMC_list_eq -> c:list.c@F@__ESBMC_values_equal(a->value, b->value, cmp_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:426]
+c:@F@__ESBMC_list_extend -> c:list.c@F@__ESBMC_copy_value(elem->value, elem->size, elem->type_id, 0, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:709]
+c:@F@__ESBMC_list_find_index -> c:list.c@F@__ESBMC_values_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:746]
+c:@F@__ESBMC_list_index -> c:list.c@F@__ESBMC_values_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:638]
+c:@F@__ESBMC_list_index_range -> c:list.c@F@__ESBMC_values_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:684]
+c:@F@__ESBMC_list_insert -> c:@F@__ESBMC_list_push(l, value, type_id, type_size, float_type_id, ptr_free) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:550]
+c:@F@__ESBMC_list_insert -> c:list.c@F@__ESBMC_copy_value(value, type_size, type_id, float_type_id, &float_idx, ptr_free) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:554]
+c:@F@__ESBMC_list_lt -> c:@F@memcmp(a->value, b->value, min_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1356]
+c:@F@__ESBMC_list_lt -> c:@F@memcmp(a->value, b->value, min_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1400]
+c:@F@__ESBMC_list_push -> c:list.c@F@__ESBMC_copy_value(value, type_size, type_id, float_type_id, &float_idx, ptr_free) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:179]
+c:@F@__ESBMC_list_push_object -> c:@F@__ESBMC_list_push(l, (void *)(&temp), o->type_id, o->size, float_type_id, ptr_free) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:208]
+c:@F@__ESBMC_list_push_object -> c:@F@__ESBMC_list_push(l, o->value, o->type_id, o->size, float_type_id, ptr_free) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:211]
+c:@F@__ESBMC_list_push_shallow -> c:list.c@F@__ESBMC_list_push_shallow_sz(l, o, list_type_id, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:267]
+c:@F@__ESBMC_list_remove -> c:list.c@F@__ESBMC_values_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1180]
+c:@F@__ESBMC_list_set_at -> c:list.c@F@__ESBMC_copy_value(value, type_size, type_id, float_type_id, &float_idx, ptr_free) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:514]
+c:@F@__ESBMC_list_set_eq -> c:list.c@F@__ESBMC_values_equal(a->value, b->value, a->size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:478]
+c:@F@__ESBMC_list_slice_assign -> c:@F@__ESBMC_list_copy_shallow_sz(l, list_type_id, elem_size, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1118]
+c:@F@__ESBMC_list_slice_assign -> c:list.c@F@__ESBMC_list_store_elem(&l->items[idx], &src->items[k], list_type_id, elem_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1159]
+c:@F@__ESBMC_list_sort -> c:@F@memcmp(prev->value, tmp.value, min_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1300]
+c:@F@__ESBMC_list_try_find_index -> c:list.c@F@__ESBMC_key_equal(elem->value, item, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:800]
+c:@F@__ESBMC_log -> c:@F@log(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:35]
+c:@F@__ESBMC_log10 -> c:@F@log10(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:133]
+c:@F@__ESBMC_log1p -> c:@F@log1p(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:158]
+c:@F@__ESBMC_log2 -> c:@F@log2(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:60]
+c:@F@__ESBMC_pow -> c:@F@pow(x, y) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:66]
+c:@F@__ESBMC_pthread_end_main_hook -> c:@F@__ESBMC_yield() [/esbmc-vfs/libc/library/pthread_lib.c:190]
+c:@F@__ESBMC_pthread_start_main_hook -> c:@F@__ESBMC_yield() [/esbmc-vfs/libc/library/pthread_lib.c:177]
+c:@F@__ESBMC_set_add -> c:@F@__ESBMC_list_contains(s, item, item_type_id, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1210]
+c:@F@__ESBMC_set_add -> c:@F@__ESBMC_list_push(s, item, item_type_id, item_size, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1213]
+c:@F@__ESBMC_set_discard -> c:@F@__ESBMC_list_remove(s, item, item_type_id, item_size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1224]
+c:@F@__ESBMC_sin -> c:@F@sin(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:7]
+c:@F@__ESBMC_sinh -> c:@F@sinh(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:111]
+c:@F@__ESBMC_tan -> c:@F@tan(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:97]
+c:@F@__ESBMC_tanh -> c:@F@tanh(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:125]
+c:@F@__ESBMC_trunc -> c:@F@trunc(x) [/workspaces/esbmc-current/src/c2goto/library/python/math.c:78]
+c:@F@__arccos_array -> c:@F@arccos(v[(signed long int)i]) [/esbmc-vfs/libc/library/libm/acos.c:29]
+c:@F@__ceil_array -> c:@F@ceil(v[(signed long int)i]) [/esbmc-vfs/libc/library/libm/ceil.c:36]
+c:@F@__pyt_init_tid -> c:@F@__ESBMC_yield() [/esbmc-vfs/libc/library/pthread_lib.c:1411]
+c:@F@__pyt_join -> c:@F@__ESBMC_yield() [/esbmc-vfs/libc/library/pthread_lib.c:1445]
+c:@F@__pyt_lock_release_waiters -> c:@F@__ESBMC_release_blocked_threads(waiters) [/esbmc-vfs/libc/library/pthread_lib.c:1501]
+c:@F@__pyt_terminate -> c:@F@__ESBMC_yield() [/esbmc-vfs/libc/library/pthread_lib.c:1423]
+c:@F@__pyt_terminate -> c:@F@__ESBMC_get_thread_id() [/esbmc-vfs/libc/library/pthread_lib.c:1424]
+c:@F@__pyt_terminate -> c:@F@__ESBMC_release_blocked_threads(pthread_join_waiters[(signed long int)threadid]) [/esbmc-vfs/libc/library/pthread_lib.c:1427]
+c:@F@__pyt_terminate -> c:@F@__ESBMC_terminate_thread() [/esbmc-vfs/libc/library/pthread_lib.c:1437]
+c:@F@__python_scalar_add_str -> c:scalar.c@F@__python_scalar_bytes_copy((void *)tagged_dst, tagged->value, tagged_len) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:199]
+c:@F@__python_scalar_add_str -> c:@F@memset((void *)tagged_dst, 0, tagged_len) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:201]
+c:@F@__python_scalar_add_str -> c:scalar.c@F@__python_scalar_bytes_copy((void *)value_dst, (void *)value, value_len) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:202]
+c:@F@__python_scalar_eq_str -> c:scalar.c@F@__python_scalar_bytes_equal(tagged->value, (void *)value, size) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:104]
+c:@F@__python_scalar_tag_copy -> c:scalar.c@F@__python_scalar_bytes_copy(copied, value, size) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:46]
+c:@F@__python_str_count -> c:@F@__python_strnlen_bounded(s, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:699]
+c:@F@__python_str_count -> c:@F@__python_strnlen_bounded(sub, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:700]
+c:@F@__python_str_find -> c:@F@__python_strnlen_bounded(s1, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:735]
+c:@F@__python_str_find -> c:@F@__python_strnlen_bounded(s2, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:736]
+c:@F@__python_str_find -> c:@F@strncmp(s1 + i, s2, len_sub) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:746]
+c:@F@__python_str_find_range -> c:@F@__python_strnlen_bounded(s1, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:757]
+c:@F@__python_str_find_range -> c:@F@__python_strnlen_bounded(s2, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:758]
+c:@F@__python_str_find_range -> c:string.c@F@__python_str_normalize_range(&start, &end, len_s) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:762]
+c:@F@__python_str_find_range -> c:@F@strncmp(s1 + i, s2, len_sub) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:776]
+c:@F@__python_str_is_float -> c:string.c@F@__python_parse_float(s, &value) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1356]
+c:@F@__python_str_isdigit -> c:@F@isdigit((signed int)((unsigned char)(*s))) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:109]
+c:@F@__python_str_lstrip_chars -> c:@F@__python_str_lstrip(s) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:328]
+c:@F@__python_str_repeat -> c:@F@__python_strnlen_bounded(s, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1530]
+c:@F@__python_str_replace -> c:@F@__python_strnlen_bounded(old_sub, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:853]
+c:@F@__python_str_replace -> c:@F@__python_strnlen_bounded(new_sub, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:854]
+c:@F@__python_str_replace -> c:@F@__python_strnlen_bounded(s, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:855]
+c:@F@__python_str_replace -> c:@F@strncmp(s + i, old_sub, old_len) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:913]
+c:@F@__python_str_replace -> c:@F@strncmp(s + i, old_sub, old_len) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:946]
+c:@F@__python_str_rfind -> c:@F@__python_strnlen_bounded(s1, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:787]
+c:@F@__python_str_rfind -> c:@F@__python_strnlen_bounded(s2, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:788]
+c:@F@__python_str_rfind -> c:@F@strncmp(s1 + i, s2, len_sub) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:803]
+c:@F@__python_str_rfind_range -> c:@F@__python_strnlen_bounded(s1, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:813]
+c:@F@__python_str_rfind_range -> c:@F@__python_strnlen_bounded(s2, 1024) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:814]
+c:@F@__python_str_rfind_range -> c:string.c@F@__python_str_normalize_range(&start, &end, len_s) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:818]
+c:@F@__python_str_rfind_range -> c:@F@strncmp(s1 + i, s2, len_sub) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:832]
+c:@F@__python_str_rstrip_chars -> c:@F@__python_str_rstrip(s) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:356]
+c:@F@__python_str_slice -> c:@F@__python_strnlen_bounded(s, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1570]
+c:@F@__python_str_split -> c:@F@__python_strnlen_bounded(sep, 64) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1036]
+c:@F@__python_str_split -> c:@F@__python_strnlen_bounded(str, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1037]
+c:@F@__python_str_split -> c:string.c@F@__python_str_split_isspace(str[(signed long int)i]) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1051]
+c:@F@__python_str_split -> c:string.c@F@__python_str_split_emit(items, &count, str, start, len_str) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1062]
+c:@F@__python_str_split -> c:string.c@F@__python_str_split_isspace(str[(signed long int)i]) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1066]
+c:@F@__python_str_split -> c:string.c@F@__python_str_split_emit(items, &count, str, start, i) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1068]
+c:@F@__python_str_split -> c:string.c@F@__python_str_split_emit(items, &count, str, start, i) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1089]
+c:@F@__python_str_split -> c:string.c@F@__python_str_split_emit(items, &count, str, start, len_str) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1099]
+c:@F@__python_str_strip_chars -> c:@F@__python_str_strip(s) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:262]
+c:@F@__python_str_to_float -> c:string.c@F@__python_parse_float(s, &value) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1346]
+c:@F@acos -> c:@F@atan2(ieee_sqrt
+  * type: floatbv
+      * width: 64
+      * f: 52
+  * operands: 
+    0: ieee_sub
+        * type: floatbv
+            * width: 64
+            * f: 52
+        * operands: 
+          0: constant
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * value: 0011111111110000000000000000000000000000000000000000000000000000
+          1: ieee_mul
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * operands: 
+                0: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:acos.c@32@F@acos@x
+                1: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:acos.c@32@F@acos@x
+              * rounding_mode: symbol
+                  * type: signedbv
+                      * width: 32
+                  * identifier: c:@__ESBMC_rounding_mode
+        * rounding_mode: symbol
+            * type: signedbv
+                * width: 32
+            * identifier: c:@__ESBMC_rounding_mode
+  * rounding_mode: symbol
+      * type: signedbv
+          * width: 32
+      * identifier: c:@__ESBMC_rounding_mode, x) [/esbmc-vfs/libc/library/libm/acos.c:7]
+c:@F@acosh -> c:@F@log(IEEE_ADD(x, ieee_sqrt
+  * type: floatbv
+      * width: 64
+      * f: 52
+  * operands: 
+    0: ieee_sub
+        * type: floatbv
+            * width: 64
+            * f: 52
+        * operands: 
+          0: ieee_mul
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * operands: 
+                0: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:acosh.c@32@F@acosh@x
+                1: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:acosh.c@32@F@acosh@x
+              * rounding_mode: symbol
+                  * type: signedbv
+                      * width: 32
+                  * identifier: c:@__ESBMC_rounding_mode
+          1: constant
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * value: 0011111111110000000000000000000000000000000000000000000000000000
+        * rounding_mode: symbol
+            * type: signedbv
+                * width: 32
+            * identifier: c:@__ESBMC_rounding_mode
+  * rounding_mode: symbol
+      * type: signedbv
+          * width: 32
+      * identifier: c:@__ESBMC_rounding_mode)) [/esbmc-vfs/libc/library/libm/acosh.c:6]
+c:@F@add -> c:umath.c@F@get_value(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:41]
+c:@F@add -> c:umath.c@F@get_value(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:41]
+c:@F@add_double -> c:umath.c@F@get_value_double(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:67]
+c:@F@add_double -> c:umath.c@F@get_value_double(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:67]
+c:@F@arccos -> c:@F@acos(x) [/esbmc-vfs/libc/library/libm/acos.c:13]
+c:@F@arctan -> c:@F@atan(x) [/esbmc-vfs/libc/library/libm/atan.c:56]
+c:@F@asin -> c:@F@atan2(x, ieee_sqrt
+  * type: floatbv
+      * width: 64
+      * f: 52
+  * operands: 
+    0: ieee_sub
+        * type: floatbv
+            * width: 64
+            * f: 52
+        * operands: 
+          0: constant
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * value: 0011111111110000000000000000000000000000000000000000000000000000
+          1: ieee_mul
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * operands: 
+                0: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:asin.c@31@F@asin@x
+                1: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:asin.c@31@F@asin@x
+              * rounding_mode: symbol
+                  * type: signedbv
+                      * width: 32
+                  * identifier: c:@__ESBMC_rounding_mode
+        * rounding_mode: symbol
+            * type: signedbv
+                * width: 32
+            * identifier: c:@__ESBMC_rounding_mode
+  * rounding_mode: symbol
+      * type: signedbv
+          * width: 32
+      * identifier: c:@__ESBMC_rounding_mode) [/esbmc-vfs/libc/library/libm/asin.c:8]
+c:@F@asinh -> c:@F@log(IEEE_ADD(x, ieee_sqrt
+  * type: floatbv
+      * width: 64
+      * f: 52
+  * operands: 
+    0: ieee_add
+        * type: floatbv
+            * width: 64
+            * f: 52
+        * operands: 
+          0: ieee_mul
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * operands: 
+                0: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:asinh.c@32@F@asinh@x
+                1: symbol
+                    * type: floatbv
+                        * width: 64
+                        * f: 52
+                    * identifier: c:asinh.c@32@F@asinh@x
+              * rounding_mode: symbol
+                  * type: signedbv
+                      * width: 32
+                  * identifier: c:@__ESBMC_rounding_mode
+          1: constant
+              * type: floatbv
+                  * width: 64
+                  * f: 52
+              * value: 0011111111110000000000000000000000000000000000000000000000000000
+        * rounding_mode: symbol
+            * type: signedbv
+                * width: 32
+            * identifier: c:@__ESBMC_rounding_mode
+  * rounding_mode: symbol
+      * type: signedbv
+          * width: 32
+      * identifier: c:@__ESBMC_rounding_mode)) [/esbmc-vfs/libc/library/libm/asinh.c:6]
+c:@F@atan -> c:atan.c@F@_atan(IEEE_DIV(1.000000, a), 2) [/esbmc-vfs/libc/library/libm/atan.c:44]
+c:@F@atan -> c:atan.c@F@_atan(a, 0) [/esbmc-vfs/libc/library/libm/atan.c:46]
+c:@F@atan2 -> c:atan.c@F@_atan(f, 2) [/esbmc-vfs/libc/library/libm/atan.c:73]
+c:@F@atan2 -> c:atan.c@F@_atan(f, 0) [/esbmc-vfs/libc/library/libm/atan.c:80]
+c:@F@atanh -> c:@F@log(IEEE_DIV(IEEE_ADD(1.000000, x), IEEE_SUB(1.000000, x))) [/esbmc-vfs/libc/library/libm/atanh.c:6]
+c:@F@ceil -> c:@F@fegetround() [/esbmc-vfs/libc/library/libm/ceil.c:24]
+c:@F@ceil -> c:@F@fesetround(2048) [/esbmc-vfs/libc/library/libm/ceil.c:24]
+c:@F@ceil -> c:@F@rint(f) [/esbmc-vfs/libc/library/libm/ceil.c:24]
+c:@F@ceil -> c:@F@fesetround(save_round) [/esbmc-vfs/libc/library/libm/ceil.c:24]
+c:@F@cos -> c:@F@fmod(IEEE_ADD(x, 3.141593e+0), IEEE_MUL(3.141593e+0, (double)2)) [/esbmc-vfs/libc/library/libm/cos.c:12]
+c:@F@cosh -> c:@F@exp(x) [/esbmc-vfs/libc/library/libm/cosh.c:6]
+c:@F@cosh -> c:@F@exp(-x) [/esbmc-vfs/libc/library/libm/cosh.c:6]
+c:@F@divide -> c:umath.c@F@get_value(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:197]
+c:@F@divide -> c:umath.c@F@get_value(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:197]
+c:@F@divide_double -> c:umath.c@F@get_value_double(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:223]
+c:@F@divide_double -> c:umath.c@F@get_value_double(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:223]
+c:@F@equiv_main -> c:@F@__ESBMC_PY_MODULE_ENTRY() [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:33]
+c:@F@equiv_main -> py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@faas_model((signed long int)state_id) [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:40]
+c:@F@equiv_main -> c:@F@faas_model(state_id) [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:43]
+c:@F@exp -> c:@F@expm1(x) [/esbmc-vfs/libc/library/libm/exp.c:84]
+c:@F@exp2 -> c:@F@exp(IEEE_MUL(x, 6.931472e-1)) [/esbmc-vfs/libc/library/libm/exp2.c:6]
+c:@F@expm1 -> c:exp.c@F@expm1_taylor(x) [/esbmc-vfs/libc/library/libm/exp.c:63]
+c:@F@expm1 -> c:@F@frexp(x, &xe) [/esbmc-vfs/libc/library/libm/exp.c:67]
+c:@F@expm1 -> c:exp.c@F@expm1_taylor(xm) [/esbmc-vfs/libc/library/libm/exp.c:70]
+c:@F@floor -> c:@F@fegetround() [/esbmc-vfs/libc/library/libm/floor.c:24]
+c:@F@floor -> c:@F@fesetround(1024) [/esbmc-vfs/libc/library/libm/floor.c:24]
+c:@F@floor -> c:@F@rint(f) [/esbmc-vfs/libc/library/libm/floor.c:24]
+c:@F@floor -> c:@F@fesetround(save_round) [/esbmc-vfs/libc/library/libm/floor.c:24]
+c:@F@frexp -> c:@F@__ESBMC_bitcast((void *)(&v), (void *)(&x)) [/esbmc-vfs/libc/library/libm/frexp.c:105]
+c:@F@frexp -> c:@F@__ESBMC_bitcast((void *)(&x), (void *)(&v)) [/esbmc-vfs/libc/library/libm/frexp.c:105]
+c:@F@ldexp -> c:@F@__ESBMC_bitcast((void *)(&v), (void *)(&x)) [/esbmc-vfs/libc/library/libm/frexp.c:106]
+c:@F@ldexp -> c:@F@copysign(0.000000, x) [/esbmc-vfs/libc/library/libm/frexp.c:106]
+c:@F@ldexp -> c:@F@copysign(+INFINITY, x) [/esbmc-vfs/libc/library/libm/frexp.c:106]
+c:@F@ldexp -> c:@F@__ESBMC_bitcast((void *)(&x), (void *)(&v)) [/esbmc-vfs/libc/library/libm/frexp.c:106]
+c:@F@log -> c:@F@log2(x) [/esbmc-vfs/libc/library/libm/exp.c:145]
+c:@F@log10 -> c:@F@log(x) [/esbmc-vfs/libc/library/libm/log10.c:6]
+c:@F@log1p -> c:@F@log(IEEE_ADD(x, (double)1)) [/esbmc-vfs/libc/library/libm/exp.c:137]
+c:@F@log1p -> c:exp.c@F@log1p_taylor(x) [/esbmc-vfs/libc/library/libm/exp.c:139]
+c:@F@log2 -> c:@F@frexp(x, &xe) [/esbmc-vfs/libc/library/libm/exp.c:166]
+c:@F@log2 -> c:exp.c@F@log1p_taylor(IEEE_SUB(xm, (double)1)) [/esbmc-vfs/libc/library/libm/exp.c:180]
+c:@F@main -> c:@F@equiv_main() [/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_model__faas_model__20260830-130124/equiv_harness.c:56]
+c:@F@matmul -> c:@F@dot(A, B, C, m, n, p, bits) [/workspaces/esbmc-current/src/c2goto/library/python/linalg.c:98]
+c:@F@matmul_double -> c:@F@dot_double(A, B, C, m, n, p) [/workspaces/esbmc-current/src/c2goto/library/python/linalg.c:109]
+c:@F@memcmp -> c:@F@__ESBMC_memcmp(s1, s2, n) [/esbmc-vfs/libc/library/string.c:371]
+c:@F@memcpy -> c:@F@__ESBMC_memcpy(dst, src, n) [/esbmc-vfs/libc/library/string.c:297]
+c:@F@memset -> c:@F@__ESBMC_memset(s, c, n) [/esbmc-vfs/libc/library/string.c:314]
+c:@F@multiply -> c:umath.c@F@get_value(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:145]
+c:@F@multiply -> c:umath.c@F@get_value(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:145]
+c:@F@multiply_double -> c:umath.c@F@get_value_double(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:171]
+c:@F@multiply_double -> c:umath.c@F@get_value_double(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:171]
+c:@F@pow -> c:@F@frexp(y, &ye) [/esbmc-vfs/libc/library/libm/pow.c:75]
+c:@F@pow -> c:@F@copysign(r, x) [/esbmc-vfs/libc/library/libm/pow.c:82]
+c:@F@pow -> c:@F@copysign(r, x) [/esbmc-vfs/libc/library/libm/pow.c:88]
+c:@F@pow -> c:@F@frexp(x, &xe) [/esbmc-vfs/libc/library/libm/pow.c:99]
+c:@F@pow -> c:@F@ldexp(1.000000, (xe - 1) * (signed int)y) [/esbmc-vfs/libc/library/libm/pow.c:106]
+c:@F@pow -> c:@F@copysign(r, x) [/esbmc-vfs/libc/library/libm/pow.c:108]
+c:@F@pow -> c:pow.c@F@pow_by_squaring((_Bool)(signbit(y)) ? IEEE_DIV(1.000000, x) : x, (unsigned int)(abs(y))) [/esbmc-vfs/libc/library/libm/pow.c:110]
+c:@F@pow -> c:@F@log(abs(x)) [/esbmc-vfs/libc/library/libm/pow.c:113]
+c:@F@pow -> c:@F@exp(IEEE_MUL(l, y)) [/esbmc-vfs/libc/library/libm/pow.c:114]
+c:@F@pow -> c:@F@round(recip) [/esbmc-vfs/libc/library/libm/pow.c:124]
+c:@F@pow -> c:@F@round(r_check) [/esbmc-vfs/libc/library/libm/pow.c:133]
+c:@F@pow -> c:@F@copysign(r, x) [/esbmc-vfs/libc/library/libm/pow.c:141]
+c:@F@round -> c:@F@fegetround() [/esbmc-vfs/libc/library/libm/round.c:24]
+c:@F@round -> c:@F@fesetround(3072) [/esbmc-vfs/libc/library/libm/round.c:24]
+c:@F@round -> c:@F@copysign(IEEE_ADD(5.000000e-1, abs(f)), f) [/esbmc-vfs/libc/library/libm/round.c:24]
+c:@F@round -> c:@F@rint(return_value$_copysign$2) [/esbmc-vfs/libc/library/libm/round.c:24]
+c:@F@round -> c:@F@fesetround(save_round) [/esbmc-vfs/libc/library/libm/round.c:24]
+c:@F@sin -> c:@F@cos(IEEE_SUB(1.570796e+0, x)) [/esbmc-vfs/libc/library/libm/sin.c:11]
+c:@F@sinh -> c:@F@exp(x) [/esbmc-vfs/libc/library/libm/sinh.c:6]
+c:@F@sinh -> c:@F@exp(-x) [/esbmc-vfs/libc/library/libm/sinh.c:6]
+c:@F@subtract -> c:umath.c@F@get_value(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:93]
+c:@F@subtract -> c:umath.c@F@get_value(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:93]
+c:@F@subtract_double -> c:umath.c@F@get_value_double(A, a_rows, a_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:119]
+c:@F@subtract_double -> c:umath.c@F@get_value_double(B, b_rows, b_cols, i, j) [/workspaces/esbmc-current/src/c2goto/library/python/umath.c:119]
+c:@F@tan -> c:@F@sin(x) [/esbmc-vfs/libc/library/libm/tan.c:6]
+c:@F@tan -> c:@F@cos(x) [/esbmc-vfs/libc/library/libm/tan.c:6]
+c:@F@tanh -> c:@F@exp(x) [/esbmc-vfs/libc/library/libm/tanh.c:6]
+c:@F@tanh -> c:@F@exp(-x) [/esbmc-vfs/libc/library/libm/tanh.c:7]
+c:@F@trunc -> c:@F@fegetround() [/esbmc-vfs/libc/library/libm/trunc.c:24]
+c:@F@trunc -> c:@F@fesetround(3072) [/esbmc-vfs/libc/library/libm/trunc.c:24]
+c:@F@trunc -> c:@F@rint(f) [/esbmc-vfs/libc/library/libm/trunc.c:24]
+c:@F@trunc -> c:@F@fesetround(save_round) [/esbmc-vfs/libc/library/libm/trunc.c:24]
+c:list.c@F@__ESBMC_copy_value -> c:@F@memcpy(copied, value, size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:164]
+c:list.c@F@__ESBMC_key_equal -> c:@F@memcmp(a, b, size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:781]
+c:list.c@F@__ESBMC_list_push_shallow_sz -> c:@F@__ESBMC_list_push(l, o->value, o->type_id, elem_size, float_type_id, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:257]
+c:list.c@F@__ESBMC_list_push_shallow_sz -> c:@F@__ESBMC_list_push_object(l, o, float_type_id, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:259]
+c:list.c@F@__ESBMC_list_store_elem -> c:list.c@F@__ESBMC_copy_value(o->value, copy_size, o->type_id, 0, 0, 0) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:1049]
+c:list.c@F@__ESBMC_values_equal -> c:list.c@F@__ESBMC_load_u64(a) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:57]
+c:list.c@F@__ESBMC_values_equal -> c:list.c@F@__ESBMC_load_u64(b) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:57]
+c:list.c@F@__ESBMC_values_equal -> c:list.c@F@__ESBMC_load_u64(a) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:61]
+c:list.c@F@__ESBMC_values_equal -> c:list.c@F@__ESBMC_load_u64(b) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:61]
+c:list.c@F@__ESBMC_values_equal -> c:list.c@F@__ESBMC_load_u64((void *)((unsigned char *)a + 8)) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:61]
+c:list.c@F@__ESBMC_values_equal -> c:list.c@F@__ESBMC_load_u64((void *)((unsigned char *)b + 8)) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:61]
+c:list.c@F@__ESBMC_values_equal -> c:@F@memcmp(a, b, size) [/workspaces/esbmc-current/src/c2goto/library/python/list.c:68]
+c:scalar.c@F@__python_scalar_bytes_copy -> c:@F@memcpy(dst, src, size) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:36]
+c:scalar.c@F@__python_scalar_bytes_equal -> c:@F@memcmp(a, b, size) [/workspaces/esbmc-current/src/c2goto/library/python/scalar.c:19]
+c:string.c@F@__python_parse_float -> c:@F@__python_strnlen_bounded(s, 256) [/workspaces/esbmc-current/src/c2goto/library/python/string.c:1282]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@C@int@F@from_bytes -> c:@F@__ESBMC_get_object_size((void *)bytes_data) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:21]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@C@int@F@from_bytes -> c:@F@__ESBMC_get_object_size(bytes_data) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:24]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@all -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:17]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@all -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@all -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19$list_size$1 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@all -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19$list_size$1 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@all -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19$list_size$1 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:19]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@any -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:197]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@any -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@any -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199$list_size$32 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@any -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199$list_size$32 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@any -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199$list_size$32 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:199]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@choice -> c:@F@__ESBMC_list_size(seq) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:66]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@choice -> c:@F@__ESBMC_list_size(seq) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:71]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@choice -> c:@F@__ESBMC_list_at(seq, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:71$list_size$117 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:71]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:34]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:38]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:39]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:39$list_size$2 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:39]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:42]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:42$list_size$3 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:42]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:88]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:92]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:93]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:93$list_size$12 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:93]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96$list_size$13 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:106]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:110]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:111]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:111]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:111$list_size$15 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:111]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:114]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:114]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:114$list_size$18 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:114]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:124]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:128]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:129]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:129$list_size$20 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:129]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:132]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:132$list_size$21 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:132]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_default_str -> c:@F@strcmp(element, result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:133]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:52]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:56]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:57]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:57]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:57$list_size$5 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:57]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:60]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:60]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:60$list_size$8 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:60]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:70]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:74]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:75]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:75$list_size$10 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:75]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:78]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:78$list_size$11 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:78]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@max_str -> c:@F@strcmp(element, result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:79]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:142]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:146]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:147]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:147$list_size$22 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:147]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:150]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:150$list_size$23 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:150]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:208]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:212]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:213]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:213$list_size$33 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:213]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:216]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:216$list_size$34 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:216]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:226]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:230]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:231]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:231]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:231$list_size$36 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:231]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:234]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:234]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:234$list_size$39 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:234]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:244]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:248]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:249]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:249$list_size$41 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:249]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:252]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:252$list_size$42 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:252]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_default_str -> c:@F@strcmp(element, result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:253]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:160]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:164]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:165]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:165]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:165$list_size$25 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:165]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:168]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:168]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:168$list_size$28 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:168]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:178]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:182]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:183]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@__ESBMC_list_at(iterable, 0 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:183$list_size$30 + (unsigned long int)0 : (unsigned long int)0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:183]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:186]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:186$list_size$31 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:186]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@min_str -> c:@F@strcmp(element, result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:187]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:180]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:180]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@_nondet_size(max_size) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:181]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_contains(result.keys, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:$list_elem$128, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:$list_elem_type$127, 8) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_find_index(result.keys, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem$132, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem_type$131, 8) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_set_at(result.values, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$dict_update_idx$130, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem$134, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem_type$133, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_push(result.keys, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem$132, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem_type$131, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_dict -> c:@F@__ESBMC_list_push(result.values, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem$134, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185$list_elem_type$133, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:185]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_list -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:126]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_list -> py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@_nondet_size(max_size) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:127]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@nondet_list -> c:@F@__ESBMC_list_push(result, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:131$list_elem$124, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:131$list_elem_type$123, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:131]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:398]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:399]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:401]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:401$list_size$104 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:401]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed -> c:@F@__ESBMC_list_push(result, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:401$list_elem$106, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:401$list_elem_type$105, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:401]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_float -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:408]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:409]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411$list_size$108 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_float -> c:@F@__ESBMC_list_push(result, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411$list_elem$111, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411$list_elem_type$110, 8, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411$list_elem_type$110, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:411]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_str -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:418]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:419]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_str -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421$list_size$113 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_str -> c:@F@strlen(/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421$list_elem$115) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@reversed_str -> c:@F@__ESBMC_list_push(result, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421$list_elem$115, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421$list_elem_type$114, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421$strlen_result$116 + 1, 0, 0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:421]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sample -> c:@F@__ESBMC_list_size(population) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:90]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sample -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:93]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sample -> c:@F@__ESBMC_list_size(population) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sample -> c:@F@__ESBMC_list_at(population, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96$list_size$119 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sample -> c:@F@__ESBMC_list_push(result, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96$list_elem$121, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96$list_elem_type$120, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:96]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:287]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:289]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:293]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:293$list_size$48 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:293]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_push(result, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:293$list_elem$50, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:293$list_elem_type$49, 8, 0, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:293]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:297]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:302]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:302]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:302$list_size$51 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:302]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:302$list_size$52 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:302]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:304]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:304$list_size$53 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:304]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:305]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:305]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:305$list_size$54 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:305]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:305$list_size$55 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:305]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:306]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:306$list_size$56 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:306]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:315]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:315$list_size$57 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:315]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:316]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:316]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:316$list_size$58 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:316]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, (n - 1) - i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:316$list_size$59 + (unsigned long int)((n - 1) - i) : (unsigned long int)((n - 1) - i)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:316]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:317]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted -> c:@F@__ESBMC_list_at(result, (n - 1) - i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:317$list_size$60 + (unsigned long int)((n - 1) - i) : (unsigned long int)((n - 1) - i)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:317]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:325]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:327]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330$list_size$62 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_push(result, &/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330$list_elem$65, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330$list_elem_type$64, 8, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330$list_elem_type$64, 1) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:330]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:333]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:338]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:338$list_size$66 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:338]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:338]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:338$list_size$68 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:338]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:339]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:339]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:339$list_size$71 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:339]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:340]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:340$list_size$73 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:340]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:340]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:340$list_size$75 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:340]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:341]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:341$list_size$77 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:341]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:349]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:349]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:349$list_size$80 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:349]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:350]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:350$list_size$82 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:350]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:350]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, (n - 1) - i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:350$list_size$84 + (unsigned long int)((n - 1) - i) : (unsigned long int)((n - 1) - i)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:350]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:351]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_float -> c:@F@__ESBMC_list_at(result, (n - 1) - i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:351$list_size$86 + (unsigned long int)((n - 1) - i) : (unsigned long int)((n - 1) - i)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:351]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_create() [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:359]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:361]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364$list_size$89 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@strlen(/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364$list_elem$91) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_push(result, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364$list_elem$91, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364$list_elem_type$90, /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364$strlen_result$92 + 1, 0, 0) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:364]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:367]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372$list_size$93 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372$list_size$94 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@strcmp((signed char *)return_value$___ESBMC_list_at$8->value, (signed char *)return_value$___ESBMC_list_at$9->value) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:372]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:373]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:373$list_size$95 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:373]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:374]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:374]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, j < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:374$list_size$96 + (unsigned long int)j : (unsigned long int)j) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:374]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:374$list_size$97 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:374]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:375]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, j + 1 < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:375$list_size$98 + (unsigned long int)(j + 1) : (unsigned long int)(j + 1)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:375]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:383]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:383$list_size$99 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:383]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:384]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:384]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:384$list_size$100 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:384]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, (n - 1) - i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:384$list_size$101 + (unsigned long int)((n - 1) - i) : (unsigned long int)((n - 1) - i)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:384]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_size(result) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:385]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sorted_str -> c:@F@__ESBMC_list_at(result, (n - 1) - i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:385$list_size$102 + (unsigned long int)((n - 1) - i) : (unsigned long int)((n - 1) - i)) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:385]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:264]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:266]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:266$list_size$43 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:266]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:276]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum_float -> c:@F@__ESBMC_list_at(iterable, (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:278]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum_float -> c:@F@__ESBMC_list_size(iterable) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:278]
+py:/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py@F@sum_float -> c:@F@__ESBMC_list_at(iterable, i < 0 ? /workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:278$list_size$45 + (unsigned long int)i : (unsigned long int)i) [/workspaces/faas-python-c-verification/cases/ec2_instance_no_public_ip/normalized.py:278]
+ESBMC version 8.4.0 64-bit x86_64 linux

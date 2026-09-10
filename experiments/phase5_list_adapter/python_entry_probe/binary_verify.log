@@ -1,0 +1,80 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+GOTO program creation time: 0.112s
+GOTO program processing time: 0.011s
+Starting Bounded Model Checking
+Unwinding loop 155 iteration 1   file experiments/phase5_list_adapter/python_list_model_sanity.py line 4 column 4 function f
+Unwinding loop 155 iteration 2   file experiments/phase5_list_adapter/python_list_model_sanity.py line 4 column 4 function f
+Not unwinding loop 155 iteration 3   file experiments/phase5_list_adapter/python_list_model_sanity.py line 4 column 4 function f
+Symex completed in: 0.007s (304 assignments)
+Caching time: 0.000s (removed 13 assertions)
+Slicing time: 0.001s (removed 180 assignments)
+Generated 105 VCC(s), 37 remaining after simplification (111 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.012s
+BMC program time: 0.026s
+
+** Results:
+  PASSED       [global.assertion.1]                                line   0  assertion !(c:@__ESBMC_exc_thrown && c:@__ESBMC_exc_typeid == 11)
+  PASSED       [global.assertion.2]                                line   0  assertion !(c:@__ESBMC_exc_thrown && c:@__ESBMC_exc_typeid == 14)
+  PASSED       [global.assertion.3]                                line   0  assertion !(c:@__ESBMC_exc_thrown && c:@__ESBMC_exc_typeid == 16)
+  PASSED       [global.assertion.4]                                line   0  assertion c:@__ESBMC_exc_thrown == 0 || c:@__ESBMC_exc_typeid == 14 || c:@__ESBMC_exc_typeid == 11 || c:@__ESBMC_exc_typeid == 16
+/workspaces/esbmc-current/src/c2goto/library/python/list.c, function __ESBMC_copy_value
+  PASSED       [__ESBMC_copy_value.object-out-of-bounds.1]         line 111  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_copy_value.assertion.1]                    line 111  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_copy_value.object-out-of-bounds.2]         line 144  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_copy_value.assertion.2]                    line 144  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_copy_value.array-bounds-violated.1]        line 144  dereference failure: array bounds violated
+  PASSED       [__ESBMC_copy_value.invalidated-dynamic-object.1]   line 144  dereference failure: invalidated dynamic object
+/workspaces/esbmc-current/src/c2goto/library/python/list.c, function __ESBMC_list_at
+  PASSED       [__ESBMC_list_at.object-out-of-bounds.1]            line 497  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_at.assertion.1]                       line 497  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_at.invalidated-dynamic-object.1]      line 497  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_at.assertion.2]                       line 497  out-of-bounds read in list
+  PASSED       [__ESBMC_list_at.object-out-of-bounds.2]            line 498  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_at.assertion.3]                       line 498  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_at.invalidated-dynamic-object.2]      line 498  dereference failure: invalidated dynamic object
+/workspaces/esbmc-current/src/c2goto/library/python/list.c, function __ESBMC_list_create
+  PASSED       [__ESBMC_list_create.object-out-of-bounds.1]        line  87  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_create.assertion.1]                   line  87  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_create.invalidated-dynamic-object.1]  line  87  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_create.object-out-of-bounds.2]        line  88  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_create.assertion.2]                   line  88  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_create.invalidated-dynamic-object.2]  line  88  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_create.object-out-of-bounds.3]        line  89  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_create.assertion.3]                   line  89  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_create.invalidated-dynamic-object.3]  line  89  dereference failure: invalidated dynamic object
+/workspaces/esbmc-current/src/c2goto/library/python/list.c, function __ESBMC_list_push
+  PASSED       [__ESBMC_list_push.object-out-of-bounds.1]          line 183  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_push.assertion.1]                     line 183  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_push.invalidated-dynamic-object.1]    line 183  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_push.invalidated-dynamic-object.2]    line 184  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_push.assertion.2]                     line 185  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_push.invalidated-dynamic-object.3]    line 185  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_push.assertion.3]                     line 186  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_push.invalidated-dynamic-object.4]    line 186  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_push.assertion.4]                     line 187  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_push.invalidated-dynamic-object.5]    line 187  dereference failure: invalidated dynamic object
+  PASSED       [__ESBMC_list_push.object-out-of-bounds.2]          line 188  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_push.assertion.5]                     line 188  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_push.invalidated-dynamic-object.6]    line 188  dereference failure: invalidated dynamic object
+/workspaces/esbmc-current/src/c2goto/library/python/list.c, function __ESBMC_list_size
+  PASSED       [__ESBMC_list_size.object-out-of-bounds.1]          line  95  dereference failure: Access to object out of bounds
+  PASSED       [__ESBMC_list_size.assertion.1]                     line  95  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__ESBMC_list_size.invalidated-dynamic-object.1]    line  95  dereference failure: invalidated dynamic object
+experiments/phase5_list_adapter/python_list_model_sanity.py
+  PASSED       [global.assertion.5]                                line  43  assertion actual == expected
+experiments/phase5_list_adapter/python_list_model_sanity.py, function f
+  PASSED       [f.assertion.1]                                     line   4  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [f.array-bounds-violated.1]                         line   4  dereference failure: array bounds violated
+  PASSED       [f.invalid-pointer-dereference.1]                   line   4  dereference failure: invalid pointer
+  PASSED       [f.invalidated-dynamic-object.1]                    line   4  dereference failure: invalidated dynamic object
+  PASSED       [f.assertion.2]                                     line   4  unwinding assertion loop 155
+
+** 0 of 48 properties failed, 48 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

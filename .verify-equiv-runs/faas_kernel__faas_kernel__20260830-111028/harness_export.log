@@ -1,0 +1,11 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-111028/equiv_harness.c --output-goto /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-111028/harness.gb
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-111028/equiv_harness.c
+/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-111028/equiv_harness.c:29:20: error: use of undeclared identifier 'n'
+   29 |     __ESBMC_assume(n >= 0);
+      |                    ^
+/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-111028/equiv_harness.c:30:20: error: use of undeclared identifier 'n'
+   30 |     __ESBMC_assume(n <= 1);
+      |                    ^
+ERROR: PARSING ERROR
+ESBMC version 8.4.0 64-bit x86_64 linux

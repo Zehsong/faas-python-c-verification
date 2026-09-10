@@ -1,0 +1,161 @@
+VERIFY_EQUIV_COMMAND: /workspaces/esbmc-current/build/src/esbmc/esbmc --binary /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/python.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/c.gb /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/harness.gb --equiv-py-target faas_kernel --equiv-c-target faas_kernel --function c:@F@equiv_main --unwind 24 --overflow-check
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+Relational bridge: preserved Python module entry as `c:@F@__ESBMC_PY_MODULE_ENTRY`
+Relational bridge: retargeted 1 call(s) from `c:@F@__ESBMC_PY_TARGET` to `py:/workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py@F@faas_kernel`
+Relational bridge: retargeted 1 C call(s) from `c:@F@__ESBMC_C_TARGET` to `c:@F@faas_kernel`
+GOTO program creation time: 0.103s
+GOTO program processing time: 0.012s
+Starting Bounded Model Checking
+Unwinding loop 158 iteration 1   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 2   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 3   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 4   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 5   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 6   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 7   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 8   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 9   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 10   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 11   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 12   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 13   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 14   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 15   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 16   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 17   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 18   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 19   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 20   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 21   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 22   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 158 iteration 23   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Not unwinding loop 158 iteration 24   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci
+Unwinding loop 129 iteration 1   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 2   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 3   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 4   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 5   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 6   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 7   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 8   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 9   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 10   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 11   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 12   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 13   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 14   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 15   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 16   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 17   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 18   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 19   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 20   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 21   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 22   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Unwinding loop 129 iteration 23   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Not unwinding loop 129 iteration 24   file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c line 7 column 5 function fibonacci
+Symex completed in: 0.011s (858 assignments)
+Caching time: 0.000s (removed 3 assertions)
+Slicing time: 0.002s (removed 591 assignments)
+Generated 128 VCC(s), 124 remaining after simplification (264 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.006s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/equiv_harness.c line 35 column 5 function equiv_main thread 0
+----------------------------------------------------
+  n = 10 (00000000 00000000 00000000 00001010)
+
+State 4 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 6 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 8 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 10 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 13 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 16 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 19 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 22 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 25 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 28 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 1
+
+State 31 file /workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py function fibonacci thread 0
+----------------------------------------------------
+  has_next_0 = 0
+
+State 33 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/equiv_harness.c line 40 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_py = 55 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00110111)
+
+State 63 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/equiv_harness.c line 43 column 5 function equiv_main thread 0
+----------------------------------------------------
+  r_c = 143 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 10001111)
+
+State 64 file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/equiv_harness.c line 46 column 5 function equiv_main thread 0
+----------------------------------------------------
+Violated property:
+  file /workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/equiv_harness.c line 46 column 5 function equiv_main
+  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+  r_py == r_c
+
+
+** Results:
+/workspaces/faas-python-c-verification/.verify-equiv-runs/faas_kernel__faas_kernel__20260830-115118/equiv_harness.c, function equiv_main
+  FAILED       [equiv_main.assertion.1]                   line 46  __VERIFY_EQUIV_RELATIONAL_PROPERTY__
+/workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c, function faas_kernel
+  NOT CHECKED  [faas_kernel.arithmetic-overflow.1]        line 22  arithmetic overflow on neg
+  NOT CHECKED  [faas_kernel.arithmetic-overflow.2]        line 25  arithmetic overflow on neg
+/workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/bad.c, function fibonacci
+  NOT CHECKED  [fibonacci.assertion.1]                    line  7  unwinding assertion loop 129
+  NOT CHECKED  [fibonacci.arithmetic-overflow.1]          line  7  arithmetic overflow on add
+  NOT CHECKED  [fibonacci.arithmetic-overflow.2]          line  9  arithmetic overflow on add
+  NOT CHECKED  [fibonacci.arithmetic-overflow.3]          line 13  arithmetic overflow on add
+/workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py, function ESBMC_range_next_
+  NOT CHECKED  [ESBMC_range_next_.arithmetic-overflow.1]  line  1  arithmetic overflow on add
+/workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py, function faas_kernel
+  NOT CHECKED  [faas_kernel.arithmetic-overflow.3]        line 21  arithmetic overflow on neg
+  NOT CHECKED  [faas_kernel.arithmetic-overflow.4]        line 23  arithmetic overflow on neg
+/workspaces/faas-python-c-verification/experiments/phase7_faas/vswarm_fibonacci/python.py, function fibonacci
+  PASSED       [fibonacci.assertion.2]                    line  0  range() arg 3 must not be zero
+  NOT CHECKED  [fibonacci.assertion.3]                    line  0  unwinding assertion loop 158
+  NOT CHECKED  [fibonacci.arithmetic-overflow.4]          line 11  arithmetic overflow on add
+
+** 1 of 13 properties failed, 1 passed, 11 not checked
+   (this mode stops at the first violation; use --multi-property for a verdict on every property)
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

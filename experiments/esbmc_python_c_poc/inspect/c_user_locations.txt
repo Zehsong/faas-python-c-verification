@@ -1,0 +1,24 @@
+2:Parsing simple.c
+28:        // 9 file simple.c line 13 column 1
+30:        // 10 file simple.c line 13 column 1
+32:        // 11 file simple.c line 13 column 1
+34:        // 12 file simple.c line 13 column 1
+36:        // 13 file simple.c line 28 column 1 function main
+109:        // 40 file simple.c line 7 column 5 function f
+111:        // 41 file simple.c line 8 column 9 function f
+113:        // 42 file simple.c line 10 column 5 function f
+115:        // 43 file simple.c line 11 column 1 function f
+120:        // 44 file simple.c line 15 column 5 function main
+122:        // 45 file simple.c line 15 column 5 function main
+124:        // 46 file simple.c line 15 column 5 function main
+126:        // 47 file simple.c line 15 column 5 function main
+128:        // 48 file simple.c line 17 column 5 function main
+130:        // 49 file simple.c line 18 column 5 function main
+132:        // 50 file simple.c line 20 column 5 function main
+134:        // 51 file simple.c line 20 column 5 function main
+136:        // 52 file simple.c line 20 column 5 function main
+138:        // 53 file simple.c line 20 column 5 function main
+140:        // 54 file simple.c line 22 column 5 function main
+143:        // 55 file simple.c line 22 column 5 function main
+145:        // 56 file simple.c line 27 column 5 function main
+147:        // 57 file simple.c line 28 column 1 function main

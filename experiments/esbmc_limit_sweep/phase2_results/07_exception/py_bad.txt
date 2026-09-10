@@ -1,0 +1,35 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing phase2_cases/07_exception/bad.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.075s
+GOTO program processing time: 0.014s
+Starting Bounded Model Checking
+Symex completed in: 0.002s (96 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 85 assignments)
+Generated 6 VCC(s), 4 remaining after simplification (11 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 0.067s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file phase2_cases/07_exception/bad.py line 11 column 0 thread 0
+----------------------------------------------------
+  x = 0 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 3 file phase2_cases/07_exception/bad.py line 18 column 4 thread 0
+----------------------------------------------------
+Violated property:
+  file phase2_cases/07_exception/bad.py line 18 column 4
+  assertion r == -1
+  r == -1
+
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

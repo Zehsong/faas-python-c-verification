@@ -186,7 +186,7 @@ def export_goto(
 # Relational harness
 # ============================================================================
 
-def build_harness(params, return_type):
+def _build_harness_base(params, return_type):
     py_ret = PY_C_TYPES[return_type]
     c_ret = TARGET_C_TYPES[return_type]
 
@@ -539,6 +539,54 @@ def classify_verification(logfile):
 # Main
 # ============================================================================
 
+
+def build_harness(params, return_type, domains=()):
+    text = _build_harness_base(params, return_type)
+
+    if not domains:
+        return text
+
+    import re as _re
+
+    assumptions = []
+    for name, lower, upper in domains:
+        assumptions.append(
+            f"    __ESBMC_assume({name} >= {lower});"
+        )
+        assumptions.append(
+            f"    __ESBMC_assume({name} <= {upper});"
+        )
+
+    assumption_text = "\n".join(assumptions) + "\n"
+
+    # Declare the ESBMC intrinsic.
+    if "__ESBMC_assume(_Bool)" not in text:
+        text = (
+            "extern void __ESBMC_assume(_Bool);\n"
+            + text
+        )
+
+    # Insert D(x) after all shared symbolic inputs have been
+    # created, but before either program target is executed.
+    #
+    # The generated harness always declares all symbolic inputs
+    # before the first "long r_py =" assignment.
+    pattern = r"(?m)^(\s*long\s+r_py\s*=)"
+
+    text, count = _re.subn(
+        pattern,
+        lambda m: assumption_text + "\n" + m.group(1),
+        text,
+        count=1,
+    )
+
+    if count != 1:
+        raise RuntimeError(
+            "could not inject domain assumptions into equiv_main"
+        )
+
+    return text
+
 def main():
     parser = argparse.ArgumentParser(
         prog="verify-equiv",
@@ -577,6 +625,17 @@ def main():
     )
 
     parser.add_argument(
+        "--domain",
+        action="append",
+        default=[],
+        metavar="NAME:LOWER:UPPER",
+        help=(
+            "restrict an int parameter to an inclusive interval; "
+            "repeat for multiple parameters"
+        ),
+    )
+
+    parser.add_argument(
         "--return",
         dest="return_type",
         choices=sorted(SUPPORTED_TYPES),
@@ -606,6 +665,60 @@ def main():
     )
 
     args = parser.parse_args()
+
+    param_types = dict(args.param)
+    domains = []
+    seen_domain_params = set()
+
+    for spec in args.domain:
+        parts = spec.split(":")
+
+        if len(parts) != 3:
+            parser.error(
+                f"invalid --domain {spec!r}; "
+                "expected NAME:LOWER:UPPER"
+            )
+
+        name, lower_text, upper_text = parts
+
+        if name not in param_types:
+            parser.error(
+                f"--domain refers to unknown parameter {name!r}"
+            )
+
+        if param_types[name] != "int":
+            parser.error(
+                f"--domain currently supports int parameters only; "
+                f"{name!r} is {param_types[name]!r}"
+            )
+
+        if name in seen_domain_params:
+            parser.error(
+                f"duplicate --domain for {name!r}"
+            )
+
+        try:
+            lower = int(lower_text)
+            upper = int(upper_text)
+        except ValueError:
+            parser.error(
+                f"invalid integer bounds in --domain {spec!r}"
+            )
+
+        if lower > upper:
+            parser.error(
+                f"lower bound exceeds upper bound in "
+                f"--domain {spec!r}"
+            )
+
+        if lower < -2147483648 or upper > 2147483647:
+            parser.error(
+                f"--domain {spec!r} exceeds shared int32 domain"
+            )
+
+        seen_domain_params.add(name)
+        domains.append((name, lower, upper))
+
 
     validate_identifier(
         args.py_function,
@@ -735,6 +848,7 @@ def main():
         build_harness(
             args.param,
             args.return_type,
+            domains,
         )
     )
 
