@@ -10,6 +10,7 @@ FIELDS = ("x", "valid", "key", "value")
 
 @dataclass(frozen=True)
 class Atom:
+    numeric_fields = ("x", "key", "value")
     left: str
     op: str = ""
     right: object = None
@@ -21,7 +22,8 @@ class Atom:
         text = text.strip()
         if text == "valid":
             return cls("valid")
-        match = re.fullmatch(r"(x|key|value)\s*(==|!=|<=|>=|<|>)\s*(x|key|value|UINT32_MAX|[0-9]+)", text)
+        fields = "|".join(re.escape(field) for field in cls.numeric_fields)
+        match = re.fullmatch(rf"({fields})\s*(==|!=|<=|>=|<|>)\s*({fields}|UINT32_MAX|[0-9]+)", text)
         if not match:
             raise ValueError(f"unsupported predicate: {text!r}; only entry-state comparisons are allowed")
         left, op, right = match.groups()
@@ -166,8 +168,8 @@ def search(backend, atoms, max_predicates=16):
             if len({row["r_original"] == row["r_cached"] for row in group}) < 2:
                 continue
             for row in group:
-                for field in ("x", "key", "value"):
-                    atom = Atom.parse(f"{field} == {row[field]}")
+                for field in getattr(backend, "numeric_fields", Atom.numeric_fields):
+                    atom = getattr(backend, "atom_type", Atom).parse(f"{field} == {row[field]}")
                     if atom not in atoms and len(atoms) < max_predicates:
                         atoms.append(atom)
         index = choose_split(cube, atoms, backend.samples)

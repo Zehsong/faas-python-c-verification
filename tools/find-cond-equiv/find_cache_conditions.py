@@ -37,10 +37,12 @@ def save_json(path, value):
     Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def validate_seed(row):
-    if not isinstance(row, dict) or set(row) != set(FIELDS):
-        raise ValueError("seed must have exactly x, valid, key and value")
-    for field in ("x", "key", "value"):
+def validate_seed(row, fields=FIELDS):
+    if not isinstance(row, dict) or set(row) != set(fields):
+        raise ValueError("seed must have exactly " + ", ".join(fields))
+    for field in fields:
+        if field == "valid":
+            continue
         if type(row[field]) is not int or not 0 <= row[field] <= UINT32_MAX:
             raise ValueError(f"invalid uint32_t seed field {field}")
     if type(row["valid"]) not in (bool, int) or row["valid"] not in (0, 1):
@@ -63,9 +65,9 @@ def seed_in_domain(row, state_mode):
     return not row["valid"] or row["value"] == (row["key"]+1) & UINT32_MAX
 
 
-def witness_from_log(text):
+def witness_from_log(text, fields=FIELDS):
     values = {}
-    for field in FIELDS:
+    for field in fields:
         found = re.findall(rf"(?m)^\s*finder_{field}\s*=(?!=)\s*(true|false|[0-9]+)(?=\s|$)", text)
         if not found:
             return None
@@ -73,7 +75,7 @@ def witness_from_log(text):
         token = found[-1]
         values[field] = int(token == "true") if token in ("true", "false") else int(token)
     try:
-        return validate_seed(values)
+        return validate_seed(values, fields)
     except ValueError:
         return None
 
@@ -114,14 +116,28 @@ __ESBMC_assert(invariant(&cache), "{PROPERTIES['preservation']}");
 
 
 class CacheBackend:
+    case = CASE
+    fields = FIELDS
+    numeric_fields = Atom.numeric_fields
+    atom_type = Atom
+    variants = VARIANTS
+    initial_atoms = staticmethod(initial_atoms)
+    default_seeds = staticmethod(default_seeds)
+    seed_in_domain = staticmethod(seed_in_domain)
+    make_harness = staticmethod(make_harness)
+
+    @classmethod
+    def validate_seed(cls, row):
+        return validate_seed(row, cls.fields)
+
     def __init__(self, args, workdir):
         self.args, self.workdir = args, Path(workdir)
         self.deadline = time.monotonic() + args.max_seconds
         self.samples, self.queries, self.replays = [], [], []
         self.seen = set()
-        self.model_bytes = (CASE / "cache_model.h").read_bytes()
+        self.model_bytes = (self.case / "cache_model.h").read_bytes()
         self.model = self.model_bytes.decode("utf-8")
-        self.probe_bytes = (CASE / "cache_probe.c").read_bytes()
+        self.probe_bytes = (self.case / "cache_probe.c").read_bytes()
         self.inputs = self.workdir / "inputs"
         self.inputs.mkdir()
         (self.inputs / "cache_model.h").write_bytes(self.model_bytes)
@@ -168,13 +184,13 @@ class CacheBackend:
                 self.esbmc = None
 
     def replay(self, rows, origin="boundary_seeds", repeat=False):
-        inputs = [validate_seed(row) for row in rows]
-        inputs = [row for row in inputs if seed_in_domain(row, self.args.state_mode)]
+        inputs = [self.validate_seed(row) for row in rows]
+        inputs = [row for row in inputs if self.seed_in_domain(row, self.args.state_mode)]
         if not repeat:
-            inputs = [row for row in inputs if tuple(row[field] for field in FIELDS) not in self.seen]
+            inputs = [row for row in inputs if tuple(row[field] for field in self.fields) not in self.seen]
         if not inputs:
             return []
-        data = "".join(" ".join(str(row[field]) for field in FIELDS) + "\n" for row in inputs)
+        data = "".join(" ".join(str(row[field]) for field in self.fields) + "\n" for row in inputs)
         command = [str(self.executable), self.args.variant]
         try:
             proc = subprocess.run(command, input=data, capture_output=True, text=True,
@@ -185,7 +201,7 @@ class CacheBackend:
             if len(observed) != len(inputs):
                 raise RuntimeError("native probe did not return one trace per input")
             for given, row in zip(inputs, observed):
-                if any(row.get(field) != given[field] for field in FIELDS):
+                if any(row.get(field) != given[field] for field in self.fields):
                     raise RuntimeError("native trace/input mismatch")
                 if row.get("invariant_before") != 1 or row.get("invariant_after") != 1:
                     raise RuntimeError("native trace violates the declared cache invariant")
@@ -194,7 +210,7 @@ class CacheBackend:
                 for field in ("r_original", "r_cached"):
                     if type(row.get(field)) is not int or not 0 <= row[field] <= UINT32_MAX:
                         raise RuntimeError("invalid return value in native trace")
-                key = tuple(given[field] for field in FIELDS)
+                key = tuple(given[field] for field in self.fields)
                 if key not in self.seen:
                     self.samples.append(row)
                     self.seen.add(key)
@@ -213,7 +229,7 @@ class CacheBackend:
         path = self.workdir / f"query-{index:03d}-{kind}"
         path.mkdir()
         source = path / "harness.c"
-        source.write_text(make_harness(self.model, self.args.variant, self.args.state_mode,
+        source.write_text(self.make_harness(self.model, self.args.variant, self.args.state_mode,
                                       kind, condition, expected), encoding="utf-8")
         command = [self.esbmc, str(source), "--function", "finder_entry", "--z3",
                    "--unwind", "12", "--overflow-check"]
@@ -222,7 +238,7 @@ class CacheBackend:
         result.update(kind=kind, condition_c=condition,
                       source_sha256=hashlib.sha256(source.read_bytes()).hexdigest())
         if result["status"] == "REFUTED" and kind in ("feasible", "equal", "different"):
-            witness = witness_from_log(oracle.read_text(path / "verify.log"))
+            witness = witness_from_log(oracle.read_text(path / "verify.log"), self.fields)
             result["witness"] = witness
             result["native_replay"] = "unavailable: entry-state assignments not parsed"
             if witness is not None:
@@ -268,10 +284,10 @@ class CacheBackend:
         return {"status": "UNKNOWN", "evidence": different, "unequal_witness": equal}
 
 
-def parse_args(argv=None):
+def parse_args(argv=None, variants=VARIANTS, default_variant="bad_miss", default_workdir=".verify-equiv-runs/condition-finder"):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cache", action="store_true", help=argparse.SUPPRESS)
-    parser.add_argument("--variant", choices=VARIANTS, default="bad_miss")
+    parser.add_argument("--variant", choices=variants, default=default_variant)
     parser.add_argument("--state-mode", choices=("invariant", "empty"), default="invariant")
     parser.add_argument("--esbmc", default=oracle.DEFAULT_ESBMC)
     parser.add_argument("--cc", default="cc", help="C compiler executable (cc/gcc/clang/cl)")
@@ -280,14 +296,14 @@ def parse_args(argv=None):
     parser.add_argument("--max-queries", type=int, default=96)
     parser.add_argument("--max-predicates", type=int, default=16)
     parser.add_argument("--hypotheses", help="optional untrusted JSON {predicates:[...],seeds:[...]}; no code execution")
-    parser.add_argument("--workdir", default=".verify-equiv-runs/condition-finder")
+    parser.add_argument("--workdir", default=default_workdir)
     args = parser.parse_args(argv)
     if not all(math.isfinite(value) and value > 0 for value in (args.timeout, args.max_seconds)) or args.max_queries < 4 or not 11 <= args.max_predicates <= 24:
         parser.error("positive time budgets, >=4 queries and 11..24 predicates are required")
     return args
 
 
-def run(args):
+def run(args, backend_type=CacheBackend):
     root = Path(args.workdir).resolve()
     root.mkdir(parents=True, exist_ok=True)
     workdir = Path(tempfile.mkdtemp(prefix=args.variant + "-", dir=root))
@@ -297,7 +313,7 @@ def run(args):
               "method": "trace-guided finite predicate partition with ESBMC certification"}
     backend = None
     try:
-        atoms = initial_atoms()
+        atoms = backend_type.initial_atoms()
         extra_seeds = []
         if args.hypotheses:
             proposal = json.loads(Path(args.hypotheses).read_text(encoding="utf-8"))
@@ -308,17 +324,17 @@ def run(args):
             if len(proposal.get("seeds", [])) > 256:
                 raise ValueError("at most 256 proposed seeds are supported")
             for text in proposal.get("predicates", []):
-                atom = Atom.parse(text)
+                atom = backend_type.atom_type.parse(text)
                 if atom not in atoms:
                     atoms.append(atom)
-            extra_seeds = [validate_seed(row) for row in proposal.get("seeds", [])]
+            extra_seeds = [backend_type.validate_seed(row) for row in proposal.get("seeds", [])]
             save_json(workdir / "hypotheses.json", proposal)
         if len(atoms) > args.max_predicates:
             raise ValueError("initial vocabulary exceeds --max-predicates")
-        backend = CacheBackend(args, workdir)
+        backend = backend_type(args, workdir)
         report["scope"] = backend.scope
         backend.prepare()
-        backend.replay(default_seeds(args.state_mode))
+        backend.replay(backend.default_seeds(args.state_mode))
         backend.replay(extra_seeds, origin="untrusted_hypotheses")
         init = backend.query("init", reserve=2)
         preservation = backend.query("preservation", reserve=2)
@@ -353,7 +369,7 @@ def run(args):
         save_json(workdir / "queries.json", backend.queries)
         save_json(workdir / "agent-context.json", {
             "scope": backend.scope, "model_source": backend.model,
-            "variant_function": VARIANTS[args.variant], "traces": backend.samples,
+            "variant_function": backend.variants[args.variant], "traces": backend.samples,
             "current_result": report, "proposal_schema": {"predicates": ["x == 42"], "seeds": []},
             "trust": "Propose only entry-state predicates or inputs; labels and proof claims are not accepted."})
     save_json(workdir / "result.json", report)

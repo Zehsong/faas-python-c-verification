@@ -63,7 +63,7 @@ bash cases/same_language_cache/test_finder.sh \
 
 依赖为 Python 3.10+、C11 编译器和支持 Z3 的 ESBMC；不需要 Python z3 包、LLM API key 或 ConcoLLMic 安装。默认编译器是 `cc`，可用 `CC=gcc` 或 `CC=clang` 指定单个可执行程序。脚本启用 `set -euo pipefail`，测试失败或证明不完整会停止并返回非零。
 
-脚本顺序：20 项旧测试（包含实际 native replay）、20 项新测试、原先 6 个缓存验证入口，以及 5 个条件搜索验收案例。**新增 finder 的 ESBMC 验收尚待在用户 Codespace 运行；下表是预期，不是本次 Windows 上已取得的证明。**
+脚本顺序：20 项 oracle 测试（包含实际 native replay）、finder 测试（最初 20 项，加入配置案例后为 28 项）、原先 6 个缓存验证入口，以及 5 个条件搜索验收案例。**用户已反馈提交 `94188b7` 在 Codespace 得到 `FINDER ACCEPTANCE: 5/5 passed`；完整日志保留在用户 Codespace。这不是 Windows 本地 ESBMC 证明。** 下一阶段的[配置变化缓存实验](../cases/config_cache/README.md)使用独立目录，并提供原始结果归档脚本。
 
 | 变体/状态域 | 预期等价条件（允许逻辑等价的其他写法） |
 |---|---|
