@@ -1,0 +1,12 @@
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Verification temporary runs
+.verify-equiv-runs/
+.verify-list-int-runs/
+
+# Common temporary files
+*.tmp
+*.log
