@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+"""Bounded stateless same-language primality computation vs lookup experiment."""
+import argparse
+import hashlib
+import math
+from pathlib import Path
+import shutil
+import sys
+import time
+
+from find_cache_conditions import CacheBackend, PROPERTIES, ROOT, oracle, run as shared_run, save_json
+from predicate_search import Atom
+
+CASE = ROOT / "cases/prime_lookup"
+VARIANTS = {"fallback": "lookup_fallback", "truncated": "lookup_truncated", "mutant": "lookup_mutant"}
+
+
+class PrimeAtom(Atom):
+    numeric_fields = ("x",)
+
+    @classmethod
+    def parse(cls, text):
+        if isinstance(text, str) and text.strip() == "valid":
+            raise ValueError("stateless prime model has no valid field")
+        return super().parse(text)
+
+
+def make_harness(model, variant, domain, kind, condition="true", expected=None):
+    if variant not in VARIANTS or kind not in ("feasible", "equal", "different", "expected"):
+        raise ValueError("unsupported stateless obligation")
+    lo, hi = domain
+    body = f"""uint32_t finder_x = nondet_u32();
+__ESBMC_assume(finder_x >= UINT32_C({lo}) && finder_x <= UINT32_C({hi}));
+__ESBMC_assume({condition});
+"""
+    if kind == "feasible":
+        body += f'__ESBMC_assert(false, "{PROPERTIES[kind]}");'
+    elif kind == "expected":
+        if expected is None:
+            raise ValueError("expected expression required")
+        body += f'__ESBMC_assert({expected}, "{PROPERTIES[kind]}");'
+    else:
+        relation = "==" if kind == "equal" else "!="
+        body += f"""bool r_original = original(finder_x);
+bool r_candidate = {VARIANTS[variant]}(finder_x);
+__ESBMC_assert(r_original {relation} r_candidate, "{PROPERTIES[kind]}");"""
+    return model + "\nextern uint32_t nondet_u32(void);\nextern void __ESBMC_assume(bool);\n" + \
+        "extern void __ESBMC_assert(bool, const char *);\nvoid finder_entry(void)\n{\n" + body + "\n}\n"
+
+
+class PrimeBackend(CacheBackend):
+    # Reuse process, replay, query and region classification infrastructure.
+    # No cache model, initialization or invariant is instantiated here.
+    fields = ("x",)
+    numeric_fields = ("x",)
+    atom_type = PrimeAtom
+    variants = VARIANTS
+    probe_filename = "prime_probe.c"
+
+    @staticmethod
+    def initial_atoms():
+        # Type boundaries and the declared table bound, not the answer formula.
+        return [PrimeAtom.parse(text) for text in ("x == 0", "x == 1", "x <= 31")]
+
+    def __init__(self, args, workdir):
+        self.args, self.workdir = args, Path(workdir)
+        self.domain = args.domain
+        self.unwind = math.isqrt(self.domain[1]) + 2
+        self.deadline = time.monotonic() + args.max_seconds
+        self.samples, self.queries, self.replays, self.seen = [], [], [], set()
+        self.inputs = self.workdir / "inputs"
+        self.inputs.mkdir()
+        self.model_bytes = (CASE / "prime_model.h").read_bytes()
+        self.model = self.model_bytes.decode("utf-8")
+        self.probe_bytes = (CASE / self.probe_filename).read_bytes()
+        (self.inputs / "prime_model.h").write_bytes(self.model_bytes)
+        (self.inputs / self.probe_filename).write_bytes(self.probe_bytes)
+        template_bytes = Path(__file__).read_bytes()
+        (self.inputs / "find_prime_conditions.py").write_bytes(template_bytes)
+        self.sketch_manifest = {
+            "template": "stateless-bounded-return-v1", "template_sha256": hashlib.sha256(template_bytes).hexdigest(),
+            "domain": list(self.domain), "state_obligations": "not applicable: no mutable state",
+            "observations": "boolean return value", "reuse": "search, oracle, replay and final condition checks",
+            "trusted_manual_inputs": ["C model", "domain", "loop bound", "predicate vocabulary"]}
+        save_json(self.workdir / "sketch-manifest.json", self.sketch_manifest)
+        self.scope = {
+            "language": "C", "research_scope": "same-language equivalence; C is the current backend",
+            "inputs": "x:uint32_t", "domain": list(self.domain), "observations": "boolean return value",
+            "initial_state": "none", "assumptions": "fixed read-only tables; no external state",
+            "bound": f"one call; unwind={self.unwind}; unwinding and safety checks enabled",
+            "completeness": "EXACT only within the declared finite input domain",
+            "model_sha256": hashlib.sha256(self.model_bytes).hexdigest(),
+            "probe_sha256": hashlib.sha256(self.probe_bytes).hexdigest(),
+            "trace_schema": "r_cached is the legacy field name for the candidate result; no cache is involved"}
+        self.esbmc, self.version = shutil.which(args.esbmc), None
+        self.executable = self.inputs / ("prime-probe.exe" if sys.platform == "win32" else "prime-probe")
+
+    def state_obligations(self):
+        return {}
+
+    def seed_in_domain(self, row, state_mode):
+        return self.domain[0] <= row["x"] <= self.domain[1]
+
+    def default_seeds(self, state_mode):
+        lo, hi = self.domain
+        return [dict(x=x) for x in sorted({lo, hi, 0, 1, 2, 3, 7, 8, 15, 16, 30, 31, 32, 33}) if lo <= x <= hi]
+
+    def validate_trace(self, row):
+        if any(type(row.get(field)) is not int or row[field] not in (0, 1) for field in ("r_original", "r_cached")):
+            raise RuntimeError("prime probe must return two booleans")
+
+    def make_harness(self, model, variant, state_mode, kind, condition="true", expected=None):
+        return make_harness(model, variant, self.domain, kind, condition, expected)
+
+
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--variant", choices=VARIANTS, default="truncated")
+    parser.add_argument("--domain", default="0:63", help="inclusive uint32 interval within 0..255 for this first stage")
+    parser.add_argument("--esbmc", default=oracle.DEFAULT_ESBMC)
+    parser.add_argument("--cc", default="cc")
+    parser.add_argument("--timeout", type=float, default=30)
+    parser.add_argument("--max-seconds", type=float, default=600)
+    parser.add_argument("--max-queries", type=int, default=512)
+    parser.add_argument("--max-predicates", type=int, default=96)
+    parser.add_argument("--hypotheses")
+    parser.add_argument("--workdir", default=".verify-equiv-runs/prime-finder")
+    args = parser.parse_args(argv)
+    try:
+        lo, hi = map(int, args.domain.split(":"))
+        if not 0 <= lo <= hi <= 255:
+            raise ValueError()
+    except ValueError:
+        parser.error("domain must be LO:HI with 0 <= LO <= HI <= 255")
+    args.domain, args.state_mode = (lo, hi), "stateless"
+    if not all(math.isfinite(n) and n > 0 for n in (args.timeout, args.max_seconds)) or args.max_queries < 4 or not 3 <= args.max_predicates <= 256:
+        parser.error("positive time budgets, >=4 queries and 3..256 predicates required")
+    return args
+
+
+def run(args):
+    return shared_run(args, PrimeBackend)
+
+
+if __name__ == "__main__":
+    sys.exit(0 if run(parse_args())["status"] == "EXACT" else 2)

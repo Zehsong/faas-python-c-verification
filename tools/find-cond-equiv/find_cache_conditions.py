@@ -45,9 +45,11 @@ def validate_seed(row, fields=FIELDS):
             continue
         if type(row[field]) is not int or not 0 <= row[field] <= UINT32_MAX:
             raise ValueError(f"invalid uint32_t seed field {field}")
-    if type(row["valid"]) not in (bool, int) or row["valid"] not in (0, 1):
-        raise ValueError("valid must be boolean or 0/1")
-    return {**row, "valid": int(row["valid"])}
+    if "valid" in fields:
+        if type(row["valid"]) not in (bool, int) or row["valid"] not in (0, 1):
+            raise ValueError("valid must be boolean or 0/1")
+        return {**row, "valid": int(row["valid"])}
+    return dict(row)
 
 
 def default_seeds(state_mode):
@@ -85,6 +87,8 @@ def make_harness(model, variant, state_mode, kind, condition="true", expected=No
 
 
 class CacheBackend:
+    probe_filename = "cache_probe.c"
+    unwind = 12
     sketch = SKETCH
     case = CASE
     fields = FIELDS
@@ -137,11 +141,21 @@ class CacheBackend:
     def remaining(self):
         return max(0.0, self.deadline - time.monotonic())
 
+    def state_obligations(self):
+        return {"initialization": self.query("init", reserve=2),
+                "preservation": self.query("preservation", reserve=2)}
+
+    def validate_trace(self, row):
+        if row.get("invariant_before") != 1 or row.get("invariant_after") != 1:
+            raise RuntimeError("native trace violates the declared cache invariant")
+        if row.get("hit") not in (0, 1):
+            raise RuntimeError("native branch trace missing")
+
     def prepare(self):
         compiler = shutil.which(self.args.cc)
         if compiler is None:
             raise RuntimeError(f"C compiler not found: {self.args.cc}")
-        source = str(self.inputs / "cache_probe.c")
+        source = str(self.inputs / self.probe_filename)
         if Path(compiler).stem.lower() == "cl":
             command = [compiler, "/nologo", "/std:c11", "/W4", source,
                        "/Fe:" + str(self.executable), "/Fo:" + str(self.inputs / "probe.obj")]
@@ -179,10 +193,7 @@ class CacheBackend:
             for given, row in zip(inputs, observed):
                 if any(row.get(field) != given[field] for field in self.fields):
                     raise RuntimeError("native trace/input mismatch")
-                if row.get("invariant_before") != 1 or row.get("invariant_after") != 1:
-                    raise RuntimeError("native trace violates the declared cache invariant")
-                if row.get("hit") not in (0, 1):
-                    raise RuntimeError("native branch trace missing")
+                self.validate_trace(row)
                 for field in ("r_original", "r_cached"):
                     if type(row.get(field)) is not int or not 0 <= row[field] <= UINT32_MAX:
                         raise RuntimeError("invalid return value in native trace")
@@ -208,7 +219,7 @@ class CacheBackend:
         source.write_text(self.make_harness(self.model, self.args.variant, self.args.state_mode,
                                       kind, condition, expected), encoding="utf-8")
         command = [self.esbmc, str(source), "--function", "finder_entry", "--z3",
-                   "--unwind", "12", "--overflow-check"]
+                   "--unwind", str(self.unwind), "--overflow-check"]
         result = check_obligation(oracle, command, path / "verify.log",
                                   min(self.args.timeout, self.remaining()), PROPERTIES[kind])
         result.update(kind=kind, condition_c=condition,
@@ -313,10 +324,9 @@ def run(args, backend_type=CacheBackend):
         backend.prepare()
         backend.replay(backend.default_seeds(args.state_mode))
         backend.replay(extra_seeds, origin="untrusted_hypotheses")
-        init = backend.query("init", reserve=2)
-        preservation = backend.query("preservation", reserve=2)
-        report["state_obligations"] = {"initialization": init, "preservation": preservation}
-        if init["status"] != "PROVED" or preservation["status"] != "PROVED":
+        obligations = backend.state_obligations()
+        report["state_obligations"] = obligations
+        if any(result["status"] != "PROVED" for result in obligations.values()):
             raise RuntimeError("initialization/invariant preservation not established; no certified condition")
         found = search(backend, atoms, args.max_predicates)
         report["search"] = found

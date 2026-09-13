@@ -52,6 +52,10 @@ The user reported the previous config-cache stage at `7ca990d` passed 3/3 and
 provided archive locations for both config-cache and baseline regression. These
 reports describe the pre-refactoring stage; they do not certify this new template.
 
+Subsequent user feedback confirmed the shared-template stage itself passed baseline
+5/5, config-cache 3/3 and sketch controls 8/8. Full solver evidence remains in the
+user's Codespace, including the archives timestamped 20260913T102454Z..102456Z.
+
 Local Windows validation after extraction: **53 tests passed, none skipped**, using
 MSVC. This includes the previous 48 checks and five new tests for binding validation,
 manifest identity, explicit environment binding, failed-obligation gating and actual
