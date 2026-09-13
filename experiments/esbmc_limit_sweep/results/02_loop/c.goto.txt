@@ -1,0 +1,178 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing cases/02_loop/good.c
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.204s
+GOTO program processing time: 0.000s
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_main (__ESBMC_main):
+        // 0 file esbmc_intrinsics.h line 17 column 1
+        ASSIGN alloc=ARRAY_OF(0);
+        // 1 file esbmc_intrinsics.h line 20 column 1
+        ASSIGN is_dynamic=ARRAY_OF(0);
+        // 2 file esbmc_intrinsics.h line 23 column 1
+        ASSIGN alloc_size={ 0 };
+        // 3 file esbmc_intrinsics.h line 39 column 1
+        ASSIGN rounding_mode=0;
+        // 4 file esbmc_intrinsics.h line 179 column 1
+        ASSIGN return_value=0;
+        // 5 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 51 column 1
+        ASSIGN num_total_threads=0;
+        // 6 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 52 column 1
+        ASSIGN num_threads_running=0;
+        // 7 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 31 column 1
+        ASSIGN atexit_count=0;
+        // 8 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 29 column 1
+        ASSIGN stdlib_atexit_key={ { .atexit_func = 0 } };
+        // 9 file cases/02_loop/good.c line 19 column 1
+        FUNCTION_CALL:  pthread_start_main_hook()
+        // 10 file cases/02_loop/good.c line 19 column 1
+        FUNCTION_CALL:  main()
+        // 11 file cases/02_loop/good.c line 19 column 1
+        FUNCTION_CALL:  atexit_handler()
+        // 12 file cases/02_loop/good.c line 19 column 1
+        FUNCTION_CALL:  pthread_end_main_hook()
+        // 13 file cases/02_loop/good.c line 38 column 1 function main
+        END_FUNCTION // main
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_atexit_handler (c:@F@__ESBMC_atexit_handler):
+        // 14 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 38 column 3 function __ESBMC_atexit_handler
+        // Labels: __ESBMC_HIDE
+     1: IF !(atexit_count > 0) THEN GOTO 2
+        // 15 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 40 column 5 function __ESBMC_atexit_handler
+        ASSIGN atexit_count=atexit_count - 1;
+        // 16 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 41 column 5 function __ESBMC_atexit_handler
+        FUNCTION_CALL:  *stdlib_atexit_key[(signed long int)atexit_count].atexit_func()
+        // 17 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 38 column 3 function __ESBMC_atexit_handler
+        GOTO 1
+        // 18 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 43 column 1 function __ESBMC_atexit_handler
+     2: END_FUNCTION // __ESBMC_atexit_handler
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_pthread_end_main_hook (c:@F@__ESBMC_pthread_end_main_hook):
+        // 19 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 163 column 3 function __ESBMC_pthread_end_main_hook
+        // Labels: __ESBMC_HIDE
+        FUNCTION_CALL:  yield()
+        // 20 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 163 column 3 function __ESBMC_pthread_end_main_hook
+        ATOMIC_BEGIN
+        // 21 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 164 column 3 function __ESBMC_pthread_end_main_hook
+        ASSIGN num_threads_running=num_threads_running - 1;
+        // 22 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 165 column 1 function __ESBMC_pthread_end_main_hook
+        END_FUNCTION // __ESBMC_pthread_end_main_hook
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_pthread_start_main_hook (c:@F@__ESBMC_pthread_start_main_hook):
+        // 23 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 150 column 3 function __ESBMC_pthread_start_main_hook
+        // Labels: __ESBMC_HIDE
+        FUNCTION_CALL:  yield()
+        // 24 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 150 column 3 function __ESBMC_pthread_start_main_hook
+        ATOMIC_BEGIN
+        // 25 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 151 column 3 function __ESBMC_pthread_start_main_hook
+        ASSIGN num_total_threads=num_total_threads + 1;
+        // 26 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 152 column 3 function __ESBMC_pthread_start_main_hook
+        ASSIGN num_threads_running=num_threads_running + 1;
+        // 27 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 153 column 3 function __ESBMC_pthread_start_main_hook
+        ATOMIC_END
+        // 28 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 154 column 1 function __ESBMC_pthread_start_main_hook
+        END_FUNCTION // __ESBMC_pthread_start_main_hook
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__VERIFIER_nondet_memory (c:@F@__VERIFIER_nondet_memory):
+        // 29 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 4 column 3 function __VERIFIER_nondet_memory
+        // Labels: __ESBMC_HIDE
+        DECL unsigned char * p;
+        // 30 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 4 column 3 function __VERIFIER_nondet_memory
+        ASSIGN p=(unsigned char *)mem;
+        // 31 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 8 function __VERIFIER_nondet_memory
+        DECL unsigned long int i;
+        // 32 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 8 function __VERIFIER_nondet_memory
+        ASSIGN i=0;
+        // 33 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 3 function __VERIFIER_nondet_memory
+     1: IF !(i < size) THEN GOTO 2
+        // 34 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 6 column 5 function __VERIFIER_nondet_memory
+        ASSIGN p[(signed long int)i]=NONDET(unsigned char);
+        // 35 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 39 function __VERIFIER_nondet_memory
+        ASSIGN i=i + 1;
+        // 36 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 3 function __VERIFIER_nondet_memory
+        GOTO 1
+        // 37 no location
+     2: DEAD c:verifier.c@128@F@__VERIFIER_nondet_memory@i
+        // 38 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 7 column 1 function __VERIFIER_nondet_memory
+        DEAD c:verifier.c@80@F@__VERIFIER_nondet_memory@p
+        // 39 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 7 column 1 function __VERIFIER_nondet_memory
+        END_FUNCTION // __VERIFIER_nondet_memory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+f (c:@F@f):
+        // 40 file cases/02_loop/good.c line 7 column 5 function f
+        DECL signed int acc;
+        // 41 file cases/02_loop/good.c line 7 column 5 function f
+        ASSIGN acc=0;
+        // 42 file cases/02_loop/good.c line 8 column 5 function f
+        DECL signed int i;
+        // 43 file cases/02_loop/good.c line 8 column 5 function f
+        ASSIGN i=0;
+        // 44 file cases/02_loop/good.c line 10 column 5 function f
+     1: IF !(i < n) THEN GOTO 2
+        // 45 file cases/02_loop/good.c line 12 column 9 function f
+        ASSIGN acc=acc + x + i;
+        // 46 file cases/02_loop/good.c line 13 column 9 function f
+        ASSIGN i=i + 1;
+        // 47 file cases/02_loop/good.c line 10 column 5 function f
+        GOTO 1
+        // 48 file cases/02_loop/good.c line 16 column 5 function f
+     2: RETURN: acc
+        // 49 file cases/02_loop/good.c line 17 column 1 function f
+        END_FUNCTION // f
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+main (c:@F@main):
+        // 50 file cases/02_loop/good.c line 21 column 5 function main
+        DECL signed int x;
+        // 51 file cases/02_loop/good.c line 21 column 5 function main
+        DECL signed int return_value$_nondet_int$1;
+        // 52 file cases/02_loop/good.c line 21 column 5 function main
+        ASSIGN return_value$_nondet_int$1=NONDET(signed int);
+        // 53 file cases/02_loop/good.c line 21 column 5 function main
+        ASSIGN x=return_value$_nondet_int$1;
+        // 54 file cases/02_loop/good.c line 22 column 5 function main
+        DECL signed int n;
+        // 55 file cases/02_loop/good.c line 22 column 5 function main
+        DECL signed int return_value$_nondet_int$2;
+        // 56 file cases/02_loop/good.c line 22 column 5 function main
+        ASSIGN return_value$_nondet_int$2=NONDET(signed int);
+        // 57 file cases/02_loop/good.c line 22 column 5 function main
+        ASSIGN n=return_value$_nondet_int$2;
+        // 58 file cases/02_loop/good.c line 24 column 5 function main
+        ASSUME 0 <= x
+        // 59 file cases/02_loop/good.c line 25 column 5 function main
+        ASSUME x <= 20
+        // 60 file cases/02_loop/good.c line 27 column 5 function main
+        ASSUME 0 <= n
+        // 61 file cases/02_loop/good.c line 28 column 5 function main
+        ASSUME n <= 5
+        // 62 file cases/02_loop/good.c line 30 column 5 function main
+        DECL signed int result;
+        // 63 file cases/02_loop/good.c line 30 column 5 function main
+        DECL signed int return_value$_f$3;
+        // 64 file cases/02_loop/good.c line 30 column 5 function main
+        FUNCTION_CALL:  return_value$_f$3=f(x, n)
+        // 65 file cases/02_loop/good.c line 30 column 5 function main
+        ASSIGN result=return_value$_f$3;
+        // 66 file cases/02_loop/good.c line 32 column 5 function main
+        DECL signed int expected;
+        // 67 file cases/02_loop/good.c line 32 column 5 function main
+        ASSIGN expected=n * x + (n * (n - 1)) / 2;
+        // 68 file cases/02_loop/good.c line 35 column 5 function main
+        OTHER sizeof(signed int);
+
+        // 69 file cases/02_loop/good.c line 35 column 5 function main
+        ASSERT result == expected // assertion result == expected
+        // 70 file cases/02_loop/good.c line 37 column 5 function main
+        RETURN: 0
+        // 71 file cases/02_loop/good.c line 38 column 1 function main
+        END_FUNCTION // main
+
+ESBMC version 8.4.0 64-bit x86_64 linux

@@ -1,0 +1,226 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing phase2_cases/06_dict/bad.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.076s
+GOTO program processing time: 0.014s
+Starting Bounded Model Checking
+Unwinding loop 27 iteration 1   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 2   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 3   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 2 iteration 1   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 563 column 3 function __ESBMC_list_contains
+Unwinding loop 2 iteration 2   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 563 column 3 function __ESBMC_list_contains
+Unwinding loop 2 iteration 3   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 563 column 3 function __ESBMC_list_contains
+Unwinding loop 8 iteration 1   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 719 column 3 function __ESBMC_list_find_index
+Unwinding loop 8 iteration 2   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 719 column 3 function __ESBMC_list_find_index
+Unwinding loop 8 iteration 3   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 719 column 3 function __ESBMC_list_find_index
+Unwinding loop 27 iteration 1   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 2   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 3   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 4   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 5   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 6   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 7   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 8   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Unwinding loop 27 iteration 9   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Not unwinding loop 27 iteration 10   file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 773 column 3 function __ESBMC_list_try_find_index
+Symex completed in: 0.073s (1502 assignments)
+Caching time: 0.002s (removed 171 assertions)
+Slicing time: 0.010s (removed 614 assignments)
+Generated 919 VCC(s), 379 remaining after simplification (717 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.013s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 1.128s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file phase2_cases/06_dict/bad.py line 14 column 0 thread 0
+----------------------------------------------------
+  k = 2 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000010)
+
+State 11 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 165 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->value = { .value=&dynamic_5_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 12 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 166 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->float_idx = { .value=&dynamic_5_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 13 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 167 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->type_id = { .value=&dynamic_5_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=0 }
+
+State 14 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 168 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->size = { .value=&dynamic_5_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 19 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 165 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->value = { .value=&dynamic_6_array[0], .float_idx=31542858479632408, .type_id=31542858479632408,
+    .size=31542858479632408 }
+
+State 20 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 166 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->float_idx = { .value=&dynamic_6_array[0], .float_idx=0, .type_id=31542858479632408,
+    .size=31542858479632408 }
+
+State 21 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 167 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->type_id = { .value=&dynamic_6_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=31542858479632408 }
+
+State 22 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 168 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->size = { .value=&dynamic_6_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 27 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 165 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->value = { .value=&dynamic_7_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 29 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 166 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->float_idx = { .value=&dynamic_7_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 30 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 167 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->type_id = { .value=&dynamic_7_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=0 }
+
+State 31 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 168 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->size = { .value=&dynamic_7_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 36 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 165 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->value = { .value=&dynamic_8_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 38 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 166 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->float_idx = { .value=&dynamic_8_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 39 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 167 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->type_id = { .value=&dynamic_8_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=0 }
+
+State 40 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 168 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->size = { .value=&dynamic_8_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 45 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 165 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->value = { .value=&dynamic_9_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 47 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 166 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->float_idx = { .value=&dynamic_9_array[0], .float_idx=0, .type_id=0,
+    .size=0 }
+
+State 48 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 167 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->type_id = { .value=&dynamic_9_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=0 }
+
+State 49 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 168 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->size = { .value=&dynamic_9_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 54 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 165 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->value = { .value=&dynamic_10_array[0], .float_idx=31542858479632408, .type_id=31542858479632408,
+    .size=31542858479632408 }
+
+State 56 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 166 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->float_idx = { .value=&dynamic_10_array[0], .float_idx=0, .type_id=31542858479632408,
+    .size=31542858479632408 }
+
+State 57 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 167 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->type_id = { .value=&dynamic_10_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=31542858479632408 }
+
+State 58 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 168 column 3 function __ESBMC_list_push thread 0
+----------------------------------------------------
+  item->size = { .value=&dynamic_10_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 157 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 158 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 159 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 160 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 161 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 162 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 163 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 164 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 125 column 5 function __ESBMC_copy_value thread 0
+----------------------------------------------------
+  *(unsigned long int *)copied = 26 (00011010)
+
+State 167 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 497 column 3 function __ESBMC_list_set_at thread 0
+----------------------------------------------------
+  (l->items + (signed long int)index)->value = { .value=&dynamic_11_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 169 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 498 column 3 function __ESBMC_list_set_at thread 0
+----------------------------------------------------
+  (l->items + (signed long int)index)->float_idx = { .value=&dynamic_11_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 170 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 499 column 3 function __ESBMC_list_set_at thread 0
+----------------------------------------------------
+  (l->items + (signed long int)index)->type_id = { .value=&dynamic_11_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 171 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/python/list.c line 500 column 3 function __ESBMC_list_set_at thread 0
+----------------------------------------------------
+  (l->items + (signed long int)index)->size = { .value=&dynamic_11_array[0], .float_idx=0, .type_id=0xAED305094B3D4A9F,
+    .size=8 }
+
+State 223 file phase2_cases/06_dict/bad.py line 29 column 0 thread 0
+----------------------------------------------------
+Violated property:
+  file phase2_cases/06_dict/bad.py line 29 column 0
+  assertion r == expected
+  r == expected
+
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

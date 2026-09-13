@@ -1,0 +1,22 @@
+f (c:@F@f):
+        // 40 file cases/02_loop/good.c line 7 column 5 function f
+        DECL signed int acc;
+        // 41 file cases/02_loop/good.c line 7 column 5 function f
+        ASSIGN acc=0;
+        // 42 file cases/02_loop/good.c line 8 column 5 function f
+        DECL signed int i;
+        // 43 file cases/02_loop/good.c line 8 column 5 function f
+        ASSIGN i=0;
+        // 44 file cases/02_loop/good.c line 10 column 5 function f
+     1: IF !(i < n) THEN GOTO 2
+        // 45 file cases/02_loop/good.c line 12 column 9 function f
+        ASSIGN acc=acc + x + i;
+        // 46 file cases/02_loop/good.c line 13 column 9 function f
+        ASSIGN i=i + 1;
+        // 47 file cases/02_loop/good.c line 10 column 5 function f
+        GOTO 1
+        // 48 file cases/02_loop/good.c line 16 column 5 function f
+     2: RETURN: acc
+        // 49 file cases/02_loop/good.c line 17 column 1 function f
+        END_FUNCTION // f
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

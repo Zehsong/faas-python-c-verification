@@ -1,0 +1,36 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Reading GOTO program from file
+GOTO program creation time: 0.002s
+GOTO program processing time: 0.000s
+Starting Bounded Model Checking
+Symex completed in: 0.001s (16 assignments)
+Caching time: 0.000s (removed 1 assertions)
+Slicing time: 0.000s (removed 10 assignments)
+Generated 4 VCC(s), 3 remaining after simplification (5 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Z3 v4.13.3
+Runtime decision procedure: 0.123s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file c_array.c line 3 column 5 function f thread 0
+----------------------------------------------------
+Violated property:
+  file c_array.c line 3 column 5 function f
+  dereference failure: Incorrect alignment when accessing data object
+
+
+** Results:
+c_array.c, function f
+  FAILED       [f.assertion.1]                    line 3  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [f.invalid-pointer-dereference.1]  line 3  dereference failure: invalid pointer
+
+** 1 of 2 properties failed, 1 not checked
+   (this mode stops at the first violation; use --multi-property for a verdict on every property)
+
+VERIFICATION FAILED
+ESBMC version 8.4.0 64-bit x86_64 linux

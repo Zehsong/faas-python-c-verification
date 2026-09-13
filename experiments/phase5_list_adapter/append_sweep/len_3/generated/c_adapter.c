@@ -1,0 +1,31 @@
+int f(int *xs, int n)
+{
+    int count = 0;
+
+    for (int i = 0; i < n; ++i)
+    {
+        if (xs[i] > 0)
+            count += 1;
+    }
+
+    return count;
+}
+
+
+
+int __VEQ_C_LIST_INT_ADAPTER(int selector, int e0, int e1, int e2)
+{
+    int n;
+
+    if (selector <= 0)
+        n = 0;
+    else if (selector == 1)
+        n = 1;
+    else if (selector == 2)
+        n = 2;
+    else
+        n = 3;
+
+    int xs[3] = {e0, e1, e2};
+    return f(xs, n);
+}

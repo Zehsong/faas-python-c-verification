@@ -1,0 +1,4 @@
+case	py_good	py_mutant	c_good	c_mutant	py_good_rc	py_bad_rc	c_good_rc	c_bad_rc	py_f_goto_lines	c_f_goto_lines
+01_helper_branch	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	14	14
+02_loop	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	22	22
+03_list_array	SUCCESS	FAILED	SUCCESS	FAILED	0	1	0	1	148	16

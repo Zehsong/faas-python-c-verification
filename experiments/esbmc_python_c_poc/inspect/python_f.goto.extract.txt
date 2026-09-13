@@ -1,0 +1,116 @@
+10196-        ASSIGN c:@__ESBMC_exc_obj$5={ .message=&"list index out of range"[0] };
+10197-        // 4468 
+10198-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$5);
+10199-        // 4469 
+10200-        GOTO 3
+10201-        // 4470 
+10202-     2: DECL  struct __ESBMC_PyObj * return_value$___ESBMC_list_at$2;
+10203-        // 4471 
+10204-        FUNCTION_CALL:  return_value$___ESBMC_list_at$2=list_at(seq, i < 0 ? simple.py:71$list_size$151 + (unsigned long int)i : (unsigned long int)i)
+10205-        // 4472 file simple.py line 71 column 4 function choice
+10206-        RETURN: *(signed long int *)return_value$___ESBMC_list_at$2->value
+10207-        // 4473 no location
+10208-     3: END_FUNCTION
+10209-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10210-
+10211:f (py:simple.py@F@f):
+10212-        // 4474 file simple.py line 2 column 4 function f
+10213-        IF !(x < 100) THEN GOTO 1
+10214-        // 4475 file simple.py line 3 column 8 function f
+10215-        RETURN: x + 1
+10216-        // 4476 file simple.py line 4 column 4 function f
+10217-     1: RETURN: 0
+10218-        // 4477 no location
+10219-        END_FUNCTION
+10220-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10221-
+10222-getrandbits (py:simple.py@F@getrandbits):
+10223-        // 4478 file simple.py line 38 column 4 function getrandbits
+10224-        // Labels: __ESBMC_HIDE
+10225-        IF !(k < 0) THEN GOTO 1
+10226-        // 4479 file simple.py line 39 column 8 function getrandbits
+10227-        ASSIGN c:@__ESBMC_exc_thrown=1;
+10228-        // 4480 file simple.py line 39 column 8 function getrandbits
+10229-        ASSIGN c:@__ESBMC_exc_typeid=9;
+10230-        // 4481 file simple.py line 39 column 8 function getrandbits
+10231-        ASSIGN c:@__ESBMC_exc_obj$6={ .message=&"number of bits must be non-negative"[0] };
+10232-        // 4482 file simple.py line 39 column 8 function getrandbits
+10233-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$6);
+10234-        // 4483 file simple.py line 39 column 8 function getrandbits
+10235-        GOTO 3
+10236-        // 4484 file simple.py line 41 column 4 function getrandbits
+10237-     1: IF !(k == 0) THEN GOTO 2
+10238-        // 4485 file simple.py line 42 column 8 function getrandbits
+10239-        RETURN: 0
+10240-        // 4486 file simple.py line 44 column 4 function getrandbits
+10241-     2: DECL signed long int value;
+10242-        // 4487 file simple.py line 44 column 4 function getrandbits
+10243-        ASSIGN value=NONDET(signed long int);
+10244-        // 4488 file simple.py line 45 column 4 function getrandbits
+10245-        DECL signed long int max_val;
+10246-        // 4489 file simple.py line 45 column 4 function getrandbits
+10247-        ASSIGN max_val=(1 << k) - 1;
+10248-        // 4490 file simple.py line 46 column 4 function getrandbits
+10249-        ASSUME value >= 0 && value <= max_val
+10250-        // 4491 file simple.py line 47 column 4 function getrandbits
+10251-        RETURN: value
+10252-        // 4492 no location
+10253-     3: END_FUNCTION
+10254-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10255-
+10256-hash (py:simple.py@F@hash):
+10257-        // 4493 file simple.py line 12 column 4 function hash
+10258-        // Labels: __ESBMC_HIDE
+10259-        RETURN: 42
+10260-        // 4494 no location
+10261-        END_FUNCTION
+10262-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10263-
+10264-max (py:simple.py@F@max):
+10265-        // 4495 
+10266-        // Labels: __ESBMC_HIDE
+10267-        OTHER &{ 82, 101, 116, 117, 114, 110, 32, 116, 104, 101, 32, 109, 97, 120, 105, 109, 117, 109, 32, 101, 108, 101, 109, 101, 110, 116, 32, 102, 114, 111, 109, 32, 97, 110, 32, 105, 116, 101, 114, 97, 98, 108, 101, 32, 111, 102, 32, 105, 110, 116, 101, 103, 101, 114, 115, 46, 0 }[0];
+10268-
+10269-        // 4496 
+10270-        DECL unsigned long int return_value$___ESBMC_list_size$1;
+10271-        // 4497 
+10272-        FUNCTION_CALL:  return_value$___ESBMC_list_size$1=list_size(iterable)
+10273-        // 4498 file simple.py line 39 column 4 function max
+10274-        IF !(return_value$___ESBMC_list_size$1 == (unsigned long int)0) THEN GOTO 1
+10275-        // 4499 file simple.py line 40 column 8 function max
+10276-        ASSIGN c:@__ESBMC_exc_thrown=1;
+10277-        // 4500 file simple.py line 40 column 8 function max
+10278-        ASSIGN c:@__ESBMC_exc_typeid=9;
+10279-        // 4501 file simple.py line 40 column 8 function max
+10280-        ASSIGN c:@__ESBMC_exc_obj$7={ .message=&"max() arg is an empty sequence"[0] };
+10281-        // 4502 file simple.py line 40 column 8 function max
+10282-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$7);
+10283-        // 4503 file simple.py line 40 column 8 function max
+10284-        GOTO 9
+10285-        // 4504 file simple.py line 42 column 4 function max
+10286-     1: DECL signed long int i;
+10287-        // 4505 file simple.py line 42 column 4 function max
+10288-        ASSIGN i=1;
+10289-        // 4506 file simple.py line 43 column 4 function max
+10290-        DECL signed long int length;
+10291-        // 4507 
+10292-        DECL unsigned long int return_value$___ESBMC_list_size$2;
+10293-        // 4508 
+10294-        FUNCTION_CALL:  return_value$___ESBMC_list_size$2=list_size(iterable)
+10295-        // 4509 file simple.py line 43 column 4 function max
+10296-        ASSIGN length=(signed long int)return_value$___ESBMC_list_size$2;
+10297-        // 4510 file simple.py line 44 column 18 function max
+10298-        DECL unsigned long int simple.py:44$list_size$3;
+10299-        // 4511 file simple.py line 44 column 18 function max
+10300-        FUNCTION_CALL:  simple.py:44$list_size$3=list_size(iterable)
+10301-        // 4512 file simple.py line 44 column 18 function max
+10302-        IF !(0 < 0 && (0 < 0 ? simple.py:44$list_size$3 + (unsigned long int)0 : (unsigned long int)0) >= simple.py:44$list_size$3) THEN GOTO 2
+10303-        // 4513 
+10304-        DEAD python_converter::simple.py:44$list_size$3
+10305-        // 4514 
+10306-        DEAD py:simple.py@F@max::$tmp::return_value$___ESBMC_list_size$2
+10307-        // 4515 
+10308-        DEAD py:simple.py@F@max@length
+10309-        // 4516 
+10310-        DEAD py:simple.py@F@max@i
+10311-        // 4517 

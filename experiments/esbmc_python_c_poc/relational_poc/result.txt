@@ -1,0 +1,47 @@
+
+======================================================================
+TEST A: ORIGINAL PYTHON vs ORIGINAL C
+======================================================================
+Python output relation:
+If(100 <= x, 0, 1 + x)
+
+C output relation:
+If(100 <= x, 0, 1 + x)
+
+Raw equivalence predicate:
+True
+
+Counterexample query:
+unsat
+No counterexample in shared int32 domain.
+
+Candidate region x < 100:
+mismatch query = unsat
+PROVED: x < 100 is an equivalence region.
+
+Outside region x >= 100:
+mismatch query = unsat
+
+======================================================================
+TEST B: ORIGINAL PYTHON vs INTENTIONALLY BAD C
+======================================================================
+Python output relation:
+If(100 <= x, 0, 1 + x)
+
+C output relation:
+If(100 <= x, 1, 1 + x)
+
+Raw equivalence predicate:
+If(100 <= x, 0, 1 + x) == If(100 <= x, 1, 1 + x)
+
+Counterexample query:
+sat
+Counterexample x = 100
+
+Candidate region x < 100:
+mismatch query = unsat
+PROVED: x < 100 is an equivalence region.
+
+Outside region x >= 100:
+mismatch query = sat
+Example mismatch: 100

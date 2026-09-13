@@ -1,0 +1,14 @@
+f (c:@F@f):
+        // 40 file cases/01_helper_branch/good.c line 18 column 5 function f
+        DECL signed int return_value$_helper$1;
+        // 41 file cases/01_helper_branch/good.c line 18 column 5 function f
+        FUNCTION_CALL:  return_value$_helper$1=helper(x)
+        // 42 file cases/01_helper_branch/good.c line 18 column 5 function f
+        DECL signed int return_value$_helper$2;
+        // 43 file cases/01_helper_branch/good.c line 18 column 5 function f
+        FUNCTION_CALL:  return_value$_helper$2=helper(x + 1)
+        // 44 file cases/01_helper_branch/good.c line 18 column 5 function f
+        RETURN: return_value$_helper$1 + return_value$_helper$2
+        // 45 file cases/01_helper_branch/good.c line 19 column 1 function f
+        END_FUNCTION // f
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

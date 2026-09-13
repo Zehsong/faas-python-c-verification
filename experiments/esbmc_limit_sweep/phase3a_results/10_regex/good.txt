@@ -1,0 +1,226 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing good.py
+WARNING: re cyclic-import: re -> re
+WARNING: _sre module-file-not-found
+WARNING: warnings cyclic-import: warnings -> re -> warnings
+WARNING: _functools module-file-not-found
+WARNING: _thread module-file-not-found
+WARNING: _warnings module-file-not-found
+WARNING: builtins module-file-not-found
+WARNING: sys module-file-not-found
+WARNING: collections.abc resolution-failed: module-not-found at 3:0
+WARNING: collections.abc resolution-failed: module-not-found at 1:0
+WARNING: types cyclic-import: types -> functools -> types
+WARNING: _abc module-file-not-found
+WARNING: _collections_abc cyclic-import: _collections_abc -> warnings -> linecache -> functools -> weakref -> _collections_abc
+WARNING: _operator module-file-not-found
+WARNING: _tracemalloc module-file-not-found
+WARNING: _weakref module-file-not-found
+WARNING: _weakrefset cyclic-import: _weakrefset -> types -> _collections_abc -> abc -> _py_abc -> _weakrefset
+WARNING: atexit module-file-not-found
+WARNING: collections.abc module-file-not-found
+WARNING: contextlib cyclic-import: _collections_abc -> abc -> _py_abc -> _weakrefset -> types -> _collections_abc
+WARNING: gc module-file-not-found
+WARNING: itertools module-file-not-found
+WARNING: unicodedata module-parse-failed: 'utf-8' codec can't decode byte 0x98 in position 96: invalid start byte
+WARNING: _ast module-file-not-found
+WARNING: _pickle module-parse-failed: 'utf-8' codec can't decode byte 0x80 in position 40: invalid start byte
+WARNING: _tokenize module-file-not-found
+WARNING: collections.abc resolution-failed: module-not-found at 147:0
+WARNING: io cyclic-import: abc -> _py_abc -> _weakrefset -> types -> _collections_abc -> abc
+WARNING: _codecs module-file-not-found
+WARNING: _io module-file-not-found
+WARNING: _struct module-parse-failed: 'utf-8' codec can't decode byte 0xc8 in position 40: invalid continuation byte
+WARNING: difflib cyclic-import: difflib -> difflib
+ERROR: Module '_winapi' not found.
+WARNING: _winapi resolution-failed: module-not-found at 165:12
+WARNING: encodings cyclic-import: encodings -> codecs -> encodings
+WARNING: importlib cyclic-import: importlib -> importlib
+WARNING: posix module-file-not-found
+WARNING: pwd module-file-not-found
+ERROR: Module '_winapi' not found.
+WARNING: _winapi resolution-failed: module-not-found at 44:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 41:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 35:4
+ERROR: Module 'winreg' not found.
+WARNING: winreg resolution-failed: module-not-found at 36:4
+WARNING: _imp module-file-not-found
+WARNING: _stat module-file-not-found
+ERROR: Module '_winapi' not found.
+WARNING: _winapi module-file-not-found
+ERROR: Module '_winapi' not found.
+WARNING: encodings.mbcs cyclic-import: encodings.mbcs -> encodings.mbcs
+WARNING: errno module-file-not-found
+WARNING: grp module-parse-failed: 'utf-8' codec can't decode byte 0xb0 in position 40: invalid start byte
+ERROR: Module 'nt' not found.
+ERROR: Module 'winreg' not found.
+ERROR: Module 'nt' not found.
+WARNING: nt module-file-not-found
+WARNING: readline module-parse-failed: 'utf-8' codec can't decode byte 0xc8 in position 40: invalid continuation byte
+WARNING: zipfile cyclic-import: zipfile -> argparse -> shutil -> zipfile
+WARNING: zlib module-parse-failed: 'utf-8' codec can't decode byte 0xa0 in position 185: invalid start byte
+WARNING: _bz2 module-parse-failed: 'utf-8' codec can't decode byte 0xa0 in position 240: invalid start byte
+WARNING: _heapq module-parse-failed: 'utf-8' codec can't decode byte 0xc0 in position 40: invalid start byte
+WARNING: _locale module-file-not-found
+WARNING: _lzma module-parse-failed: 'utf-8' codec can't decode byte 0x98 in position 96: invalid start byte
+WARNING: _opcode module-parse-failed: 'utf-8' codec can't decode byte 0xf0 in position 40: invalid continuation byte
+WARNING: _signal module-file-not-found
+WARNING: binascii module-parse-failed: 'utf-8' codec can't decode byte 0x9f in position 41: invalid start byte
+WARNING: codeop cyclic-import: argparse -> shutil -> zipfile -> argparse
+WARNING: marshal module-file-not-found
+ERROR: Module '_wmi' not found.
+WARNING: _wmi resolution-failed: module-not-found at 316:4
+ERROR: Module 'java.lang' not found.
+WARNING: java.lang resolution-failed: module-not-found at 501:4
+ERROR: Module 'java.lang' not found.
+WARNING: java.lang resolution-failed: module-not-found at 524:8
+ERROR: Module 'winreg' not found.
+WARNING: winreg resolution-failed: module-not-found at 368:12
+ERROR: Module 'winreg' not found.
+WARNING: winreg resolution-failed: module-not-found at 430:12
+ERROR: Module 'vms_lib' not found.
+WARNING: vms_lib resolution-failed: module-not-found at 810:12
+ERROR: Module '_winreg' not found.
+WARNING: _winreg resolution-failed: module-not-found at 370:12
+ERROR: Module '_winreg' not found.
+WARNING: _winreg resolution-failed: module-not-found at 432:12
+WARNING: select module-parse-failed: 'utf-8' codec can't decode byte 0xa0 in position 40: invalid start byte
+ERROR: Module 'msvcrt' not found.
+WARNING: msvcrt resolution-failed: module-not-found at 71:4
+ERROR: Module '_winapi' not found.
+WARNING: _winapi resolution-failed: module-not-found at 81:4
+ERROR: Module '_winapi' not found.
+WARNING: _winapi resolution-failed: module-not-found at 82:4
+WARNING: webbrowser cyclic-import: shutil -> zipfile -> argparse -> shutil
+ERROR: Module 'winreg' not found.
+WARNING: winreg module-file-not-found
+WARNING: _contextvars module-parse-failed: 'utf-8' codec can't decode byte 0xf0 in position 40: invalid continuation byte
+WARNING: _posixsubprocess module-parse-failed: 'utf-8' codec can't decode byte 0xb0 in position 40: invalid start byte
+WARNING: _string module-file-not-found
+ERROR: Module '_winreg' not found.
+WARNING: _winreg module-file-not-found
+ERROR: Module '_wmi' not found.
+WARNING: _wmi module-file-not-found
+WARNING: collections.abc resolution-failed: module-not-found at 17:0
+WARNING: asyncio.futures cyclic-import: asyncio.futures -> asyncio -> asyncio.futures
+WARNING: asyncio.locks cyclic-import: asyncio -> asyncio.futures -> asyncio
+WARNING: asyncio.threads cyclic-import: asyncio.threads -> asyncio -> asyncio.threads
+WARNING: fcntl module-parse-failed: 'utf-8' codec can't decode byte 0xc6 in position 41: invalid continuation byte
+WARNING: collections.abc resolution-failed: module-not-found at 79:0
+ERROR: Module 'java.lang' not found.
+WARNING: java.lang module-file-not-found
+WARNING: collections.abc resolution-failed: module-not-found at 26:0
+ERROR: Module '_winapi' not found.
+WARNING: _winapi resolution-failed: module-not-found at 32:4
+ERROR: Module 'winreg' not found.
+WARNING: winreg resolution-failed: module-not-found at 37:4
+ERROR: Module 'msvcrt' not found.
+WARNING: msvcrt module-file-not-found
+WARNING: collections.abc resolution-failed: module-not-found at 10:0
+WARNING: termios module-parse-failed: 'utf-8' codec can't decode byte 0xad in position 152: invalid start byte
+ERROR: Module 'vms_lib' not found.
+WARNING: vms_lib module-file-not-found
+WARNING: _asyncio module-parse-failed: 'utf-8' codec can't decode byte 0x81 in position 153: invalid start byte
+WARNING: _csv module-parse-failed: 'utf-8' codec can't decode byte 0xb8 in position 96: invalid start byte
+WARNING: _datetime module-parse-failed: 'utf-8' codec can't decode byte 0x99 in position 41: invalid start byte
+WARNING: _random module-parse-failed: 'utf-8' codec can't decode byte 0x80 in position 40: invalid start byte
+WARNING: _sha2 module-parse-failed: 'utf-8' codec can't decode byte 0xe8 in position 40: invalid continuation byte
+WARNING: _socket module-parse-failed: 'utf-8' codec can't decode byte 0xd0 in position 40: invalid continuation byte
+WARNING: array module-parse-failed: 'utf-8' codec can't decode byte 0x99 in position 41: invalid start byte
+WARNING: email.headerregistry cyclic-import: types -> _collections_abc -> abc -> _py_abc -> _weakrefset -> types
+ERROR: Module '_winapi' not found.
+WARNING: _winapi resolution-failed: module-not-found at 46:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 318:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 524:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 590:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 604:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 875:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 876:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 877:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 878:4
+ERROR: Module 'nt' not found.
+WARNING: nt resolution-failed: module-not-found at 885:4
+WARNING: _bisect module-parse-failed: 'utf-8' codec can't decode byte 0xf8 in position 96: invalid start byte
+WARNING: _blake2 module-parse-failed: 'utf-8' codec can't decode byte 0xe0 in position 40: invalid continuation byte
+WARNING: _hashlib module-parse-failed: 'utf-8' codec can't decode byte 0xc8 in position 40: invalid continuation byte
+WARNING: _md5 module-parse-failed: 'utf-8' codec can't decode byte 0xc9 in position 41: invalid continuation byte
+WARNING: _sha1 module-parse-failed: 'utf-8' codec can't decode byte 0x80 in position 40: invalid start byte
+WARNING: _sha3 module-parse-failed: 'utf-8' codec can't decode byte 0xc0 in position 40: invalid start byte
+WARNING: _ssl module-parse-failed: 'utf-8' codec can't decode byte 0x80 in position 40: invalid start byte
+WARNING: _statistics module-parse-failed: 'utf-8' codec can't decode byte 0xf0 in position 40: invalid continuation byte
+WARNING: pyexpat module-parse-failed: 'utf-8' codec can't decode byte 0xb0 in position 96: invalid start byte
+Traceback (most recent call last):
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/parser/__main__.py", line 22, in <module>
+    _resolve_main()()
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/parser/parser.py", line 124, in main
+    return cli_main(deps=CliDeps(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/parser/parser_cli.py", line 199, in main
+    import_resolver.process_collected_imports(
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/parser/import_resolver.py", line 408, in process_collected_imports
+    preprocessor.finalize_module(tree)
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/module_lifecycle_mixin.py", line 15, in finalize_module
+    node = self.generic_visit(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 483, in generic_visit
+    value = self.visit(value)
+            ^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 407, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/class_context_mixin.py", line 17, in visit_ClassDef
+    self.generic_visit(node)
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 483, in generic_visit
+    value = self.visit(value)
+            ^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 407, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/core_visitors_mixin.py", line 1499, in visit_FunctionDef
+    self.generic_visit(node)
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 483, in generic_visit
+    value = self.visit(value)
+            ^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 407, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/expression_rewrite_mixin.py", line 340, in visit_While
+    node = self.generic_visit(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 483, in generic_visit
+    value = self.visit(value)
+            ^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 407, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/core_visitors_mixin.py", line 1321, in visit_Assign
+    node = self.generic_visit(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 492, in generic_visit
+    new_node = self.visit(old_value)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.python/current/lib/python3.12/ast.py", line 407, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/core_visitors_mixin.py", line 1456, in visit_Call
+    if not self._apply_call_signature_defaults(node):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/core_visitors_mixin.py", line 926, in _apply_call_signature_defaults
+    self._fill_missing_args_with_defaults(node, function_name, expected_args, keywords)
+  File "/tmp/esbmc-python-astgen-dae8-a02f-ceb2/preprocessor/core_visitors_mixin.py", line 898, in _fill_missing_args_with_defaults
+    raise TypeError(
+TypeError: match() missing 2 required positional arguments: 'pattern' and 'string'
+ESBMC version 8.4.0 64-bit x86_64 linux
+
+RUNNER_EXIT_CODE=1
+RUNNER_ELAPSED_SECONDS=17

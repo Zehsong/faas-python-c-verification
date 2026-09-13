@@ -1,0 +1,10 @@
+f (py:simple.py@F@f):
+        // 4474 file simple.py line 2 column 4 function f
+        IF !(x < 100) THEN GOTO 1
+        // 4475 file simple.py line 3 column 8 function f
+        RETURN: x + 1
+        // 4476 file simple.py line 4 column 4 function f
+     1: RETURN: 0
+        // 4477 no location
+        END_FUNCTION
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

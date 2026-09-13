@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "name": "helper_multi_good",
+      "python": "experiments/phase4e_generalization/case1/good.py",
+      "py_function": "f",
+      "c": "experiments/phase4e_generalization/case1/good.c",
+      "c_function": "f",
+      "params": [
+        "x:int",
+        "y:int"
+      ],
+      "return": "int",
+      "expect": "EQ",
+      "unwind": 12
+    },
+
+    {
+      "name": "helper_multi_mutant",
+      "python": "experiments/phase4e_generalization/case1/good.py",
+      "py_function": "f",
+      "c": "experiments/phase4e_generalization/case1/bad.c",
+      "c_function": "f",
+      "params": [
+        "x:int",
+        "y:int"
+      ],
+      "return": "int",
+      "expect": "NEQ",
+      "unwind": 12
+    },
+
+    {
+      "name": "bounded_loop_good",
+      "python": "experiments/phase4e_generalization/case2/good.py",
+      "py_function": "f",
+      "c": "experiments/phase4e_generalization/case2/good.c",
+      "c_function": "f",
+      "params": [
+        "x:int"
+      ],
+      "return": "int",
+      "expect": "EQ",
+      "unwind": 12
+    },
+
+    {
+      "name": "bounded_loop_mutant",
+      "python": "experiments/phase4e_generalization/case2/good.py",
+      "py_function": "f",
+      "c": "experiments/phase4e_generalization/case2/bad.c",
+      "c_function": "f",
+      "params": [
+        "x:int"
+      ],
+      "return": "int",
+      "expect": "NEQ",
+      "unwind": 12
+    }
+  ]
+}

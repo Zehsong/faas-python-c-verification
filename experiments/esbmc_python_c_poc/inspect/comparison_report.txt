@@ -1,0 +1,1524 @@
+============================================================
+ ESBMC PYTHON-C FUNCTION REPRESENTATION COMPARISON
+============================================================
+
+============================================================
+[1] SOURCE: PYTHON
+============================================================
+def f(x: int) -> int:
+    if x < 100:
+        return x + 1
+    return 0
+
+
+x: int = nondet_int()
+
+__ESBMC_assume(x >= -1000)
+__ESBMC_assume(x <= 1000)
+
+r: int = f(x)
+
+assert (x < 100 and r == x + 1) or \
+       (x >= 100 and r == 0)
+
+============================================================
+[2] SOURCE: C
+============================================================
+#include <assert.h>
+
+int nondet_int(void);
+
+int f(int x)
+{
+    if (x < 100)
+        return x + 1;
+
+    return 0;
+}
+
+int main(void)
+{
+    int x = nondet_int();
+
+    __ESBMC_assume(x >= -1000);
+    __ESBMC_assume(x <= 1000);
+
+    int r = f(x);
+
+    assert(
+        (x < 100 && r == x + 1) ||
+        (x >= 100 && r == 0)
+    );
+
+    return 0;
+}
+
+============================================================
+[3] PYTHON FUNCTION f - GOTO EXTRACT
+============================================================
+10196-        ASSIGN c:@__ESBMC_exc_obj$5={ .message=&"list index out of range"[0] };
+10197-        // 4468 
+10198-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$5);
+10199-        // 4469 
+10200-        GOTO 3
+10201-        // 4470 
+10202-     2: DECL  struct __ESBMC_PyObj * return_value$___ESBMC_list_at$2;
+10203-        // 4471 
+10204-        FUNCTION_CALL:  return_value$___ESBMC_list_at$2=list_at(seq, i < 0 ? simple.py:71$list_size$151 + (unsigned long int)i : (unsigned long int)i)
+10205-        // 4472 file simple.py line 71 column 4 function choice
+10206-        RETURN: *(signed long int *)return_value$___ESBMC_list_at$2->value
+10207-        // 4473 no location
+10208-     3: END_FUNCTION
+10209-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10210-
+10211:f (py:simple.py@F@f):
+10212-        // 4474 file simple.py line 2 column 4 function f
+10213-        IF !(x < 100) THEN GOTO 1
+10214-        // 4475 file simple.py line 3 column 8 function f
+10215-        RETURN: x + 1
+10216-        // 4476 file simple.py line 4 column 4 function f
+10217-     1: RETURN: 0
+10218-        // 4477 no location
+10219-        END_FUNCTION
+10220-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10221-
+10222-getrandbits (py:simple.py@F@getrandbits):
+10223-        // 4478 file simple.py line 38 column 4 function getrandbits
+10224-        // Labels: __ESBMC_HIDE
+10225-        IF !(k < 0) THEN GOTO 1
+10226-        // 4479 file simple.py line 39 column 8 function getrandbits
+10227-        ASSIGN c:@__ESBMC_exc_thrown=1;
+10228-        // 4480 file simple.py line 39 column 8 function getrandbits
+10229-        ASSIGN c:@__ESBMC_exc_typeid=9;
+10230-        // 4481 file simple.py line 39 column 8 function getrandbits
+10231-        ASSIGN c:@__ESBMC_exc_obj$6={ .message=&"number of bits must be non-negative"[0] };
+10232-        // 4482 file simple.py line 39 column 8 function getrandbits
+10233-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$6);
+10234-        // 4483 file simple.py line 39 column 8 function getrandbits
+10235-        GOTO 3
+10236-        // 4484 file simple.py line 41 column 4 function getrandbits
+10237-     1: IF !(k == 0) THEN GOTO 2
+10238-        // 4485 file simple.py line 42 column 8 function getrandbits
+10239-        RETURN: 0
+10240-        // 4486 file simple.py line 44 column 4 function getrandbits
+10241-     2: DECL signed long int value;
+10242-        // 4487 file simple.py line 44 column 4 function getrandbits
+10243-        ASSIGN value=NONDET(signed long int);
+10244-        // 4488 file simple.py line 45 column 4 function getrandbits
+10245-        DECL signed long int max_val;
+10246-        // 4489 file simple.py line 45 column 4 function getrandbits
+10247-        ASSIGN max_val=(1 << k) - 1;
+10248-        // 4490 file simple.py line 46 column 4 function getrandbits
+10249-        ASSUME value >= 0 && value <= max_val
+10250-        // 4491 file simple.py line 47 column 4 function getrandbits
+10251-        RETURN: value
+10252-        // 4492 no location
+10253-     3: END_FUNCTION
+10254-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10255-
+10256-hash (py:simple.py@F@hash):
+10257-        // 4493 file simple.py line 12 column 4 function hash
+10258-        // Labels: __ESBMC_HIDE
+10259-        RETURN: 42
+10260-        // 4494 no location
+10261-        END_FUNCTION
+10262-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10263-
+10264-max (py:simple.py@F@max):
+10265-        // 4495 
+10266-        // Labels: __ESBMC_HIDE
+10267-        OTHER &{ 82, 101, 116, 117, 114, 110, 32, 116, 104, 101, 32, 109, 97, 120, 105, 109, 117, 109, 32, 101, 108, 101, 109, 101, 110, 116, 32, 102, 114, 111, 109, 32, 97, 110, 32, 105, 116, 101, 114, 97, 98, 108, 101, 32, 111, 102, 32, 105, 110, 116, 101, 103, 101, 114, 115, 46, 0 }[0];
+10268-
+10269-        // 4496 
+10270-        DECL unsigned long int return_value$___ESBMC_list_size$1;
+10271-        // 4497 
+10272-        FUNCTION_CALL:  return_value$___ESBMC_list_size$1=list_size(iterable)
+10273-        // 4498 file simple.py line 39 column 4 function max
+10274-        IF !(return_value$___ESBMC_list_size$1 == (unsigned long int)0) THEN GOTO 1
+10275-        // 4499 file simple.py line 40 column 8 function max
+10276-        ASSIGN c:@__ESBMC_exc_thrown=1;
+10277-        // 4500 file simple.py line 40 column 8 function max
+10278-        ASSIGN c:@__ESBMC_exc_typeid=9;
+10279-        // 4501 file simple.py line 40 column 8 function max
+10280-        ASSIGN c:@__ESBMC_exc_obj$7={ .message=&"max() arg is an empty sequence"[0] };
+10281-        // 4502 file simple.py line 40 column 8 function max
+10282-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$7);
+10283-        // 4503 file simple.py line 40 column 8 function max
+10284-        GOTO 9
+10285-        // 4504 file simple.py line 42 column 4 function max
+10286-     1: DECL signed long int i;
+10287-        // 4505 file simple.py line 42 column 4 function max
+10288-        ASSIGN i=1;
+10289-        // 4506 file simple.py line 43 column 4 function max
+10290-        DECL signed long int length;
+10291-        // 4507 
+10292-        DECL unsigned long int return_value$___ESBMC_list_size$2;
+10293-        // 4508 
+10294-        FUNCTION_CALL:  return_value$___ESBMC_list_size$2=list_size(iterable)
+10295-        // 4509 file simple.py line 43 column 4 function max
+10296-        ASSIGN length=(signed long int)return_value$___ESBMC_list_size$2;
+10297-        // 4510 file simple.py line 44 column 18 function max
+10298-        DECL unsigned long int simple.py:44$list_size$3;
+10299-        // 4511 file simple.py line 44 column 18 function max
+10300-        FUNCTION_CALL:  simple.py:44$list_size$3=list_size(iterable)
+10301-        // 4512 file simple.py line 44 column 18 function max
+10302-        IF !(0 < 0 && (0 < 0 ? simple.py:44$list_size$3 + (unsigned long int)0 : (unsigned long int)0) >= simple.py:44$list_size$3) THEN GOTO 2
+10303-        // 4513 
+10304-        DEAD python_converter::simple.py:44$list_size$3
+10305-        // 4514 
+10306-        DEAD py:simple.py@F@max::$tmp::return_value$___ESBMC_list_size$2
+10307-        // 4515 
+10308-        DEAD py:simple.py@F@max@length
+10309-        // 4516 
+10310-        DEAD py:simple.py@F@max@i
+10311-        // 4517 
+
+============================================================
+[4] C FULL GOTO
+============================================================
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing simple.c
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.250s
+GOTO program processing time: 0.000s
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_main (__ESBMC_main):
+        // 0 file esbmc_intrinsics.h line 17 column 1
+        ASSIGN alloc=ARRAY_OF(0);
+        // 1 file esbmc_intrinsics.h line 20 column 1
+        ASSIGN is_dynamic=ARRAY_OF(0);
+        // 2 file esbmc_intrinsics.h line 23 column 1
+        ASSIGN alloc_size={ 0 };
+        // 3 file esbmc_intrinsics.h line 39 column 1
+        ASSIGN rounding_mode=0;
+        // 4 file esbmc_intrinsics.h line 179 column 1
+        ASSIGN return_value=0;
+        // 5 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 51 column 1
+        ASSIGN num_total_threads=0;
+        // 6 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 52 column 1
+        ASSIGN num_threads_running=0;
+        // 7 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 31 column 1
+        ASSIGN atexit_count=0;
+        // 8 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 29 column 1
+        ASSIGN stdlib_atexit_key={ { .atexit_func = 0 } };
+        // 9 file simple.c line 13 column 1
+        FUNCTION_CALL:  pthread_start_main_hook()
+        // 10 file simple.c line 13 column 1
+        FUNCTION_CALL:  main()
+        // 11 file simple.c line 13 column 1
+        FUNCTION_CALL:  atexit_handler()
+        // 12 file simple.c line 13 column 1
+        FUNCTION_CALL:  pthread_end_main_hook()
+        // 13 file simple.c line 28 column 1 function main
+        END_FUNCTION // main
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_atexit_handler (c:@F@__ESBMC_atexit_handler):
+        // 14 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 38 column 3 function __ESBMC_atexit_handler
+        // Labels: __ESBMC_HIDE
+     1: IF !(atexit_count > 0) THEN GOTO 2
+        // 15 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 40 column 5 function __ESBMC_atexit_handler
+        ASSIGN atexit_count=atexit_count - 1;
+        // 16 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 41 column 5 function __ESBMC_atexit_handler
+        FUNCTION_CALL:  *stdlib_atexit_key[(signed long int)atexit_count].atexit_func()
+        // 17 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 38 column 3 function __ESBMC_atexit_handler
+        GOTO 1
+        // 18 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 43 column 1 function __ESBMC_atexit_handler
+     2: END_FUNCTION // __ESBMC_atexit_handler
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_pthread_end_main_hook (c:@F@__ESBMC_pthread_end_main_hook):
+        // 19 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 163 column 3 function __ESBMC_pthread_end_main_hook
+        // Labels: __ESBMC_HIDE
+        FUNCTION_CALL:  yield()
+        // 20 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 163 column 3 function __ESBMC_pthread_end_main_hook
+        ATOMIC_BEGIN
+        // 21 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 164 column 3 function __ESBMC_pthread_end_main_hook
+        ASSIGN num_threads_running=num_threads_running - 1;
+        // 22 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 165 column 1 function __ESBMC_pthread_end_main_hook
+        END_FUNCTION // __ESBMC_pthread_end_main_hook
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__ESBMC_pthread_start_main_hook (c:@F@__ESBMC_pthread_start_main_hook):
+        // 23 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 150 column 3 function __ESBMC_pthread_start_main_hook
+        // Labels: __ESBMC_HIDE
+        FUNCTION_CALL:  yield()
+        // 24 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 150 column 3 function __ESBMC_pthread_start_main_hook
+        ATOMIC_BEGIN
+        // 25 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 151 column 3 function __ESBMC_pthread_start_main_hook
+        ASSIGN num_total_threads=num_total_threads + 1;
+        // 26 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 152 column 3 function __ESBMC_pthread_start_main_hook
+        ASSIGN num_threads_running=num_threads_running + 1;
+        // 27 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 153 column 3 function __ESBMC_pthread_start_main_hook
+        ATOMIC_END
+        // 28 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 154 column 1 function __ESBMC_pthread_start_main_hook
+        END_FUNCTION // __ESBMC_pthread_start_main_hook
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+__VERIFIER_nondet_memory (c:@F@__VERIFIER_nondet_memory):
+        // 29 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 4 column 3 function __VERIFIER_nondet_memory
+        // Labels: __ESBMC_HIDE
+        DECL unsigned char * p;
+        // 30 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 4 column 3 function __VERIFIER_nondet_memory
+        ASSIGN p=(unsigned char *)mem;
+        // 31 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 8 function __VERIFIER_nondet_memory
+        DECL unsigned long int i;
+        // 32 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 8 function __VERIFIER_nondet_memory
+        ASSIGN i=0;
+        // 33 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 3 function __VERIFIER_nondet_memory
+     1: IF !(i < size) THEN GOTO 2
+        // 34 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 6 column 5 function __VERIFIER_nondet_memory
+        ASSIGN p[(signed long int)i]=NONDET(unsigned char);
+        // 35 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 39 function __VERIFIER_nondet_memory
+        ASSIGN i=i + 1;
+        // 36 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 3 function __VERIFIER_nondet_memory
+        GOTO 1
+        // 37 no location
+     2: DEAD c:verifier.c@128@F@__VERIFIER_nondet_memory@i
+        // 38 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 7 column 1 function __VERIFIER_nondet_memory
+        DEAD c:verifier.c@80@F@__VERIFIER_nondet_memory@p
+        // 39 file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 7 column 1 function __VERIFIER_nondet_memory
+        END_FUNCTION // __VERIFIER_nondet_memory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+f (c:@F@f):
+        // 40 file simple.c line 7 column 5 function f
+        IF !(x < 100) THEN GOTO 1
+        // 41 file simple.c line 8 column 9 function f
+        RETURN: x + 1
+        // 42 file simple.c line 10 column 5 function f
+     1: RETURN: 0
+        // 43 file simple.c line 11 column 1 function f
+        END_FUNCTION // f
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+main (c:@F@main):
+        // 44 file simple.c line 15 column 5 function main
+        DECL signed int x;
+        // 45 file simple.c line 15 column 5 function main
+        DECL signed int return_value$_nondet_int$1;
+        // 46 file simple.c line 15 column 5 function main
+        ASSIGN return_value$_nondet_int$1=NONDET(signed int);
+        // 47 file simple.c line 15 column 5 function main
+        ASSIGN x=return_value$_nondet_int$1;
+        // 48 file simple.c line 17 column 5 function main
+        ASSUME x >= -1000
+        // 49 file simple.c line 18 column 5 function main
+        ASSUME x <= 1000
+        // 50 file simple.c line 20 column 5 function main
+        DECL signed int r;
+        // 51 file simple.c line 20 column 5 function main
+        DECL signed int return_value$_f$2;
+        // 52 file simple.c line 20 column 5 function main
+        FUNCTION_CALL:  return_value$_f$2=f(x)
+        // 53 file simple.c line 20 column 5 function main
+        ASSIGN r=return_value$_f$2;
+        // 54 file simple.c line 22 column 5 function main
+        OTHER sizeof(signed int);
+
+        // 55 file simple.c line 22 column 5 function main
+        ASSERT x < 100 && r == x + 1 || x >= 100 && r == 0 // assertion (x < 100 && r == x + 1) || (x >= 100 && r == 0)
+        // 56 file simple.c line 27 column 5 function main
+        RETURN: 0
+        // 57 file simple.c line 28 column 1 function main
+        END_FUNCTION // main
+
+ESBMC version 8.4.0 64-bit x86_64 linux
+
+============================================================
+[5] PYTHON FUNCTION f - SYMBOL TABLE
+============================================================
+29840-
+29841-Symbol......: py:simple.py@r
+29842-Module......: simple
+29843-Base name...: r
+29844-Mode........: Python
+29845-Type........: signed long int
+29846-Value.......: f(x)
+29847-Flags.......: lvalue
+29848-Location....: file simple.py line 12 column 0
+29849-
+29850:Symbol......: py:simple.py@F@f@x
+29851-Module......: simple.py
+29852-Base name...: x
+29853-Mode........: Python
+29854-Type........: signed long int
+29855-Value.......: 
+29856-Flags.......: lvalue file_local
+29857-Location....: file simple.py line 1 column 6 function f
+29858-
+29859:Symbol......: py:simple.py@F@f
+29860-Module......: simple
+29861-Base name...: f
+29862-Mode........: Python
+29863-Type........: signed long int (signed long int)
+29864-Value.......: 
+29865-{
+29866-if(x < 100)
+29867-  
+29868-{
+29869-  return x + 1;
+29870-
+29871-  }
+29872-
+29873-return 0;
+29874-
+29875-}
+29876-Flags.......: lvalue
+29877-Location....: file simple.py line 1 column 0
+29878-
+29879-Symbol......: python_init
+29880-Module......: 
+29881-Base name...: python_init
+29882-Mode........: 
+29883-Type........: void ()
+29884-Value.......: 
+29885-{
+29886-
+29887-__ESBMC_HIDE:
+29888-  ;
+29889-
+29890-  
+29891-{
+29892-    
+29893-{
+29894-      
+29895-{
+29896-      }
+29897-      
+29898-{
+29899-      }
+29900-      
+29901-{
+29902-      }
+29903-      
+29904-{
+29905-      }
+29906-      
+29907-{
+29908-      }
+29909-      
+29910-{
+29911-      }
+29912-      
+29913-{
+29914-      py:simple.py@C@BaseException@message={ 0 };
+29915-      py:simple.py@C@Exception@message={ 0 };
+29916-      py:simple.py@C@ValueError@message={ 0 };
+29917-      py:simple.py@C@TypeError@message={ 0 };
+29918-      py:simple.py@C@IndexError@message={ 0 };
+29919-      py:simple.py@C@KeyError@message={ 0 };
+29920-      py:simple.py@C@ZeroDivisionError@message={ 0 };
+29921-      py:simple.py@C@AssertionError@message={ 0 };
+29922-      py:simple.py@C@NameError@message={ 0 };
+29923-      py:simple.py@C@OSError@message={ 0 };
+29924-      py:simple.py@C@FileNotFoundError@message={ 0 };
+29925-      py:simple.py@C@FileExistsError@message={ 0 };
+29926-      py:simple.py@C@PermissionError@message={ 0 };
+29927-      py:simple.py@C@StopIteration@message={ 0 };
+29928-      py:simple.py@C@RuntimeError@message={ 0 };
+29929-      py:simple.py@C@NotImplementedError@message={ 0 };
+29930-      py:simple.py@C@EOFError@message={ 0 };
+29931-      py:simple.py@C@ImportError@message={ 0 };
+29932-      py:simple.py@C@ImportError@name={ 0 };
+29933-      py:simple.py@C@ImportError@path={ 0 };
+29934-      py:simple.py@C@ModuleNotFoundError@message={ 0 };
+29935-      py:simple.py@C@ModuleNotFoundError@name={ 0 };
+29936-      py:simple.py@C@ModuleNotFoundError@path={ 0 };
+29937-      }
+29938-      
+29939-{
+
+============================================================
+[6] C FUNCTION f - SYMBOL TABLE EXTRACT
+============================================================
+1-Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+2-Parsing simple.c
+3-Converting
+4-
+5-Symbols:
+6:Number of symbols: 87
+7-
+8-Symbol......: c:@F@__ESBMC_assume
+9-Module......: esbmc_intrinsics
+10-Base name...: __ESBMC_assume
+11-Mode........: C
+12-Type........: void (_Bool)
+13-Value.......: 
+14-Flags.......: lvalue
+15:Location....: file esbmc_intrinsics.h line 1 column 1
+16-
+17-Symbol......: c:@F@__ESBMC_assert
+18-Module......: esbmc_intrinsics
+19-Base name...: __ESBMC_assert
+20-Mode........: C
+21-Type........: void (_Bool, const signed char *)
+22-Value.......: 
+23-Flags.......: lvalue
+24:Location....: file esbmc_intrinsics.h line 2 column 1
+25-
+26-Symbol......: c:@F@__ESBMC_cover
+27-Module......: esbmc_intrinsics
+28-Base name...: __ESBMC_cover
+29-Mode........: C
+30-Type........: void (_Bool)
+31-Value.......: 
+32-Flags.......: lvalue
+33:Location....: file esbmc_intrinsics.h line 3 column 1
+34-
+35-Symbol......: c:@F@__ESBMC_same_object
+36-Module......: esbmc_intrinsics
+37-Base name...: __ESBMC_same_object
+38-Mode........: C
+39-Type........: _Bool (const void *, const void *)
+40-Value.......: 
+41-Flags.......: lvalue
+42:Location....: file esbmc_intrinsics.h line 4 column 1
+43-
+44-Symbol......: c:@F@__ESBMC_yield
+45-Module......: esbmc_intrinsics
+46-Base name...: __ESBMC_yield
+47-Mode........: C
+48-Type........: void ()
+49-Value.......: 
+50-Flags.......: lvalue
+51:Location....: file esbmc_intrinsics.h line 5 column 1
+52-
+53-Symbol......: c:@F@__ESBMC_atomic_begin
+54-Module......: esbmc_intrinsics
+55-Base name...: __ESBMC_atomic_begin
+56-Mode........: C
+57-Type........: void ()
+58-Value.......: 
+59-Flags.......: lvalue
+60:Location....: file esbmc_intrinsics.h line 6 column 1
+61-
+62-Symbol......: c:@F@__ESBMC_atomic_end
+63-Module......: esbmc_intrinsics
+64-Base name...: __ESBMC_atomic_end
+65-Mode........: C
+66-Type........: void ()
+67-Value.......: 
+68-Flags.......: lvalue
+69:Location....: file esbmc_intrinsics.h line 7 column 1
+70-
+71-Symbol......: c:@F@__ESBMC_init_object
+72-Module......: esbmc_intrinsics
+73-Base name...: __ESBMC_init_object
+74-Mode........: C
+75-Type........: void (void *)
+76-Value.......: 
+77-Flags.......: lvalue
+78:Location....: file esbmc_intrinsics.h line 10 column 1
+79-
+80-Symbol......: c:@F@__ESBMC_POINTER_OBJECT
+81-Module......: esbmc_intrinsics
+82-Base name...: __ESBMC_POINTER_OBJECT
+83-Mode........: C
+84-Type........: unsigned long int (const void *)
+85-Value.......: 
+86-Flags.......: lvalue
+87:Location....: file esbmc_intrinsics.h line 13 column 1
+88-
+89-Symbol......: c:@F@__ESBMC_POINTER_OFFSET
+90-Module......: esbmc_intrinsics
+91-Base name...: __ESBMC_POINTER_OFFSET
+92-Mode........: C
+93-Type........: signed long int (const void *)
+94-Value.......: 
+95-Flags.......: lvalue
+96:Location....: file esbmc_intrinsics.h line 14 column 1
+97-
+98-Symbol......: c:@__ESBMC_alloc
+99-Module......: esbmc_intrinsics
+100-Base name...: __ESBMC_alloc
+101-Mode........: C
+102-Type........: _Bool [INFINITY()]
+103-Value.......: ARRAY_OF(0)
+104:Flags.......: lvalue static_lifetime
+105:Location....: file esbmc_intrinsics.h line 17 column 1
+106-
+107-Symbol......: c:@__ESBMC_is_dynamic
+108-Module......: esbmc_intrinsics
+109-Base name...: __ESBMC_is_dynamic
+110-Mode........: C
+111-Type........: _Bool [INFINITY()]
+112-Value.......: ARRAY_OF(0)
+113:Flags.......: lvalue static_lifetime
+114:Location....: file esbmc_intrinsics.h line 20 column 1
+115-
+116-Symbol......: c:@__ESBMC_alloc_size
+117-Module......: esbmc_intrinsics
+118-Base name...: __ESBMC_alloc_size
+119-Mode........: C
+120-Type........: unsigned long int [INFINITY()]
+121-Value.......: { 0 }
+122:Flags.......: lvalue static_lifetime
+123:Location....: file esbmc_intrinsics.h line 23 column 1
+124-
+125-Symbol......: c:@F@__ESBMC_get_object_size
+126-Module......: esbmc_intrinsics
+127-Base name...: __ESBMC_get_object_size
+128-Mode........: C
+129-Type........: unsigned long int (const void *)
+130-Value.......: 
+131-Flags.......: lvalue
+132:Location....: file esbmc_intrinsics.h line 27 column 1
+133-
+134:Symbol......: c:@F@__ESBMC_is_fresh
+135-Module......: esbmc_intrinsics
+136:Base name...: __ESBMC_is_fresh
+137-Mode........: C
+138-Type........: _Bool (void *, unsigned long int)
+139-Value.......: 
+140-Flags.......: lvalue
+141:Location....: file esbmc_intrinsics.h line 35 column 1
+142-
+143-Symbol......: c:@F@__ESBMC_is_little_endian
+144-Module......: esbmc_intrinsics
+145-Base name...: __ESBMC_is_little_endian
+146-Mode........: C
+147-Type........: _Bool ()
+148-Value.......: 
+149-Flags.......: lvalue
+150:Location....: file esbmc_intrinsics.h line 37 column 1
+151-
+152-Symbol......: c:@__ESBMC_rounding_mode
+153-Module......: esbmc_intrinsics
+154-Base name...: __ESBMC_rounding_mode
+155-Mode........: C
+156-Type........: signed int
+157-Value.......: 0
+158:Flags.......: lvalue static_lifetime
+159:Location....: file esbmc_intrinsics.h line 39 column 1
+160-
+161-Symbol......: c:@F@__ESBMC_memset
+162-Module......: esbmc_intrinsics
+163-Base name...: __ESBMC_memset
+164-Mode........: C
+165-Type........: void * (void *, signed int, unsigned long int)
+166-Value.......: 
+167-Flags.......: lvalue
+168:Location....: file esbmc_intrinsics.h line 41 column 1
+169-
+170-Symbol......: c:@F@__ESBMC_memcpy
+171-Module......: esbmc_intrinsics
+172-Base name...: __ESBMC_memcpy
+173-Mode........: C
+174-Type........: void * (void *, const void *, unsigned long int)
+175-Value.......: 
+176-Flags.......: lvalue
+177:Location....: file esbmc_intrinsics.h line 42 column 1
+178-
+179-Symbol......: c:@F@__ESBMC_memmove
+180-Module......: esbmc_intrinsics
+181-Base name...: __ESBMC_memmove
+182-Mode........: C
+183-Type........: void * (void *, const void *, unsigned long int)
+184-Value.......: 
+185-Flags.......: lvalue
+186:Location....: file esbmc_intrinsics.h line 43 column 1
+187-
+188-Symbol......: c:@F@__ESBMC_memchr
+189-Module......: esbmc_intrinsics
+190-Base name...: __ESBMC_memchr
+191-Mode........: C
+192-Type........: void * (const void *, signed int, unsigned long int)
+193-Value.......: 
+194-Flags.......: lvalue
+195:Location....: file esbmc_intrinsics.h line 44 column 1
+196-
+197-Symbol......: c:@F@__ESBMC_memcmp
+198-Module......: esbmc_intrinsics
+199-Base name...: __ESBMC_memcmp
+200-Mode........: C
+201-Type........: signed int (const void *, const void *, unsigned long int)
+202-Value.......: 
+203-Flags.......: lvalue
+204:Location....: file esbmc_intrinsics.h line 45 column 1
+205-
+206-Symbol......: c:@F@__ESBMC_bitcast
+207-Module......: esbmc_intrinsics
+208-Base name...: __ESBMC_bitcast
+209-Mode........: C
+210-Type........: void (void *, void *)
+211-Value.......: 
+212-Flags.......: lvalue
+213:Location....: file esbmc_intrinsics.h line 49 column 1
+214-
+215-Symbol......: c:@F@__ESBMC_memory_leak_checks
+216-Module......: esbmc_intrinsics
+217-Base name...: __ESBMC_memory_leak_checks
+218-Mode........: C
+219-Type........: void ()
+220-Value.......: 
+221-Flags.......: lvalue
+222:Location....: file esbmc_intrinsics.h line 53 column 1
+223-
+224-Symbol......: c:@F@__ESBMC_pthread_start_main_hook
+225-Module......: esbmc_intrinsics
+226-Base name...: __ESBMC_pthread_start_main_hook
+227-Mode........: C
+228-Type........: void ()
+229-Value.......: 
+230-{
+231-
+232-__ESBMC_HIDE:
+233-  ;
+234-
+235-atomic_begin();
+236-
+237-num_total_threads++;
+238-
+239-num_threads_running++;
+240-
+241-atomic_end();
+242-
+243-}
+244-Flags.......: lvalue
+245:Location....: file esbmc_intrinsics.h line 58 column 1
+246-
+247-Symbol......: c:@F@__ESBMC_pthread_end_main_hook
+248-Module......: esbmc_intrinsics
+249-Base name...: __ESBMC_pthread_end_main_hook
+250-Mode........: C
+251-Type........: void ()
+252-Value.......: 
+253-{
+254-
+255-__ESBMC_HIDE:
+256-  ;
+257-
+258-atomic_begin();
+259-
+260-num_threads_running--;
+261-
+262-}
+263-Flags.......: lvalue
+264:Location....: file esbmc_intrinsics.h line 59 column 1
+265-
+266-Symbol......: c:@F@__ESBMC_atexit_handler
+267-Module......: esbmc_intrinsics
+268-Base name...: __ESBMC_atexit_handler
+269-Mode........: C
+270-Type........: void ()
+271-Value.......: 
+272-{
+273-
+274-__ESBMC_HIDE:
+275-  ;
+276-
+277-while(atexit_count > 0)
+278-  
+279-{
+280-  atexit_count--;
+281-
+282:  *stdlib_atexit_key[(signed long int)atexit_count].atexit_func();
+283-
+284-  }
+285-
+286-}
+287-Flags.......: lvalue
+288:Location....: file esbmc_intrinsics.h line 63 column 1
+289-
+290-Symbol......: c:@F@nondet_int
+291-Module......: esbmc_intrinsics
+292-Base name...: nondet_int
+293-Mode........: C
+294-Type........: signed int ()
+295-Value.......: 
+296-Flags.......: lvalue
+297:Location....: file esbmc_intrinsics.h line 79 column 1
+298-
+299-Symbol......: c:@F@nondet_uint
+300-Module......: esbmc_intrinsics
+301-Base name...: nondet_uint
+302-Mode........: C
+303-Type........: unsigned int ()
+304-Value.......: 
+305-Flags.......: lvalue
+306:Location....: file esbmc_intrinsics.h line 80 column 1
+307-
+308-Symbol......: c:@F@nondet_long
+309-Module......: esbmc_intrinsics
+310-Base name...: nondet_long
+311-Mode........: C
+312-Type........: signed long int ()
+313-Value.......: 
+314-Flags.......: lvalue
+315:Location....: file esbmc_intrinsics.h line 81 column 1
+316-
+317-Symbol......: c:@F@nondet_ulong
+318-Module......: esbmc_intrinsics
+319-Base name...: nondet_ulong
+320-Mode........: C
+321-Type........: unsigned long int ()
+322-Value.......: 
+323-Flags.......: lvalue
+324:Location....: file esbmc_intrinsics.h line 82 column 1
+325-
+326-Symbol......: c:@F@nondet_short
+327-Module......: esbmc_intrinsics
+328-Base name...: nondet_short
+329-Mode........: C
+330-Type........: signed short int ()
+331-Value.......: 
+332-Flags.......: lvalue
+333:Location....: file esbmc_intrinsics.h line 83 column 1
+334-
+335-Symbol......: c:@F@nondet_ushort
+336-Module......: esbmc_intrinsics
+337-Base name...: nondet_ushort
+338-Mode........: C
+339-Type........: unsigned short int ()
+340-Value.......: 
+341-Flags.......: lvalue
+342:Location....: file esbmc_intrinsics.h line 84 column 1
+343-
+344-Symbol......: c:@F@nondet_char
+345-Module......: esbmc_intrinsics
+346-Base name...: nondet_char
+347-Mode........: C
+348-Type........: signed char ()
+349-Value.......: 
+350-Flags.......: lvalue
+351:Location....: file esbmc_intrinsics.h line 85 column 1
+352-
+353-Symbol......: c:@F@nondet_uchar
+354-Module......: esbmc_intrinsics
+355-Base name...: nondet_uchar
+356-Mode........: C
+357-Type........: unsigned char ()
+358-Value.......: 
+359-Flags.......: lvalue
+360:Location....: file esbmc_intrinsics.h line 86 column 1
+361-
+362-Symbol......: c:@F@nondet_schar
+363-Module......: esbmc_intrinsics
+364-Base name...: nondet_schar
+365-Mode........: C
+366-Type........: signed char ()
+367-Value.......: 
+368-Flags.......: lvalue
+369:Location....: file esbmc_intrinsics.h line 87 column 1
+370-
+371-Symbol......: c:@F@nondet_bool
+372-Module......: esbmc_intrinsics
+373-Base name...: nondet_bool
+374-Mode........: C
+375-Type........: _Bool ()
+376-Value.......: 
+377-Flags.......: lvalue
+378:Location....: file esbmc_intrinsics.h line 88 column 1
+379-
+380:Symbol......: c:@F@nondet_float
+381-Module......: esbmc_intrinsics
+382:Base name...: nondet_float
+383-Mode........: C
+384:Type........: float ()
+385-Value.......: 
+386-Flags.......: lvalue
+387:Location....: file esbmc_intrinsics.h line 89 column 1
+388-
+389-Symbol......: c:@F@nondet_double
+390-Module......: esbmc_intrinsics
+391-Base name...: nondet_double
+392-Mode........: C
+393-Type........: double ()
+394-Value.......: 
+395-Flags.......: lvalue
+396:Location....: file esbmc_intrinsics.h line 90 column 1
+397-
+398-Symbol......: c:@F@__VERIFIER_nondet_int
+399-Module......: esbmc_intrinsics
+400-Base name...: __VERIFIER_nondet_int
+401-Mode........: C
+402-Type........: signed int ()
+403-Value.......: 
+404-Flags.......: lvalue
+405:Location....: file esbmc_intrinsics.h line 93 column 1
+406-
+407-Symbol......: c:@F@__VERIFIER_nondet_uint
+408-Module......: esbmc_intrinsics
+409-Base name...: __VERIFIER_nondet_uint
+410-Mode........: C
+411-Type........: unsigned int ()
+412-Value.......: 
+413-Flags.......: lvalue
+414:Location....: file esbmc_intrinsics.h line 94 column 1
+415-
+416-Symbol......: c:@F@__VERIFIER_nondet_long
+417-Module......: esbmc_intrinsics
+418-Base name...: __VERIFIER_nondet_long
+419-Mode........: C
+420-Type........: signed long int ()
+421-Value.......: 
+422-Flags.......: lvalue
+423:Location....: file esbmc_intrinsics.h line 95 column 1
+424-
+425-Symbol......: c:@F@__VERIFIER_nondet_ulong
+426-Module......: esbmc_intrinsics
+427-Base name...: __VERIFIER_nondet_ulong
+428-Mode........: C
+429-Type........: unsigned long int ()
+430-Value.......: 
+431-Flags.......: lvalue
+432:Location....: file esbmc_intrinsics.h line 96 column 1
+433-
+434-Symbol......: c:@F@__VERIFIER_nondet_short
+435-Module......: esbmc_intrinsics
+436-Base name...: __VERIFIER_nondet_short
+437-Mode........: C
+438-Type........: signed short int ()
+439-Value.......: 
+440-Flags.......: lvalue
+441:Location....: file esbmc_intrinsics.h line 97 column 1
+442-
+443-Symbol......: c:@F@__VERIFIER_nondet_ushort
+444-Module......: esbmc_intrinsics
+445-Base name...: __VERIFIER_nondet_ushort
+446-Mode........: C
+447-Type........: unsigned short int ()
+448-Value.......: 
+449-Flags.......: lvalue
+450:Location....: file esbmc_intrinsics.h line 98 column 1
+451-
+452-Symbol......: c:@F@__VERIFIER_nondet_char
+453-Module......: esbmc_intrinsics
+454-Base name...: __VERIFIER_nondet_char
+455-Mode........: C
+456-Type........: signed char ()
+457-Value.......: 
+458-Flags.......: lvalue
+459:Location....: file esbmc_intrinsics.h line 99 column 1
+460-
+461-Symbol......: c:@F@__VERIFIER_nondet_uchar
+462-Module......: esbmc_intrinsics
+463-Base name...: __VERIFIER_nondet_uchar
+464-Mode........: C
+465-Type........: unsigned char ()
+466-Value.......: 
+467-Flags.......: lvalue
+468:Location....: file esbmc_intrinsics.h line 100 column 1
+469-
+470-Symbol......: c:@F@__VERIFIER_nondet_schar
+471-Module......: esbmc_intrinsics
+472-Base name...: __VERIFIER_nondet_schar
+473-Mode........: C
+474-Type........: signed char ()
+475-Value.......: 
+476-Flags.......: lvalue
+477:Location....: file esbmc_intrinsics.h line 101 column 1
+478-
+479-Symbol......: c:@F@__VERIFIER_nondet_bool
+480-Module......: esbmc_intrinsics
+481-Base name...: __VERIFIER_nondet_bool
+482-Mode........: C
+483-Type........: _Bool ()
+484-Value.......: 
+485-Flags.......: lvalue
+486:Location....: file esbmc_intrinsics.h line 102 column 1
+487-
+488:Symbol......: c:@F@__VERIFIER_nondet_float
+489-Module......: esbmc_intrinsics
+490:Base name...: __VERIFIER_nondet_float
+491-Mode........: C
+492:Type........: float ()
+493-Value.......: 
+494-Flags.......: lvalue
+495:Location....: file esbmc_intrinsics.h line 103 column 1
+496-
+497-Symbol......: c:@F@__VERIFIER_nondet_double
+498-Module......: esbmc_intrinsics
+499-Base name...: __VERIFIER_nondet_double
+500-Mode........: C
+501-Type........: double ()
+502-Value.......: 
+503-Flags.......: lvalue
+504:Location....: file esbmc_intrinsics.h line 104 column 1
+505-
+506-Symbol......: c:@F@__VERIFIER_nondet_memory
+507-Module......: esbmc_intrinsics
+508-Base name...: __VERIFIER_nondet_memory
+509-Mode........: C
+510-Type........: void (void *, unsigned long int)
+511-Value.......: 
+512-{
+513-
+514-__ESBMC_HIDE:
+515-  ;
+516-
+517-unsigned char * p=(unsigned char *)mem;
+518-
+519-  
+520-{
+521-    unsigned long int i=0;
+522-
+523:  for(; i < size; i++;
+524-)
+525-    p[(signed long int)i] = __VERIFIER_nondet_uchar();
+526-
+527-
+528-  }
+529-}
+530-Flags.......: lvalue
+531:Location....: file esbmc_intrinsics.h line 106 column 1
+532-
+533-Symbol......: c:@F@__VERIFIER_error
+534-Module......: esbmc_intrinsics
+535-Base name...: __VERIFIER_error
+536-Mode........: C
+537-Type........: void ()
+538-Value.......: 
+539-Flags.......: lvalue
+540:Location....: file esbmc_intrinsics.h line 108 column 1
+541-
+542-Symbol......: c:@F@__VERIFIER_assume
+543-Module......: esbmc_intrinsics
+544-Base name...: __VERIFIER_assume
+545-Mode........: C
+546-Type........: void (signed int)
+547-Value.......: 
+548-Flags.......: lvalue
+549:Location....: file esbmc_intrinsics.h line 109 column 1
+550-
+551-Symbol......: c:@F@__VERIFIER_atomic_begin
+552-Module......: esbmc_intrinsics
+553-Base name...: __VERIFIER_atomic_begin
+554-Mode........: C
+555-Type........: void ()
+556-Value.......: 
+557-Flags.......: lvalue
+558:Location....: file esbmc_intrinsics.h line 110 column 1
+559-
+560-Symbol......: c:@F@__VERIFIER_atomic_end
+561-Module......: esbmc_intrinsics
+562-Base name...: __VERIFIER_atomic_end
+563-Mode........: C
+564-Type........: void ()
+565-Value.......: 
+566-Flags.......: lvalue
+567:Location....: file esbmc_intrinsics.h line 111 column 1
+568-
+569-Symbol......: c:@F@__ESBMC_r_ok
+570-Module......: esbmc_intrinsics
+571-Base name...: __ESBMC_r_ok
+572-Mode........: C
+573-Type........: _Bool (void *, unsigned long int)
+574-Value.......: 
+575-Flags.......: lvalue
+576:Location....: file esbmc_intrinsics.h line 116 column 1
+577-
+578-Symbol......: c:@F@__ESBMC_unreachable
+579-Module......: esbmc_intrinsics
+580-Base name...: __ESBMC_unreachable
+581-Mode........: C
+582-Type........: void ()
+583-Value.......: 
+584-Flags.......: lvalue
+585:Location....: file esbmc_intrinsics.h line 120 column 1
+586-
+587:Symbol......: c:@F@__ESBMC_forall
+588-Module......: esbmc_intrinsics
+589:Base name...: __ESBMC_forall
+590-Mode........: C
+591-Type........: _Bool (void *, _Bool)
+592-Value.......: 
+593-Flags.......: lvalue
+594:Location....: file esbmc_intrinsics.h line 130 column 1
+595-
+596-Symbol......: c:@F@__ESBMC_exists
+597-Module......: esbmc_intrinsics
+598-Base name...: __ESBMC_exists
+599-Mode........: C
+600-Type........: _Bool (void *, _Bool)
+601-Value.......: 
+602-Flags.......: lvalue
+603:Location....: file esbmc_intrinsics.h line 131 column 1
+604-
+605-Symbol......: c:@F@__ESBMC_loop_invariant
+606-Module......: esbmc_intrinsics
+607-Base name...: __ESBMC_loop_invariant
+608-Mode........: C
+609-Type........: void (_Bool)
+610-Value.......: 
+611-Flags.......: lvalue
+612:Location....: file esbmc_intrinsics.h line 138 column 1
+613-
+614-Symbol......: c:@F@__ESBMC_witness_assume
+615-Module......: esbmc_intrinsics
+616-Base name...: __ESBMC_witness_assume
+617-Mode........: C
+618-Type........: void (signed int, _Bool)
+619-Value.......: 
+620-Flags.......: lvalue
+621:Location....: file esbmc_intrinsics.h line 141 column 1
+622-
+623-Symbol......: c:@F@__ESBMC_loop_assigns_impl
+624-Module......: esbmc_intrinsics
+625-Base name...: __ESBMC_loop_assigns_impl
+626-Mode........: C
+627-Type........: void (const void *)
+628-Value.......: 
+629-Flags.......: lvalue
+630:Location....: file esbmc_intrinsics.h line 152 column 1
+631-
+632-Symbol......: c:@F@__ESBMC_unroll
+633-Module......: esbmc_intrinsics
+634-Base name...: __ESBMC_unroll
+635-Mode........: C
+636-Type........: void (signed int)
+637-Value.......: 
+638-Flags.......: lvalue
+639:Location....: file esbmc_intrinsics.h line 169 column 1
+640-
+641-Symbol......: c:@F@__ESBMC_requires
+642-Module......: esbmc_intrinsics
+643-Base name...: __ESBMC_requires
+644-Mode........: C
+645-Type........: void (_Bool)
+646-Value.......: 
+647-Flags.......: lvalue
+648:Location....: file esbmc_intrinsics.h line 177 column 1
+649-
+650-Symbol......: c:@F@__ESBMC_ensures
+651-Module......: esbmc_intrinsics
+652-Base name...: __ESBMC_ensures
+653-Mode........: C
+654-Type........: void (_Bool)
+655-Value.......: 
+656-Flags.......: lvalue
+657:Location....: file esbmc_intrinsics.h line 178 column 1
+658-
+659-Symbol......: c:@__ESBMC_return_value
+660-Module......: esbmc_intrinsics
+661-Base name...: __ESBMC_return_value
+662-Mode........: C
+663-Type........: signed int
+664-Value.......: 0
+665:Flags.......: lvalue static_lifetime
+666:Location....: file esbmc_intrinsics.h line 179 column 1
+667-
+668-Symbol......: c:@F@__ESBMC_old_raw
+669-Module......: esbmc_intrinsics
+670-Base name...: __ESBMC_old_raw
+671-Mode........: C
+672-Type........: void * (void *)
+673-Value.......: 
+674-Flags.......: lvalue
+675:Location....: file esbmc_intrinsics.h line 180 column 1
+676-
+677-Symbol......: c:@F@__ESBMC_assigns_impl
+678-Module......: esbmc_intrinsics
+679-Base name...: __ESBMC_assigns_impl
+680-Mode........: C
+681-Type........: void (const void *)
+682-Value.......: 
+683-Flags.......: lvalue
+684:Location....: file esbmc_intrinsics.h line 185 column 1
+685-
+686:Symbol......: c:@F@__assert_fail
+687-Module......: assert
+688:Base name...: __assert_fail
+689-Mode........: C
+690-Type........: void (const signed char *, const signed char *, unsigned int, const signed char *)
+691-Value.......: 
+692-Flags.......: lvalue extern
+693:Location....: file /usr/include/assert.h line 69 column 1
+694-
+695:Symbol......: c:@F@__assert_perror_fail
+696-Module......: assert
+697:Base name...: __assert_perror_fail
+698-Mode........: C
+699-Type........: void (signed int, const signed char *, unsigned int, const signed char *)
+700-Value.......: 
+701-Flags.......: lvalue extern
+702:Location....: file /usr/include/assert.h line 74 column 1
+703-
+704-Symbol......: c:@F@__assert
+705-Module......: assert
+706-Base name...: __assert
+707-Mode........: C
+708-Type........: void (const signed char *, const signed char *, signed int)
+709-Value.......: 
+710-Flags.......: lvalue extern
+711:Location....: file /usr/include/assert.h line 81 column 1
+712-
+713:Symbol......: c:@F@f
+714-Module......: simple
+715:Base name...: f
+716-Mode........: C
+717-Type........: signed int (signed int)
+718-Value.......: 
+719-{
+720:if(x < 100)
+721-  return x + 1;
+722-
+723-
+724-return 0;
+725-
+726-}
+727-Flags.......: lvalue
+728:Location....: file simple.c line 5 column 1
+729-
+730:Symbol......: c:simple.c@50@F@f@x
+731-Module......: simple
+732-Base name...: x
+733-Mode........: C
+734-Type........: signed int
+735-Value.......: 
+736:Flags.......: lvalue file_local
+737:Location....: file simple.c line 5 column 7 function f
+738-
+739-Symbol......: c:@F@main
+740-Module......: simple
+741-Base name...: main
+742-Mode........: C
+743-Type........: signed int ()
+744-Value.......: 
+745-{
+746-signed int x=nondet_int();
+747-
+748-assume(x >= -1000);
+749-
+750-assume(x <= 1000);
+751-
+752:signed int r=f(x);
+753-
+754:sizeof(signed int),  (
+755-{
+756:if(x < 100 && r == x + 1 || x >= 100 && r == 0)
+757-  ;
+758-else
+759:  __assert_fail(&"(x < 100 && r == x + 1) || (x >= 100 && r == 0)"[0], &"simple.c"[0], 25, &"int main(void)"[0]);
+760-
+761-
+762-});
+763-
+764-return 0;
+765-
+766-}
+767-Flags.......: lvalue
+768:Location....: file simple.c line 13 column 1
+769-
+770-Symbol......: c:simple.c@137@F@main@x
+771-Module......: simple
+772-Base name...: x
+773-Mode........: C
+774-Type........: signed int
+775-Value.......: nondet_int()
+776:Flags.......: lvalue file_local
+777:Location....: file simple.c line 15 column 5 function main
+778-
+779-Symbol......: c:simple.c@228@F@main@r
+780-Module......: simple
+781-Base name...: r
+782-Mode........: C
+783-Type........: signed int
+784:Value.......: f(x)
+785:Flags.......: lvalue file_local
+786:Location....: file simple.c line 20 column 5 function main
+787-
+788-Symbol......: c:@__ESBMC_num_total_threads
+789-Module......: pthread_lib
+790-Base name...: __ESBMC_num_total_threads
+791-Mode........: C
+792-Type........: unsigned short int
+793-Value.......: 0
+794:Flags.......: lvalue static_lifetime
+795:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 51 column 1
+796-
+797-Symbol......: c:@__ESBMC_num_threads_running
+798-Module......: pthread_lib
+799-Base name...: __ESBMC_num_threads_running
+800-Mode........: C
+801-Type........: unsigned short int
+802-Value.......: 0
+803:Flags.......: lvalue static_lifetime
+804:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/pthread_lib.c line 52 column 1
+805-
+806-Symbol......: c:stdlib.c@__ESBMC_atexit_count
+807-Module......: stdlib
+808-Base name...: __ESBMC_atexit_count
+809-Mode........: C
+810-Type........: unsigned long int
+811-Value.......: 0
+812:Flags.......: lvalue static_lifetime file_local
+813:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 31 column 1
+814-
+815-Symbol......: tag-struct atexit_key
+816-Module......: stdlib
+817-Base name...: struct atexit_key
+818-Mode........: C
+819-Type........:  struct atexit_key { void (*)(); }
+820-Value.......: 
+821-Flags.......: type
+822:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 23 column 9
+823-
+824-Symbol......: c:stdlib.c@__ESBMC_stdlib_atexit_key
+825-Module......: stdlib
+826-Base name...: __ESBMC_stdlib_atexit_key
+827-Mode........: C
+828-Type........:  struct atexit_key [INFINITY()]
+829:Value.......: { { .atexit_func = 0 } }
+830:Flags.......: lvalue static_lifetime file_local
+831:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/stdlib.c line 29 column 1
+832-
+833:Symbol......: c:verifier.c@80@F@__VERIFIER_nondet_memory@p
+834:Module......: verifier
+835-Base name...: p
+836-Mode........: C
+837-Type........: unsigned char *
+838-Value.......: (unsigned char *)mem
+839:Flags.......: lvalue file_local
+840:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 4 column 3 function __VERIFIER_nondet_memory
+841-
+842:Symbol......: c:verifier.c@30@F@__VERIFIER_nondet_memory@mem
+843:Module......: verifier
+844-Base name...: mem
+845-Mode........: C
+846-Type........: void *
+847-Value.......: 
+848:Flags.......: lvalue file_local
+849:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 1 column 31 function __VERIFIER_nondet_memory
+850-
+851:Symbol......: c:verifier.c@128@F@__VERIFIER_nondet_memory@i
+852:Module......: verifier
+853-Base name...: i
+854-Mode........: C
+855-Type........: unsigned long int
+856-Value.......: 0
+857:Flags.......: lvalue file_local
+858:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 5 column 8 function __VERIFIER_nondet_memory
+859-
+860:Symbol......: c:verifier.c@41@F@__VERIFIER_nondet_memory@size
+861:Module......: verifier
+862-Base name...: size
+863-Mode........: C
+864-Type........: unsigned long int
+865-Value.......: 
+866:Flags.......: lvalue file_local
+867:Location....: file /build/esbmc-H9lVUj/esbmc-8.4.0+dfsg/src/c2goto/library/verifier.c line 1 column 42 function __VERIFIER_nondet_memory
+868-
+869-Symbol......: __ESBMC_main
+870-Module......: 
+871-Base name...: __ESBMC_main
+872-Mode........: 
+873-Type........: void ()
+874-Value.......: 
+875-{
+876-alloc=ARRAY_OF(0);
+877-is_dynamic=ARRAY_OF(0);
+878-alloc_size={ 0 };
+879-rounding_mode=0;
+880-return_value=0;
+881-num_total_threads=0;
+882-num_threads_running=0;
+883-atexit_count=0;
+884:stdlib_atexit_key={ { .atexit_func = 0 } };
+885-pthread_start_main_hook()
+886-main()
+887-atexit_handler()
+888-pthread_end_main_hook()
+889-}
+890-Flags.......:
+891-Location....: 
+892-
+893-
+894-ESBMC version 8.4.0 64-bit x86_64 linux
+
+============================================================
+[7] INSTRUCTION-STYLE SUMMARY
+============================================================
+
+--- Python ---
+10196-        ASSIGN c:@__ESBMC_exc_obj$5={ .message=&"list index out of range"[0] };
+10198-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$5);
+10200-        GOTO 3
+10202-     2: DECL  struct __ESBMC_PyObj * return_value$___ESBMC_list_at$2;
+10204-        FUNCTION_CALL:  return_value$___ESBMC_list_at$2=list_at(seq, i < 0 ? simple.py:71$list_size$151 + (unsigned long int)i : (unsigned long int)i)
+10206-        RETURN: *(signed long int *)return_value$___ESBMC_list_at$2->value
+10208-     3: END_FUNCTION
+10213-        IF !(x < 100) THEN GOTO 1
+10215-        RETURN: x + 1
+10217-     1: RETURN: 0
+10219-        END_FUNCTION
+10225-        IF !(k < 0) THEN GOTO 1
+10227-        ASSIGN c:@__ESBMC_exc_thrown=1;
+10229-        ASSIGN c:@__ESBMC_exc_typeid=9;
+10231-        ASSIGN c:@__ESBMC_exc_obj$6={ .message=&"number of bits must be non-negative"[0] };
+10233-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$6);
+10235-        GOTO 3
+10237-     1: IF !(k == 0) THEN GOTO 2
+10239-        RETURN: 0
+10241-     2: DECL signed long int value;
+10243-        ASSIGN value=NONDET(signed long int);
+10245-        DECL signed long int max_val;
+10247-        ASSIGN max_val=(1 << k) - 1;
+10249-        ASSUME value >= 0 && value <= max_val
+10251-        RETURN: value
+10253-     3: END_FUNCTION
+10259-        RETURN: 42
+10261-        END_FUNCTION
+10270-        DECL unsigned long int return_value$___ESBMC_list_size$1;
+10272-        FUNCTION_CALL:  return_value$___ESBMC_list_size$1=list_size(iterable)
+10274-        IF !(return_value$___ESBMC_list_size$1 == (unsigned long int)0) THEN GOTO 1
+10276-        ASSIGN c:@__ESBMC_exc_thrown=1;
+10278-        ASSIGN c:@__ESBMC_exc_typeid=9;
+10280-        ASSIGN c:@__ESBMC_exc_obj$7={ .message=&"max() arg is an empty sequence"[0] };
+10282-        ASSIGN c:@__ESBMC_exc_value=(void *)(&c:@__ESBMC_exc_obj$7);
+10284-        GOTO 9
+10286-     1: DECL signed long int i;
+10288-        ASSIGN i=1;
+10290-        DECL signed long int length;
+10292-        DECL unsigned long int return_value$___ESBMC_list_size$2;
+10294-        FUNCTION_CALL:  return_value$___ESBMC_list_size$2=list_size(iterable)
+10296-        ASSIGN length=(signed long int)return_value$___ESBMC_list_size$2;
+10298-        DECL unsigned long int simple.py:44$list_size$3;
+10300-        FUNCTION_CALL:  simple.py:44$list_size$3=list_size(iterable)
+10302-        IF !(0 < 0 && (0 < 0 ? simple.py:44$list_size$3 + (unsigned long int)0 : (unsigned long int)0) >= simple.py:44$list_size$3) THEN GOTO 2
+10304-        DEAD python_converter::simple.py:44$list_size$3
+10306-        DEAD py:simple.py@F@max::$tmp::return_value$___ESBMC_list_size$2
+10308-        DEAD py:simple.py@F@max@length
+10310-        DEAD py:simple.py@F@max@i
+
+--- C ---
+Generating GOTO Program
+GOTO program creation time: 0.250s
+GOTO program processing time: 0.000s
+        ASSIGN alloc=ARRAY_OF(0);
+        ASSIGN is_dynamic=ARRAY_OF(0);
+        ASSIGN alloc_size={ 0 };
+        ASSIGN rounding_mode=0;
+        ASSIGN return_value=0;
+        ASSIGN num_total_threads=0;
+        ASSIGN num_threads_running=0;
+        ASSIGN atexit_count=0;
+        ASSIGN stdlib_atexit_key={ { .atexit_func = 0 } };
+        FUNCTION_CALL:  pthread_start_main_hook()
+        FUNCTION_CALL:  main()
+        FUNCTION_CALL:  atexit_handler()
+        FUNCTION_CALL:  pthread_end_main_hook()
+        END_FUNCTION // main
+     1: IF !(atexit_count > 0) THEN GOTO 2
+        ASSIGN atexit_count=atexit_count - 1;
+        FUNCTION_CALL:  *stdlib_atexit_key[(signed long int)atexit_count].atexit_func()
+        GOTO 1
+     2: END_FUNCTION // __ESBMC_atexit_handler
+        FUNCTION_CALL:  yield()
+        ASSIGN num_threads_running=num_threads_running - 1;
+        END_FUNCTION // __ESBMC_pthread_end_main_hook
+        FUNCTION_CALL:  yield()
+        ASSIGN num_total_threads=num_total_threads + 1;
+        ASSIGN num_threads_running=num_threads_running + 1;
+        END_FUNCTION // __ESBMC_pthread_start_main_hook
+        DECL unsigned char * p;
+        ASSIGN p=(unsigned char *)mem;
+        DECL unsigned long int i;
+        ASSIGN i=0;
+     1: IF !(i < size) THEN GOTO 2
+        ASSIGN p[(signed long int)i]=NONDET(unsigned char);
+        ASSIGN i=i + 1;
+        GOTO 1
+     2: DEAD c:verifier.c@128@F@__VERIFIER_nondet_memory@i
+        DEAD c:verifier.c@80@F@__VERIFIER_nondet_memory@p
+        END_FUNCTION // __VERIFIER_nondet_memory
+        IF !(x < 100) THEN GOTO 1
+        RETURN: x + 1
+     1: RETURN: 0
+        END_FUNCTION // f
+        DECL signed int x;
+        DECL signed int return_value$_nondet_int$1;
+        ASSIGN return_value$_nondet_int$1=NONDET(signed int);
+        ASSIGN x=return_value$_nondet_int$1;
+        ASSUME x >= -1000
+        ASSUME x <= 1000
+        DECL signed int r;
+        DECL signed int return_value$_f$2;
+        FUNCTION_CALL:  return_value$_f$2=f(x)
+        ASSIGN r=return_value$_f$2;
+        ASSERT x < 100 && r == x + 1 || x >= 100 && r == 0 // assertion (x < 100 && r == x + 1) || (x >= 100 && r == 0)
+        RETURN: 0
+        END_FUNCTION // main
+
+============================================================
+[8] USER SOURCE LOCATIONS
+============================================================
+
+--- Python simple.py ---
+10204-        FUNCTION_CALL:  return_value$___ESBMC_list_at$2=list_at(seq, i < 0 ? simple.py:71$list_size$151 + (unsigned long int)i : (unsigned long int)i)
+10205-        // 4472 file simple.py line 71 column 4 function choice
+10211:f (py:simple.py@F@f):
+10212-        // 4474 file simple.py line 2 column 4 function f
+10214-        // 4475 file simple.py line 3 column 8 function f
+10216-        // 4476 file simple.py line 4 column 4 function f
+10222-getrandbits (py:simple.py@F@getrandbits):
+10223-        // 4478 file simple.py line 38 column 4 function getrandbits
+10226-        // 4479 file simple.py line 39 column 8 function getrandbits
+10228-        // 4480 file simple.py line 39 column 8 function getrandbits
+10230-        // 4481 file simple.py line 39 column 8 function getrandbits
+10232-        // 4482 file simple.py line 39 column 8 function getrandbits
+10234-        // 4483 file simple.py line 39 column 8 function getrandbits
+10236-        // 4484 file simple.py line 41 column 4 function getrandbits
+10238-        // 4485 file simple.py line 42 column 8 function getrandbits
+10240-        // 4486 file simple.py line 44 column 4 function getrandbits
+10242-        // 4487 file simple.py line 44 column 4 function getrandbits
+10244-        // 4488 file simple.py line 45 column 4 function getrandbits
+10246-        // 4489 file simple.py line 45 column 4 function getrandbits
+10248-        // 4490 file simple.py line 46 column 4 function getrandbits
+10250-        // 4491 file simple.py line 47 column 4 function getrandbits
+10256-hash (py:simple.py@F@hash):
+10257-        // 4493 file simple.py line 12 column 4 function hash
+10264-max (py:simple.py@F@max):
+10273-        // 4498 file simple.py line 39 column 4 function max
+10275-        // 4499 file simple.py line 40 column 8 function max
+10277-        // 4500 file simple.py line 40 column 8 function max
+10279-        // 4501 file simple.py line 40 column 8 function max
+10281-        // 4502 file simple.py line 40 column 8 function max
+10283-        // 4503 file simple.py line 40 column 8 function max
+10285-        // 4504 file simple.py line 42 column 4 function max
+10287-        // 4505 file simple.py line 42 column 4 function max
+10289-        // 4506 file simple.py line 43 column 4 function max
+10295-        // 4509 file simple.py line 43 column 4 function max
+10297-        // 4510 file simple.py line 44 column 18 function max
+10298-        DECL unsigned long int simple.py:44$list_size$3;
+10299-        // 4511 file simple.py line 44 column 18 function max
+10300-        FUNCTION_CALL:  simple.py:44$list_size$3=list_size(iterable)
+10301-        // 4512 file simple.py line 44 column 18 function max
+10302-        IF !(0 < 0 && (0 < 0 ? simple.py:44$list_size$3 + (unsigned long int)0 : (unsigned long int)0) >= simple.py:44$list_size$3) THEN GOTO 2
+10304-        DEAD python_converter::simple.py:44$list_size$3
+10306-        DEAD py:simple.py@F@max::$tmp::return_value$___ESBMC_list_size$2
+10308-        DEAD py:simple.py@F@max@length
+10310-        DEAD py:simple.py@F@max@i
+
+--- C simple.c ---
+Parsing simple.c
+        // 9 file simple.c line 13 column 1
+        // 10 file simple.c line 13 column 1
+        // 11 file simple.c line 13 column 1
+        // 12 file simple.c line 13 column 1
+        // 13 file simple.c line 28 column 1 function main
+        // 40 file simple.c line 7 column 5 function f
+        // 41 file simple.c line 8 column 9 function f
+        // 42 file simple.c line 10 column 5 function f
+        // 43 file simple.c line 11 column 1 function f
+        // 44 file simple.c line 15 column 5 function main
+        // 45 file simple.c line 15 column 5 function main
+        // 46 file simple.c line 15 column 5 function main
+        // 47 file simple.c line 15 column 5 function main
+        // 48 file simple.c line 17 column 5 function main
+        // 49 file simple.c line 18 column 5 function main
+        // 50 file simple.c line 20 column 5 function main
+        // 51 file simple.c line 20 column 5 function main
+        // 52 file simple.c line 20 column 5 function main
+        // 53 file simple.c line 20 column 5 function main
+        // 54 file simple.c line 22 column 5 function main
+        // 55 file simple.c line 22 column 5 function main
+        // 56 file simple.c line 27 column 5 function main
+        // 57 file simple.c line 28 column 1 function main
+
+============================================================
+ END
+============================================================

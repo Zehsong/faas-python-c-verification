@@ -1,0 +1,16 @@
+f (c:@F@f):
+        // 40 file cases/03_list_array/good.c line 7 column 5 function f
+        DECL signed int [3] values;
+        // 41 file cases/03_list_array/good.c line 7 column 5 function f
+        ASSIGN values={ a, b, c };
+        // 42 file cases/03_list_array/good.c line 9 column 5 function f
+        ASSIGN values[1]=values[1] + 1;
+        // 43 file cases/03_list_array/good.c line 11 column 5 function f
+        ASSERT (signed long int)idx >= 0 // array bounds violated: array `values' lower bound
+        // 44 file cases/03_list_array/good.c line 11 column 5 function f
+        ASSERT (signed long int)idx < 3 // array bounds violated: array `values' upper bound
+        // 45 file cases/03_list_array/good.c line 11 column 5 function f
+        RETURN: values[(signed long int)idx]
+        // 46 file cases/03_list_array/good.c line 12 column 1 function f
+        END_FUNCTION // f
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

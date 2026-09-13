@@ -1,0 +1,47 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing good.py
+Converting
+Generating GOTO Program
+GOTO program creation time: 1.995s
+GOTO program processing time: 0.030s
+Starting Bounded Model Checking
+Unwinding loop 154 iteration 1   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 2   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 3   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 4   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 5   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 6   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 7   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 8   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 9   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 10   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 154 iteration 11   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Not unwinding loop 154 iteration 12   file /tmp/esbmc-python-astgen-02c4-3817-61a2/models/math.py line 245 column 4 function gcd
+Unwinding loop 179 iteration 1   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 2   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 3   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 4   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 5   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 6   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 7   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 8   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 9   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 10   file good.py line 4 column 4 function reference_gcd
+Unwinding loop 179 iteration 11   file good.py line 4 column 4 function reference_gcd
+Not unwinding loop 179 iteration 12   file good.py line 4 column 4 function reference_gcd
+Symex completed in: 0.025s (263 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 106 assignments)
+Generated 28 VCC(s), 27 remaining after simplification (157 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 12.819s
+BMC program time: 12.862s
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux
+
+RUNNER_EXIT_CODE=0
+RUNNER_ELAPSED_SECONDS=15

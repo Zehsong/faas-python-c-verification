@@ -1,0 +1,14 @@
+f (py:cases/01_helper_branch/good.py@F@f):
+        // 4474 
+        DECL signed long int return_value$_helper$1;
+        // 4475 
+        FUNCTION_CALL:  return_value$_helper$1=helper(x)
+        // 4476 
+        DECL signed long int return_value$_helper$2;
+        // 4477 
+        FUNCTION_CALL:  return_value$_helper$2=helper(x + 1)
+        // 4478 file cases/01_helper_branch/good.py line 10 column 4 function f
+        RETURN: return_value$_helper$1 + return_value$_helper$2
+        // 4479 no location
+        END_FUNCTION
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

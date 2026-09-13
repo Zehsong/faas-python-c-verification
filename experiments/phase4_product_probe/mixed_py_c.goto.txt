@@ -1,0 +1,7 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing py_side.py
+Parsing c_side.c
+Converting
+ERROR: main already defined by another language module
+ERROR: CONVERSION ERROR
+ESBMC version 8.4.0 64-bit x86_64 linux

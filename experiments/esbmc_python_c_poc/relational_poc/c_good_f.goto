@@ -1,0 +1,10 @@
+f (c:@F@f):
+        // 40 file simple.c line 7 column 5 function f
+        IF !(x < 100) THEN GOTO 1
+        // 41 file simple.c line 8 column 9 function f
+        RETURN: x + 1
+        // 42 file simple.c line 10 column 5 function f
+     1: RETURN: 0
+        // 43 file simple.c line 11 column 1 function f
+        END_FUNCTION // f
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
