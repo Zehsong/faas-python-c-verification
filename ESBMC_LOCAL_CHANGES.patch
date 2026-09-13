@@ -1,0 +1,329 @@
+diff --git a/src/esbmc/options.cpp b/src/esbmc/options.cpp
+index 272bf192f4..354263ea4b 100644
+--- a/src/esbmc/options.cpp
++++ b/src/esbmc/options.cpp
+@@ -156,6 +156,14 @@ const struct group_opt_templ all_cmd_options[] = {
+     {"no-library", NULL, "Disable built-in abstract C library"},
+     {"no-string-literal", NULL, "Ignore string literals (replace with NULL)"},
+     {"binary", NULL, "Read goto program instead of source code"},
++    {"equiv-py-target",
++     boost::program_options::value<std::string>()->value_name("name"),
++     "Experimental relational verification: retarget "
++     "__ESBMC_PY_TARGET to a Python GOTO function"},
++    {"equiv-c-target",
++     boost::program_options::value<std::string>()->value_name("name"),
++     "Experimental relational verification: retarget "
++     "__ESBMC_C_TARGET to a C GOTO function"},
+     {"cprover", NULL, "Deprecated no-op (kept for backward compatibility)"},
+     {"no-cprover-additions",
+      NULL,
+diff --git a/src/esbmc/parseoptions/goto_program.cpp b/src/esbmc/parseoptions/goto_program.cpp
+index 12775ac196..1305b54e32 100644
+--- a/src/esbmc/parseoptions/goto_program.cpp
++++ b/src/esbmc/parseoptions/goto_program.cpp
+@@ -211,6 +211,233 @@ retarget_esbmc_main(goto_functionst &goto_functions, const irep_idt &target)
+   return false;
+ }
+ 
++
++// Experimental Python<->C relational-verification bridge.
++//
++// A C relational harness calls:
++//
++//     __ESBMC_PY_TARGET(...)
++//
++// which appears in GOTO as:
++//
++//     c:@F@__ESBMC_PY_TARGET
++//
++// After Python and C GOTO binaries have been merged, redirect that call
++// to the unique Python function requested by:
++//
++//     --equiv-py-target <name>
++//
++// This changes only the call target.  The Python function body itself is
++// the real GOTO body produced by the Python frontend.
++static bool retarget_equiv_python_placeholder(
++  const cmdlinet &cmdline,
++  goto_functionst &goto_functions)
++{
++  if (!cmdline.isset("equiv-py-target"))
++    return false;
++
++  const std::string wanted = cmdline.getval("equiv-py-target");
++  const std::string suffix = "@F@" + wanted;
++
++  irep_idt python_target;
++  std::size_t matches = 0;
++
++  for (const auto &entry : goto_functions.function_map)
++  {
++    const std::string id = entry.first.as_string();
++
++    const bool is_python =
++      id.rfind("py:", 0) == 0;
++
++    const bool suffix_matches =
++      id.size() >= suffix.size() &&
++      id.compare(
++        id.size() - suffix.size(),
++        suffix.size(),
++        suffix) == 0;
++
++    if (is_python && suffix_matches)
++    {
++      python_target = entry.first;
++      ++matches;
++    }
++  }
++
++  if (matches != 1)
++  {
++    log_error(
++      "relational bridge expected exactly one Python function named `{}`, "
++      "found {}",
++      wanted,
++      matches);
++    return true;
++  }
++
++  const irep_idt placeholder("c:@F@__ESBMC_PY_TARGET");
++
++  std::size_t rewrites = 0;
++
++  for (auto &entry : goto_functions.function_map)
++  {
++    Forall_goto_program_instructions (it, entry.second.body)
++    {
++      if (!it->is_function_call())
++        continue;
++
++      code_function_call2t &call =
++        to_code_function_call2t(it->code);
++
++      if (
++        is_symbol2t(call.function) &&
++        to_symbol2t(call.function).thename == placeholder)
++      {
++        call.function =
++          symbol2tc(get_empty_type(), python_target);
++
++        ++rewrites;
++      }
++    }
++  }
++
++  if (rewrites == 0)
++  {
++    log_error(
++      "relational bridge found no calls to `{}`",
++      id2string(placeholder));
++    return true;
++  }
++
++  log_status(
++    "Relational bridge: retargeted {} call(s) from `{}` to `{}`",
++    rewrites,
++    id2string(placeholder),
++    id2string(python_target));
++
++  return false;
++}
++
++
++// Experimental C side of the Python<->C relational bridge.
++//
++// The synthetic relational harness calls:
++//
++//     __ESBMC_C_TARGET(...)
++//
++// instead of declaring/calling the real C function directly.
++//
++// This is important when multiple GOTO binaries are merged: a second extern
++// declaration of the real C function can overwrite goto_functiont::type
++// metadata (including formal-parameter identifiers) while leaving the body
++// from the original C binary.  Retargeting a uniquely named placeholder keeps
++// the C function's body and type together.
++static bool retarget_equiv_c_placeholder(
++  const cmdlinet &cmdline,
++  goto_functionst &goto_functions)
++{
++  if (!cmdline.isset("equiv-c-target"))
++    return false;
++
++  const std::string wanted = cmdline.getval("equiv-c-target");
++
++  irep_idt c_target;
++
++  // Prefer the normal external C function id.
++  const irep_idt exact("c:@F@" + wanted);
++
++  auto exact_it = goto_functions.function_map.find(exact);
++
++  if (
++    exact_it != goto_functions.function_map.end() &&
++    exact_it->second.body_available)
++  {
++    c_target = exact;
++  }
++  else
++  {
++    // Fallback for file-local/static functions: require a unique bodied
++    // C function whose id ends in @F@<wanted>.
++    const std::string suffix = "@F@" + wanted;
++
++    std::size_t matches = 0;
++
++    for (const auto &entry : goto_functions.function_map)
++    {
++      const std::string id = entry.first.as_string();
++
++      const bool is_c =
++        id.rfind("c:", 0) == 0;
++
++      const bool suffix_matches =
++        id.size() >= suffix.size() &&
++        id.compare(
++          id.size() - suffix.size(),
++          suffix.size(),
++          suffix) == 0;
++
++      if (
++        is_c &&
++        suffix_matches &&
++        entry.second.body_available)
++      {
++        c_target = entry.first;
++        ++matches;
++      }
++    }
++
++    if (matches != 1)
++    {
++      log_error(
++        "relational bridge expected exactly one bodied C function "
++        "named `{}`, found {}",
++        wanted,
++        matches);
++      return true;
++    }
++  }
++
++  const irep_idt placeholder("c:@F@__ESBMC_C_TARGET");
++
++  std::size_t rewrites = 0;
++
++  for (auto &entry : goto_functions.function_map)
++  {
++    Forall_goto_program_instructions (it, entry.second.body)
++    {
++      if (!it->is_function_call())
++        continue;
++
++      code_function_call2t &call =
++        to_code_function_call2t(it->code);
++
++      if (
++        is_symbol2t(call.function) &&
++        to_symbol2t(call.function).thename == placeholder)
++      {
++        call.function =
++          symbol2tc(get_empty_type(), c_target);
++
++        ++rewrites;
++      }
++    }
++  }
++
++  if (rewrites == 0)
++  {
++    log_error(
++      "relational bridge found no calls to `{}`",
++      id2string(placeholder));
++    return true;
++  }
++
++  log_status(
++    "Relational bridge: retargeted {} C call(s) from `{}` to `{}`",
++    rewrites,
++    id2string(placeholder),
++    id2string(c_target));
++
++  return false;
++}
++
+ // Bridge the synthesised __ESBMC_main, which wraps the boilerplate c:@F@main,
+ // onto the program's real entry. An explicit --function wins; otherwise a CBMC
+ // binary dispatches into __CPROVER__start (it runs __CPROVER_initialize and
+@@ -290,6 +517,12 @@ bool esbmc_parseoptionst::create_goto_program(
+       if (read_goto_binary(goto_functions))
+         return true;
+ 
++      if (retarget_equiv_python_placeholder(cmdline, goto_functions))
++        return true;
++
++      if (retarget_equiv_c_placeholder(cmdline, goto_functions))
++        return true;
++
+       // Resolve CBMC's bodyless libc externals (ceil/floor/..., strlen/strcmp/
+       // strncmp) to the operational-model bodies the additions linked, before
+       // symex sees a bodyless call returning nondet.
+@@ -336,6 +569,22 @@ bool esbmc_parseoptionst::read_goto_binary(goto_functionst &goto_functions)
+ {
+   log_progress("Reading GOTO program from file");
+   goto_binary_reader goto_reader;
++
++  // Experimental relational-linking rule:
++  //
++  // The Python frontend's __ESBMC_main is semantically significant: it
++  // initializes static-lifetime state, invokes python_init(), and executes
++  // python_user_main().  A later C relational harness also owns an
++  // __ESBMC_main, so ordinary multi-binary merging overwrites the Python
++  // entry and makes runtime-backed Python values (list/dict/str/...) execute
++  // without initialization.
++  //
++  // In relational mode the first input is the Python GOTO binary. Preserve
++  // its complete entry body under a collision-free callable alias before
++  // reading the later C/harness binaries.
++  const irep_idt py_module_entry = "c:@F@__ESBMC_PY_MODULE_ENTRY";
++  bool first_binary = true;
++
+   for (const auto &arg : cmdline.args)
+   {
+     if (goto_reader.read_goto_binary(arg, context, goto_functions))
+@@ -343,6 +592,35 @@ bool esbmc_parseoptionst::read_goto_binary(goto_functionst &goto_functions)
+       log_error("Failed to read `{}'", arg);
+       return true;
+     }
++
++    if (first_binary && cmdline.isset("equiv-py-target"))
++    {
++      auto py_main = goto_functions.function_map.find("__ESBMC_main");
++
++      if (
++        py_main == goto_functions.function_map.end() ||
++        !py_main->second.body_available)
++      {
++        log_error(
++          "Relational bridge: Python binary has no bodied __ESBMC_main "
++          "to preserve");
++        return true;
++      }
++
++      goto_functions.function_map[py_module_entry] = py_main->second;
++
++      // The copied instructions still carry the old owning-function id.
++      // Rewrite only instruction ownership metadata; function-call targets
++      // inside the body (python_init, python_user_main, hooks) remain intact.
++      goto_functions.function_map[py_module_entry]
++        .update_instructions_function(py_module_entry, true);
++
++      log_status(
++        "Relational bridge: preserved Python module entry as `{}`",
++        id2string(py_module_entry));
++    }
++
++    first_binary = false;
+   }
+ 
+   return false;
