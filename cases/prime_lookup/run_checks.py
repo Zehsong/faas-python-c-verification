@@ -5,6 +5,7 @@ import hashlib
 import math
 from pathlib import Path
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/find-cond-equiv"))
@@ -42,17 +43,20 @@ def main():
     parser.add_argument("--timeout", type=float, default=30)
     parser.add_argument("--max-seconds", type=float, default=600)
     parser.add_argument("--workdir", default=".verify-equiv-runs/prime-acceptance")
+    parser.add_argument("--extended", action="store_true", help="also test all three variants on 0..127")
     args = parser.parse_args()
     output = Path(args.workdir).resolve()
     output.mkdir(parents=True, exist_ok=True)
     results = []
-    for variant, domain_text in CASES:
+    cases = CASES + ([(variant, "0:127") for variant in ("fallback", "truncated", "mutant")] if args.extended else [])
+    for variant, domain_text in cases:
         name = variant + "-" + domain_text.replace(":", "-")
         print(f"\n{name}", flush=True)
         settings = parse_args(["--variant", variant, "--domain", domain_text,
                                "--esbmc", args.esbmc, "--cc", args.cc,
                                "--timeout", str(args.timeout), "--max-seconds", str(args.max_seconds),
                                "--workdir", str(output / name)])
+        started = time.monotonic()
         report = run(settings)
         validation = {"status": "UNKNOWN", "reason": "finder did not return EXACT"}
         if report["status"] == "EXACT" and report.get("condition_c"):
@@ -71,10 +75,13 @@ def main():
         passed = report["status"] == "EXACT" and validation["status"] == "PROVED"
         results.append({"case": name, "passed": passed, "status": report["status"],
                         "condition": report["condition"], "validation": validation,
+                        "elapsed_seconds": round(time.monotonic() - started, 3),
                         "queries_used": report.get("queries_used"), "artifacts": report["artifacts"]})
         print(f"{name}: {'PASS' if passed else 'NOT PROVED'}", flush=True)
     save_json(output / "results.json", results)
     count = sum(row["passed"] for row in results)
+    for row in results:
+        print(f"{row['case']}: {row['status']} queries={row['queries_used']} elapsed={row['elapsed_seconds']}s")
     print(f"PRIME ACCEPTANCE: {count}/{len(results)} passed")
     return 0 if count == len(results) else 2
 

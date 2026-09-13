@@ -1,5 +1,22 @@
 # 质数计算与查表：第一阶段
 
+用户已提供上一版完整 Codespace 输出：原基线 5/5、配置缓存 3/3、sketch
+8/8、新 prime 5/5 均通过。其中 truncated-0-63 使用 86 次 finder 查询
+（不含独立验收查询），但条件很长。当前新增有限域条件表示压缩：只对
+已证明 EQ 区域求精确的域内集合表示，不使用运行样本或筛法答案；原始
+搜索条件保留在 result.json 的 search 中，最终输出仍由 ESBMC 检查。
+这只改善表达，不减少搜索查询，也不发现通用的质数谓词。
+
+下一轮用同一预算比较 0..63 与 0..127，运行：
+
+```bash
+bash cases/prime_lookup/test_prime.sh /workspaces/esbmc-current/build/src/esbmc/esbmc --extended
+```
+
+包含原 5 项和三个 0..127 案例，目标为 `PRIME ACCEPTANCE: 8/8 passed`。
+逐例记录 finder 查询数以及包含独立验收的耗时。未证明的案例同样保留，
+不可只记录成功样本。当前本地 63 项测试通过；扩域正式结果待 Codespace。
+
 研究目标是多种语言中的**同语言条件等价性**。本例继续使用当前 C 后端，
 并不把研究限制为 C→C，也不涉及跨语言验证。接口为 `is_prime(x)`，
 观察布尔返回值；“求第 n 个质数”是不同接口，未在本阶段实现。

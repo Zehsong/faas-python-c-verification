@@ -9,7 +9,7 @@ import sys
 import time
 
 from find_cache_conditions import CacheBackend, PROPERTIES, ROOT, oracle, run as shared_run, save_json
-from predicate_search import Atom
+from predicate_search import Atom, matches
 
 CASE = ROOT / "cases/prime_lookup"
 VARIANTS = {"fallback": "lookup_fallback", "truncated": "lookup_truncated", "mutant": "lookup_mutant"}
@@ -98,6 +98,9 @@ class PrimeBackend(CacheBackend):
     def state_obligations(self):
         return {}
 
+    def present_condition(self, found):
+        return compact_condition(found, self.domain)
+
     def seed_in_domain(self, row, state_mode):
         return self.domain[0] <= row["x"] <= self.domain[1]
 
@@ -111,6 +114,37 @@ class PrimeBackend(CacheBackend):
 
     def make_harness(self, model, variant, state_mode, kind, condition="true", expected=None):
         return make_harness(model, variant, self.domain, kind, condition, expected)
+
+
+def compact_condition(found, domain):
+    """Re-express certified EQ cubes over the declared small integer domain.
+
+    Evaluates predicates, never original/candidate code or sample labels. Unknown
+    regions are not promoted to EQ. The caller still certifies the final output.
+    """
+    lo, hi = domain
+    if not 0 <= lo <= hi <= 255:
+        raise ValueError("compact presentation requires an explicit domain within 0..255")
+    atoms = [PrimeAtom.parse(text) for text in found["predicates"]]
+    included = [x for x in range(lo, hi+1) if any(matches(cube, atoms, {"x": x}) for cube in found["eq_cubes"])]
+    excluded = sorted(set(range(lo, hi+1)) - set(included))
+
+    def points(values, equal, c):
+        if not values:
+            return "false" if equal else "true"
+        var = "finder_x" if c else "x"
+        terms = [f"({var} {'==' if equal else '!='} " + (f"UINT32_C({x})" if c else str(x)) + ")" for x in values]
+        return (" || " if equal else " && ").join(terms)
+
+    options = []
+    # Keep the original when it is shorter; choose the same representation for
+    # human-readable and C output. All forms are equivalent only inside domain.
+    options.append((found["condition"], found["condition_c"]))
+    options.extend((points(values, equal, False), points(values, equal, True))
+                   for values, equal in ((included, True), (excluded, False)))
+    condition, condition_c = min(options, key=lambda pair: len(pair[0]))
+    return {"condition": condition, "condition_c": condition_c,
+            "basis": "certified EQ union re-expressed exactly within declared finite domain; no sample labels used"}
 
 
 def parse_args(argv=None):

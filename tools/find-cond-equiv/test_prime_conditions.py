@@ -11,7 +11,7 @@ import unittest
 from unittest.mock import patch
 
 from find_cache_conditions import ROOT, witness_from_log
-from find_prime_conditions import PrimeAtom, PrimeBackend, make_harness, parse_args, run
+from find_prime_conditions import PrimeAtom, PrimeBackend, compact_condition, make_harness, parse_args, run
 from predicate_search import matches, search
 from test_predicate_search import FiniteOracle
 
@@ -21,6 +21,25 @@ spec.loader.exec_module(acceptance)
 
 
 class PrimeTests(unittest.TestCase):
+    def test_compact_condition_preserves_certified_union(self):
+        # The certified region is all points except 3 and 7. Labels are absent.
+        atoms = [PrimeAtom.parse(f"x == {x}") for x in range(10)]
+        cubes = [((x, True),) for x in range(10) if x not in (3, 7)]
+        found = {"predicates": [a.text() for a in atoms], "eq_cubes": cubes,
+                 "condition": "long original " * 30, "condition_c": "unused"}
+        result = compact_condition(found, (0, 9))
+        self.assertEqual(result["condition"], "(x != 3) && (x != 7)")
+        self.assertEqual(result["condition_c"], "(finder_x != UINT32_C(3)) && (finder_x != UINT32_C(7))")
+
+    def test_compact_condition_does_not_promote_unknown_points(self):
+        found = {"predicates": ["x == 2"], "eq_cubes": [((0, True),)],
+                 "condition": "((x == 2))", "condition_c": "((finder_x == UINT32_C(2)))"}
+        self.assertEqual(compact_condition(found, (0, 7))["condition"], "(x == 2)")
+        found["eq_cubes"] = []
+        self.assertEqual(compact_condition(found, (0, 7))["condition"], "false")
+        found["eq_cubes"] = [()]
+        self.assertEqual(compact_condition(found, (0, 7))["condition"], "true")
+
     def test_stateless_predicates_and_witness(self):
         self.assertEqual(witness_from_log("finder_x = 37", ("x",)), {"x": 37})
         for text in ("valid", " valid ", "key == x", "original(x)"):

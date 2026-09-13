@@ -145,6 +145,10 @@ class CacheBackend:
         return {"initialization": self.query("init", reserve=2),
                 "preservation": self.query("preservation", reserve=2)}
 
+    def present_condition(self, found):
+        return {"condition": found["condition"], "condition_c": found["condition_c"],
+                "basis": "disjunction of individually proved regions; Boolean-only simplification"}
+
     def validate_trace(self, row):
         if row.get("invariant_before") != 1 or row.get("invariant_after") != 1:
             raise RuntimeError("native trace violates the declared cache invariant")
@@ -330,16 +334,17 @@ def run(args, backend_type=CacheBackend):
             raise RuntimeError("initialization/invariant preservation not established; no certified condition")
         found = search(backend, atoms, args.max_predicates)
         report["search"] = found
-        report["condition"] = found["condition"]
+        presentation = backend.present_condition(found)
+        report["condition"] = presentation["condition"]
         # Revalidate the published condition; prove its complement contains only
         # unequal observations before claiming an exact domain within this model.
-        final = backend.query("equal", found["condition_c"])
-        outside = backend.query("different", f"!({found['condition_c']})")
+        final = backend.query("equal", presentation["condition_c"])
+        outside = backend.query("different", f"!({presentation['condition_c']})")
         report["final_validation"] = {"sufficiency": final, "complement": outside}
         report["exact"] = final["status"] == "PROVED" and outside["status"] == "PROVED"
         report["status"] = "EXACT" if report["exact"] else "PARTIAL" if found["buckets"]["EQ"] else "UNKNOWN"
-        report["condition_c"] = found["condition_c"]
-        report["condition_basis"] = "disjunction of individually proved regions; Boolean-only simplification"
+        report["condition_c"] = presentation["condition_c"]
+        report["condition_basis"] = presentation["basis"]
         if final["status"] == "REFUTED" or (final["status"] == "UNKNOWN" and final.get("reason", "").startswith("solver/native")):
             report.update(status="UNKNOWN", exact=False, condition=None, condition_c=None,
                           reason="final validation contradicted prior certificates; do not use this condition")
