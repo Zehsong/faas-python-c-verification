@@ -1,0 +1,39 @@
+{
+  "status": "UNKNOWN",
+  "variant": "bad_miss",
+  "state_mode": "invariant",
+  "created_utc": "2026-09-13T07:47:08.234887+00:00",
+  "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\finder-local-smoke\\bad_miss-t9o2h89x",
+  "condition": null,
+  "exact": false,
+  "uses_llm_api": false,
+  "method": "trace-guided finite predicate partition with ESBMC certification",
+  "scope": {
+    "language": "C",
+    "inputs": "x,key,value:uint32_t; valid:bool; unsigned arithmetic modulo 2^32",
+    "state_mode": "invariant",
+    "initial_state": "arbitrary state satisfying !valid || value == original(key)",
+    "observations": "one return value; cache invariant also checked after the call",
+    "assumptions": "private cache; sequential execution; pure original; no environment or other writers",
+    "bound": "one loop-free call; initialization and invariant preservation are separate obligations",
+    "condition_discovery": "automatic combination within a bounded vocabulary; invariant/model supplied by hand",
+    "sequence_claim": "no unrestricted sequence equivalence claimed for conditional variants",
+    "model_sha256": "4a6f643524b226f2292eabcf7d06721f71b142c40360605c08746bc8521fde5e",
+    "probe_sha256": "65a40c86f38b67492ffe1e70bcc7fa45f3d9c056eee40858b4cd679a333c07e9"
+  },
+  "state_obligations": {
+    "initialization": {
+      "status": "UNKNOWN",
+      "reason": "ESBMC unavailable: /workspaces/esbmc-current/build/src/esbmc/esbmc"
+    },
+    "preservation": {
+      "status": "UNKNOWN",
+      "reason": "ESBMC unavailable: /workspaces/esbmc-current/build/src/esbmc/esbmc"
+    }
+  },
+  "reason": "initialization/invariant preservation not established; no certified condition",
+  "esbmc": null,
+  "esbmc_version_output": null,
+  "queries_used": 0,
+  "traces_collected": 50
+}

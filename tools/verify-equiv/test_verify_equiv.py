@@ -112,11 +112,14 @@ class OracleTests(unittest.TestCase):
         self.assertEqual(report["scope"]["bound"], "exactly three symbolic calls, no loops")
         self.assertFalse(report["automatic_condition_discovery"])
         self.assertEqual(len(report["source_sha256"]), 64)
+        self.assertEqual(report["local_headers"][0]["snapshot"], "cache_model.h")
+        self.assertEqual((self.work / "cache_model.h").read_bytes(), (CASE / "cache_model.h").read_bytes())
 
     def test_saved_source_can_be_reused_in_its_output_directory(self):
         snapshot = self.work / "harness-source.c"
         original = (CASE / "cache_demo.c").read_bytes()
         snapshot.write_bytes(original)
+        (self.work / "cache_model.h").write_bytes((CASE / "cache_model.h").read_bytes())
         argv = ["--c-harness", str(snapshot), "--entry", "good_sequence",
                 "--scope-file", str(CASE / "scopes.json"), "--esbmc", str(self.work / "missing-esbmc"),
                 "--workdir", str(self.work)]

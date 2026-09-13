@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 import argparse
 import subprocess
+import sys
+
+# Preserve the original Python/C interval baseline; the cache-family adapter
+# reuses its oracle while searching predicates over input and entry state.
+if "--cache" in sys.argv[1:]:
+    from find_cache_conditions import main
+    sys.exit(main(sys.argv[1:]))
 
 p = argparse.ArgumentParser()
 p.add_argument("--python", required=True)

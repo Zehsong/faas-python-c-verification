@@ -10,6 +10,7 @@ import re
 import shutil
 import tempfile
 from pathlib import Path
+from c_obligation import check as check_obligation
 
 REACHABILITY_PROPERTY = "__VERIFY_EQUIV_REACHABILITY__"
 
@@ -65,6 +66,15 @@ def main(argv, oracle):
         report.update(source=str(source), source_sha256=hashlib.sha256(source_bytes).hexdigest(),
                       scope=scope, scope_origin="author supplied; review against harness")
         (workdir / "harness-source.c").write_bytes(source_bytes)
+        # Record direct sibling headers used by the reviewed cache case. This
+        # is not a general transitive dependency or system-header snapshotter.
+        report["local_headers"] = []
+        for name in sorted(set(re.findall(r'(?m)^\s*#include\s+"([A-Za-z0-9_-]+\.h)"', source_bytes.decode("utf-8")))):
+            header = source.parent / name
+            data = header.read_bytes()
+            (workdir / name).write_bytes(data)
+            report["local_headers"].append({"source": str(header), "snapshot": name,
+                                             "sha256": hashlib.sha256(data).hexdigest()})
     except (OSError, ValueError, KeyError, TypeError) as exc:
         return finish("UNKNOWN", f"invalid source/scope: {exc}")
 
@@ -93,9 +103,10 @@ def main(argv, oracle):
         return finish("UNKNOWN", "observation reachability probe did not produce its expected violation")
 
     verify_log = workdir / "verify.log"
-    rc, timeout = oracle.run(command, verify_log, args.timeout)
+    obligation = check_obligation(oracle, command, verify_log, args.timeout, oracle.RELATIONAL_PROPERTY)
+    rc, timeout = obligation["returncode"], obligation["timed_out"]
     report["verification_returncode"] = rc
-    verdict = oracle.classify_verification(verify_log)
+    verdict = {"PROVED": "EQ", "REFUTED": "NEQ", "UNKNOWN": "UNKNOWN"}[obligation["status"]]
     report["violation"] = oracle.extract_violated_property(verify_log)
     report["counterexample_trace"] = oracle.extract_counterexample(
         verify_log, [(name, "int") for name in

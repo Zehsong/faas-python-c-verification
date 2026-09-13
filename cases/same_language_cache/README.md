@@ -1,5 +1,7 @@
 # C→C 缓存等价验证：第一版
 
+后续的自动条件搜索入口、论文借鉴与一键验收见 [轨迹引导 finder](../../docs/TRACE_GUIDED_FINDER.md)。实现现在共享 `cache_model.h`；下面六个手写验证入口及原有语义保留。
+
 本案例通过现有 `tools/verify-equiv/verify_equiv.py` 的新 `--c-harness` 路由运行。
 Python/C 路由、定制 GOTO 合并和原有实验保留。新路由接收**人工编写并审阅的组合 C harness**，尚不自动合并任意两个 C 文件，也不支持 C++ 对象模型。
 

@@ -1,36 +1,4 @@
-#include <stdbool.h>
-#include <stdint.h>
-
-typedef struct {
-    bool valid;
-    uint32_t key;
-    uint32_t value;
-} Cache;
-
-static uint32_t original(uint32_t x) { return x + UINT32_C(1); }
-
-static uint32_t cached_good(Cache *cache, uint32_t x)
-{
-    if (cache->valid && cache->key == x) return cache->value;
-    cache->value = original(x);
-    cache->key = x;
-    cache->valid = true;
-    return cache->value;
-}
-
-static uint32_t cached_bad(Cache *cache, uint32_t x)
-{
-    if (cache->valid && cache->key == x) return cache->value;
-    cache->value = original(x);
-    cache->key = x;
-    cache->valid = true;
-    return 0; /* Deliberate mutation: only the miss return is wrong. */
-}
-
-static bool invariant(const Cache *cache)
-{
-    return !cache->valid || cache->value == original(cache->key);
-}
+#include "cache_model.h"
 
 #ifndef REPLAY
 extern uint32_t nondet_uint32_t(void);
