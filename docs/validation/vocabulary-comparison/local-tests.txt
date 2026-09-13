@@ -1,0 +1,135 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.3.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+cache_demo.c
+test_bad_empty_miss_witness (test_verify_equiv.NativeReplayTests.test_bad_empty_miss_witness) ... ok
+test_bad_miss_hit_miss_preserves_state (test_verify_equiv.NativeReplayTests.test_bad_miss_hit_miss_preserves_state) ... ok
+test_correct_cache_repeated_and_boundary_inputs (test_verify_equiv.NativeReplayTests.test_correct_cache_repeated_and_boundary_inputs) ... ok
+test_invalid_replay_input (test_verify_equiv.NativeReplayTests.test_invalid_replay_input) ... ok
+test_unsigned_wraparound_exception (test_verify_equiv.NativeReplayTests.test_unsigned_wraparound_exception) ... ok
+test_c_adapter_missing_solver_discards_stale_logs (test_verify_equiv.OracleTests.test_c_adapter_missing_solver_discards_stale_logs) ... ok
+test_c_adapter_requires_reachable_observation (test_verify_equiv.OracleTests.test_c_adapter_requires_reachable_observation) ... ok
+test_c_adapter_success_keeps_scope_and_provenance (test_verify_equiv.OracleTests.test_c_adapter_success_keeps_scope_and_provenance) ... ok
+test_c_adapter_target_neq_and_trace (test_verify_equiv.OracleTests.test_c_adapter_target_neq_and_trace) ... ok
+test_c_adapter_timeout_error_rc_and_safety_failure (test_verify_equiv.OracleTests.test_c_adapter_timeout_error_rc_and_safety_failure) ... ok
+test_domains_precede_both_targets_and_preserve_module_entry (test_verify_equiv.OracleTests.test_domains_precede_both_targets_and_preserve_module_entry) ... ok
+test_echoed_marker_does_not_turn_safety_failure_into_neq (test_verify_equiv.OracleTests.test_echoed_marker_does_not_turn_safety_failure_into_neq) ... ok
+test_legacy_cli_scope_reports_actual_domain (test_verify_equiv.OracleTests.test_legacy_cli_scope_reports_actual_domain) ... ok
+test_multiple_properties_with_safety_failure_are_unknown (test_verify_equiv.OracleTests.test_multiple_properties_with_safety_failure_are_unknown) ... ok
+test_nearby_marker_in_results_is_not_a_violated_property (test_verify_equiv.OracleTests.test_nearby_marker_in_results_is_not_a_violated_property) ... ok
+test_process_start_failure (test_verify_equiv.OracleTests.test_process_start_failure) ... ok
+test_saved_source_can_be_reused_in_its_output_directory (test_verify_equiv.OracleTests.test_saved_source_can_be_reused_in_its_output_directory) ... ok
+test_success (test_verify_equiv.OracleTests.test_success) ... ok
+test_target_counterexample (test_verify_equiv.OracleTests.test_target_counterexample) ... ok
+test_timeout_and_conflicting_statuses_are_unknown (test_verify_equiv.OracleTests.test_timeout_and_conflicting_statuses_are_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.130s
+
+OK
+test_failed_state_obligation_prevents_search (test_cache_sketch.SketchTests.test_failed_state_obligation_prevents_search) ... ok
+test_generated_obligations_bind_environment_and_state_explicitly (test_cache_sketch.SketchTests.test_generated_obligations_bind_environment_and_state_explicitly) ... ok
+test_invalid_or_executable_bindings_are_rejected (test_cache_sketch.SketchTests.test_invalid_or_executable_bindings_are_rejected) ... ok
+test_manifest_distinguishes_template_from_instance (test_cache_sketch.SketchTests.test_manifest_distinguishes_template_from_instance) ... ok
+test_native_positive_and_negative_controls (test_cache_sketch.SketchTests.test_native_positive_and_negative_controls) ... ok
+test_configuration_is_not_assumed_fresh (test_config_conditions.ConfigTests.test_configuration_is_not_assumed_fresh) ... ok
+test_input_only_vocabulary_cannot_separate_stale_configuration (test_config_conditions.ConfigTests.test_input_only_vocabulary_cannot_separate_stale_configuration) ... ok
+test_witness_requires_both_environment_fields (test_config_conditions.ConfigTests.test_witness_requires_both_environment_fields) ... ok
+test_all_formal_templates_compile (test_config_conditions.NativeConfigTests.test_all_formal_templates_compile) ... ok
+test_missing_solver_does_not_certify_native_results (test_config_conditions.NativeConfigTests.test_missing_solver_does_not_certify_native_results) ... ok
+test_native_variants_and_finite_search (test_config_conditions.NativeConfigTests.test_native_variants_and_finite_search) ... ok
+test_plain_probe_matches_instrumented_state_and_returns (test_config_conditions.NativeConfigTests.test_plain_probe_matches_instrumented_state_and_returns) ... ok
+test_two_calls_with_environment_change_reproduce_stale_bug (test_config_conditions.NativeConfigTests.test_two_calls_with_environment_change_reproduce_stale_bug) ... ok
+test_compaction_understands_certified_modulo_regions (test_modulo_conditions.ModuloTests.test_compaction_understands_certified_modulo_regions) ... ok
+test_modulo_c_semantics_and_native_search (test_modulo_conditions.ModuloTests.test_modulo_c_semantics_and_native_search) ... ok
+test_repeat_order_is_balanced (test_modulo_conditions.ModuloTests.test_repeat_order_is_balanced) ... ok
+test_safe_modulo_grammar_and_bounds (test_modulo_conditions.ModuloTests.test_safe_modulo_grammar_and_bounds) ... ok
+test_same_seeds_and_budgets_different_vocabulary (test_modulo_conditions.ModuloTests.test_same_seeds_and_budgets_different_vocabulary) ... ok
+test_unknown_runs_are_included_in_summaries (test_modulo_conditions.ModuloTests.test_unknown_runs_are_included_in_summaries) ... ok
+test_generated_solver_harnesses_compile_as_c (test_predicate_search.NativeSearchTests.test_generated_solver_harnesses_compile_as_c) ... ok
+test_instrumentation_preserves_native_outputs_and_state (test_predicate_search.NativeSearchTests.test_instrumentation_preserves_native_outputs_and_state) ... ok
+test_missing_esbmc_leaves_all_native_evidence_unproved (test_predicate_search.NativeSearchTests.test_missing_esbmc_leaves_all_native_evidence_unproved) ... ok
+test_real_trace_guided_partitions_for_four_variants (test_predicate_search.NativeSearchTests.test_real_trace_guided_partitions_for_four_variants) ... ok
+test_counterexample_can_add_a_non_boundary_constant (test_predicate_search.PredicateTests.test_counterexample_can_add_a_non_boundary_constant) ... ok
+test_exhausted_vocabulary_keeps_mixed_unknown (test_predicate_search.PredicateTests.test_exhausted_vocabulary_keeps_mixed_unknown) ... ok
+test_harness_has_shared_input_separate_inequality_property_and_no_golden_condition (test_predicate_search.PredicateTests.test_harness_has_shared_input_separate_inequality_property_and_no_golden_condition) ... ok
+test_misleading_positive_hints_cannot_certify_a_region (test_predicate_search.PredicateTests.test_misleading_positive_hints_cannot_certify_a_region) ... ok
+test_mixed_region_is_refined_not_marked_all_neq (test_predicate_search.PredicateTests.test_mixed_region_is_refined_not_marked_all_neq) ... ok
+test_negative_assertion_needs_its_own_proof (test_predicate_search.PredicateTests.test_negative_assertion_needs_its_own_proof) ... ok
+test_proposed_verdict_is_rejected (test_predicate_search.PredicateTests.test_proposed_verdict_is_rejected) ... ok
+test_query_and_wall_clock_budget_fail_closed (test_predicate_search.PredicateTests.test_query_and_wall_clock_budget_fail_closed) ... ok
+test_replayed_witness_must_reach_target_region (test_predicate_search.PredicateTests.test_replayed_witness_must_reach_target_region) ... ok
+test_safe_predicate_grammar (test_predicate_search.PredicateTests.test_safe_predicate_grammar) ... ok
+test_seed_validation (test_predicate_search.PredicateTests.test_seed_validation) ... ok
+test_simplification_preserves_truth_table (test_predicate_search.PredicateTests.test_simplification_preserves_truth_table) ... ok
+test_simplification_random_covers (test_predicate_search.PredicateTests.test_simplification_random_covers) ... ok
+test_uint32_boundary_and_state_predicates (test_predicate_search.PredicateTests.test_uint32_boundary_and_state_predicates) ... ok
+test_unknown_never_becomes_eq (test_predicate_search.PredicateTests.test_unknown_never_becomes_eq) ... ok
+test_witness_parser_uses_entry_variables_only (test_predicate_search.PredicateTests.test_witness_parser_uses_entry_variables_only) ... ok
+test_all_generated_harnesses_compile (test_prime_conditions.NativePrimeTests.test_all_generated_harnesses_compile) ... ok
+test_missing_solver_stays_unknown (test_prime_conditions.NativePrimeTests.test_missing_solver_stays_unknown) ... ok
+test_native_algorithms_against_independent_sieve (test_prime_conditions.NativePrimeTests.test_native_algorithms_against_independent_sieve) ... ok
+test_trace_guided_discovery_includes_out_of_table_composites (test_prime_conditions.NativePrimeTests.test_trace_guided_discovery_includes_out_of_table_composites) ... ok
+test_compact_condition_does_not_promote_unknown_points (test_prime_conditions.PrimeTests.test_compact_condition_does_not_promote_unknown_points) ... ok
+test_compact_condition_preserves_certified_union (test_prime_conditions.PrimeTests.test_compact_condition_preserves_certified_union) ... ok
+test_domain_validation (test_prime_conditions.PrimeTests.test_domain_validation) ... ok
+test_formal_template_has_domain_and_no_cache_assumptions (test_prime_conditions.PrimeTests.test_formal_template_has_domain_and_no_cache_assumptions) ... ok
+test_stateless_backend_has_no_dummy_state_proofs (test_prime_conditions.PrimeTests.test_stateless_backend_has_no_dummy_state_proofs) ... ok
+test_stateless_predicates_and_witness (test_prime_conditions.PrimeTests.test_stateless_predicates_and_witness) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 7.470s
+
+OK
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\finder-local-smoke\bad_miss-4tilkcu3
+
+good-invariant
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\config-acceptance-missing-solver\good-invariant\good-7aqvz5ja
+good-invariant: NOT PROVED
+
+stale-invariant
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\config-acceptance-missing-solver\stale-invariant\stale-xpwaskvd
+stale-invariant: NOT PROVED
+
+stale-empty
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\config-acceptance-missing-solver\stale-empty\stale-v37w9o3e
+stale-empty: NOT PROVED
+
+CONFIG CACHE ACCEPTANCE: 0/3 passed
+
+fallback-0-63
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\prime-missing-solver\fallback-0-63\fallback-kxr4jf8f
+fallback-0-63: NOT PROVED
+
+truncated-0-63
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\prime-missing-solver\truncated-0-63\truncated-z4cqdrr1
+truncated-0-63: NOT PROVED
+
+mutant-0-63
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\prime-missing-solver\mutant-0-63\mutant-zj231qyj
+mutant-0-63: NOT PROVED
+
+truncated-0-31
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\prime-missing-solver\truncated-0-31\truncated-7fjwxtd1
+truncated-0-31: NOT PROVED
+
+truncated-37-37
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\prime-missing-solver\truncated-37-37\truncated-ctpvhcc8
+truncated-37-37: NOT PROVED
+fallback-0-63: UNKNOWN queries=0 elapsed=0.125s
+truncated-0-63: UNKNOWN queries=0 elapsed=0.11s
+mutant-0-63: UNKNOWN queries=0 elapsed=0.125s
+truncated-0-31: UNKNOWN queries=0 elapsed=0.125s
+truncated-37-37: UNKNOWN queries=0 elapsed=0.125s
+PRIME ACCEPTANCE: 0/5 passed

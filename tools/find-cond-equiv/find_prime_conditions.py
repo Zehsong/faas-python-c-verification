@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Bounded stateless same-language primality computation vs lookup experiment."""
 import argparse
+from dataclasses import dataclass
 import hashlib
 import math
+import re
 from pathlib import Path
 import shutil
 import sys
@@ -13,6 +15,26 @@ from predicate_search import Atom, matches
 
 CASE = ROOT / "cases/prime_lookup"
 VARIANTS = {"fallback": "lookup_fallback", "truncated": "lookup_truncated", "mutant": "lookup_mutant"}
+MODULI = tuple(range(2, 17))
+
+
+@dataclass(frozen=True)
+class ModuloAtom:
+    divisor: int
+    remainder: int
+
+    def __post_init__(self):
+        if type(self.divisor) is not int or type(self.remainder) is not int or not 2 <= self.divisor <= 16 or not 0 <= self.remainder < self.divisor:
+            raise ValueError("modulo predicate requires 2..16 divisor and 0 <= remainder < divisor")
+
+    def text(self):
+        return f"x % {self.divisor} == {self.remainder}"
+
+    def c(self):
+        return f"finder_x % UINT32_C({self.divisor}) == UINT32_C({self.remainder})"
+
+    def evaluate(self, sample):
+        return sample["x"] % self.divisor == self.remainder
 
 
 class PrimeAtom(Atom):
@@ -20,6 +42,10 @@ class PrimeAtom(Atom):
 
     @classmethod
     def parse(cls, text):
+        if isinstance(text, str):
+            match = re.fullmatch(r"\s*x\s*%\s*([0-9]+)\s*==\s*([0-9]+)\s*", text)
+            if match:
+                return ModuloAtom(*map(int, match.groups()))
         if isinstance(text, str) and text.strip() == "valid":
             raise ValueError("stateless prime model has no valid field")
         return super().parse(text)
@@ -82,6 +108,9 @@ class PrimeBackend(CacheBackend):
             "domain": list(self.domain), "state_obligations": "not applicable: no mutable state",
             "observations": "boolean return value", "reuse": "search, oracle, replay and final condition checks",
             "trusted_manual_inputs": ["C model", "domain", "loop bound", "predicate vocabulary"]}
+        self.sketch_manifest["vocabulary"] = args.vocabulary
+        self.sketch_manifest["initial_predicates"] = [atom.text() for atom in self.initial_atoms()]
+        self.sketch_manifest["initial_seeds"] = self.default_seeds("stateless")
         save_json(self.workdir / "sketch-manifest.json", self.sketch_manifest)
         self.scope = {
             "language": "C", "research_scope": "same-language equivalence; C is the current backend",
@@ -92,6 +121,7 @@ class PrimeBackend(CacheBackend):
             "model_sha256": hashlib.sha256(self.model_bytes).hexdigest(),
             "probe_sha256": hashlib.sha256(self.probe_bytes).hexdigest(),
             "trace_schema": "r_cached is the legacy field name for the candidate result; no cache is involved"}
+        self.scope["vocabulary"] = args.vocabulary
         self.esbmc, self.version = shutil.which(args.esbmc), None
         self.executable = self.inputs / ("prime-probe.exe" if sys.platform == "win32" else "prime-probe")
 
@@ -114,6 +144,13 @@ class PrimeBackend(CacheBackend):
 
     def make_harness(self, model, variant, state_mode, kind, condition="true", expected=None):
         return make_harness(model, variant, self.domain, kind, condition, expected)
+
+
+class ModuloPrimeBackend(PrimeBackend):
+    @staticmethod
+    def initial_atoms():
+        # All small divisors, including composite ones. No sieve or expected set.
+        return PrimeBackend.initial_atoms() + [ModuloAtom(divisor, 0) for divisor in MODULI]
 
 
 def compact_condition(found, domain):
@@ -150,6 +187,7 @@ def compact_condition(found, domain):
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--variant", choices=VARIANTS, default="truncated")
+    parser.add_argument("--vocabulary", choices=("baseline", "modulo"), default="baseline")
     parser.add_argument("--domain", default="0:63", help="inclusive uint32 interval within 0..255 for this first stage")
     parser.add_argument("--esbmc", default=oracle.DEFAULT_ESBMC)
     parser.add_argument("--cc", default="cc")
@@ -169,11 +207,13 @@ def parse_args(argv=None):
     args.domain, args.state_mode = (lo, hi), "stateless"
     if not all(math.isfinite(n) and n > 0 for n in (args.timeout, args.max_seconds)) or args.max_queries < 4 or not 3 <= args.max_predicates <= 256:
         parser.error("positive time budgets, >=4 queries and 3..256 predicates required")
+    if args.vocabulary == "modulo" and args.max_predicates < 3 + len(MODULI):
+        parser.error("modulo vocabulary requires at least 18 predicate slots")
     return args
 
 
 def run(args):
-    return shared_run(args, PrimeBackend)
+    return shared_run(args, ModuloPrimeBackend if args.vocabulary == "modulo" else PrimeBackend)
 
 
 if __name__ == "__main__":

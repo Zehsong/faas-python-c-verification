@@ -1,5 +1,8 @@
 # 质数计算与查表：第一阶段
 
+扩域验收已由用户确认 8/8 通过。当前下一步是[基线与取模词汇对照](VOCABULARY_COMPARISON.md)，
+使用独立脚本 `test_vocabulary.sh`，旧默认 CLI 仍使用 baseline 词汇。
+
 用户已提供上一版完整 Codespace 输出：原基线 5/5、配置缓存 3/3、sketch
 8/8、新 prime 5/5 均通过。其中 truncated-0-63 使用 86 次 finder 查询
 （不含独立验收查询），但条件很长。当前新增有限域条件表示压缩：只对

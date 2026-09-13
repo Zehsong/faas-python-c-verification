@@ -1,0 +1,73 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.3.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+
+r1-fallback-0-63-baseline
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-fallback-0-63-baseline\fallback-on9qh5us
+r1-fallback-0-63-baseline: NOT PROVED
+
+r1-fallback-0-63-modulo
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-fallback-0-63-modulo\fallback-llx3t14c
+r1-fallback-0-63-modulo: NOT PROVED
+
+r1-truncated-0-63-baseline
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-truncated-0-63-baseline\truncated-zycu1ujd
+r1-truncated-0-63-baseline: NOT PROVED
+
+r1-truncated-0-63-modulo
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-truncated-0-63-modulo\truncated-4xrgjrgd
+r1-truncated-0-63-modulo: NOT PROVED
+
+r1-mutant-0-63-baseline
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-mutant-0-63-baseline\mutant-bqr3ctyt
+r1-mutant-0-63-baseline: NOT PROVED
+
+r1-mutant-0-63-modulo
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-mutant-0-63-modulo\mutant-_mch6i5i
+r1-mutant-0-63-modulo: NOT PROVED
+
+r1-fallback-0-127-baseline
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-fallback-0-127-baseline\fallback-b_xwc8gv
+r1-fallback-0-127-baseline: NOT PROVED
+
+r1-fallback-0-127-modulo
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-fallback-0-127-modulo\fallback-ymt3l2y1
+r1-fallback-0-127-modulo: NOT PROVED
+
+r1-truncated-0-127-baseline
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-truncated-0-127-baseline\truncated-0kng9az2
+r1-truncated-0-127-baseline: NOT PROVED
+
+r1-truncated-0-127-modulo
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-truncated-0-127-modulo\truncated-qj7ycmpo
+r1-truncated-0-127-modulo: NOT PROVED
+
+r1-mutant-0-127-baseline
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-mutant-0-127-baseline\mutant-woezx8q6
+r1-mutant-0-127-baseline: NOT PROVED
+
+r1-mutant-0-127-modulo
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz\r1-mutant-0-127-modulo\mutant-mkf0csje
+r1-mutant-0-127-modulo: NOT PROVED
+fallback 0:63: baseline queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1; modulo queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1
+truncated 0:63: baseline queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1; modulo queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1
+mutant 0:63: baseline queries=0 time=0.109s raw_chars=5 published_chars=0 certified=0/1; modulo queries=0 time=0.109s raw_chars=5 published_chars=0 certified=0/1
+fallback 0:127: baseline queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1; modulo queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1
+truncated 0:127: baseline queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1; modulo queries=0 time=0.11s raw_chars=5 published_chars=0 certified=0/1
+mutant 0:127: baseline queries=0 time=0.11s raw_chars=5 published_chars=0 certified=0/1; modulo queries=0 time=0.125s raw_chars=5 published_chars=0 certified=0/1
+VOCABULARY COMPARISON: 0/12 certified; paired inputs match=True
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\vocabulary-missing-solver\comparison-faokcpcz
