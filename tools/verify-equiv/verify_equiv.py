@@ -99,6 +99,11 @@ def run(cmd, logfile, timeout):
 
         return 124, True
 
+    except OSError as exc:
+        with logfile.open("a") as out:
+            out.write(f"\nVERIFY_EQUIV_INTERNAL: process error: {exc}\n")
+        return 127, False
+
 
 def read_text(path):
     path = Path(path)
@@ -514,20 +519,29 @@ def extract_violated_property(logfile):
 # Verdict classification
 # ============================================================================
 
-def classify_verification(logfile):
+def classify_verification(logfile, property_name=RELATIONAL_PROPERTY):
     text = read_text(logfile)
+    statuses = re.findall(r"(?m)^VERIFICATION (SUCCESSFUL|FAILED)\s*$", text)
+    if len(statuses) != 1 or "VERIFY_EQUIV_INTERNAL:" in text:
+        return "UNKNOWN"
 
-    if "VERIFICATION SUCCESSFUL" in text:
+    if statuses == ["SUCCESSFUL"]:
         return "EQ"
 
-    if "VERIFICATION FAILED" in text:
+    if statuses == ["FAILED"]:
         #
         # Only call it NEQ if OUR relational property is
         # the property that failed.
         #
         # Any other ESBMC failure is conservatively UNKNOWN.
         #
-        if RELATIONAL_PROPERTY in text:
+        # A marker echoed in source/commands is not evidence of a violation.
+        # Match only the diagnostic immediately following a violation location.
+        blocks = re.findall(
+            r"(?m)^\s*Violated property:\s*\n"
+            r"[^\n]*\n([^\n]*)", text,
+        )
+        if blocks and all(line.strip() == property_name for line in blocks):
             return "NEQ"
 
         return "UNKNOWN_PROPERTY_FAILURE"
@@ -588,11 +602,17 @@ def build_harness(params, return_type, domains=()):
     return text
 
 def main():
+    if any(x == "--c-harness" or x.startswith("--c-harness=")
+           for x in sys.argv[1:]):
+        from verify_c_harness import main as c_main
+        return c_main(sys.argv[1:], sys.modules[__name__])
+
     parser = argparse.ArgumentParser(
         prog="verify-equiv",
         description=(
             "Fail-closed experimental Python<->C "
-            "relational equivalence checker."
+            "relational equivalence checker. For reviewed C/C harnesses, "
+            "use --c-harness FILE --help."
         ),
     )
 
@@ -1003,6 +1023,9 @@ def main():
         verify_log
     )
 
+    if (verdict == "EQ" and rc != 0) or (verdict == "NEQ" and rc == 0):
+        verdict = "UNKNOWN"
+
     if verdict == "EQ":
         print("EQ")
         print()
@@ -1016,9 +1039,13 @@ def main():
 
         for name, typ in args.param:
             if typ == "int":
+                lower, upper = next(
+                    ((lo, hi) for n, lo, hi in domains if n == name),
+                    (-2147483648, 2147483647),
+                )
                 print(
                     f"  {name}: shared int32 domain "
-                    f"[-2147483648, 2147483647]"
+                    f"[{lower}, {upper}]"
                 )
 
             else:

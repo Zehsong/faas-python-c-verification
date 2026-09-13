@@ -1,0 +1,25 @@
+test_bad_empty_miss_witness (test_verify_equiv.NativeReplayTests.test_bad_empty_miss_witness) ... ok
+test_bad_miss_hit_miss_preserves_state (test_verify_equiv.NativeReplayTests.test_bad_miss_hit_miss_preserves_state) ... ok
+test_correct_cache_repeated_and_boundary_inputs (test_verify_equiv.NativeReplayTests.test_correct_cache_repeated_and_boundary_inputs) ... ok
+test_invalid_replay_input (test_verify_equiv.NativeReplayTests.test_invalid_replay_input) ... ok
+test_unsigned_wraparound_exception (test_verify_equiv.NativeReplayTests.test_unsigned_wraparound_exception) ... ok
+test_c_adapter_missing_solver_discards_stale_logs (test_verify_equiv.OracleTests.test_c_adapter_missing_solver_discards_stale_logs) ... ok
+test_c_adapter_requires_reachable_observation (test_verify_equiv.OracleTests.test_c_adapter_requires_reachable_observation) ... ok
+test_c_adapter_success_keeps_scope_and_provenance (test_verify_equiv.OracleTests.test_c_adapter_success_keeps_scope_and_provenance) ... ok
+test_c_adapter_target_neq_and_trace (test_verify_equiv.OracleTests.test_c_adapter_target_neq_and_trace) ... ok
+test_c_adapter_timeout_error_rc_and_safety_failure (test_verify_equiv.OracleTests.test_c_adapter_timeout_error_rc_and_safety_failure) ... ok
+test_domains_precede_both_targets_and_preserve_module_entry (test_verify_equiv.OracleTests.test_domains_precede_both_targets_and_preserve_module_entry) ... ok
+test_echoed_marker_does_not_turn_safety_failure_into_neq (test_verify_equiv.OracleTests.test_echoed_marker_does_not_turn_safety_failure_into_neq) ... ok
+test_legacy_cli_scope_reports_actual_domain (test_verify_equiv.OracleTests.test_legacy_cli_scope_reports_actual_domain) ... ok
+test_multiple_properties_with_safety_failure_are_unknown (test_verify_equiv.OracleTests.test_multiple_properties_with_safety_failure_are_unknown) ... ok
+test_nearby_marker_in_results_is_not_a_violated_property (test_verify_equiv.OracleTests.test_nearby_marker_in_results_is_not_a_violated_property) ... ok
+test_process_start_failure (test_verify_equiv.OracleTests.test_process_start_failure) ... ok
+test_saved_source_can_be_reused_in_its_output_directory (test_verify_equiv.OracleTests.test_saved_source_can_be_reused_in_its_output_directory) ... ok
+test_success (test_verify_equiv.OracleTests.test_success) ... ok
+test_target_counterexample (test_verify_equiv.OracleTests.test_target_counterexample) ... ok
+test_timeout_and_conflicting_statuses_are_unknown (test_verify_equiv.OracleTests.test_timeout_and_conflicting_statuses_are_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.105s
+
+OK

@@ -1,0 +1,6 @@
+good_sequence: UNKNOWN (expected EQ)
+bad_sequence: UNKNOWN (expected NEQ)
+good_induction: UNKNOWN (expected EQ)
+bad_induction: UNKNOWN (expected NEQ)
+bad_conditional_step: UNKNOWN (expected EQ)
+bad_empty_miss: UNKNOWN (expected NEQ)

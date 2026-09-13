@@ -1,0 +1,50 @@
+[
+  {
+    "entry": "good_sequence",
+    "expected": "EQ",
+    "actual": "UNKNOWN",
+    "passed": false,
+    "reason": "ESBMC executable not found: /workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\same-language-cache\\good_sequence"
+  },
+  {
+    "entry": "bad_sequence",
+    "expected": "NEQ",
+    "actual": "UNKNOWN",
+    "passed": false,
+    "reason": "ESBMC executable not found: /workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\same-language-cache\\bad_sequence"
+  },
+  {
+    "entry": "good_induction",
+    "expected": "EQ",
+    "actual": "UNKNOWN",
+    "passed": false,
+    "reason": "ESBMC executable not found: /workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\same-language-cache\\good_induction"
+  },
+  {
+    "entry": "bad_induction",
+    "expected": "NEQ",
+    "actual": "UNKNOWN",
+    "passed": false,
+    "reason": "ESBMC executable not found: /workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\same-language-cache\\bad_induction"
+  },
+  {
+    "entry": "bad_conditional_step",
+    "expected": "EQ",
+    "actual": "UNKNOWN",
+    "passed": false,
+    "reason": "ESBMC executable not found: /workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\same-language-cache\\bad_conditional_step"
+  },
+  {
+    "entry": "bad_empty_miss",
+    "expected": "NEQ",
+    "actual": "UNKNOWN",
+    "passed": false,
+    "reason": "ESBMC executable not found: /workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\same-language-cache\\bad_empty_miss"
+  }
+]

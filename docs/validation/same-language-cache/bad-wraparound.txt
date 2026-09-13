@@ -1,0 +1,2 @@
+x=4294967295 hit=0 original=0 cached=0 invariant=1
+x=4294967295 hit=1 original=0 cached=0 invariant=1

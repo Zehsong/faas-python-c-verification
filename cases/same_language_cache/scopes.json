@@ -1,0 +1,49 @@
+{
+  "good_sequence": {
+    "inputs": "uint32_t values in [0, 4294967295]; addition modulo 2^32",
+    "observations": "return value of each call; cache is private",
+    "assumptions": "sequential calls; pure original; no I/O, library calls, concurrency or external cache mutation",
+    "initial_state": "empty cache {valid=false, key=0, value=0}, retained between calls",
+    "bound": "exactly three symbolic calls, no loops",
+    "variant": "correct"
+  },
+  "bad_sequence": {
+    "inputs": "uint32_t values in [0, 4294967295]; addition modulo 2^32",
+    "observations": "return value of each call; cache is private",
+    "assumptions": "sequential calls; pure original; no I/O, library calls, concurrency or external cache mutation",
+    "initial_state": "empty cache {valid=false, key=0, value=0}, retained between calls",
+    "bound": "exactly three symbolic calls, no loops",
+    "variant": "miss returns 0"
+  },
+  "good_induction": {
+    "inputs": "uint32_t values in [0, 4294967295]; addition modulo 2^32",
+    "observations": "return value of each call; cache is private",
+    "assumptions": "sequential calls; pure original; no I/O, library calls, concurrency or external cache mutation",
+    "initial_state": "base: empty cache; step: arbitrary state with !valid || value == original(key)",
+    "bound": "initialization obligation plus one symbolic step with invariant preservation; no loops",
+    "interpretation": "If EQ: initialization and step obligations justify induction over finite sequential calls; invariant supplied by hand"
+  },
+  "bad_induction": {
+    "inputs": "uint32_t values in [0, 4294967295]; addition modulo 2^32",
+    "observations": "return value of each call; cache is private",
+    "assumptions": "sequential calls; pure original; no I/O, library calls, concurrency or external cache mutation",
+    "initial_state": "base: empty cache; step: arbitrary state with !valid || value == original(key)",
+    "bound": "initialization obligation plus one symbolic step with invariant preservation; no loops",
+    "interpretation": "A target violation refutes unconditional step equivalence"
+  },
+  "bad_conditional_step": {
+    "inputs": "uint32_t values in [0, 4294967295]; addition modulo 2^32",
+    "observations": "return value of each call; cache is private",
+    "assumptions": "sequential calls; pure original; no I/O, library calls, concurrency or external cache mutation; (valid && key == x) || x == UINT32_MAX assumed before the step",
+    "initial_state": "base: empty cache; step: arbitrary state with !valid || value == original(key)",
+    "bound": "initialization obligation plus one symbolic step with invariant preservation; no loops",
+    "interpretation": "If EQ: local conditional equivalence and invariant preservation; no automatic condition discovery"
+  },
+  "bad_empty_miss": {
+    "inputs": "x = 1",
+    "observations": "return value of each call; cache is private",
+    "assumptions": "sequential calls; pure original; no I/O, library calls, concurrency or external cache mutation",
+    "initial_state": "empty cache {valid=false, key=0, value=0}",
+    "bound": "one call; fixed replay witness"
+  }
+}
