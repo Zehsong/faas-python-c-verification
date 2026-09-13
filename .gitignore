@@ -6,6 +6,7 @@ __pycache__/
 # Verification temporary runs
 .verify-equiv-runs/
 .verify-list-int-runs/
+evidence-downloads/
 
 # Common temporary files
 *.tmp

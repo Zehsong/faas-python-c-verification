@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "name": "pure_cache",
+  "fields": {"x": "uint32_t", "valid": "bool", "key": "uint32_t", "value": "uint32_t"},
+  "state_fields": ["valid", "key", "value"],
+  "call_args": ["x"],
+  "initial_state": {"valid": 0, "key": 0, "value": 0},
+  "variants": {"good": "cached_good", "bad_miss": "cached_bad", "bad_hit": "cached_bad_hit", "bad_miss_two": "cached_bad_miss_two"}
+}

@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "name": "config_cache",
+  "fields": {"x": "uint32_t", "valid": "bool", "key": "uint32_t", "value": "uint32_t", "config": "uint32_t", "cached_config": "uint32_t"},
+  "state_fields": ["valid", "key", "value", "cached_config"],
+  "call_args": ["x", "config"],
+  "initial_state": {"valid": 0, "key": 0, "value": 0, "cached_config": 0},
+  "variants": {"good": "cached_good", "stale": "cached_stale"}
+}

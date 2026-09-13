@@ -142,7 +142,8 @@ $$
 - 新增借鉴 Agentic Concolic Execution 的轨迹引导条件 finder：原生执行提供搜索线索，ESBMC 独立证明候选区域及最终条件。当前是无需 LLM API 的缓存族基线，支持可选 agent 假设文件；不表示完整多 agent 系统已实现。
 - [方法、证明边界与 Codespace 测试命令](docs/TRACE_GUIDED_FINDER.md)。新 finder 的正式 ESBMC 验收结果以实际运行日志为准。
 - 用户已反馈提交 `94188b7` 的 `FINDER ACCEPTANCE: 5/5 passed`；完整 Codespace 日志仍由用户保存。
-- [配置变化缓存实验与独立归档命令](cases/config_cache/README.md)：复用搜索/证明引擎，新增当前配置与历史缓存配置的手工模型。本地 48 项测试通过；新案例的 ESBMC 验收待 Codespace 运行。
+- [配置变化缓存实验与独立归档命令](cases/config_cache/README.md)：复用搜索/证明引擎，新增当前配置与历史缓存配置的手工模型；该阶段本地 48 项测试通过。
+- 用户已反馈配置缓存阶段 `CONFIG CACHE ACCEPTANCE: 3/3 passed`。随后新增[共享 cache proof sketch](docs/CACHE_SKETCH_REUSE.md)：两个实例使用同一证明模板，保存模板与绑定哈希，并增加正反例控制。本地共 53 项测试通过；这次模板重构的 ESBMC 回归待 Codespace 运行。
 
 ### 交接材料中的历史基础
 

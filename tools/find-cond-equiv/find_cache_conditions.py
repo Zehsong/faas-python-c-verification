@@ -26,11 +26,11 @@ import verify_equiv as oracle
 from c_obligation import check as check_obligation
 from predicate_search import Atom, FIELDS, UINT32_MAX, cube_expression, initial_atoms, matches, search
 
-VARIANTS = {"good": "cached_good", "bad_miss": "cached_bad",
-            "bad_hit": "cached_bad_hit", "bad_miss_two": "cached_bad_miss_two"}
-PROPERTIES = {"feasible": "__FINDER_FEASIBLE__", "equal": oracle.RELATIONAL_PROPERTY,
-              "different": "__FINDER_ALL_DIFFERENT__", "init": "__FINDER_INITIALIZED__",
-              "preservation": "__FINDER_PRESERVED__", "expected": "__FINDER_EXPECTED_CONDITION__"}
+from cache_sketch import CacheSketch, PROPERTIES
+
+SKETCH = CacheSketch(CASE / "sketch.json")
+VARIANTS = SKETCH.data["variants"]
+assert PROPERTIES["equal"] == oracle.RELATIONAL_PROPERTY
 
 
 def save_json(path, value):
@@ -81,41 +81,11 @@ def witness_from_log(text, fields=FIELDS):
 
 
 def make_harness(model, variant, state_mode, kind, condition="true", expected=None):
-    """Only this reviewed template, not inferred path summaries, defines semantics."""
-    if kind not in PROPERTIES or variant not in VARIANTS:
-        raise ValueError("unknown obligation or variant")
-    if kind == "init":
-        body = 'Cache cache = {false, 0, 0};\n__ESBMC_assert(invariant(&cache), "' + PROPERTIES[kind] + '");'
-    else:
-        state = ("bool finder_valid = false;\nuint32_t finder_key = 0, finder_value = 0;"
-                 if state_mode == "empty" else
-                 "bool finder_valid = nondet_bool();\nuint32_t finder_key = nondet_u32();\nuint32_t finder_value = nondet_u32();")
-        body = f"""uint32_t finder_x = nondet_u32();
-{state}
-Cache cache = {{finder_valid, finder_key, finder_value}};
-__ESBMC_assume(invariant(&cache));
-__ESBMC_assume({condition});
-"""
-        if kind == "feasible":
-            body += f'__ESBMC_assert(false, "{PROPERTIES[kind]}");'
-        elif kind == "expected":
-            if expected is None:
-                raise ValueError("expected-condition obligation requires an expression")
-            body += f'__ESBMC_assert({expected}, "{PROPERTIES[kind]}");'
-        else:
-            body += f"""uint32_t r_original = original(finder_x);
-uint32_t r_cached = {VARIANTS[variant]}(&cache, finder_x);
-__ESBMC_assert(invariant(&cache), "{PROPERTIES['preservation']}");
-"""
-            if kind in ("equal", "different"):
-                relation = "==" if kind == "equal" else "!="
-                body += f'__ESBMC_assert(r_original {relation} r_cached, "{PROPERTIES[kind]}");'
-    return model + "\nextern uint32_t nondet_u32(void);\nextern bool nondet_bool(void);\n" + \
-        "extern void __ESBMC_assume(bool);\nextern void __ESBMC_assert(bool, const char *);\n" + \
-        "void finder_entry(void)\n{\n" + body + "\n}\n"
+    return SKETCH.render(model, variant, state_mode, kind, condition, expected)
 
 
 class CacheBackend:
+    sketch = SKETCH
     case = CASE
     fields = FIELDS
     numeric_fields = Atom.numeric_fields
@@ -132,6 +102,8 @@ class CacheBackend:
 
     def __init__(self, args, workdir):
         self.args, self.workdir = args, Path(workdir)
+        if tuple(self.sketch.data["fields"]) != tuple(self.fields) or self.sketch.data["variants"] != self.variants:
+            raise ValueError("adapter fields/variants disagree with sketch bindings")
         self.deadline = time.monotonic() + args.max_seconds
         self.samples, self.queries, self.replays = [], [], []
         self.seen = set()
@@ -140,6 +112,10 @@ class CacheBackend:
         self.probe_bytes = (self.case / "cache_probe.c").read_bytes()
         self.inputs = self.workdir / "inputs"
         self.inputs.mkdir()
+        save_json(self.inputs / "sketch.json", self.sketch.data)
+        (self.inputs / "cache_sketch.py").write_bytes((ROOT / "tools/find-cond-equiv/cache_sketch.py").read_bytes())
+        self.sketch_manifest = self.sketch.manifest()
+        save_json(self.workdir / "sketch-manifest.json", self.sketch_manifest)
         (self.inputs / "cache_model.h").write_bytes(self.model_bytes)
         (self.inputs / "cache_probe.c").write_bytes(self.probe_bytes)
         self.scope = {
@@ -333,6 +309,7 @@ def run(args, backend_type=CacheBackend):
             raise ValueError("initial vocabulary exceeds --max-predicates")
         backend = backend_type(args, workdir)
         report["scope"] = backend.scope
+        report["sketch"] = backend.sketch_manifest
         backend.prepare()
         backend.replay(backend.default_seeds(args.state_mode))
         backend.replay(extra_seeds, origin="untrusted_hypotheses")

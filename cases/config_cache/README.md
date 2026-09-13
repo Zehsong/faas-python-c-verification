@@ -34,7 +34,8 @@ The independent acceptance runner checks these expected answers only after searc
 | stale / invariant | `!(valid && key == x) || config == cached_config` |
 | stale / empty | true |
 
-These are expected results until Codespace ESBMC reports them as proved. A predicate
+The user reported 3/3 passing for this stage at `7ca990d`. The subsequent shared
+[sketch refactoring](../../docs/CACHE_SKETCH_REUSE.md) requires a fresh solver run. A predicate
 over `x` alone cannot distinguish a fresh and stale cache for the same input.
 Even an exact result here covers only this return observation and declared domain.
 An unrestricted sequence theorem for conditional variants is not claimed.
@@ -53,7 +54,7 @@ Then run the new stage using the existing custom binary:
 bash cases/config_cache/test_finder.sh /workspaces/esbmc-current/build/src/esbmc/esbmc
 ```
 
-This runs 48 local/native tests, repeats the original five-case solver acceptance,
+This runs the local/native tests (now 53), repeats the original five-case solver acceptance,
 and runs three new solver cases. Each stage has a fresh directory; the previous
 baseline remains untouched. Expected summaries are `FINDER ACCEPTANCE: 5/5 passed`
 and `CONFIG CACHE ACCEPTANCE: 3/3 passed`.

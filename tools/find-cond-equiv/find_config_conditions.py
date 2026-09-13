@@ -5,7 +5,10 @@ import sys
 from find_cache_conditions import CacheBackend, PROPERTIES, ROOT, parse_args as base_args, run as base_run
 from predicate_search import Atom, UINT32_MAX
 
-VARIANTS = {"good": "cached_good", "stale": "cached_stale"}
+from cache_sketch import CacheSketch
+
+SKETCH = CacheSketch(ROOT / "cases/config_cache/sketch.json")
+VARIANTS = SKETCH.data["variants"]
 FIELDS = ("x", "valid", "key", "value", "config", "cached_config")
 
 
@@ -37,40 +40,11 @@ def seed_in_domain(row, state_mode):
 
 
 def make_harness(model, variant, state_mode, kind, condition="true", expected=None):
-    if kind not in PROPERTIES or variant not in VARIANTS or state_mode not in ("empty", "invariant"):
-        raise ValueError("unknown obligation, variant or state mode")
-    if kind == "init":
-        body = f'Cache cache = {{false, 0, 0, 0}};\n__ESBMC_assert(invariant(&cache), "{PROPERTIES[kind]}");'
-    else:
-        body = "uint32_t finder_x = nondet_u32();\nuint32_t finder_config = nondet_u32();\n"
-        for field in ("valid", "key", "value", "cached_config"):
-            ctype = "bool" if field == "valid" else "uint32_t"
-            init = "0" if state_mode == "empty" else "nondet_bool()" if field == "valid" else "nondet_u32()"
-            body += f"{ctype} finder_{field} = {init};\n"
-        body += f"""Cache cache = {{finder_valid, finder_key, finder_value, finder_cached_config}};
-__ESBMC_assume(invariant(&cache));
-__ESBMC_assume({condition});
-"""
-        if kind == "feasible":
-            body += f'__ESBMC_assert(false, "{PROPERTIES[kind]}");'
-        elif kind == "expected":
-            if expected is None:
-                raise ValueError("expected expression required")
-            body += f'__ESBMC_assert({expected}, "{PROPERTIES[kind]}");'
-        else:
-            body += f"""uint32_t r_original = original(finder_x, finder_config);
-uint32_t r_cached = {VARIANTS[variant]}(&cache, finder_x, finder_config);
-__ESBMC_assert(invariant(&cache), "{PROPERTIES['preservation']}");
-"""
-            if kind in ("equal", "different"):
-                relation = "==" if kind == "equal" else "!="
-                body += f'__ESBMC_assert(r_original {relation} r_cached, "{PROPERTIES[kind]}");'
-    return model + "\nextern uint32_t nondet_u32(void);\nextern bool nondet_bool(void);\n" + \
-        "extern void __ESBMC_assume(bool);\nextern void __ESBMC_assert(bool, const char *);\n" + \
-        "void finder_entry(void)\n{\n" + body + "\n}\n"
+    return SKETCH.render(model, variant, state_mode, kind, condition, expected)
 
 
 class ConfigBackend(CacheBackend):
+    sketch = SKETCH
     case = ROOT / "cases/config_cache"
     fields = FIELDS
     numeric_fields = ConfigAtom.numeric_fields
