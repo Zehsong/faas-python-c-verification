@@ -73,4 +73,5 @@ Windows/MSVC **69 项测试通过**，包括原 63 项与新增 6 项。新增�
 保留，以及真实 C 取模表达式对 0..255 和 UINT32_MAX 的求值。三个
 真实 C 候选也在有限测试域上验证了取模词汇搜索的结果。
 
-本地未运行 ESBMC，尚未取得 modulo 的正式验收或性能结果。
+本地未运行 ESBMC。后续用户在 Codespace 反馈 **24/24 certified，paired
+inputs match=True**；测量、来源和原始证据位置见[用户结果记录](../../docs/validation/vocabulary-comparison/user-reported-results.md)。该记录是用户日志转录，不是本地重新运行的正式证明。
