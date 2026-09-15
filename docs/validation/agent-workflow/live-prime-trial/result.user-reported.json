@@ -1,0 +1,208 @@
+{
+  "status": "EXACT",
+  "goal_reached": true,
+  "phase": "READY",
+  "condition": "((x <= 31) || (x % 2 == 0) || (x % 3 == 0) || (x % 5 == 0) || (x % 7 == 0) || (x % 11 == 0))",
+  "scope": {
+    "language": "C",
+    "research_scope": "same-language equivalence; C is the current backend",
+    "inputs": "x:uint32_t",
+    "domain": [
+      0,
+      127
+    ],
+    "observations": "boolean return value",
+    "initial_state": "none",
+    "assumptions": "fixed read-only tables; no external state",
+    "bound": "one call; unwind=13; unwinding and safety checks enabled",
+    "completeness": "EXACT only within the declared finite input domain",
+    "model_sha256": "4925403b1fee6d28ee947ce5b6e0e4ae32ec8ed80e6299444693d4617a2614d5",
+    "probe_sha256": "1f8a3ff4cbc24b036be986a4de2b199b86b7be8485ab240e81a9611135e6541e",
+    "trace_schema": "r_cached is the legacy field name for the candidate result; no cache is involved",
+    "vocabulary": "baseline"
+  },
+  "queries_used": 4,
+  "active_seconds": 1.1177481559998341,
+  "rounds": 1,
+  "best_result": {
+    "status": "EXACT",
+    "candidate": "((x <= 31) || (x % 2 == 0) || (x % 3 == 0) || (x % 5 == 0) || (x % 7 == 0) || (x % 11 == 0))",
+    "candidate_c": "((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0)))",
+    "checks": {
+      "feasible": {
+        "status": "REFUTED",
+        "returncode": 1,
+        "timed_out": false,
+        "property": "__FINDER_FEASIBLE__",
+        "command": [
+          "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/harness.c",
+          "--function",
+          "finder_entry",
+          "--z3",
+          "--unwind",
+          "13",
+          "--overflow-check"
+        ],
+        "log": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/verify.log",
+        "violation": [
+          "Violated property:",
+          "file /workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/harness.c line 56 column 1 function finder_entry",
+          "__FINDER_FEASIBLE__",
+          "0",
+          "** Results:",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/harness.c, function finder_entry",
+          "FAILED       [finder_entry.assertion.1]  line 56  __FINDER_FEASIBLE__"
+        ],
+        "kind": "feasible",
+        "condition_c": "((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0)))",
+        "source_sha256": "dc72f764e7fb912926d9cafd6c07941a09a261a5ed82aa8431718cea1ff75584",
+        "witness": {
+          "x": 12
+        },
+        "native_replay": {
+          "x": 12,
+          "r_original": 0,
+          "r_cached": 0
+        }
+      },
+      "sufficiency": {
+        "status": "PROVED",
+        "returncode": 0,
+        "timed_out": false,
+        "property": "__VERIFY_EQUIV_RELATIONAL_PROPERTY__",
+        "command": [
+          "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-001-equal/harness.c",
+          "--function",
+          "finder_entry",
+          "--z3",
+          "--unwind",
+          "13",
+          "--overflow-check"
+        ],
+        "log": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-001-equal/verify.log",
+        "violation": [],
+        "kind": "equal",
+        "condition_c": "((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0)))",
+        "source_sha256": "a6e827179c3c0606ea53d2880fda9359958544f06b692984cbdf0147065c9792"
+      },
+      "complement": {
+        "status": "PROVED",
+        "returncode": 0,
+        "timed_out": false,
+        "property": "__FINDER_ALL_DIFFERENT__",
+        "command": [
+          "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-002-different/harness.c",
+          "--function",
+          "finder_entry",
+          "--z3",
+          "--unwind",
+          "13",
+          "--overflow-check"
+        ],
+        "log": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-002-different/verify.log",
+        "violation": [],
+        "kind": "different",
+        "condition_c": "!(((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0))))",
+        "source_sha256": "a871b3577957949303d2cfa14fc71a7b8492b9f81ed46ac07edfa587f673206c"
+      }
+    },
+    "feedback": [],
+    "round": 1,
+    "artifacts": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001"
+  },
+  "latest_feedback": {
+    "status": "EXACT",
+    "candidate": "((x <= 31) || (x % 2 == 0) || (x % 3 == 0) || (x % 5 == 0) || (x % 7 == 0) || (x % 11 == 0))",
+    "candidate_c": "((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0)))",
+    "checks": {
+      "feasible": {
+        "status": "REFUTED",
+        "returncode": 1,
+        "timed_out": false,
+        "property": "__FINDER_FEASIBLE__",
+        "command": [
+          "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/harness.c",
+          "--function",
+          "finder_entry",
+          "--z3",
+          "--unwind",
+          "13",
+          "--overflow-check"
+        ],
+        "log": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/verify.log",
+        "violation": [
+          "Violated property:",
+          "file /workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/harness.c line 56 column 1 function finder_entry",
+          "__FINDER_FEASIBLE__",
+          "0",
+          "** Results:",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-000-feasible/harness.c, function finder_entry",
+          "FAILED       [finder_entry.assertion.1]  line 56  __FINDER_FEASIBLE__"
+        ],
+        "kind": "feasible",
+        "condition_c": "((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0)))",
+        "source_sha256": "dc72f764e7fb912926d9cafd6c07941a09a261a5ed82aa8431718cea1ff75584",
+        "witness": {
+          "x": 12
+        },
+        "native_replay": {
+          "x": 12,
+          "r_original": 0,
+          "r_cached": 0
+        }
+      },
+      "sufficiency": {
+        "status": "PROVED",
+        "returncode": 0,
+        "timed_out": false,
+        "property": "__VERIFY_EQUIV_RELATIONAL_PROPERTY__",
+        "command": [
+          "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-001-equal/harness.c",
+          "--function",
+          "finder_entry",
+          "--z3",
+          "--unwind",
+          "13",
+          "--overflow-check"
+        ],
+        "log": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-001-equal/verify.log",
+        "violation": [],
+        "kind": "equal",
+        "condition_c": "((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0)))",
+        "source_sha256": "a6e827179c3c0606ea53d2880fda9359958544f06b692984cbdf0147065c9792"
+      },
+      "complement": {
+        "status": "PROVED",
+        "returncode": 0,
+        "timed_out": false,
+        "property": "__FINDER_ALL_DIFFERENT__",
+        "command": [
+          "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+          "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-002-different/harness.c",
+          "--function",
+          "finder_entry",
+          "--z3",
+          "--unwind",
+          "13",
+          "--overflow-check"
+        ],
+        "log": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001/query-002-different/verify.log",
+        "violation": [],
+        "kind": "different",
+        "condition_c": "!(((finder_x <= UINT32_C(31)) || (finder_x % UINT32_C(2) == UINT32_C(0)) || (finder_x % UINT32_C(3) == UINT32_C(0)) || (finder_x % UINT32_C(5) == UINT32_C(0)) || (finder_x % UINT32_C(7) == UINT32_C(0)) || (finder_x % UINT32_C(11) == UINT32_C(0))))",
+        "source_sha256": "a871b3577957949303d2cfa14fc71a7b8492b9f81ed46ac07edfa587f673206c"
+      }
+    },
+    "feedback": [],
+    "round": 1,
+    "artifacts": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh/round-001"
+  },
+  "artifacts": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh",
+  "session_id": "83bce4bd-d6d6-4502-b5f1-cee724b6bd44",
+  "agent_transport": "external JSON files; no LLM API invoked"
+}

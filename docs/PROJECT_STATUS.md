@@ -77,6 +77,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Extended prime acceptance | 8/8 | User-pasted Codespace output |
 | Vocabulary comparison | 24/24 certified; paired inputs match=True | User-pasted summary; [transcribed measurements](validation/vocabulary-comparison/user-reported-results.md) |
 | Agent workflow protocol | 8/8 passed, including expected missing-solver UNKNOWN | [User-pasted summary](validation/agent-workflow/user-reported-results.md); original archive not independently opened here |
+| External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
 `/workspaces/faas-python-c-verification`, modified ESBMC at
@@ -93,8 +94,9 @@ Keep the working Codespace and its customized binary/source and evidence.
 
 1. Protocol acceptance is now user-reported 8/8 on Codespace; preserve its archive.
    No local formal rerun or independent archive audit was performed here.
-2. Try real external-agent proposals through the new session interface, recording
-   prompts and interventions separately from scripted control results.
+2. The first external-chat proposal session now reports EXACT in one round. Stop
+   that completed session; retain its original artifacts. It used a familiar
+   candidate and does not establish unseen-case discovery or agent speedup.
 3. Build the generic scalar C contract/binding layer with agent-assisted config
    and a neutral runner; then test new pairs without editing the engine.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch

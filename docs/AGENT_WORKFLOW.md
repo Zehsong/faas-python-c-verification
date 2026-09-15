@@ -119,6 +119,11 @@ benchmark**. No performance improvement or LLM accuracy is measured here.
 
 ## Running a real agent-assisted session
 
+The first such trial has now returned EXACT in one round. Its [context, proposal,
+result and limitations](validation/agent-workflow/live-prime-trial/README.md) are
+recorded separately from scripted acceptance. The commands below describe how
+to start a fresh session, not an instruction to continue the completed one.
+
 Start a prime session using the existing modified ESBMC:
 
 ```bash
@@ -171,10 +176,10 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
 ## Next implementation steps
 
 1. Protocol acceptance is user-reported 8/8; preserve its evidence archive.
-2. Try an actual Codex-authored proposal loop and record prompts, proposals,
-   feedback, human interventions, total time and model usage when available.
-   A trial on the familiar prime case checks integration only; prior knowledge
-   of its answer rules it out as a held-out discovery/performance measurement.
+2. First external-chat trial completed: EXACT in one round on the familiar prime
+   case. Preserve its artifacts. Prior knowledge of the answer rules it out as a
+   held-out discovery/performance measurement; unattended transport and genuine
+   counterexample-driven refinement remain separate evaluation tasks.
 3. Introduce the generic C scalar contract/binding layer with controlled harness
    generation; agent-assisted configuration should reduce adapter-writing work.
 4. Add a provider transport for unattended rounds after the file protocol is

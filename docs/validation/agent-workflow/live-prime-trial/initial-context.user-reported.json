@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "session_id": "83bce4bd-d6d6-4502-b5f1-cee724b6bd44",
+  "next_round": 1,
+  "contract": {
+    "case": "prime",
+    "variant": "truncated",
+    "domain": "0:127",
+    "state_mode": "invariant",
+    "goal": "exact",
+    "esbmc": "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+    "cc": "cc",
+    "timeout": 30,
+    "max_seconds": 300,
+    "max_queries": 64,
+    "max_rounds": 8
+  },
+  "scope": {
+    "language": "C",
+    "research_scope": "same-language equivalence; C is the current backend",
+    "inputs": "x:uint32_t",
+    "domain": [
+      0,
+      127
+    ],
+    "observations": "boolean return value",
+    "initial_state": "none",
+    "assumptions": "fixed read-only tables; no external state",
+    "bound": "one call; unwind=13; unwinding and safety checks enabled",
+    "completeness": "EXACT only within the declared finite input domain",
+    "model_sha256": "4925403b1fee6d28ee947ce5b6e0e4ae32ec8ed80e6299444693d4617a2614d5",
+    "probe_sha256": "1f8a3ff4cbc24b036be986a4de2b199b86b7be8485ab240e81a9611135e6541e",
+    "trace_schema": "r_cached is the legacy field name for the candidate result; no cache is involved",
+    "vocabulary": "baseline"
+  },
+  "model_source": "#ifndef EQUIV_PRIME_MODEL_H\n#define EQUIV_PRIME_MODEL_H\n#include <stdbool.h>\n#include <stdint.h>\n\n/* Reviewed example, not an extracted real-project optimization. */\nstatic bool original(uint32_t x)\n{\n    if (x < 2) return false;\n    for (uint32_t d = 2; d <= x / d; ++d)\n        if (x % d == 0) return false;\n    return true;\n}\n\nstatic const bool prime_table[32] = {\n    false, false, true, true, false, true, false, true,\n    false, false, false, true, false, true, false, false,\n    false, true, false, true, false, false, false, true,\n    false, false, false, false, false, true, false, true\n};\n\nstatic bool lookup_fallback(uint32_t x)\n{\n    if (x < 32) return prime_table[x];\n    return original(x);\n}\n\nstatic bool lookup_truncated(uint32_t x)\n{\n    if (x < 32) return prime_table[x];\n    return false;\n}\n\nstatic const bool mutant_table[32] = {\n    false, false, true, true, false, true, false, true,\n    false, true, false, true, false, true, false, false,\n    false, true, false, true, false, false, false, true,\n    false, false, false, false, false, true, false, true\n};\n\nstatic bool lookup_mutant(uint32_t x)\n{\n    if (x < 32) return mutant_table[x];\n    return original(x);\n}\n#endif\n",
+  "samples": [
+    {
+      "x": 0,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 1,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 2,
+      "r_original": 1,
+      "r_cached": 1
+    },
+    {
+      "x": 3,
+      "r_original": 1,
+      "r_cached": 1
+    },
+    {
+      "x": 7,
+      "r_original": 1,
+      "r_cached": 1
+    },
+    {
+      "x": 8,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 15,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 16,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 30,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 31,
+      "r_original": 1,
+      "r_cached": 1
+    },
+    {
+      "x": 32,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 33,
+      "r_original": 0,
+      "r_cached": 0
+    },
+    {
+      "x": 127,
+      "r_original": 1,
+      "r_cached": 0
+    }
+  ],
+  "progress": {
+    "status": "UNKNOWN",
+    "goal_reached": false,
+    "phase": "READY",
+    "condition": null,
+    "scope": {
+      "language": "C",
+      "research_scope": "same-language equivalence; C is the current backend",
+      "inputs": "x:uint32_t",
+      "domain": [
+        0,
+        127
+      ],
+      "observations": "boolean return value",
+      "initial_state": "none",
+      "assumptions": "fixed read-only tables; no external state",
+      "bound": "one call; unwind=13; unwinding and safety checks enabled",
+      "completeness": "EXACT only within the declared finite input domain",
+      "model_sha256": "4925403b1fee6d28ee947ce5b6e0e4ae32ec8ed80e6299444693d4617a2614d5",
+      "probe_sha256": "1f8a3ff4cbc24b036be986a4de2b199b86b7be8485ab240e81a9611135e6541e",
+      "trace_schema": "r_cached is the legacy field name for the candidate result; no cache is involved",
+      "vocabulary": "baseline"
+    },
+    "queries_used": 1,
+    "active_seconds": 0.3920331150002312,
+    "rounds": 0,
+    "best_result": null,
+    "latest_feedback": null,
+    "artifacts": "/workspaces/faas-python-c-verification/.verify-equiv-runs/agent-live/run-l0selh/session-xsryjyoh",
+    "session_id": "83bce4bd-d6d6-4502-b5f1-cee724b6bd44",
+    "agent_transport": "external JSON files; no LLM API invoked"
+  },
+  "identity": {
+    "files": {
+      "cases/config_cache/sketch.json": "2a96201af20c02b55bda50a2a9ba1b145cf1746cda60f81bcc69673af9266ae2",
+      "cases/prime_lookup/prime_model.h": "4925403b1fee6d28ee947ce5b6e0e4ae32ec8ed80e6299444693d4617a2614d5",
+      "cases/prime_lookup/prime_probe.c": "1f8a3ff4cbc24b036be986a4de2b199b86b7be8485ab240e81a9611135e6541e",
+      "cases/same_language_cache/sketch.json": "11581bd1336cb32909aa0a455f4c1dd52394851f01263bc8d80298c05ab9e61c",
+      "tools/find-cond-equiv/agent_conditions.py": "e5a0d9ec4b8a2463a689a8c151354ec875c414f4b747de039bd80888ea5649c5",
+      "tools/find-cond-equiv/agent_workflow.py": "829a99229cda9592449306eaa0f7958b0e42b83ae951c990f65ec4548a8e74cd",
+      "tools/find-cond-equiv/cache_sketch.py": "596f85d2781154a981b7d54595c5653efd4148d283072ce5df527cfa0b5499a5",
+      "tools/find-cond-equiv/find_cache_conditions.py": "b4380a28fc65f2cb4a9a97dddc77c42b25e61955161c366ae56df31cb681139f",
+      "tools/find-cond-equiv/find_cond_equiv.py": "f0c5a0a3a23ca460637231e465ad823e460109270978a4f34ef3ade506fe52f9",
+      "tools/find-cond-equiv/find_config_conditions.py": "dd7a193649bf22cba2cc85de0554022f144c96a4f79da7492fd1347b4cce3f63",
+      "tools/find-cond-equiv/find_prime_conditions.py": "a815def7f43c1f20a6d7c2bf071364abb94b5ddae53be2201a0b756b847a49b0",
+      "tools/find-cond-equiv/predicate_search.py": "d715382aef9cbee64ad7cfbeb2a17ea26c953ff352c31ef960f7806cdad804ad",
+      "tools/verify-equiv/c_obligation.py": "cc8328944aa6066ab44a84f60074781806c1c2c879a6797a88e4433b6e1d80de",
+      "tools/verify-equiv/verify_equiv.py": "11c5e68d6ab311e2fcd21c2dfa4347cccf1a2f9c87e750e7a7f4bca924811dc5"
+    },
+    "binaries": {
+      "esbmc": {
+        "path": "/workspaces/esbmc-current/build/src/esbmc/esbmc",
+        "sha256": "909682a1a99cd4a01d7c099ee5629dc65cb11993965eaf1ecda33e924c0fe3ee"
+      },
+      "cc": {
+        "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26"
+      }
+    },
+    "python": "3.12.1 (main, Mar 11 2026, 12:17:56) [GCC 13.3.0]",
+    "contract_sha256": "f8840ddc142b23bd5dbf8b0cca836a7999e6fb984d258242b04b7a88d837c913"
+  },
+  "proposal_schema": {
+    "session_id": "83bce4bd-d6d6-4502-b5f1-cee724b6bd44",
+    "round": 1,
+    "condition": true,
+    "seeds": []
+  },
+  "condition_grammar": "JSON booleans, supported entry-state atom strings, or {all:[...]}, {any:[...]}, {not:...}",
+  "allowed_atoms": {
+    "numeric_fields": [
+      "x"
+    ],
+    "examples": [
+      "x == 0",
+      "x == 1",
+      "x <= 31"
+    ],
+    "modulo": "x % d == r, 2<=d<=16 and 0<=r<d"
+  },
+  "instructions": "Propose a condition and optional entry-state inputs. true in the schema is only a syntax example. Stop if progress.goal_reached is true. Read source and feedback; do not assume it is correct. Do not edit runner-owned session files, sources, scope, assumptions or verification flags. Submit only a separate proposal JSON. No verdicts, output labels, code or expected-answer files are accepted."
+}

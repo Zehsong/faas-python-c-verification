@@ -5,6 +5,20 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — First live external-chat candidate certified
+
+- Recorded the user-reported prime/truncated `0..127` session: EXACT, one round,
+  four total queries and 1.1177481559998341 runner active seconds. Candidate
+  feasibility, sufficiency and complement results agree with the final status.
+- Saved the [reported context/result and assistant proposal](docs/validation/agent-workflow/live-prime-trial/README.md),
+  with source/tool identities, scope, provenance and original artifact location.
+  Raw remote solver logs and the submitted proposal file were not fetched.
+- This is a successful external-chat integration trial using a known formula;
+  no unseen-case discovery, autonomous invocation or speedup is claimed.
+- Documentation/data only: JSON consistency, relative links and whitespace
+  checked. No runtime changes or local solver rerun. Next priority: generic C
+  scalar bindings/configuration and controlled harness generation.
+
 ## 2026-09-16 — Codespace agent-workflow acceptance reported
 
 - Recorded the user's **AGENT WORKFLOW ACCEPTANCE: 8/8 passed**, associated with
