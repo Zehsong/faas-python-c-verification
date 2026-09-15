@@ -2,7 +2,8 @@
 
 Generic C scalar contracts are now available with `start --case c --contract`;
 see [C scalar workflow](C_SCALAR_TOOL.md). The original adapters and commands below
-remain supported. New scalar formal acceptance is pending; local controls pass.
+remain supported. Scalar acceptance is now [user-reported 8/8](validation/c-scalar/user-reported-results.md);
+local controls pass, and raw remote evidence has not been independently inspected.
 
 
 Updated 2026-09-16. The user approved beginning this direction. The current
@@ -185,8 +186,8 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
    case. Preserve its artifacts. Prior knowledge of the answer rules it out as a
    held-out discovery/performance measurement; unattended transport and genuine
    counterexample-driven refinement remain separate evaluation tasks.
-3. Run formal acceptance of the implemented generic scalar C binding/harness
-   layer, then try an unseen supported pair and measure configuration effort.
+3. Scalar integration acceptance is user-reported 8/8. Preserve its archive,
+   then try a new supported pair without engine edits and measure configuration effort.
 4. Add a provider transport for unattended rounds after the file protocol is
    validated. Compare it with the existing deterministic finder on held-out
    examples at matched total budgets, counting unsuccessful runs and agent cost.

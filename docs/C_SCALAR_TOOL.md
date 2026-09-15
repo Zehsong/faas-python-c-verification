@@ -4,7 +4,9 @@ The `c-scalar-v1` adapter constructs the native probe and relational harness fro
 two admitted C files plus one JSON contract. New pairs within this subset do not
 need a Python adapter. Both automatic predicate discovery and external-agent
 sessions use the same contract and backend. This is the first M1 implementation;
-formal acceptance on the user's modified ESBMC remains pending.
+the user has reported **8/8 scalar acceptance** from Codespace.
+[Transcript and provenance](validation/c-scalar/user-reported-results.md); raw
+logs and run-specific binary identity have not been independently inspected here.
 
 ## Run the acceptance stage
 
@@ -150,6 +152,6 @@ safety flags or result labels. No unattended agent API is integrated.
   runner-owned, as in the existing protocol. Full compiler dependency closure
   (system headers, shared libraries, environment) is not fingerprinted.
 
-The next gate is real ESBMC acceptance, then a fresh user-supplied C pair. Future
+The next check is a fresh supported C pair with the engine unchanged. Future
 work includes useful input diagnostics, broader C syntax, bounded arrays/tables,
 and measuring preparation effort and discovery effectiveness on unseen cases.

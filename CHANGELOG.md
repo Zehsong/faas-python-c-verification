@@ -5,6 +5,19 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — C scalar integration acceptance reported
+
+- Recorded the user's **C SCALAR ACCEPTANCE: 8/8 passed** summary, following
+  implementation `5502520`, including the explicit missing-solver PASS and exact
+  artifact/archive paths. [Result and provenance](docs/validation/c-scalar/user-reported-results.md).
+- Updated current status, quickstart, agent workflow and plan: the first scalar
+  integration gate is now user-reported passed. Raw per-case logs, executed
+  checkout and binary identity remain unaudited; no arbitrary-C or autonomous-agent
+  claim follows from these fixture/protocol results.
+- Documentation only. Checked preserved transcript, relative links and whitespace;
+  no runtime changes or formal solver rerun. Next: a new supported C pair through
+  configuration alone with the engine fixed, then M2 result/failure diagnostics.
+
 ## 2026-09-16 — Generic C scalar contracts and controlled harness generation
 
 - Added `find_c_conditions.py --contract` and `agent_workflow.py start --case c

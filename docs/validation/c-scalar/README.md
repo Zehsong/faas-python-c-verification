@@ -18,6 +18,8 @@ Python and pycparser 3.00. No local ESBMC or Linux proof run was available.
   unwind controls did not count a missing tool as a genuine safety counterexample.
 - Python syntax, Bash syntax, evidence-result structure and whitespace checked.
 
-New formal acceptance on the user's modified ESBMC is **pending**. Expected 8/8
-is a test criterion, not an observed result. Existing user-reported proof results
-remain historical evidence. See [commands and supported scope](../../C_SCALAR_TOOL.md).
+At the time of these local tests, formal acceptance was pending. The user later
+reported **C SCALAR ACCEPTANCE: 8/8 passed** from Codespace; see the separate
+[result record and evidence paths](user-reported-results.md). This does not change
+the local missing-solver result above. No local formal rerun or raw remote archive
+inspection was performed. See [commands and scope](../../C_SCALAR_TOOL.md).

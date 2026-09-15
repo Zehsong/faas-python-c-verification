@@ -6,7 +6,7 @@
 
 接续开发请先读[当前状态与交接](docs/PROJECT_STATUS.md)、[开发记录](CHANGELOG.md)及[C 工具开发计划（提议）](docs/DEVELOPMENT_PLAN.md)。近期优先完成可复现、可接入新案例的 C 条件等价工具，再评估局限与其他语言复用；下文保留长期研究背景。
 
-已开始实现 [agent 辅助条件等价工作流](docs/AGENT_WORKFLOW.md)：外部 agent 通过 JSON 提议条件和输入，工具提供原生执行筛查、后端认证与跨轮反馈。现已增加[通用 C 标量接入](docs/C_SCALAR_TOOL.md)：两份受支持的 C 源码加契约配置即可生成 harness，并复用查区域和 agent 会话；本地测试通过，修改版 ESBMC 的新增验收待运行。尚未支持任意 C 程序或自动模型 API。
+已开始实现 [agent 辅助条件等价工作流](docs/AGENT_WORKFLOW.md)：外部 agent 通过 JSON 提议条件和输入，工具提供原生执行筛查、后端认证与跨轮反馈。现已增加[通用 C 标量接入](docs/C_SCALAR_TOOL.md)：两份受支持的 C 源码加契约配置即可生成 harness，并复用查区域和 agent 会话；本地测试通过，用户已反馈 Codespace 的新增验收 **8/8 通过**（[结果与证据路径](docs/validation/c-scalar/user-reported-results.md)，原始归档尚未独立审阅）。尚未支持任意 C 程序或自动模型 API。
 
 ## 1. 研究目标
 

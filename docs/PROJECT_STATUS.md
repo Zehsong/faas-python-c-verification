@@ -15,8 +15,8 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest implementation: the 2026-09-16 generic C scalar adapter commit
-  (identify its hash in Git history), following `23ad4af` (live trial record),
+- Latest implementation: `5502520` (generic C scalar adapter),
+  following `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
 - The working branch was explicitly fetched before this change; no newer remote
   implementation was found. Unlocated cloud edits remain unreviewed.
@@ -43,7 +43,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Cache sketch | Shared generation of initialization, preservation and relational obligations for two cache families | Invariant and bindings are supplied; no automatic invariant synthesis |
 | Prime/lookup adapter | Compares fallback, truncated and mutated tables against trial division | Boolean return, one uint32 input, CLI domain constrained to 0..255 |
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
-| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Pure uint32_t/bool subset, return observation, 1..4 inputs; formal acceptance pending |
+| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Pure uint32_t/bool subset, return observation, 1..4 inputs; 8/8 acceptance user-reported, raw archive not independently inspected |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
@@ -62,8 +62,11 @@ admit arbitrary C, tables, pointers or stateful programs through the generic rou
 
 Local validation: 107 distinct tests passed, no skips (105 in the full
 regression, followed by 17 targeted scalar tests including two additional controls).
-The 17 new tests cover scalar admission, safety gating, bindings and native results. See [local evidence](validation/c-scalar/README.md). The new formal
-`C SCALAR ACCEPTANCE: 8/8` is an expected gate, **not yet an observed result**.
+The 17 new tests cover scalar admission, safety gating, bindings and native results.
+See [local evidence](validation/c-scalar/README.md). The user subsequently reported
+**C SCALAR ACCEPTANCE: 8/8 passed** from Codespace.
+[Transcript, evidence paths and provenance](validation/c-scalar/user-reported-results.md).
+No raw archive inspection or local formal rerun accompanies this record.
 
 ## Evidence baseline
 
@@ -87,6 +90,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Extended prime acceptance | 8/8 | User-pasted Codespace output |
 | Vocabulary comparison | 24/24 certified; paired inputs match=True | User-pasted summary; [transcribed measurements](validation/vocabulary-comparison/user-reported-results.md) |
 | Agent workflow protocol | 8/8 passed, including expected missing-solver UNKNOWN | [User-pasted summary](validation/agent-workflow/user-reported-results.md); original archive not independently opened here |
+| C scalar integration | 8/8 passed | [User-pasted summary](validation/c-scalar/user-reported-results.md); run-specific source/binary hashes and raw logs not independently inspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -107,12 +111,13 @@ Keep the working Codespace and its customized binary/source and evidence.
 2. The first external-chat proposal session now reports EXACT in one round. Stop
    that completed session; retain its original artifacts. It used a familiar
    candidate and does not establish unseen-case discovery or agent speedup.
-3. Run the new C scalar acceptance script with the existing modified ESBMC.
-   Expect 8/8, preserve the new archive, then try an unseen supported C pair
-   through configuration alone. Implementation is ready; formal acceptance is pending.
+3. Scalar acceptance is user-reported 8/8; preserve its separate archive. Try a
+   new supported C pair through configuration alone with the engine fixed; record
+   preparation work, proof scope, conditions and failures. Then continue M2
+   result-interface and diagnostic work. Raw scalar archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `23ad4af` when this implementation began.
+   branch beyond `5502520` when this result was recorded.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

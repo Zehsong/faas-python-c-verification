@@ -9,8 +9,11 @@ unlocated school/cloud changes before implementing overlapping work.
 M1's first pure scalar C slice is implemented: checked contracts, controlled
 harness/probe generation, shared discovery and `--case c` agent sessions. Three
 new families plus a mutant require only C/JSON fixtures. Native/admission controls
-pass locally; M1 is not accepted until the user's modified ESBMC passes the new
-8-check stage. See [scope, commands and remaining limits](C_SCALAR_TOOL.md).
+pass locally. The user has now reported 8/8 for the new scalar integration stage;
+[provenance and archive paths](validation/c-scalar/user-reported-results.md). This
+clears the first scalar acceptance gate at user-reported evidence level; a new
+external pair and M2 result/failure controls remain next. See
+[scope, commands and remaining limits](C_SCALAR_TOOL.md).
 Broader syntax, tables/arrays and unseen-case evaluation remain later gates.
 
 ## Release target
