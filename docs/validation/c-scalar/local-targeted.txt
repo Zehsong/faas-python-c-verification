@@ -1,0 +1,70 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.3.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+test_agent_scalar_session_with_mock_certificates (test_c_scalar.ScalarTests.test_agent_scalar_session_with_mock_certificates) ... ok
+test_all_fixture_signatures (test_c_scalar.ScalarTests.test_all_fixture_signatures) ... ok
+test_comments_and_unsigned_operations (test_c_scalar.ScalarTests.test_comments_and_unsigned_operations) ... ok
+test_contract_rejects_empty_and_out_of_type_domain (test_c_scalar.ScalarTests.test_contract_rejects_empty_and_out_of_type_domain) ... ok
+test_contract_rejects_wrong_binding_and_signature (test_c_scalar.ScalarTests.test_contract_rejects_wrong_binding_and_signature) ... ok
+test_harness_checks_full_domain_without_disabling_safety (test_c_scalar.ScalarTests.test_harness_checks_full_domain_without_disabling_safety) ... ok
+test_native_bool_input_and_condition (test_c_scalar.ScalarTests.test_native_bool_input_and_condition) ... ok
+test_native_fixtures (test_c_scalar.ScalarTests.test_native_fixtures) ... ok
+test_native_same_name_helpers_and_permuted_binding (test_c_scalar.ScalarTests.test_native_same_name_helpers_and_permuted_binding) ... ok
+test_predicates_use_only_declared_fields (test_c_scalar.ScalarTests.test_predicates_use_only_declared_fields) ... ok
+test_rejects_preprocessor_bypasses (test_c_scalar.ScalarTests.test_rejects_preprocessor_bypasses) ... ok
+test_rejects_unsupported_effects_and_types (test_c_scalar.ScalarTests.test_rejects_unsupported_effects_and_types) ... ok
+test_replay_refuses_before_safety (test_c_scalar.ScalarTests.test_replay_refuses_before_safety) ... ok
+test_seed_validation_and_domain (test_c_scalar.ScalarTests.test_seed_validation_and_domain) ... ok
+test_source_and_contract_identity_drift (test_c_scalar.ScalarTests.test_source_and_contract_identity_drift) ... ok
+test_unknown_safety_prevents_agent_replay (test_c_scalar.ScalarTests.test_unknown_safety_prevents_agent_replay) ... ok
+test_unknown_safety_prevents_finder_replay_and_search (test_c_scalar.ScalarTests.test_unknown_safety_prevents_finder_replay_and_search) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 1.275s
+
+OK
+UNKNOWN: None
+Phase: READY; goal reached: False
+Agent context: C:\Users\Administrator\AppData\Local\Temp\tmp_dhk51pi\session-ndjnsjg7\agent-context.json
+EXACT: x == y
+Phase: READY; goal reached: True
+Latest proposal: EXACT
+Agent context: C:\Users\Administrator\AppData\Local\Temp\tmp_dhk51pi\session-ndjnsjg7\agent-context.json
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\AppData\Local\Temp\tmpko1xo4y2\session-pxphxx55\agent-context.json
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp6ww0mzm8\pair-52dpff5l
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\max_min\pair-pm107l0y
+max_min: NOT PROVED
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\parity\pair-cwwsmmpo
+parity: NOT PROVED
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\series\pair-h3s4cdi1
+series: NOT PROVED
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\series_mutant\pair-_8cmlzld
+series_mutant: NOT PROVED
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\insufficient_unwind\pair-dx13zou7
+insufficient_unwind: NOT PROVED
+UNKNOWN: None
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\unsafe_division\pair-2gyzpa56
+unsafe_division: NOT PROVED
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\agent\session-sh3c3jja\agent-context.json
+agent-scalar-contract: NOT PROVED
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi\missing-solver\session-e3e1jluv\agent-context.json
+missing-solver: PASS
+C SCALAR ACCEPTANCE: 1/8 passed
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-scalar-missing-solver\checks-us4j8_wi

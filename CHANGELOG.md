@@ -5,6 +5,35 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Generic C scalar contracts and controlled harness generation
+
+- Added `find_c_conditions.py --contract` and `agent_workflow.py start --case c
+  --contract`: two admitted C files and a typed input/observation contract now
+  reuse the existing search, native replay and ESBMC certification pipeline.
+- Added AST admission/type checks using pinned pycparser 3.0, checked function/
+  helper namespacing, positional input binding, source snapshots and identity
+  checks. No arbitrary agent harness code is accepted. The initial subset is
+  pure uint32_t/bool scalars, 1..4 inputs, branches/helpers/bounded loops and return
+  observation; arrays, pointers, signed arithmetic and state remain outside it.
+- Extracted shared process/oracle/replay logic into `c_backend.py` and search/final
+  certification into `condition_runner.py`; preserved old case entry points.
+  Generic native execution requires a prior whole-domain safety/unwinding proof.
+  Missing solver, unsafe code or insufficient bounds cannot produce native traces
+  or an equivalence certificate. Agent rounds bind the contract/sources/parser/
+  tool identity and reuse safety only when that identity remains unchanged.
+- Added configuration-only max/min, parity, series and series-mutant fixtures,
+  two safety/bound controls, a generic scripted agent trial and missing-solver
+  control. The new stage archives evidence independently as `c-scalar-*`.
+- Validation: 107 distinct local tests passed without skips across full baseline
+  and final scalar runs. Actual native fixture results, admission failures, safety
+  gating and protocol controls are covered. The intentionally missing-solver
+  acceptance run correctly reports 1/8, not formal success. Python/Bash syntax
+  and diff checks passed. [Local logs and provenance](docs/validation/c-scalar/README.md).
+- [Usage and limitations](docs/C_SCALAR_TOOL.md); status, workflow and development
+  plan updated. Next: user runs the 8-check stage with their modified ESBMC, then
+  supplies an unseen C pair. Formal acceptance and autonomous-agent effectiveness
+  are not yet established for this new adapter.
+
 ## 2026-09-16 — First live external-chat candidate certified
 
 - Recorded the user-reported prime/truncated `0..127` session: EXACT, one round,

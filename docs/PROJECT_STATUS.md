@@ -15,9 +15,11 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest implementation: `62ea51ecfcd47e73879d20d7e555ade35adcd9ba` (agent workflow),
-  following finder baseline `8e85664` and handoff documentation `3a9c9b6`.
-  The 2026-09-16 result-recording commit changes documentation only.
+- Latest implementation: the 2026-09-16 generic C scalar adapter commit
+  (identify its hash in Git history), following `23ad4af` (live trial record),
+  `62ea51e` (agent workflow) and finder baseline `8e85664`.
+- The working branch was explicitly fetched before this change; no newer remote
+  implementation was found. Unlocated cloud edits remain unreviewed.
 - On 2026-09-15, remote heads showed that working branch still at `8e85664`;
   `main` at `8a686a5`, `recovery-current-work` at `5bb7479`.
 - `codespace-refactored-space-parakeet-v6v7r597jj5ghp6qw` at `3f652c4` is a
@@ -41,19 +43,27 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Cache sketch | Shared generation of initialization, preservation and relational obligations for two cache families | Invariant and bindings are supplied; no automatic invariant synthesis |
 | Prime/lookup adapter | Compares fallback, truncated and mutated tables against trial division | Boolean return, one uint32 input, CLI domain constrained to 0..255 |
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
-| Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Reviewed prime/cache/config-cache adapters; external chat authors proposals; no automatic model API or generic C harness inference |
+| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Pure uint32_t/bool subset, return observation, 1..4 inputs; formal acceptance pending |
+| Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
 [C harness route](../tools/verify-equiv/verify_c_harness.py),
 [search](../tools/find-cond-equiv/predicate_search.py),
-[shared runner](../tools/find-cond-equiv/find_cache_conditions.py),
+[shared runner](../tools/find-cond-equiv/condition_runner.py),
 [prime adapter](../tools/find-cond-equiv/find_prime_conditions.py).
 
-The shared runner is still cache-oriented: the prime adapter subclasses
-`CacheBackend`, and importing the runner loads a cache sketch. New cases still
-need Python adapters, model/probe code and hand-specified proof obligations.
-These are the main integration gaps before a reusable C tool release.
+Process/oracle/replay infrastructure now lives in `c_backend.py`, and discovery
+in `condition_runner.py`. The generic C adapter subclasses that base directly;
+legacy prime/config adapters retain their compatibility inheritance. See
+[C scalar usage and boundaries](C_SCALAR_TOOL.md). Three new pair families and
+one mutant are supplied entirely through C files and contracts. This does not
+admit arbitrary C, tables, pointers or stateful programs through the generic route.
+
+Local validation: 107 distinct tests passed, no skips (105 in the full
+regression, followed by 17 targeted scalar tests including two additional controls).
+The 17 new tests cover scalar admission, safety gating, bindings and native results. See [local evidence](validation/c-scalar/README.md). The new formal
+`C SCALAR ACCEPTANCE: 8/8` is an expected gate, **not yet an observed result**.
 
 ## Evidence baseline
 
@@ -97,11 +107,12 @@ Keep the working Codespace and its customized binary/source and evidence.
 2. The first external-chat proposal session now reports EXACT in one round. Stop
    that completed session; retain its original artifacts. It used a familiar
    candidate and does not establish unseen-case discovery or agent speedup.
-3. Build the generic scalar C contract/binding layer with agent-assisted config
-   and a neutral runner; then test new pairs without editing the engine.
+3. Run the new C scalar acceptance script with the existing modified ESBMC.
+   Expect 8/8, preserve the new archive, then try an unseen supported C pair
+   through configuration alone. Implementation is ready; formal acceptance is pending.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `3a9c9b6` when this implementation began.
+   branch beyond `23ad4af` when this implementation began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

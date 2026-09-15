@@ -61,7 +61,7 @@ class SketchTests(unittest.TestCase):
                     patch.object(CacheBackend, "prepare"), patch.object(CacheBackend, "replay"), \
                     patch.object(CacheBackend, "query", side_effect=lambda kind, **kw:
                         {"status": "REFUTED" if kind == failed else "PROVED"}), \
-                    patch("find_cache_conditions.search") as search, contextlib.redirect_stdout(io.StringIO()):
+                    patch("condition_runner.search") as search, contextlib.redirect_stdout(io.StringIO()):
                 report = run(parse_args(["--workdir", tmp]))
                 self.assertEqual(report["status"], "UNKNOWN")
                 self.assertIsNone(report["condition"])

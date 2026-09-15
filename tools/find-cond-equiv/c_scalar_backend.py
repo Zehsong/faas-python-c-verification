@@ -1,0 +1,156 @@
+"""Contract-bound generic scalar C adapter for both discovery and agent sessions."""
+import hashlib
+import itertools
+from pathlib import Path
+import shutil
+import sys
+import time
+
+from c_backend import CBackend, save_json
+from c_scalar_contract import Contract
+from predicate_search import Atom, UINT32_MAX
+
+
+def bind_contract(path):
+    contract = Contract(path)
+
+    class ScalarAtom(Atom):
+        numeric_fields = contract.fields
+
+        @classmethod
+        def parse(cls, text):
+            if isinstance(text, str):
+                text = text.strip()
+                if text in contract.fields and contract.data["inputs"][text]["type"] == "bool":
+                    return cls(text)
+                if text == "valid":
+                    raise ValueError("bare valid is allowed only for a declared bool input")
+            return super().parse(text)
+
+    class ScalarBackend(CBackend):
+        proof_before_replay = True
+        command_extra = ("--no-slice",)
+        properties = {**CBackend.properties, "safety": "__C_SCALAR_SAFETY__"}
+        probe_filename = "scalar_probe.c"
+        fields = contract.fields
+        numeric_fields = contract.fields
+        atom_type = ScalarAtom
+        variants = {"pair": contract.data["candidate"]["entry"]}
+        unwind = contract.data["unwind"]
+
+        def __init__(self, args, workdir):
+            if Contract(contract.path).identity != contract.identity:
+                raise ValueError("C contract/source changed after binding; start again")
+            self.args, self.workdir = args, Path(workdir)
+            self.deadline = time.monotonic() + args.max_seconds
+            self.samples, self.queries, self.replays, self.seen = [], [], [], set()
+            self.safety_established = False
+            self.inputs = self.workdir / "inputs"
+            self.inputs.mkdir()
+            self.model = contract.model()
+            save_json(self.inputs / "contract.json", contract.data)
+            for side, source in contract.sources.items():
+                (self.inputs / f"{side}.c").write_bytes(source.data)
+            (self.inputs / "bound_model.h").write_text(self.model, encoding="utf-8")
+            (self.inputs / self.probe_filename).write_text(self.probe(), encoding="utf-8")
+            self.sketch_manifest = {"template": "c-scalar-v1", "contract": contract.data,
+                                    "source_identity": contract.identity,
+                                    "model_sha256": hashlib.sha256(self.model.encode()).hexdigest()}
+            save_json(self.workdir / "sketch-manifest.json", self.sketch_manifest)
+            self.scope = {"language": "C", "adapter": "c-scalar-v1", "inputs": contract.data["inputs"],
+                          "observations": "return value of one call", "return_type": contract.data["return_type"],
+                          "state": "pure scalar functions; no globals, pointers or external calls",
+                          "arithmetic": "uint32_t modulo 2^32; bool; 32-bit int/unsigned int; 8-bit bytes",
+                          "bound": {"unwind": self.unwind, "unwinding_assertions": True},
+                          "safety": "whole declared domain must pass safety and unwinding before native replay",
+                          "condition_discovery": "finite entry-state comparison vocabulary; no completeness beyond certified domain",
+                          "source_identity": contract.identity}
+            self.esbmc, self.version = shutil.which(args.esbmc), None
+            self.executable = self.inputs / ("scalar-probe.exe" if sys.platform == "win32" else "scalar-probe")
+
+        @classmethod
+        def validate_seed(cls, row):
+            if not isinstance(row, dict) or set(row) != set(cls.fields):
+                raise ValueError("seed must contain exactly the contract inputs")
+            for name, value in row.items():
+                spec = contract.data["inputs"][name]
+                limit = 1 if spec["type"] == "bool" else UINT32_MAX
+                if type(value) is not int or not 0 <= value <= limit:
+                    raise ValueError(f"invalid scalar seed: {name}")
+            return dict(row)
+
+        @staticmethod
+        def seed_in_domain(row, state_mode):
+            return all(spec["min"] <= row[name] <= spec["max"] for name, spec in contract.data["inputs"].items())
+
+        @classmethod
+        def initial_atoms(cls):
+            atoms = [cls.atom_type.parse(f"{a} == {b}") for a, b in itertools.combinations(cls.fields, 2)]
+            for name, spec in contract.data["inputs"].items():
+                atoms += [cls.atom_type.parse(f"{name} == {n}") for n in sorted({spec["min"], spec["max"]})]
+            return atoms
+
+        @classmethod
+        def default_seeds(cls, state_mode):
+            values = [sorted({spec["min"], spec["max"], (spec["min"] + spec["max"]) // 2})
+                      for spec in contract.data["inputs"].values()]
+            return [dict(zip(cls.fields, row)) for row in itertools.product(*values)]
+
+        def state_obligations(self):
+            result = self.query("safety", reserve=2)
+            self.safety_established = result["status"] == "PROVED"
+            return {"safety": result}
+
+        def restore_obligations(self, obligations):
+            # Called only after agent_workflow checks source/contract/tool identity.
+            self.safety_established = obligations.get("safety", {}).get("status") == "PROVED"
+
+        def replay(self, rows, origin="boundary_seeds", repeat=False):
+            if not self.safety_established:
+                raise RuntimeError("native replay disabled until whole-domain safety is proved")
+            return super().replay(rows, origin, repeat)
+
+        def validate_trace(self, row):
+            if contract.data["return_type"] == "bool" and any(row.get(n) not in (0, 1) for n in ("r_original", "r_cached")):
+                raise RuntimeError("native boolean return outside 0/1")
+
+        @staticmethod
+        def make_harness(model, variant, state_mode, kind, condition="true", expected=None):
+            if kind not in ("safety", "feasible", "equal", "different", "expected"):
+                raise ValueError("unsupported scalar obligation")
+            declarations = []
+            for name, spec in contract.data["inputs"].items():
+                declarations += [f"  uint32_t finder_{name} = nondet_uint32_t();",
+                                 f"  __ESBMC_assume(finder_{name} >= UINT32_C({spec['min']}) && finder_{name} <= UINT32_C({spec['max']}));"]
+            statements = [] if kind == "expected" else [f"  __ESBMC_assume({condition});"]
+            if kind != "feasible":
+                statements += [f"  volatile {contract.data['return_type']} ce_left = {contract.call('original')};",
+                               f"  volatile {contract.data['return_type']} ce_right = {contract.call('candidate')};"]
+            assertion = {"safety": "true", "feasible": "false", "equal": "ce_left == ce_right", "different": "ce_left != ce_right",
+                         "expected": f"({condition}) == ({expected})"}[kind]
+            statements += [f'  __ESBMC_assert({assertion}, "{ScalarBackend.properties[kind]}");']
+            return model + "\nextern uint32_t nondet_uint32_t(void);\nvoid finder_entry(void) {\n" + "\n".join(declarations + statements) + "\n}\n"
+
+        @staticmethod
+        def probe():
+            # Every input reaching this executable is revalidated by replay().
+            names = contract.fields
+            temps = ", ".join("ce_input_" + name for name in names)
+            formats = " ".join("%llu" for _ in names)
+            addresses = ", ".join("&ce_input_" + name for name in names)
+            lines = [contract.model(), "#include <stdio.h>", "int main(void) {", f"  unsigned long long {temps};",
+                     f'  while (scanf("{formats}", {addresses}) == {len(names)}) {{']
+            for name, spec in contract.data["inputs"].items():
+                lines += [f"    if (ce_input_{name} < {spec['min']}ull || ce_input_{name} > {spec['max']}ull) return 2;",
+                          f"    {spec['type']} finder_{name} = ({spec['type']})ce_input_{name};"]
+            lines += [f"    {contract.data['return_type']} ce_left = {contract.call('original')};",
+                      f"    {contract.data['return_type']} ce_right = {contract.call('candidate')};"]
+            fields = [*names, "r_original", "r_cached"]
+            values = [*("finder_" + n for n in names), "ce_left", "ce_right"]
+            fmt = "{" + ",".join('\\"' + n + '\\":%llu' for n in fields) + "}\\n"
+            lines += ['    printf("' + fmt + '", ' + ", ".join("(unsigned long long)" + v for v in values) + ");",
+                      "  }", "  return 0;", "}"]
+            return "\n".join(lines) + "\n"
+
+    ScalarBackend.contract = contract
+    return ScalarBackend

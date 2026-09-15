@@ -42,6 +42,13 @@ def session_lock(directory):
 
 
 def adapter(config):
+    if config["case"] == "c":
+        from c_scalar_backend import bind_contract
+        from find_c_conditions import parse_args
+        settings = parse_args(["--contract", config["contract"], "--esbmc", config["esbmc"], "--cc", config["cc"],
+                               "--timeout", str(config["timeout"]), "--max-seconds", str(config["max_seconds"]),
+                               "--max-queries", str(config["max_queries"])])
+        return bind_contract(settings.contract), settings
     backend, parser = {"prime": (PrimeBackend, prime_args), "cache": (CacheBackend, cache_args),
                        "config-cache": (ConfigBackend, config_args)}[config["case"]]
     argv = ["--variant", config["variant"], "--esbmc", config["esbmc"], "--cc", config["cc"],
@@ -55,13 +62,20 @@ def adapter(config):
 
 
 def fingerprint(config):
-    case = {"prime": "prime_lookup", "cache": "same_language_cache", "config-cache": "config_cache"}[config["case"]]
+    case = {"prime": "prime_lookup", "cache": "same_language_cache", "config-cache": "config_cache", "c": "c_scalar"}[config["case"]]
     paths = [p for p in (ROOT / "tools/find-cond-equiv").glob("*.py") if not p.name.startswith("test_")]
     paths += [ROOT / "tools/verify-equiv" / name for name in ("verify_equiv.py", "c_obligation.py")]
-    paths += [p for p in (ROOT / "cases" / case).iterdir() if p.suffix in (".h", ".c", ".json")]
+    if config["case"] != "c":
+        paths += [p for p in (ROOT / "cases" / case).iterdir() if p.suffix in (".h", ".c", ".json")]
     # Shared imports load these bindings even for stateless cases.
     paths += [ROOT / f"cases/{name}/sketch.json" for name in ("same_language_cache", "config_cache")]
     files = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(paths))}
+    if config["case"] == "c":
+        from c_scalar_contract import Contract
+        import pycparser
+        files.update(Contract(config["contract"]).identity)
+        for path in Path(pycparser.__file__).parent.glob("*.py"):
+            files["pycparser/" + path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
     binaries = {}
     for key in ("esbmc", "cc"):
         path = shutil.which(config[key])
@@ -194,8 +208,14 @@ def start(config, root):
                                         "modulo": "x % d == r, 2<=d<=16 and 0<=r<d" if config["case"] == "prime" else None})
             backend.prepare()
             state["esbmc_version_output"] = backend.version
+            obligations = backend.state_obligations() if backend.proof_before_replay else None
+            if obligations is not None:
+                state["state_obligations"] = obligations
+                if any(row["status"] != "PROVED" for row in obligations.values()):
+                    raise RuntimeError("whole-domain safety/unwinding not proved; native replay disabled")
             backend.replay(backend.default_seeds(settings.state_mode))
-            obligations = backend.state_obligations()
+            if obligations is None:
+                obligations = backend.state_obligations()
             state["state_obligations"] = obligations
             if any(row["status"] != "PROVED" for row in obligations.values()):
                 raise RuntimeError("state initialization/preservation not proved")
@@ -222,7 +242,11 @@ def step(directory, proposal_path):
             raise ValueError("session is not ready; inspect initialization and start a new session")
         if state["rounds"] >= config["max_rounds"]:
             raise ValueError("session round budget exhausted")
-        if fingerprint(config) != state["identity"]:
+        try:
+            unchanged = fingerprint(config) == state["identity"]
+        except (OSError, ValueError, RuntimeError, RecursionError):
+            unchanged = False
+        if not unchanged:
             state.update(phase="BLOCKED", best_result=None,
                          latest_feedback={"status": "UNKNOWN", "reason": "source or tool identity changed; start a new session"})
             return publish(directory, state)
@@ -247,6 +271,7 @@ def step(directory, proposal_path):
             backend = backend_type(settings, phase)
             backend.deadline = started + remaining
             backend.prepare()
+            backend.restore_obligations(state.get("state_obligations", {}))
             # Re-execute persisted entry inputs; never import supplied output labels.
             old_inputs = [{name: row[name] for name in backend.fields} for row in state.get("samples", [])]
             backend.replay(old_inputs, origin="prior_round_inputs")
@@ -263,7 +288,7 @@ def step(directory, proposal_path):
         # cannot publish an earlier certificate as current for changed inputs.
         try:
             unchanged = fingerprint(config) == state["identity"]
-        except OSError:
+        except (OSError, ValueError, RuntimeError, RecursionError):
             unchanged = False
         if not unchanged:
             state.update(phase="BLOCKED", best_result=None)
@@ -282,8 +307,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     actions = parser.add_subparsers(dest="action", required=True)
     begin = actions.add_parser("start")
-    begin.add_argument("--case", choices=("prime", "cache", "config-cache"), default="prime")
-    begin.add_argument("--variant", required=True)
+    begin.add_argument("--case", choices=("prime", "cache", "config-cache", "c"), default="prime")
+    begin.add_argument("--variant")
+    begin.add_argument("--contract", help="--case c only: fixed scalar C contract JSON")
     begin.add_argument("--domain", help="prime only; default 0:127")
     begin.add_argument("--state-mode", choices=("empty", "invariant"), default="invariant")
     begin.add_argument("--goal", choices=("exact", "sufficient"), default="exact")
@@ -303,6 +329,12 @@ def main(argv=None):
             result = step(args.session, args.proposal)
             return 0 if result["goal_reached"] else 2
         config = {key: value for key, value in vars(args).items() if key not in ("action", "workdir")}
+        if args.case == "c":
+            if not args.contract or args.variant is not None or args.domain is not None or args.state_mode != "invariant":
+                parser.error("--case c requires --contract; variant/domain/state-mode are fixed by that contract")
+            config.update(contract=str(Path(args.contract).resolve()), variant="pair", state_mode="stateless")
+        elif args.contract is not None or args.variant is None:
+            parser.error("built-in cases require --variant and do not accept --contract")
         if not 1 <= args.max_rounds <= 64 or args.max_queries < 4 or not all(
                 math.isfinite(n) and n > 0 for n in (args.timeout, args.max_seconds)):
             parser.error("positive time budgets, >=4 queries and 1..64 rounds required")

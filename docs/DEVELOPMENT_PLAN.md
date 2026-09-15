@@ -4,6 +4,15 @@
 request to deliver a usable C tool before broadening language support. Review
 unlocated school/cloud changes before implementing overlapping work.
 
+## 2026-09-16 implementation update
+
+M1's first pure scalar C slice is implemented: checked contracts, controlled
+harness/probe generation, shared discovery and `--case c` agent sessions. Three
+new families plus a mutant require only C/JSON fixtures. Native/admission controls
+pass locally; M1 is not accepted until the user's modified ESBMC passes the new
+8-check stage. See [scope, commands and remaining limits](C_SCALAR_TOOL.md).
+Broader syntax, tables/arrays and unseen-case evaluation remain later gates.
+
 ## Release target
 
 A new user supplies two supported C functions, their entry points, build inputs,
@@ -65,8 +74,8 @@ criteria rather than promising dates before reviewing the school work.
 The user subsequently approved agent-assisted development. See
 [the recorded workflow](AGENT_WORKFLOW.md): a first file-mediated proposal/check/
 feedback session is now implemented over the reviewed adapters. It accepts
-conditions and inputs; general agent-generated C bindings/harnesses are still
-planned. Add agent-assisted configuration alongside M1, then evaluate unattended
+conditions and inputs; the scalar route now accepts checked initial C bindings
+and generates its own harness. Arbitrary agent harnesses remain disallowed. Evaluate unattended
 provider transport and predicate selection. This does not change the release
 requirement that new supported scalar cases avoid custom Python backends.
 

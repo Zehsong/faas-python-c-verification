@@ -1,0 +1,288 @@
+"""Strict, deliberately small C frontend; source bodies are never synthesized.
+
+The parser validates a pure scalar subset before any compilation. The harness
+uses the original bodies, with function names scoped by checked macro bindings.
+This is an admission checker, not a sandbox for hostile files or compilers.
+"""
+import hashlib
+from pathlib import Path
+import re
+
+from agent_conditions import strict_json
+from predicate_search import UINT32_MAX
+
+
+def identifier(value):
+    return (isinstance(value, str) and re.fullmatch(r"[a-z][A-Za-z0-9_]{0,47}", value)
+            and not value.startswith(("ce_", "finder_"))
+            and value not in {"true", "false", "bool", "uint32_t"})
+
+
+def stripped_source(source):
+    # Reject line splicing and alternate preprocessing tokens before parsing.
+    if "\\" in source or "??" in source or "%:" in source or "\x00" in source:
+        raise ValueError("unsupported C: escapes, line splicing or alternate preprocessing tokens")
+    # Literals are outside this subset; comments can contain arbitrary quotes.
+    tokens = re.compile(r'/\*.*?\*/|//[^\n]*|"[^"\n]*"|\'[^\'\n]*\'', re.S)
+    def replace(match):
+        token = match.group()
+        if token.startswith(("/*", "//")):
+            return " " + "\n" * token.count("\n")
+        raise ValueError("unsupported C: string/character literals")
+    clean = tokens.sub(replace, source)
+    lines = []
+    for line in clean.splitlines():
+        if line.lstrip().startswith("#"):
+            if not re.fullmatch(r"\s*#\s*include\s*<(stdint|stdbool)\.h>\s*", line):
+                raise ValueError("unsupported C: only stdint.h/stdbool.h includes are allowed")
+            line = ""
+        lines.append(line)
+    return "\n".join(lines)
+
+
+class Source:
+    def __init__(self, path):
+        try:
+            from pycparser import c_ast, c_parser
+        except ImportError as exc:
+            raise ValueError("C scalar frontend requires: python3 -m pip install -r tools/find-cond-equiv/requirements.txt") from exc
+        self.ast = c_ast
+        self.path = Path(path).resolve()
+        self.data = self.path.read_bytes()
+        if len(self.data) > 65536:
+            raise ValueError("unsupported C: source exceeds 64 KiB")
+        self.text = self.data.decode("utf-8")
+        self.body = stripped_source(self.text)
+        try:
+            tree = c_parser.CParser().parse("typedef unsigned int uint32_t; typedef _Bool bool;\n" + self.body)
+        except Exception as exc:
+            raise ValueError(f"unsupported C syntax in {self.path.name}: {exc}") from exc
+        functions = tree.ext[2:]
+        if not 1 <= len(functions) <= 16 or any(not isinstance(f, c_ast.FuncDef) for f in functions):
+            raise ValueError("unsupported C: only 1..16 function definitions; no globals/prototypes/typedefs")
+        self.names = [f.decl.name for f in functions]
+        if len(set(self.names)) != len(self.names) or not all(identifier(n) for n in self.names):
+            raise ValueError("unsupported or duplicate function name")
+        self.signatures = {}
+        self.nodes = 0
+        for function in functions:
+            decl = function.decl
+            if decl.storage not in ([], ["static"]) or decl.funcspec or decl.quals or function.param_decls:
+                raise ValueError("unsupported function declaration")
+            result_type = self.scalar_type(decl.type.type)
+            params = decl.type.args.params if decl.type.args else []
+            if not 1 <= len(params) <= 4:
+                raise ValueError("functions require 1..4 scalar parameters")
+            env = {}
+            types = []
+            for param in params:
+                if not isinstance(param, c_ast.Decl) or param.storage or param.quals or param.init:
+                    raise ValueError("unsupported parameter declaration")
+                self.check_name(param.name, env)
+                env[param.name] = self.scalar_type(param.type)
+                types.append(env[param.name])
+            # The current function is deliberately absent: recursion is rejected.
+            self.statement(function.body, env, result_type)
+            if not self.returns(function.body):
+                raise ValueError("every function must structurally return a value on every path")
+            self.signatures[decl.name] = (result_type, types)
+
+    def scalar_type(self, node):
+        a = self.ast
+        if not isinstance(node, a.TypeDecl) or node.quals or not isinstance(node.type, a.IdentifierType):
+            raise ValueError("unsupported C type: only unqualified uint32_t/bool scalars")
+        names = node.type.names
+        if names == ["uint32_t"]:
+            return "uint32_t"
+        if names in (["bool"], ["_Bool"]):
+            return "bool"
+        raise ValueError("unsupported C type: only uint32_t/bool")
+
+    def check_name(self, name, env):
+        if not identifier(name) or name in env or name in self.names:
+            raise ValueError("unsupported identifier, shadowing or function-name collision")
+
+    def tick(self):
+        self.nodes += 1
+        if self.nodes > 4096:
+            raise ValueError("unsupported C: AST exceeds 4096 checked nodes")
+
+    def expression(self, node, env):
+        self.tick()
+        a = self.ast
+        if isinstance(node, a.ID):
+            if node.name in ("true", "false"):
+                return "bool"
+            if node.name not in env:
+                raise ValueError(f"unknown scalar: {node.name}")
+            return env[node.name]
+        if isinstance(node, a.Constant):
+            # No signed arithmetic or implementation-dependent literal types.
+            if not re.fullmatch(r"(?:0[xX][0-9a-fA-F]+|0[0-7]*|[1-9][0-9]*)[uU]", node.value):
+                raise ValueError("integer literals require a uint32 unsigned suffix, e.g. 1u")
+            text = node.value[:-1]
+            value = int(text, 16 if text.lower().startswith("0x") else 8 if text.startswith("0") else 10)
+            if value > UINT32_MAX:
+                raise ValueError("integer literal exceeds uint32_t")
+            return "uint32_t"
+        if isinstance(node, a.Cast):
+            self.expression(node.expr, env)
+            return self.scalar_type(node.to_type.type)
+        if isinstance(node, a.UnaryOp) and node.op in ("!", "~", "+", "-"):
+            typ = self.expression(node.expr, env)
+            if node.op == "!":
+                return "bool"
+            if typ != "uint32_t":
+                raise ValueError("arithmetic requires uint32_t operands")
+            return typ
+        if isinstance(node, a.BinaryOp):
+            left, right = self.expression(node.left, env), self.expression(node.right, env)
+            if node.op in ("&&", "||", "==", "!=", "<", "<=", ">", ">="):
+                return "bool"
+            if left != "uint32_t" or right != "uint32_t" or node.op not in ("+", "-", "*", "/", "%", "&", "|", "^", "<<", ">>"):
+                raise ValueError("unsupported arithmetic; operands must be uint32_t")
+            if node.op in ("<<", ">>"):
+                if not isinstance(node.right, a.Constant) or not re.fullmatch(r"(?:[0-9]|[12][0-9]|3[01])[uU]", node.right.value):
+                    raise ValueError("shift count must be a decimal unsigned literal in 0..31")
+            return "uint32_t"
+        if isinstance(node, a.TernaryOp):
+            self.expression(node.cond, env)
+            left, right = self.expression(node.iftrue, env), self.expression(node.iffalse, env)
+            if left != right:
+                raise ValueError("conditional branches require identical scalar types")
+            return left
+        if isinstance(node, a.FuncCall) and isinstance(node.name, a.ID):
+            signature = self.signatures.get(node.name.name)
+            if signature is None:
+                raise ValueError("unsupported call: helpers must be defined earlier; no external calls or recursion")
+            args = node.args.exprs if isinstance(node.args, a.ExprList) else []
+            if [self.expression(arg, env) for arg in args] != signature[1]:
+                raise ValueError("helper argument types/count do not match")
+            return signature[0]
+        raise ValueError(f"unsupported C expression: {type(node).__name__}")
+
+    def statement(self, node, env, result_type):
+        self.tick()
+        a = self.ast
+        if node is None or isinstance(node, a.EmptyStatement):
+            return
+        if isinstance(node, a.Compound):
+            local = dict(env)
+            for child in node.block_items or []:
+                self.statement(child, local, result_type)
+            return
+        if isinstance(node, a.DeclList):
+            for child in node.decls:
+                self.statement(child, env, result_type)
+            return
+        if isinstance(node, a.Decl):
+            self.check_name(node.name, env)
+            typ = self.scalar_type(node.type)
+            if node.storage or node.quals or node.funcspec or node.bitsize or node.init is None:
+                raise ValueError("locals must be initialized automatic scalars")
+            if self.expression(node.init, env) != typ:
+                raise ValueError("local initializer type mismatch; use an explicit scalar cast")
+            env[node.name] = typ
+            return
+        if isinstance(node, a.Return):
+            if self.expression(node.expr, env) != result_type:
+                raise ValueError("return type mismatch; use an explicit scalar cast")
+            return
+        if isinstance(node, a.Assignment) and isinstance(node.lvalue, a.ID):
+            left, right = self.expression(node.lvalue, env), self.expression(node.rvalue, env)
+            if left != right or node.op not in ("=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=") or (node.op != "=" and left != "uint32_t"):
+                raise ValueError("unsupported scalar assignment")
+            return
+        if isinstance(node, a.UnaryOp) and node.op in ("p++", "p--", "++", "--") and isinstance(node.expr, a.ID):
+            if self.expression(node.expr, env) != "uint32_t":
+                raise ValueError("increments require uint32_t")
+            return
+        if isinstance(node, a.If):
+            self.expression(node.cond, env)
+            self.statement(node.iftrue, dict(env), result_type)
+            self.statement(node.iffalse, dict(env), result_type)
+            return
+        if isinstance(node, a.While):
+            self.expression(node.cond, env)
+            self.statement(node.stmt, dict(env), result_type)
+            return
+        if isinstance(node, a.For):
+            local = dict(env)
+            self.statement(node.init, local, result_type)
+            if node.cond is not None:
+                self.expression(node.cond, local)
+            self.statement(node.next, local, result_type)
+            self.statement(node.stmt, local, result_type)
+            return
+        if isinstance(node, a.FuncCall):
+            self.expression(node, env)
+            return
+        raise ValueError(f"unsupported C statement: {type(node).__name__}")
+
+    def returns(self, node):
+        a = self.ast
+        if isinstance(node, a.Return):
+            return True
+        if isinstance(node, a.Compound):
+            return bool(node.block_items) and self.returns(node.block_items[-1])
+        if isinstance(node, a.If):
+            return self.returns(node.iftrue) and self.returns(node.iffalse)
+        return False
+
+    def namespaced(self, side):
+        return ("\n".join(f"#define {name} ce_{side}_{name}" for name in self.names)
+                + "\n" + self.body + "\n"
+                + "\n".join(f"#undef {name}" for name in self.names) + "\n")
+
+
+class Contract:
+    def __init__(self, path):
+        self.path = Path(path).resolve()
+        raw = self.path.read_bytes()
+        if len(raw) > 65536:
+            raise ValueError("contract exceeds 64 KiB")
+        self.data = d = strict_json(raw.decode("utf-8"))
+        required = {"schema", "name", "original", "candidate", "inputs", "return_type", "observations", "unwind"}
+        if not isinstance(d, dict) or set(d) != required or type(d["schema"]) is not int or d["schema"] != 1:
+            raise ValueError("invalid C scalar contract schema")
+        if not identifier(d["name"]) or d["return_type"] not in ("bool", "uint32_t") or d["observations"] != ["return"]:
+            raise ValueError("contract requires a name, bool/uint32_t return, and observations: [return]")
+        if type(d["unwind"]) is not int or not 1 <= d["unwind"] <= 1024:
+            raise ValueError("unwind must be 1..1024; unwinding assertions remain enabled")
+        if not isinstance(d["inputs"], dict) or not 1 <= len(d["inputs"]) <= 4:
+            raise ValueError("contract requires 1..4 scalar inputs")
+        self.fields = tuple(d["inputs"])
+        for name, spec in d["inputs"].items():
+            if not identifier(name) or not isinstance(spec, dict) or set(spec) != {"type", "min", "max"} or spec["type"] not in ("bool", "uint32_t"):
+                raise ValueError("each input requires a scalar type, min and max")
+            limit = 1 if spec["type"] == "bool" else UINT32_MAX
+            if type(spec["min"]) is not int or type(spec["max"]) is not int or not 0 <= spec["min"] <= spec["max"] <= limit:
+                raise ValueError("invalid scalar input domain")
+        self.sources = {}
+        for side in ("original", "candidate"):
+            binding = d[side]
+            if not isinstance(binding, dict) or set(binding) != {"source", "entry", "args"} or not isinstance(binding["source"], str) or not identifier(binding["entry"]):
+                raise ValueError("each side requires source, entry and args")
+            args = binding["args"]
+            if not isinstance(args, list) or any(not isinstance(n, str) for n in args) or len(args) != len(self.fields) or set(args) != set(self.fields):
+                raise ValueError("each side must bind every logical input exactly once")
+            try:
+                source = Source(self.path.parent / binding["source"])
+            except RecursionError as exc:
+                raise ValueError("unsupported C: nesting too deep") from exc
+            wanted = (d["return_type"], [d["inputs"][n]["type"] for n in args])
+            if source.signatures.get(binding["entry"]) != wanted:
+                raise ValueError(f"{side} entry signature does not match contract")
+            self.sources[side] = source
+        self.identity = {str(self.path): hashlib.sha256(raw).hexdigest(), **{
+            str(s.path): hashlib.sha256(s.data).hexdigest() for s in self.sources.values()}}
+
+    def call(self, side):
+        binding = self.data[side]
+        return f"ce_{side}_{binding['entry']}(" + ", ".join("finder_" + n for n in binding["args"]) + ")"
+
+    def model(self):
+        return ("#include <stdint.h>\n#include <stdbool.h>\n#include <limits.h>\n"
+                '_Static_assert(CHAR_BIT == 8 && UINT_MAX == UINT32_MAX && INT_MAX == 2147483647, "32-bit int model required");\n'
+                '_Static_assert(_Generic((uint32_t)0, unsigned int: 1, default: 0), "uint32_t must be unsigned int");\n'
+                + "".join(source.namespaced(side) for side, source in self.sources.items()))

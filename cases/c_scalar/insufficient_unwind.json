@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "name": "insufficient_unwind",
+  "original": {
+    "source": "series_loop.c",
+    "entry": "sum",
+    "args": [
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "series_formula.c",
+    "entry": "sum",
+    "args": [
+      "n"
+    ]
+  },
+  "inputs": {
+    "n": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 31
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 2
+}

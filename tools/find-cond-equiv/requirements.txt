@@ -1,0 +1,2 @@
+# Used only by the generic C scalar admission checker (Python >=3.10).
+pycparser==3.0

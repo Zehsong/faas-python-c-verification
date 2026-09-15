@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "name": "unsafe_division",
+  "original": {
+    "source": "division.c",
+    "entry": "divide",
+    "args": [
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "division.c",
+    "entry": "divide",
+    "args": [
+      "n"
+    ]
+  },
+  "inputs": {
+    "n": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 1
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 40
+}

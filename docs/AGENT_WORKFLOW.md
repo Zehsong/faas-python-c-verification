@@ -1,8 +1,13 @@
 # Agent-assisted conditional equivalence workflow
 
+Generic C scalar contracts are now available with `start --case c --contract`;
+see [C scalar workflow](C_SCALAR_TOOL.md). The original adapters and commands below
+remain supported. New scalar formal acceptance is pending; local controls pass.
+
+
 Updated 2026-09-16. The user approved beginning this direction. The current
 implementation is a file-mediated candidate feedback loop over three reviewed
-C adapters, not an arbitrary-program frontend or an autonomous model API client.
+C adapters and the checked scalar C frontend. No autonomous model API is integrated.
 
 ## Intended workflow and trust boundaries
 
@@ -27,9 +32,9 @@ output label, executable code, a smaller domain or a new assumption.
 
 The backend proves the supplied harness. It does not by itself prove that an
 arbitrary agent-generated harness faithfully represents the user's programs.
-Consequently, the first implementation retains reviewed C adapters, state
-invariants and harness templates. General C binding/config generation, checked
-program extraction and invariant proposals are later work.
+The implementation uses reviewed C adapters/state invariants, plus a restricted
+scalar C admission checker with controlled bindings and harness generation.
+General project extraction and invariant proposals remain later work.
 
 The design borrows the concrete-execution/agent-feedback idea from
 [Agentic Concolic Execution](https://srg.doc.ic.ac.uk/publications/26-concollmic-sp.html).
@@ -180,8 +185,8 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
    case. Preserve its artifacts. Prior knowledge of the answer rules it out as a
    held-out discovery/performance measurement; unattended transport and genuine
    counterexample-driven refinement remain separate evaluation tasks.
-3. Introduce the generic C scalar contract/binding layer with controlled harness
-   generation; agent-assisted configuration should reduce adapter-writing work.
+3. Run formal acceptance of the implemented generic scalar C binding/harness
+   layer, then try an unseen supported pair and measure configuration effort.
 4. Add a provider transport for unattended rounds after the file protocol is
    validated. Compare it with the existing deterministic finder on held-out
    examples at matched total budgets, counting unsuccessful runs and agent cost.
