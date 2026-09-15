@@ -1,0 +1,37 @@
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\fallback-controls\session-nibp4gur\agent-context.json
+fallback-controls: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\truncated-refinement\session-pp0haeyz\agent-context.json
+truncated-refinement: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\mutant-refinement\session-hae6bruy\agent-context.json
+mutant-refinement: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\all-unequal\session-b6_9hb_o\agent-context.json
+all-unequal: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\cache-empty\session-yms29ln1\agent-context.json
+cache-empty: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\config-state\session-t3ghxkm5\agent-context.json
+config-state: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\sufficient-only\session-n8x02iqf\agent-context.json
+sufficient-only: FAIL
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1\missing-solver\session-bswsbpne\agent-context.json
+missing-solver: PASS
+AGENT WORKFLOW ACCEPTANCE: 1/8 passed
+Scripted protocol controls; no autonomous-agent performance claim.
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\agent-missing-solver\controls-hf_twyt1

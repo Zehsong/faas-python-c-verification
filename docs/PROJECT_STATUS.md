@@ -16,7 +16,9 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
 - Latest implementation inspected: `8e856641015ef10ffd0e2262b61b0d3dcf3aa3a9`.
-  The handoff documentation is added in a later commit on this same branch.
+  This is the prior finder baseline. Handoff documentation followed at `3a9c9b6`;
+  the agent workflow described below is added in a subsequent commit on the same
+  branch. Use Git HEAD and CHANGELOG to identify the current implementation.
 - On 2026-09-15, remote heads showed that working branch still at `8e85664`;
   `main` at `8a686a5`, `recovery-current-work` at `5bb7479`.
 - `codespace-refactored-space-parakeet-v6v7r597jj5ghp6qw` at `3f652c4` is a
@@ -40,6 +42,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Cache sketch | Shared generation of initialization, preservation and relational obligations for two cache families | Invariant and bindings are supplied; no automatic invariant synthesis |
 | Prime/lookup adapter | Compares fallback, truncated and mutated tables against trial division | Boolean return, one uint32 input, CLI domain constrained to 0..255 |
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
+| Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Reviewed prime/cache/config-cache adapters; external chat authors proposals; no automatic model API or generic C harness inference |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -54,6 +57,12 @@ need Python adapters, model/probe code and hand-specified proof obligations.
 These are the main integration gaps before a reusable C tool release.
 
 ## Evidence baseline
+
+For the new agent workflow, local testing has covered 90 distinct tests across
+the baseline and final targeted runs, including 21 new tests and no skips.
+[Current local validation](validation/agent-workflow/README.md). Its formal
+protocol acceptance is pending; this must not be confused with earlier 24/24
+vocabulary results below.
 
 These are historical results, **not a fresh 2026-09-15 formal rerun**.
 
@@ -80,12 +89,15 @@ Keep the working Codespace and its customized binary/source and evidence.
 
 ## Next handoff
 
-1. Locate the school/cloud changes before implementing overlapping functionality.
-2. Agree the C v0.1 contract and unsupported-feature behavior.
-3. Build a generic scalar C input adapter and neutral shared runner, then reuse
-   it on an unseen function pair without changing the search engine.
-4. Prioritize adaptive vocabulary after the generic workflow is usable, or only
-   earlier if review of the school changes shows it already exists.
+1. Run [agent workflow protocol acceptance](AGENT_WORKFLOW.md) on the modified
+   ESBMC. These eight controls have not yet been formally run on this Windows host.
+2. Try real external-agent proposals through the new session interface, recording
+   prompts and interventions separately from scripted control results.
+3. Build the generic scalar C contract/binding layer with agent-assisted config
+   and a neutral runner; then test new pairs without editing the engine.
+4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
+   before integrating overlapping work. No remote update was found on the working
+   branch beyond `3a9c9b6` when this implementation began.
 
-This audit changes documentation only. No generic adapter or adaptive algorithm
-has been implemented by the audit itself.
+The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
+file protocol, not an autonomous API client or automatic invariant synthesizer.

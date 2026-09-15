@@ -5,6 +5,34 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-15 — Agent proposal/check/feedback sessions
+
+- Recorded [the approved workflow and trust boundaries](docs/AGENT_WORKFLOW.md),
+  including agent-assisted configuration as part of the planned generic C layer.
+- Added `agent_workflow.py start/step` for the existing prime/cache/config-cache
+  adapters. External agents exchange JSON files; no model API is invoked.
+- Added bounded Boolean condition syntax, strict proposal validation, replay of
+  actual C inputs, native screening, named backend obligations and separate
+  sufficient/exact goals. Agent proposals cannot change the fixed scope, provide
+  output labels or inject harness code.
+- Sessions retain evidence and feedback, share round/query/active-time budgets,
+  reject stale submissions, detect source/contract/tool drift and lock updates.
+  Retained certificates and latest proposal status are reported separately.
+- Added eight scripted protocol controls, independent checks for six EXACT
+  outcomes, Codespace execution/archiving and 21 new local tests. These fixtures
+  are not an autonomous-agent discovery or performance benchmark.
+- Validation: 69 existing tests passed during the initial regression run; all
+  21 new tests passed on the final source (90 distinct tests across runs, none
+  skipped). Python compilation, shell syntax and documentation links checked.
+  [Local evidence](docs/validation/agent-workflow/README.md).
+- Missing-solver injection gave UNKNOWN for all sessions and only the intentional
+  UNKNOWN control passed (1/8; expected exit 2). Formal 8/8 acceptance remains for
+  the user's modified ESBMC in Codespace; no new formal success is claimed here.
+- Next: run formal protocol acceptance, then try genuine agent-authored proposals
+  and develop the generic scalar C binding/configuration layer. General harness
+  inference, automatic invariants and unattended model-provider integration are
+  not implemented by this change.
+
 ## 2026-09-15 — Repository continuity and proposed C release plan
 
 - Audited local code, remote branches and available PR head refs. Confirmed

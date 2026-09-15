@@ -1,0 +1,26 @@
+test_empty_candidate_is_not_useful_but_can_be_exact_for_all_unequal (test_agent_workflow.CandidateTests.test_empty_candidate_is_not_useful_but_can_be_exact_for_all_unequal) ... ok
+test_exact_requires_both_proofs (test_agent_workflow.CandidateTests.test_exact_requires_both_proofs) ... ok
+test_native_refutation_requires_no_solver (test_agent_workflow.CandidateTests.test_native_refutation_requires_no_solver) ... ok
+test_out_of_region_solver_witness_fails_closed (test_agent_workflow.CandidateTests.test_out_of_region_solver_witness_fails_closed) ... ok
+test_partial_has_a_proof_and_native_equal_outside_feedback (test_agent_workflow.CandidateTests.test_partial_has_a_proof_and_native_equal_outside_feedback) ... ok
+test_sufficient_goal_does_not_query_complement (test_agent_workflow.CandidateTests.test_sufficient_goal_does_not_query_complement) ... ok
+test_unproved_sufficiency_never_publishes_partial (test_agent_workflow.CandidateTests.test_unproved_sufficiency_never_publishes_partial) ... ok
+test_boolean_tree_and_uint_boundaries (test_agent_workflow.ConditionTests.test_boolean_tree_and_uint_boundaries) ... ok
+test_code_outputs_invalid_operators_and_sizes_rejected (test_agent_workflow.ConditionTests.test_code_outputs_invalid_operators_and_sizes_rejected) ... ok
+test_contract_scope_and_labels_cannot_be_proposed (test_agent_workflow.ConditionTests.test_contract_scope_and_labels_cannot_be_proposed) ... ok
+test_duplicate_json_keys_and_nonfinite_values_rejected (test_agent_workflow.ConditionTests.test_duplicate_json_keys_and_nonfinite_values_rejected) ... ok
+test_active_time_budget_does_not_reset_on_resume (test_agent_workflow.NativeWorkflowTests.test_active_time_budget_does_not_reset_on_resume) ... ok
+test_contract_file_drift_is_detected (test_agent_workflow.NativeWorkflowTests.test_contract_file_drift_is_detected) ... ok
+test_drift_on_failed_round_withdraws_prior_current_certificate (test_agent_workflow.NativeWorkflowTests.test_drift_on_failed_round_withdraws_prior_current_certificate) ... ok
+test_generated_boolean_tree_matches_native_c (test_agent_workflow.NativeWorkflowTests.test_generated_boolean_tree_matches_native_c) ... ok
+test_missing_solver_produces_context_but_no_certificate (test_agent_workflow.NativeWorkflowTests.test_missing_solver_produces_context_but_no_certificate) ... ok
+test_native_seed_refutes_wrong_candidate_without_queries (test_agent_workflow.NativeWorkflowTests.test_native_seed_refutes_wrong_candidate_without_queries) ... ok
+test_query_budget_is_shared_across_rounds (test_agent_workflow.NativeWorkflowTests.test_query_budget_is_shared_across_rounds) ... ok
+test_resume_refine_and_rejected_data_preserve_prior_proof (test_agent_workflow.NativeWorkflowTests.test_resume_refine_and_rejected_data_preserve_prior_proof) ... ok
+test_round_budget_and_session_lock_prevent_extra_updates (test_agent_workflow.NativeWorkflowTests.test_round_budget_and_session_lock_prevent_extra_updates) ... ok
+test_source_identity_drift_blocks_resume (test_agent_workflow.NativeWorkflowTests.test_source_identity_drift_blocks_resume) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 2.408s
+
+OK

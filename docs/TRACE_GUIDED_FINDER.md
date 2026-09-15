@@ -102,6 +102,8 @@ python3 -m json.tool .verify-equiv-runs/finder-acceptance/results.json
 
 ## Agent 接口
 
+后续新增了[持久化 agent 工作流](AGENT_WORKFLOW.md)，支持 Boolean 候选条件、原生筛查和跨轮反馈。下面保留原 `--hypotheses` 批次接口的说明；两个入口都不自动调用模型 API。
+
 先运行一次，再将输出目录的 `agent-context.json` 交给 agent。它包含固定模型、当前轨迹、未解决区域及已有证据。可以提供如下建议文件：
 
 ```json

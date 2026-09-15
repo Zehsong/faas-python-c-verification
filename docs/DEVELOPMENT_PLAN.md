@@ -62,6 +62,14 @@ criteria rather than promising dates before reviewing the school work.
 
 ## Internal structure
 
+The user subsequently approved agent-assisted development. See
+[the recorded workflow](AGENT_WORKFLOW.md): a first file-mediated proposal/check/
+feedback session is now implemented over the reviewed adapters. It accepts
+conditions and inputs; general agent-generated C bindings/harnesses are still
+planned. Add agent-assisted configuration alongside M1, then evaluate unattended
+provider transport and predicate selection. This does not change the release
+requirement that new supported scalar cases avoid custom Python backends.
+
 Separate a language-neutral condition search interface from the C-specific
 frontend/harness, native execution and ESBMC adapter. Keep existing proof and
 replay behavior while extracting the cache-specific runner dependencies.
