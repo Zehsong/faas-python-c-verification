@@ -5,6 +5,19 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Codespace agent-workflow acceptance reported
+
+- Recorded the user's **AGENT WORKFLOW ACCEPTANCE: 8/8 passed**, associated with
+  implementation `62ea51e`, including the expected missing-solver UNKNOWN.
+- Preserved the supplied output and exact evidence/archive paths in
+  [the result record](docs/validation/agent-workflow/user-reported-results.md).
+  The original archive and its source/binary hashes were not independently read.
+- Updated current status and workflow instructions. Next is a real external-agent
+  proposal loop; familiar prime cases count as integration trials, not held-out
+  agent-discovery evidence.
+- Documentation only: link and whitespace checks; no runtime changes or new
+  solver runs, and no autonomous-agent performance claim.
+
 ## 2026-09-15 — Agent proposal/check/feedback sessions
 
 - Recorded [the approved workflow and trust boundaries](docs/AGENT_WORKFLOW.md),

@@ -22,7 +22,9 @@
 - `py_compile` checked the new Python modules, and Git Bash `-n` checked the
   acceptance script. Relative documentation links and `git diff --check` passed.
 
-Formal acceptance on the user's modified ESBMC is pending:
+At the time of these local tests, formal acceptance was pending. The user later
+reported **8/8 passed** in Codespace; see [the result transcript](user-reported-results.md).
+To reproduce that suite:
 
 ```bash
 bash cases/agent_workflow/test_agent.sh /workspaces/esbmc-current/build/src/esbmc/esbmc

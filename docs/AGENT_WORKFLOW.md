@@ -1,6 +1,6 @@
 # Agent-assisted conditional equivalence workflow
 
-Updated 2026-09-15. The user approved beginning this direction. The current
+Updated 2026-09-16. The user approved beginning this direction. The current
 implementation is a file-mediated candidate feedback loop over three reviewed
 C adapters, not an arbitrary-program frontend or an autonomous model API client.
 
@@ -99,6 +99,11 @@ A false condition may be EXACT if a nonempty domain is proved entirely unequal.
 
 ## Codespace protocol acceptance
 
+The user has now reported **8/8 passed**. See the [transcript and archive
+location](validation/agent-workflow/user-reported-results.md). The commands below
+remain available for reproduction; a new full acceptance run is not required just
+to start a proposal session on this unchanged implementation.
+
 ```bash
 git pull --ff-only origin codex/same-language-cache
 bash cases/agent_workflow/test_agent.sh /workspaces/esbmc-current/build/src/esbmc/esbmc
@@ -165,9 +170,11 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
 
 ## Next implementation steps
 
-1. Run formal protocol acceptance on the user's modified ESBMC.
+1. Protocol acceptance is user-reported 8/8; preserve its evidence archive.
 2. Try an actual Codex-authored proposal loop and record prompts, proposals,
    feedback, human interventions, total time and model usage when available.
+   A trial on the familiar prime case checks integration only; prior knowledge
+   of its answer rules it out as a held-out discovery/performance measurement.
 3. Introduce the generic C scalar contract/binding layer with controlled harness
    generation; agent-assisted configuration should reduce adapter-writing work.
 4. Add a provider transport for unattended rounds after the file protocol is

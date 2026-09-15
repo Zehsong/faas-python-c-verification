@@ -1,6 +1,6 @@
 # Project status and handoff
 
-Updated: 2026-09-15. This is the primary handoff entry point; Git and source code
+Updated: 2026-09-16. This is the primary handoff entry point; Git and source code
 remain authoritative. Roadmap items are not implemented capabilities.
 
 ## Current objective
@@ -15,10 +15,9 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest implementation inspected: `8e856641015ef10ffd0e2262b61b0d3dcf3aa3a9`.
-  This is the prior finder baseline. Handoff documentation followed at `3a9c9b6`;
-  the agent workflow described below is added in a subsequent commit on the same
-  branch. Use Git HEAD and CHANGELOG to identify the current implementation.
+- Latest implementation: `62ea51ecfcd47e73879d20d7e555ade35adcd9ba` (agent workflow),
+  following finder baseline `8e85664` and handoff documentation `3a9c9b6`.
+  The 2026-09-16 result-recording commit changes documentation only.
 - On 2026-09-15, remote heads showed that working branch still at `8e85664`;
   `main` at `8a686a5`, `recovery-current-work` at `5bb7479`.
 - `codespace-refactored-space-parakeet-v6v7r597jj5ghp6qw` at `3f652c4` is a
@@ -60,9 +59,11 @@ These are the main integration gaps before a reusable C tool release.
 
 For the new agent workflow, local testing has covered 90 distinct tests across
 the baseline and final targeted runs, including 21 new tests and no skips.
-[Current local validation](validation/agent-workflow/README.md). Its formal
-protocol acceptance is pending; this must not be confused with earlier 24/24
-vocabulary results below.
+[Current local validation](validation/agent-workflow/README.md). On 2026-09-16,
+the user supplied a Codespace summary reporting **AGENT WORKFLOW ACCEPTANCE:
+8/8 passed**. [Result transcript and archive location](validation/agent-workflow/user-reported-results.md).
+This is scripted protocol acceptance, separate from the earlier 24/24 vocabulary
+comparison and from any future autonomous-agent evaluation.
 
 These are historical results, **not a fresh 2026-09-15 formal rerun**.
 
@@ -75,6 +76,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Sketch controls | 8/8 | User-pasted Codespace output |
 | Extended prime acceptance | 8/8 | User-pasted Codespace output |
 | Vocabulary comparison | 24/24 certified; paired inputs match=True | User-pasted summary; [transcribed measurements](validation/vocabulary-comparison/user-reported-results.md) |
+| Agent workflow protocol | 8/8 passed, including expected missing-solver UNKNOWN | [User-pasted summary](validation/agent-workflow/user-reported-results.md); original archive not independently opened here |
 
 Formal environment: existing Codespace project at
 `/workspaces/faas-python-c-verification`, modified ESBMC at
@@ -89,8 +91,8 @@ Keep the working Codespace and its customized binary/source and evidence.
 
 ## Next handoff
 
-1. Run [agent workflow protocol acceptance](AGENT_WORKFLOW.md) on the modified
-   ESBMC. These eight controls have not yet been formally run on this Windows host.
+1. Protocol acceptance is now user-reported 8/8 on Codespace; preserve its archive.
+   No local formal rerun or independent archive audit was performed here.
 2. Try real external-agent proposals through the new session interface, recording
    prompts and interventions separately from scripted control results.
 3. Build the generic scalar C contract/binding layer with agent-assisted config
