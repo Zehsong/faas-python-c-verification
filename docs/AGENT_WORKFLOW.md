@@ -195,8 +195,10 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
    alongside the [post-freeze interval-check stage](../cases/c_scalar_transfer/README.md) archive.
    It now reports 8/8 required passes and 8/12 discovery EXACT, without engine
    edits; see [the result record](validation/c-transfer/user-reported-results.md).
-   Inspect detailed metrics, then run the implemented M2 reporting acceptance. This stage
-   compares deterministic vocabularies, not autonomous agents.
+   Inspect detailed transfer metrics; this experiment compares deterministic
+   vocabularies, not autonomous agents. M2 reporting acceptance now has a separate
+   [user-reported 10/10 result](validation/m2-results/user-reported-results.md).
+   Preserve that archive and inspect the human/JSON reports before expanding support.
 4. Add a provider transport for unattended rounds after the file protocol is
    validated. Compare it with the existing deterministic finder on held-out
    examples at matched total budgets, counting unsuccessful runs and agent cost.

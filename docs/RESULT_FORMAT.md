@@ -141,7 +141,9 @@ Local validation: 120 tests passed in the full regression (20 oracle + 100
 finder/protocol/native), including 13 new result tests; final targeted tests and
 an intentionally missing-solver stage were also run. That negative stage reports
 3/10, as required: only missing-solver, empty-domain and unsupported-input controls
-pass. Real ESBMC acceptance for M2 is **pending**.
+pass. The user subsequently reported **M2 RESULT ACCEPTANCE: 10/10 passed**
+from Codespace; [transcript and archive paths](validation/m2-results/user-reported-results.md).
+The raw archive has not been independently inspected here.
 [Local logs and provenance](validation/m2-results/README.md).
 
 ## Frozen transfer baseline

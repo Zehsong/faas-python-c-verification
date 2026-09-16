@@ -5,6 +5,22 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — M2 acceptance reported
+
+- Recorded the user's **M2 RESULT ACCEPTANCE: 10/10 passed**, including the
+  explicit `agent-partial: PASS`, following implementation `26925c7`.
+  [Transcript and evidence paths](docs/validation/m2-results/user-reported-results.md).
+  These checks include expected UNKNOWN/rejection outcomes, not ten proofs of
+  equivalence. Scripted agent controls establish no autonomous-agent performance.
+- Preserved the separate Codespace archive path. Its contents and actual run
+  checkout/binary identities remain independently uninspected. The local 3/10
+  missing-solver control is distinct from this reported 10/10 solver-stage result.
+- Updated README, status, workflow, result guide and plan. Next inspect report
+  usability and remaining M2 edge cases, demonstrate the M1/M2 scalar workflow,
+  then expand bounded memory/state. The frozen transfer baseline is unchanged.
+- Documentation only: checked transcript, local links, consistency and whitespace;
+  no runtime changes or formal rerun.
+
 ## 2026-09-16 — M2 versioned results and proof diagnostics
 
 - Added verification-result.json schema v1 and report.md for finder/agent runs,

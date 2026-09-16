@@ -11,8 +11,8 @@ harness/probe generation, shared discovery and `--case c` agent sessions. Three
 new families plus a mutant require only C/JSON fixtures. Native/admission controls
 pass locally. The user has now reported 8/8 for the new scalar integration stage;
 [provenance and archive paths](validation/c-scalar/user-reported-results.md). This
-clears the first scalar acceptance gate at user-reported evidence level; a new
-external pair and M2 result/failure controls remain next. See
+clears the first scalar acceptance gate at user-reported evidence level. The
+subsequent transfer and M2 results are recorded below. See
 [scope, commands and remaining limits](C_SCALAR_TOOL.md).
 Broader syntax, tables/arrays and unseen-case evaluation remain later gates.
 
@@ -27,20 +27,22 @@ EXACT, with unchanged engine/inputs/tools.
 [Reported result and limits](validation/c-transfer/user-reported-results.md).
 The four default-vocabulary exploratory runs were non-EXACT; detailed reasons
 remain unavailable. This is integration evidence, not a separately sourced
-real-world or blind case, and establishes no paired speedup. Next implement M2
-versioned result/status/reason fields and diagnostic controls, preserving the
-frozen experiment baseline for future comparisons.
+real-world or blind case, and establishes no paired speedup. The subsequent M2
+result/status/reason fields and diagnostic controls preserve this frozen
+experiment baseline for future comparisons.
 
 ## M2 implementation update
 
 Versioned JSON and human reports are now implemented for finder and agent
 sessions, with backward-compatible legacy artifacts, certified partial-union
 fallback, explicit empty domains and structured failure codes. Local regression
-passes; the [10-check M2 acceptance stage](RESULT_FORMAT.md) remains pending on
-the user's modified ESBMC. CLI usage/output-directory failures are not promised
-artifact-producing runs. The existing frozen transfer lock is preserved, so its
-old experiment must be rerun in its original checkout. After acceptance, evaluate
-the report usability and remaining M2 edge cases before M3 memory/state expansion.
+passes; the user now reports **10/10 passed** for the
+[M2 acceptance stage](RESULT_FORMAT.md). [Transcript and provenance](validation/m2-results/user-reported-results.md).
+The raw archive and actual run identities remain uninspected. CLI usage/output-
+directory failures are not promised artifact-producing runs. The existing frozen
+transfer lock is preserved, so its old experiment must be rerun in its original
+checkout. Next evaluate report usability and remaining M2 edge cases, and
+demonstrate the M1/M2 scalar workflow before M3 memory/state expansion.
 
 ## Release target
 

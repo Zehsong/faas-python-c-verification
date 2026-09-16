@@ -20,6 +20,9 @@
   frozen transfer-stage tests are intentionally not rerun against the changed
   M2 engine; their hash lock remains unchanged and requires its old checkout.
 
-M2's real-solver 10-check acceptance is pending. Historical user-reported 8/8
-scalar and transfer results are not claims about this new engine version.
+Following these local checks, the user reported **M2 RESULT ACCEPTANCE: 10/10
+passed** from Codespace. [Transcript and archive paths](user-reported-results.md).
+This is separate user-reported evidence; no local formal rerun or independent
+archive inspection accompanies it. Historical scalar/transfer 8/8 results still
+belong to their earlier engine versions.
 See [result format, scope and commands](../../RESULT_FORMAT.md).

@@ -10,7 +10,7 @@
 
 新增[冻结引擎后的多输入接入实验](cases/c_scalar_transfer/README.md)：用交换区间边界检查的例子，对照默认词汇与通用排序词汇，记录条件、查询数和失败；核心引擎不改，本地 9 项检查通过；用户已报告 **8/8 必需运行通过、8/12 得到 EXACT**（[结果与解释](docs/validation/c-transfer/user-reported-results.md)）。默认词汇的 4 次探索运行未得到 EXACT，具体状态和原因待查看完整指标。
 
-已实现 [M2 统一结果与诊断报告](docs/RESULT_FORMAT.md)：保留旧 JSON，新增版本化结果和可读报告，区分精确区域、充分区域、未知与空输入域。本地 120 项回归通过，新增 10 项 Codespace 验收待运行。旧冻结引擎实验需在原提交的独立 checkout 重跑。
+已实现 [M2 统一结果与诊断报告](docs/RESULT_FORMAT.md)：保留旧 JSON，新增版本化结果和可读报告，区分精确区域、充分区域、未知与空输入域。本地 120 项回归通过，用户已报告 Codespace **M2 验收 10/10 通过**（[结果与证据路径](docs/validation/m2-results/user-reported-results.md)，原始归档尚未独立审阅）。旧冻结引擎实验需在原提交的独立 checkout 重跑。
 
 ## 1. 研究目标
 
