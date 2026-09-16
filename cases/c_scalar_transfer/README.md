@@ -8,7 +8,9 @@ of this experiment. A checked hash manifest enforces that boundary.
 It is a new integration example, not an independently selected blind benchmark:
 the same developer authored the C fixtures, contracts and assessment expectations.
 No runtime speedup of the C refactoring or autonomous-agent effectiveness is
-claimed. Formal Codespace results for this new stage are pending.
+claimed. The user has reported **8/8 required runs passed and 8/12 discovery EXACT**,
+with engine/inputs/tools unchanged. See the [result record and evidence paths](../../docs/validation/c-transfer/user-reported-results.md);
+raw solver logs and the detailed baseline outcomes have not been inspected here.
 
 ## Program and domain
 
@@ -125,7 +127,9 @@ is a universal SMT certificate. A missing-solver run preserves all six UNKNOWN
 results, zero traces, and 0/4 required passes. See
 [local logs](../../docs/validation/c-transfer/README.md).
 
-Next: inspect actual default/ordered outcomes, predicates, failures and query
-counts before drawing conclusions. Then prioritize M2's stable result schema
+The reported totals imply four non-EXACT exploratory default-vocabulary runs;
+their PARTIAL/UNKNOWN breakdown and reasons are not supplied. One ordered run
+on 0..31 reports 32 queries and 5.920 seconds; this is not a paired speedup.
+Next inspect the detailed metrics, then prioritize M2's stable result schema
 and diagnostics, informed by observed limitations. A separately sourced real
 program pair and any unattended-agent comparison remain further evaluation work.

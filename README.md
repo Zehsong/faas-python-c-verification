@@ -8,7 +8,7 @@
 
 已开始实现 [agent 辅助条件等价工作流](docs/AGENT_WORKFLOW.md)：外部 agent 通过 JSON 提议条件和输入，工具提供原生执行筛查、后端认证与跨轮反馈。现已增加[通用 C 标量接入](docs/C_SCALAR_TOOL.md)：两份受支持的 C 源码加契约配置即可生成 harness，并复用查区域和 agent 会话；本地测试通过，用户已反馈 Codespace 的新增验收 **8/8 通过**（[结果与证据路径](docs/validation/c-scalar/user-reported-results.md)，原始归档尚未独立审阅）。尚未支持任意 C 程序或自动模型 API。
 
-新增[冻结引擎后的多输入接入实验](cases/c_scalar_transfer/README.md)：用交换区间边界检查的例子，对照默认词汇与通用排序词汇，记录条件、查询数和失败；核心引擎不改，本地 9 项检查通过，正式结果待 Codespace 运行。
+新增[冻结引擎后的多输入接入实验](cases/c_scalar_transfer/README.md)：用交换区间边界检查的例子，对照默认词汇与通用排序词汇，记录条件、查询数和失败；核心引擎不改，本地 9 项检查通过；用户已报告 **8/8 必需运行通过、8/12 得到 EXACT**（[结果与解释](docs/validation/c-transfer/user-reported-results.md)）。默认词汇的 4 次探索运行未得到 EXACT，具体状态和原因待查看完整指标。
 
 ## 1. 研究目标
 

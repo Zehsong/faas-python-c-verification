@@ -70,7 +70,7 @@ No raw archive inspection or local formal rerun accompanies this record.
 
 ## Current transfer experiment
 
-A new three-input interval-check family is ready under
+The three-input interval-check experiment is implemented at `52df7d1` under
 [`cases/c_scalar_transfer`](../cases/c_scalar_transfer/README.md). The engine is
 frozen at `5502520` (pre-experiment checkout `61ba47b`); 16 file hashes are checked
 by the stage. Four C sources and four contracts cover full equality, no equal
@@ -79,9 +79,14 @@ field-order atoms use the existing hypotheses interface; no engine changes.
 
 Nine targeted local tests passed without skips, including native fixture checks
 and missing-solver preservation. [Local evidence](validation/c-transfer/README.md).
-The new formal gate and default/ordered results are **pending**, with 8 required
-and 12 total runs at the default two repeats. It is an authored integration
-experiment, not independent held-out or autonomous-agent evaluation.
+The user now reports **8/8 required runs passed, 8/12 discovery EXACT**, with
+all reports valid and engine/inputs/tools unchanged. By the published schedule,
+the four exploratory default-vocabulary reordered runs were non-EXACT; their
+PARTIAL/UNKNOWN breakdown and reasons await the detailed metrics. One ordered
+0..31 run reports 32 queries and 5.920 seconds.
+[Transcript, interpretation and evidence paths](validation/c-transfer/user-reported-results.md).
+This is user-reported evidence from an authored integration experiment; raw logs
+remain unaudited, and no blind-case, autonomous-agent or speedup claim follows.
 
 ## Evidence baseline
 
@@ -106,6 +111,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Vocabulary comparison | 24/24 certified; paired inputs match=True | User-pasted summary; [transcribed measurements](validation/vocabulary-comparison/user-reported-results.md) |
 | Agent workflow protocol | 8/8 passed, including expected missing-solver UNKNOWN | [User-pasted summary](validation/agent-workflow/user-reported-results.md); original archive not independently opened here |
 | C scalar integration | 8/8 passed | [User-pasted summary](validation/c-scalar/user-reported-results.md); run-specific source/binary hashes and raw logs not independently inspected |
+| C scalar transfer | 8/8 required passed; 8/12 discovery EXACT; engine/inputs/tools unchanged | [User-pasted summary](validation/c-transfer/user-reported-results.md); baseline PARTIAL/UNKNOWN breakdown and raw logs not supplied |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -126,14 +132,14 @@ Keep the working Codespace and its customized binary/source and evidence.
 2. The first external-chat proposal session now reports EXACT in one round. Stop
    that completed session; retain its original artifacts. It used a familiar
    candidate and does not establish unseen-case discovery or agent speedup.
-3. Scalar acceptance is user-reported 8/8; preserve its separate archive. Run
-   `cases/c_scalar_transfer/test_transfer.sh` with the existing modified ESBMC.
-   Inspect required successes separately from exploratory baseline PARTIAL/UNKNOWN
-   outcomes and save the new archive. Then continue M2 result/diagnostic work.
-   Raw scalar archive inspection remains open.
+3. Scalar acceptance is user-reported 8/8; transfer now reports 8/8 required and
+   8/12 EXACT. Preserve both separate archives. Inspect the transfer metrics for
+   baseline statuses/reasons and actual conditions before comparing performance.
+   Next implementation: M2 versioned results and clear proof/failure diagnostics;
+   preserve the frozen transfer baseline. Raw archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `61ba47b` when the transfer experiment was developed.
+   branch beyond `52df7d1` when its result was recorded.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

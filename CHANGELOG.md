@@ -5,6 +5,22 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — C transfer acceptance and discovery totals reported
+
+- Recorded the user's **8/8 required passes, 8/12 discovery EXACT**, with all
+  reports valid and unchanged engine/inputs/tools, following experiment `52df7d1`.
+  Preserved the supplied archive paths and the single reported ordered 0..31
+  measurement: 32 queries, 5.920 seconds. [Transcript](docs/validation/c-transfer/user-reported-results.md).
+- From the schedule and totals, the four exploratory default-vocabulary reordered
+  runs were non-EXACT. Their PARTIAL/UNKNOWN breakdown, reasons, conditions and
+  paired costs remain unavailable; no mean or speedup is claimed. Raw archives
+  and run-specific checkout/binary identities have not been independently audited.
+- Updated status, workflow and plan toward M2 versioned results and diagnostics,
+  preserving the frozen experiment baseline. This is authored integration
+  evidence, not blind-case or autonomous-agent evaluation.
+- Documentation only: transcript, schedule/count inference, local links and
+  whitespace checked. No runtime changes, engine-lock updates or solver reruns.
+
 ## 2026-09-16 — Post-freeze C scalar transfer experiment
 
 - Added a new three-input interval-check family through four C files and four

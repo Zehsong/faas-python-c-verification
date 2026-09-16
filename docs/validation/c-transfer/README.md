@@ -25,5 +25,9 @@ formal gate was satisfied. The test captures this negative-control output to
 avoid confusing it with the real stage's summary in Codespace. No discovery
 speedup or real-solver success is claimed.
 
-Formal results on the user's modified ESBMC are pending. See the
+These local tests preceded the user-reported Codespace result: **8/8 required
+runs passed, 8/12 discovery EXACT**. See the separate
+[result record and evidence paths](user-reported-results.md). No raw archive
+inspection or local formal rerun accompanies that record. The local missing-
+solver result above remains unchanged. See the
 [experiment design and Codespace command](../../../cases/c_scalar_transfer/README.md).

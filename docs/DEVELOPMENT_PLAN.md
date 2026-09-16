@@ -22,10 +22,14 @@ The [interval-check experiment](../cases/c_scalar_transfer/README.md) now tests
 newly authored three-input programs using only C/JSON bindings. The engine is
 locked to the accepted scalar implementation. Default and generic field-order
 vocabularies use matched budgets/seeds, with failures retained. Nine local
-controls pass; formal results are pending. This adds integration evidence when
-run, but does not substitute for a separately sourced real-world or blind case.
-No M2 engine changes are bundled into this experiment. After its results, work
-on explicit, versioned result/status/reason fields and diagnostic controls.
+controls pass. The user now reports 8/8 required runs passed and 8/12 discovery
+EXACT, with unchanged engine/inputs/tools.
+[Reported result and limits](validation/c-transfer/user-reported-results.md).
+The four default-vocabulary exploratory runs were non-EXACT; detailed reasons
+remain unavailable. This is integration evidence, not a separately sourced
+real-world or blind case, and establishes no paired speedup. Next implement M2
+versioned result/status/reason fields and diagnostic controls, preserving the
+frozen experiment baseline for future comparisons.
 
 ## Release target
 
