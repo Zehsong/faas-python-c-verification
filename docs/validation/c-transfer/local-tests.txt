@@ -1,0 +1,19 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.3.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+test_claim_assessment_requires_certificates_and_safety (test_transfer.TransferTests.test_claim_assessment_requires_certificates_and_safety) ... ok
+test_engine_lock_rejects_edits_and_extra_modules (test_transfer.TransferTests.test_engine_lock_rejects_edits_and_extra_modules) ... ok
+test_frozen_engine_and_contract_only_binding (test_transfer.TransferTests.test_frozen_engine_and_contract_only_binding) ... ok
+test_missing_solver_does_not_pass_experiment (test_transfer.TransferTests.test_missing_solver_does_not_pass_experiment) ... ok
+test_native_fixtures_on_all_small_domain_inputs (test_transfer.TransferTests.test_native_fixtures_on_all_small_domain_inputs) ... ok
+test_ordered_vocabulary_uses_names_only (test_transfer.TransferTests.test_ordered_vocabulary_uses_names_only) ... ok
+test_paired_schedule_alternates_and_counts_required_runs (test_transfer.TransferTests.test_paired_schedule_alternates_and_counts_required_runs) ... ok
+test_predicate_formula_on_larger_finite_domain (test_transfer.TransferTests.test_predicate_formula_on_larger_finite_domain) ... ok
+test_unresolved_reason_kept (test_transfer.TransferTests.test_unresolved_reason_kept) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.098s
+
+OK

@@ -1,0 +1,23 @@
+{
+  "baseline_commit": "61ba47b",
+  "implementation_commit": "5502520",
+  "hash_format": "sha256 of UTF-8 text with universal newlines normalized to LF",
+  "files": {
+    "tools/find-cond-equiv/agent_conditions.py": "e5a0d9ec4b8a2463a689a8c151354ec875c414f4b747de039bd80888ea5649c5",
+    "tools/find-cond-equiv/agent_workflow.py": "8f411132f1bd020ce30d10009dec596f1a97e69fcad97c9637509b45e41568e1",
+    "tools/find-cond-equiv/c_backend.py": "9754573b17beb326559a7e411128b16c9ec80eb6b2a9c84af6ce5d29339df0ad",
+    "tools/find-cond-equiv/c_scalar_backend.py": "6a66216fea5d4ffcc7c5ecb7176deadff494e63c861c0b43e62e42b404d9b7f9",
+    "tools/find-cond-equiv/c_scalar_contract.py": "c0b47d0701ad7184e89c450ae67260675328112f2af534d82eec97c31cdfc5a1",
+    "tools/find-cond-equiv/cache_sketch.py": "596f85d2781154a981b7d54595c5653efd4148d283072ce5df527cfa0b5499a5",
+    "tools/find-cond-equiv/condition_runner.py": "d2eb78c8e9f134cd8f49e487d267fa1e2944b3579e88568f0b800a0b65a26480",
+    "tools/find-cond-equiv/find_c_conditions.py": "6d2886982f332df8d5b29e9fd41ea58f1b91901b669c8072683f2c8a9612e0b4",
+    "tools/find-cond-equiv/find_cache_conditions.py": "ead19b1ecf39bc48e54fc595dc723e5873c50314a8b213cfe8d4d50428ccde27",
+    "tools/find-cond-equiv/find_cond_equiv.py": "f0c5a0a3a23ca460637231e465ad823e460109270978a4f34ef3ade506fe52f9",
+    "tools/find-cond-equiv/find_config_conditions.py": "dd7a193649bf22cba2cc85de0554022f144c96a4f79da7492fd1347b4cce3f63",
+    "tools/find-cond-equiv/find_prime_conditions.py": "a815def7f43c1f20a6d7c2bf071364abb94b5ddae53be2201a0b756b847a49b0",
+    "tools/find-cond-equiv/predicate_search.py": "d715382aef9cbee64ad7cfbeb2a17ea26c953ff352c31ef960f7806cdad804ad",
+    "tools/verify-equiv/verify_equiv.py": "11c5e68d6ab311e2fcd21c2dfa4347cccf1a2f9c87e750e7a7f4bca924811dc5",
+    "tools/verify-equiv/c_obligation.py": "cc8328944aa6066ab44a84f60074781806c1c2c879a6797a88e4433b6e1d80de",
+    "tools/find-cond-equiv/requirements.txt": "9d4431fa786985235381359ba3864027bb84eb71d277253d60145a5a374586ff"
+  }
+}

@@ -187,7 +187,9 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
    held-out discovery/performance measurement; unattended transport and genuine
    counterexample-driven refinement remain separate evaluation tasks.
 3. Scalar integration acceptance is user-reported 8/8. Preserve its archive,
-   then try a new supported pair without engine edits and measure configuration effort.
+   then run the [post-freeze interval-check stage](../cases/c_scalar_transfer/README.md).
+   It uses new C/JSON fixtures without engine edits; formal results are pending.
+   This stage compares deterministic vocabularies, not autonomous agents.
 4. Add a provider transport for unattended rounds after the file protocol is
    validated. Compare it with the existing deterministic finder on held-out
    examples at matched total budgets, counting unsuccessful runs and agent cost.

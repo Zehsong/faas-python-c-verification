@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "name": "equivalent_31",
+  "original": {
+    "source": "clamp_reference.c",
+    "entry": "clamp",
+    "args": [
+      "x",
+      "low",
+      "high"
+    ]
+  },
+  "candidate": {
+    "source": "clamp_expression.c",
+    "entry": "clamp",
+    "args": [
+      "x",
+      "low",
+      "high"
+    ]
+  },
+  "inputs": {
+    "x": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 31
+    },
+    "low": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 31
+    },
+    "high": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 31
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 4
+}

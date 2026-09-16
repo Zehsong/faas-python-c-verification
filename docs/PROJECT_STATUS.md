@@ -15,7 +15,7 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest implementation: `5502520` (generic C scalar adapter),
+- Latest core implementation: `5502520` (generic C scalar adapter),
   following `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
 - The working branch was explicitly fetched before this change; no newer remote
@@ -68,6 +68,21 @@ See [local evidence](validation/c-scalar/README.md). The user subsequently repor
 [Transcript, evidence paths and provenance](validation/c-scalar/user-reported-results.md).
 No raw archive inspection or local formal rerun accompanies this record.
 
+## Current transfer experiment
+
+A new three-input interval-check family is ready under
+[`cases/c_scalar_transfer`](../cases/c_scalar_transfer/README.md). The engine is
+frozen at `5502520` (pre-experiment checkout `61ba47b`); 16 file hashes are checked
+by the stage. Four C sources and four contracts cover full equality, no equal
+inputs, and a relational equivalence region on two domains. Optional generic
+field-order atoms use the existing hypotheses interface; no engine changes.
+
+Nine targeted local tests passed without skips, including native fixture checks
+and missing-solver preservation. [Local evidence](validation/c-transfer/README.md).
+The new formal gate and default/ordered results are **pending**, with 8 required
+and 12 total runs at the default two repeats. It is an authored integration
+experiment, not independent held-out or autonomous-agent evaluation.
+
 ## Evidence baseline
 
 For the new agent workflow, local testing has covered 90 distinct tests across
@@ -111,13 +126,14 @@ Keep the working Codespace and its customized binary/source and evidence.
 2. The first external-chat proposal session now reports EXACT in one round. Stop
    that completed session; retain its original artifacts. It used a familiar
    candidate and does not establish unseen-case discovery or agent speedup.
-3. Scalar acceptance is user-reported 8/8; preserve its separate archive. Try a
-   new supported C pair through configuration alone with the engine fixed; record
-   preparation work, proof scope, conditions and failures. Then continue M2
-   result-interface and diagnostic work. Raw scalar archive inspection remains open.
+3. Scalar acceptance is user-reported 8/8; preserve its separate archive. Run
+   `cases/c_scalar_transfer/test_transfer.sh` with the existing modified ESBMC.
+   Inspect required successes separately from exploratory baseline PARTIAL/UNKNOWN
+   outcomes and save the new archive. Then continue M2 result/diagnostic work.
+   Raw scalar archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `5502520` when this result was recorded.
+   branch beyond `61ba47b` when the transfer experiment was developed.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

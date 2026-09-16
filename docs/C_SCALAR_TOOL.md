@@ -152,6 +152,7 @@ safety flags or result labels. No unattended agent API is integrated.
   runner-owned, as in the existing protocol. Full compiler dependency closure
   (system headers, shared libraries, environment) is not fingerprinted.
 
-The next check is a fresh supported C pair with the engine unchanged. Future
+The next check is the [post-freeze interval-check experiment](../cases/c_scalar_transfer/README.md),
+with the engine unchanged; its formal results are pending. Future
 work includes useful input diagnostics, broader C syntax, bounded arrays/tables,
 and measuring preparation effort and discovery effectiveness on unseen cases.

@@ -5,6 +5,32 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Post-freeze C scalar transfer experiment
+
+- Added a new three-input interval-check family through four C files and four
+  JSON contracts only: expression/full-equivalence and offset/full-inequality
+  controls, plus reordered checks on 0..7 and 0..31 rectangular domains.
+  The last pair requires relations among inputs and permits inverted bounds.
+- Finder/frontend/backend/oracle files are unchanged. A 16-file LF-normalized
+  hash lock records the `61ba47b` baseline (engine implementation `5502520`) and
+  rejects drift. No per-case adapter, handwritten harness or probe was added.
+- Added an experiment runner using the existing hypotheses interface to compare
+  default predicates with all six field-order atoms. Matched budgets/seeds,
+  alternating mode order and two repeats yield 8 required / 12 total runs.
+  Exploratory PARTIAL/UNKNOWN results stay visible; they do not count as EXACT.
+  Post-discovery assessment budgets and discovery metrics are reported separately.
+- Added fresh evidence archival, CSV/JSON measurements, source/binary checks,
+  preparation-work inventory and honest authored-example provenance. This is not
+  an independent blind case, autonomous-agent experiment or measured speedup.
+- Validation: nine targeted Windows/MSVC tests pass without skips; 1,536 native
+  observations plus a finite arithmetic expectation check. The missing-solver
+  experiment correctly retains six UNKNOWN results and 0/4 required passes.
+  [Logs](docs/validation/c-transfer/README.md). Python/Bash syntax, links, engine
+  identity and whitespace checked. Existing core tests were not rerun because
+  the engine is unchanged. Formal ESBMC results are pending.
+- Next: run [the transfer stage](cases/c_scalar_transfer/README.md), inspect
+  outcomes/costs/limitations, then develop M2 result schemas and diagnostics.
+
 ## 2026-09-16 — C scalar integration acceptance reported
 
 - Recorded the user's **C SCALAR ACCEPTANCE: 8/8 passed** summary, following

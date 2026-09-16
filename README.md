@@ -8,6 +8,8 @@
 
 已开始实现 [agent 辅助条件等价工作流](docs/AGENT_WORKFLOW.md)：外部 agent 通过 JSON 提议条件和输入，工具提供原生执行筛查、后端认证与跨轮反馈。现已增加[通用 C 标量接入](docs/C_SCALAR_TOOL.md)：两份受支持的 C 源码加契约配置即可生成 harness，并复用查区域和 agent 会话；本地测试通过，用户已反馈 Codespace 的新增验收 **8/8 通过**（[结果与证据路径](docs/validation/c-scalar/user-reported-results.md)，原始归档尚未独立审阅）。尚未支持任意 C 程序或自动模型 API。
 
+新增[冻结引擎后的多输入接入实验](cases/c_scalar_transfer/README.md)：用交换区间边界检查的例子，对照默认词汇与通用排序词汇，记录条件、查询数和失败；核心引擎不改，本地 9 项检查通过，正式结果待 Codespace 运行。
+
 ## 1. 研究目标
 
 本项目研究如何在已有大型软件项目或重要程序案例中，让 LLM 辅助进行性能优化，并为优化后的程序提供明确范围内的语义保持保证。

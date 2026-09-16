@@ -16,6 +16,17 @@ external pair and M2 result/failure controls remain next. See
 [scope, commands and remaining limits](C_SCALAR_TOOL.md).
 Broader syntax, tables/arrays and unseen-case evaluation remain later gates.
 
+## Post-freeze transfer check
+
+The [interval-check experiment](../cases/c_scalar_transfer/README.md) now tests
+newly authored three-input programs using only C/JSON bindings. The engine is
+locked to the accepted scalar implementation. Default and generic field-order
+vocabularies use matched budgets/seeds, with failures retained. Nine local
+controls pass; formal results are pending. This adds integration evidence when
+run, but does not substitute for a separately sourced real-world or blind case.
+No M2 engine changes are bundled into this experiment. After its results, work
+on explicit, versioned result/status/reason fields and diagnostic controls.
+
 ## Release target
 
 A new user supplies two supported C functions, their entry points, build inputs,
