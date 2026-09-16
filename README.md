@@ -14,9 +14,11 @@
 
 新增[可演示的 C 端到端流程](cases/c_scalar_demo/README.md)：一条命令生成四种结果的总览、已实际重放的反例和独立归档；也提供复制两个 C 文件与 JSON 约定后直接接入的步骤。证明引擎不变，用户已报告 **READY，5/5 检查通过**（[结果与证据路径](docs/validation/c-demo/user-reported-results.md)，原始归档尚未独立审阅）。
 
-新增 [M3 第一步：通用 C 只读表](cases/c_readonly_tables/README.md)。函数内部固定长度、完整初始化的 const 数组已接入通用接口，可直接比较质数计算与查表，不需专用 Python adapter。本地 136 项回归通过；用户已报告 Codespace **9/9 验收通过**（[输出与证据路径](docs/validation/c-readonly-tables/user-reported-results.md)，原始归档尚未独立审阅）。数组参数、输出数组与可变状态仍待后续开发。
+新增 [M3 第一步：通用 C 只读表](cases/c_readonly_tables/README.md)。函数内部固定长度、完整初始化的 const 数组已接入通用接口，可直接比较质数计算与查表，不需专用 Python adapter。本地 136 项回归通过；用户已报告 Codespace **9/9 验收通过**（[输出与证据路径](docs/validation/c-readonly-tables/user-reported-results.md)，原始归档尚未独立审阅）。该 schema 1 阶段的输入与返回仍为标量；数组接口见下方 schema 2。
 
-新增 [M3 有界数组输入／输出](cases/c_bounded_arrays/README.md)：schema 2 约定绑定固定数组参数，两边使用独立初值副本，比较返回值及全部数组最终内容。搜索、agent 筛查和反例重放使用完整观察；本地 149 项回归通过，新阶段 10 项正式验收及当前版本只读表回归待 Codespace 运行。
+新增 [M3 有界数组输入／输出](cases/c_bounded_arrays/README.md)：schema 2 约定绑定固定数组参数，两边使用独立初值副本，比较返回值及全部数组最终内容。搜索、agent 筛查和反例重放使用完整观察；本地 149 项回归通过，用户已报告 **10/10 验收通过**（[证据记录](docs/validation/c-bounded-arrays/user-reported-results.md)）；当前版本只读表重跑结果尚未提供。
+
+新增 [M3 私有缓存状态验收](cases/cache_state/README.md)：两个缓存家族在初始化与状态保持证明通过后才执行原生输入；公共报告明确必需状态义务与单次调用范围，缺失证据不能发布认证条件。本地 **157 项检查通过**，14 项正式验收待修改版 ESBMC 运行。
 
 ## 1. 研究目标
 

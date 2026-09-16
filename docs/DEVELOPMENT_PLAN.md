@@ -84,10 +84,25 @@ aliasing or unrestricted pointer syntax. Shared native comparison now covers
 full observation vectors throughout search, agent screening and witness replay.
 [Contract, examples and commands](../cases/c_bounded_arrays/README.md).
 
-149 local tests pass. Array 10/10 and a current-engine const-table 9/9 rerun are
-pending on the existing modified ESBMC. This implements the small array part of
+149 local tests pass. The user now reports **array 10/10 passed**;
+[transcript](validation/c-bounded-arrays/user-reported-results.md). The current-engine
+const-table rerun remains unreported. This implements the small array part of
 M3, not cache state/sequence obligations or full release gates. The user prefers
 autonomous continuation between stages and summaries only at meaningful milestones.
+
+## M3 cache state admission update
+
+The existing two cache families now gate all native inputs on initialization and
+mode-specific preservation, validate typed post-state values, and declare required
+state evidence in the common result contract. Resumed agent sessions restore the
+gate under unchanged identity. The [14-check acceptance](../cases/cache_state/README.md)
+is implemented; formal execution is pending. It includes real invalid-state
+obligations rather than assuming a successful return establishes preservation.
+
+After this acceptance, the M3 gate can be assessed using separate array and cache
+archives. Arbitrary stateful C admission and sequence-equivalence certificates are
+not implied. Preserve the earlier frozen transfer baseline and use current result
+reports for the demonstration release.
 
 ## Release target
 

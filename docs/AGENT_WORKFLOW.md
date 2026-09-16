@@ -216,3 +216,15 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
 4. Add a provider transport for unattended rounds after the file protocol is
    validated. Compare it with the existing deterministic finder on held-out
    examples at matched total budgets, counting unsuccessful runs and agent cost.
+
+## Cache state admission update
+
+For `--case cache` and `--case config-cache`, initialization and preservation
+must both be PROVED before initial samples or later replay. Round restoration
+uses the same required evidence after existing identity checks; restart older
+sessions after upgrading. Missing solvers now leave zero cache native samples.
+Typed post-state values must satisfy the invariant even if a probe prints a
+positive invariant flag. State fields, initializer and proof mode are visible in
+scope.state_contract; private cache bytes are not relational outputs. The
+[14-check state stage](../cases/cache_state/README.md) includes both resumed
+protocols. Its authored proposals are scripted tests, not autonomous results.

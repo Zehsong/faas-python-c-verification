@@ -16,9 +16,10 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
 - Latest demonstration implementation: `75dbd47`; user-reported READY (5/5).
-- Latest implementation: bounded-array schema 2 (identify its commit in Git
-  history), following `c4fceec` (table result record). Prior table frontend
-  `cd2b88c` has user-reported 9/9; current-engine table rerun is pending.
+- Latest implementation: cache state admission/reporting (identify this commit
+  in Git history), following `b1ae3d9` (bounded arrays, user-reported 10/10).
+  Prior table frontend `cd2b88c` has user-reported 9/9; the current-engine table
+  rerun remains unreported.
 - Prior core implementation: `26925c7` (M2 result contract), following `133abe9` (transfer result record),
   `5502520` (scalar adapter) and `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
@@ -47,7 +48,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Cache sketch | Shared generation of initialization, preservation and relational obligations for two cache families | Invariant and bindings are supplied; no automatic invariant synthesis |
 | Prime/lookup adapter | Compares fallback, truncated and mutated tables against trial division | Boolean return, one uint32 input, CLI domain constrained to 0..255 |
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
-| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Schema 1 scalars/const tables; schema 2 fixed array parameters, independent copies and all final elements observed; array 10-check formal stage pending; four input values total, no aliases or persistent state |
+| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Schema 1 scalars/const tables; schema 2 fixed array parameters, independent copies and all final elements observed; array acceptance user-reported 10/10; four input values total, no aliases or persistent state |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
 | Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
@@ -162,9 +163,33 @@ are explicit in scope. Session identity changes require fresh agent sessions.
 Local regression: 149 passed (20 oracle + 123 finder + six demo), no skips.
 [Local evidence](validation/c-bounded-arrays/README.md). An actual missing-solver
 stage yields the expected 3/10 with all outcomes UNKNOWN and no native inputs.
-The new array 10/10 and a fresh readonly-table 9/9 regression are pending on the
-modified ESBMC. Previous result counts are historical, not claims about this
-new engine. Cache initialization/preservation and sequence claims remain open.
+The user now reports **C BOUNDED ARRAY ACCEPTANCE: 10/10 passed**.
+[Transcript and archive paths](validation/c-bounded-arrays/user-reported-results.md).
+The raw archive and actual checkout/binary identity remain uninspected. The
+requested current-engine readonly-table rerun remains unreported. Earlier counts
+are historical. Cache state admission work is recorded below; sequence claims
+remain outside the current result contract.
+
+## M3 cache state admission and reports
+
+Both reviewed cache adapters now prove initialization and mode-specific
+preservation before native input execution. Missing/refuted/unknown obligations
+block replay and condition discovery. Agent rounds restore this gate only after
+the existing source/tool identity checks. Complete typed post-state fields are
+validated alongside the native invariant flags.
+
+Reports name private state, call/environment inputs, the initializer, preservation
+domain and required state obligations. Missing required evidence cannot be
+published as EXACT/PARTIAL. Equality observes the return; private cache bytes are
+not compared to a fictitious reference cache. A new [14-check stage](../cases/cache_state/README.md)
+uses both families, both entry modes, invalid initialization/preservation, missing
+solver and resumed scripted agent sessions. Local evidence is recorded
+[here](validation/cache-state/README.md); formal acceptance is pending.
+
+This strengthens the existing reviewed cache adapters. It does not admit arbitrary
+stateful C contracts, synthesize invariants or establish unrestricted sequence
+equivalence. In `empty` mode, preservation covers an empty entry only, not all
+invariant states. Frozen transfer experiments retain their original checkout.
 
 ## Current transfer experiment
 
@@ -213,6 +238,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | M2 result contract | 10/10 passed, including agent-partial | [User-pasted summary](validation/m2-results/user-reported-results.md); includes expected failure/UNKNOWN controls, raw archive not independently inspected |
 | Scalar demonstration | READY, 5/5 checks, tools unchanged=True | [User-pasted summary](validation/c-demo/user-reported-results.md); raw overview, formula and witness not independently inspected |
 | Generic C local const tables | 9/9 passed; scripted agent EXACT n != 9 on 0..31 | [User-pasted summary](validation/c-readonly-tables/user-reported-results.md); includes expected UNKNOWN/rejection controls, raw archive uninspected |
+| Generic C bounded arrays | 10/10 passed | [User-pasted summary](validation/c-bounded-arrays/user-reported-results.md); includes negative controls, raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -241,14 +267,15 @@ Keep the working Codespace and its customized binary/source and evidence.
    Inspect its overview and JSON/Markdown reports for usability and remaining
    M2 edge cases. M3 local const-table acceptance is now user-reported 9/9;
    preserve its separate archive and completed agent session. Array input/output
-   schema 2 is now implemented: run the readonly-table regression (9/9) and
-   bounded-array stage (10/10) with separate archives and the modified ESBMC.
+   schema 2 now has user-reported 10/10; the readonly-table rerun remains
+   unreported. Run the new cache-state stage (14/14 target) with a separate
+   archive and modified ESBMC. Keep array and state evidence separate.
    Continue authorized work directly after evidence updates; reserve summaries
    for meaningful milestones. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `c4fceec` when array development began.
+   branch beyond `b1ae3d9` when cache-state development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

@@ -74,6 +74,9 @@ class CacheBackend(CBackend):
 
     def __init__(self, args, workdir):
         self.args, self.workdir = args, Path(workdir)
+        # Set per instance: the legacy stateless prime adapter has its own init.
+        self.proof_before_replay = True
+        self.state_established = False
         if tuple(self.sketch.data["fields"]) != tuple(self.fields) or self.sketch.data["variants"] != self.variants:
             raise ValueError("adapter fields/variants disagree with sketch bindings")
         self.deadline = time.monotonic() + args.max_seconds
@@ -93,6 +96,16 @@ class CacheBackend(CBackend):
         self.scope = {
             "language": "C", "inputs": "x,key,value:uint32_t; valid:bool; unsigned arithmetic modulo 2^32",
             "state_mode": args.state_mode,
+            "required_state_obligations": ["initialization", "preservation"],
+            "state_contract": {
+                "fields": {n: self.sketch.data["fields"][n] for n in self.sketch.data["state_fields"]},
+                "call_inputs": self.sketch.data["call_args"],
+                "initializer": self.sketch.data["initial_state"],
+                "ownership": "candidate-private Cache object, freshly initialized for each symbolic/native entry; original is pure",
+                "observation": "return equality plus invariant preservation; private cache bytes are not relational outputs",
+                "preservation_domain": args.state_mode,
+                "sequence_equivalence": "NOT_CLAIMED",
+            },
             "initial_state": "empty {0,0,0}" if args.state_mode == "empty" else "arbitrary state satisfying !valid || value == original(key)",
             "observations": "one return value; cache invariant also checked after the call",
             "assumptions": "private cache; sequential execution; pure original; no environment or other writers",
@@ -108,8 +121,20 @@ class CacheBackend(CBackend):
 
 
     def state_obligations(self):
-        return {"initialization": self.query("init", reserve=2),
-                "preservation": self.query("preservation", reserve=2)}
+        obligations = {"initialization": self.query("init", reserve=2),
+                       "preservation": self.query("preservation", reserve=2)}
+        self.restore_obligations(obligations)
+        return obligations
+
+    def restore_obligations(self, obligations):
+        # Agent workflow verifies source/tool identity before restoring evidence.
+        self.state_established = all(obligations.get(name, {}).get("status") == "PROVED"
+                                     for name in ("initialization", "preservation"))
+
+    def replay(self, rows, origin="boundary_seeds", repeat=False):
+        if self.proof_before_replay and not self.state_established:
+            raise RuntimeError("native replay disabled until initialization and preservation are proved")
+        return super().replay(rows, origin, repeat)
 
 
     def validate_trace(self, row):
@@ -117,6 +142,15 @@ class CacheBackend(CBackend):
             raise RuntimeError("native trace violates the declared cache invariant")
         if row.get("hit") not in (0, 1):
             raise RuntimeError("native branch trace missing")
+        after = dict(row)
+        for field in self.sketch.data["state_fields"]:
+            value = row.get("after_" + field)
+            maximum = 1 if self.sketch.data["fields"][field] == "bool" else UINT32_MAX
+            if type(value) is not int or not 0 <= value <= maximum:
+                raise RuntimeError("native post-state field missing or outside declared type: " + field)
+            after[field] = value
+        if not self.seed_in_domain(after, "invariant"):
+            raise RuntimeError("native post-state does not satisfy the cache invariant")
 
 
 def parse_args(argv=None, variants=VARIANTS, default_variant="bad_miss", default_workdir=".verify-equiv-runs/condition-finder"):

@@ -21,8 +21,9 @@
   comparisons changed, so the Codespace command also reruns readonly-table 9/9
   with its separate archive before the new array 10/10 stage.
 
-Formal array 10/10 and the current-engine readonly-table rerun are pending on
-the user's existing modified ESBMC. Earlier scalar/table/demo pass counts are
+The user subsequently reported **array 10/10 passed**;
+[transcript and provenance](user-reported-results.md). The current-engine
+readonly-table rerun remains unreported. Earlier scalar/table/demo pass counts are
 historical and do not certify the new array semantics. The complete M3 cache
 state/sequence obligations remain open.
 

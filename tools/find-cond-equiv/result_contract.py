@@ -104,8 +104,13 @@ def build_summary(report, *, producer="finder", samples=(), queries=(), state=No
     condition = best.get("candidate") if state is not None else report.get("condition")
     condition_c = best.get("candidate_c") if state is not None else report.get("condition_c")
     obligations = source.get("state_obligations", {})
+    required = (source.get("scope") or {}).get("required_state_obligations", [])
+    obligations = {**{name: {"status": "NOT_CHECKED", "reason_code": "STATE_OBLIGATION_MISSING",
+                            "reason": "Required state obligation missing: " + name}
+                     for name in required}, **obligations}
     domain = _domain(source, samples, queries)
     diagnostics = collect_diagnostics(source)
+    diagnostics += collect_diagnostics({name: q for name, q in obligations.items() if name not in source.get("state_obligations", {})}, "obligations.state")
     # Empty domains and stale evidence cannot be published as equivalence claims.
     admitted = bool(source.get("scope")) and all(q.get("status") == "PROVED" for q in obligations.values())
     stale = source.get("phase") == "BLOCKED" or source.get("reason_code") in ("IDENTITY_CHANGED", "CERTIFICATE_CONTRADICTION")
@@ -210,6 +215,9 @@ def validate_summary(summary):
         if domain["status"] != "NONEMPTY" or checks["sufficiency"]["status"] != "PROVED" or any(
                 q["status"] != "PROVED" for q in checks["state"].values()):
             raise ValueError("certified claim lacks domain/state/sufficiency evidence")
+        if any(checks["state"].get(name, {}).get("status") != "PROVED"
+               for name in summary["scope"].get("required_state_obligations", [])):
+            raise ValueError("certified claim lacks a required state obligation")
         if summary["status"] == "EXACT" and checks["complement"]["status"] != "PROVED":
             raise ValueError("EXACT requires complementary inequality evidence")
     elif claim.get("condition") is not None or claim.get("condition_c") is not None:

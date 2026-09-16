@@ -45,7 +45,8 @@ def run(args, backend_type):
         if obligations is not None:
             report["state_obligations"] = obligations
             if any(result["status"] != "PROVED" for result in obligations.values()):
-                raise RuntimeError("whole-domain safety/unwinding not established; native replay disabled")
+                code = "STATE_OBLIGATION_NOT_PROVED" if "initialization" in obligations else "SAFETY_NOT_ESTABLISHED"
+                raise ExecutionFailure(code, "required state/safety obligations not established; native replay disabled")
         backend.replay(backend.default_seeds(args.state_mode))
         backend.replay(extra_seeds, origin="untrusted_hypotheses")
         if obligations is None:

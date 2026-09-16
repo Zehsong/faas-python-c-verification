@@ -179,6 +179,8 @@ class NativeSearchTests(unittest.TestCase):
         cls.args = parse_args(["--cc", os.environ.get("FINDER_CC", "cc"), "--esbmc", "not-installed-test-esbmc"])
         cls.backend = CacheBackend(cls.args, cls.temp.name)
         cls.backend.prepare()
+        # Native fixture tests only; this bypass is not a formal certificate.
+        cls.backend.state_established = True
 
     def test_real_trace_guided_partitions_for_four_variants(self):
         numbers = (0, 1, 7, 8, UINT32_MAX)
@@ -201,13 +203,13 @@ class NativeSearchTests(unittest.TestCase):
                 if variant == "good":
                     self.assertEqual(found["condition"], "true")
 
-    def test_missing_esbmc_leaves_all_native_evidence_unproved(self):
+    def test_missing_esbmc_blocks_native_evidence(self):
         with tempfile.TemporaryDirectory() as tmp, contextlib.redirect_stdout(io.StringIO()):
             args = parse_args(["--cc", os.environ.get("FINDER_CC", "cc"), "--esbmc", "not-installed-test-esbmc", "--workdir", tmp])
             report = run(args)
             self.assertEqual(report["status"], "UNKNOWN")
             self.assertIsNone(report["condition"])
-            self.assertGreater(report["traces_collected"], 0)
+            self.assertEqual(report["traces_collected"], 0)
             self.assertFalse(report["exact"])
 
     def test_instrumentation_preserves_native_outputs_and_state(self):

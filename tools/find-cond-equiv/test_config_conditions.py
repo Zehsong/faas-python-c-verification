@@ -53,6 +53,8 @@ class NativeConfigTests(unittest.TestCase):
         cls.args = parse_args(["--cc", os.environ.get("FINDER_CC", "cc"), "--esbmc", "missing-test-esbmc"])
         cls.backend = ConfigBackend(cls.args, cls.temp.name)
         cls.backend.prepare()
+        # Native fixture tests only; this bypass is not a formal certificate.
+        cls.backend.state_established = True
 
     def test_native_variants_and_finite_search(self):
         seeds = default_seeds("invariant")
@@ -122,12 +124,12 @@ class NativeConfigTests(unittest.TestCase):
         proc = subprocess.run(command, capture_output=True, text=True, timeout=60)
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 
-    def test_missing_solver_does_not_certify_native_results(self):
+    def test_missing_solver_blocks_native_results(self):
         with tempfile.TemporaryDirectory() as tmp, contextlib.redirect_stdout(io.StringIO()):
             report = run(parse_args(["--cc", self.args.cc, "--esbmc", "missing-test-esbmc", "--workdir", tmp]))
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIsNone(report["condition"])
-        self.assertEqual(report["traces_collected"], 512)
+        self.assertEqual(report["traces_collected"], 0)
 
 
 if __name__ == "__main__":

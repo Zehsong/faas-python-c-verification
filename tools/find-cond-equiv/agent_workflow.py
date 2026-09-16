@@ -18,7 +18,7 @@ import time
 import uuid
 
 from agent_conditions import strict_json, validate_proposal
-from result_contract import build_summary, write_summary, failure_result
+from result_contract import ExecutionFailure, build_summary, write_summary, failure_result
 from predicate_search import observations_equal
 from find_cache_conditions import ROOT, CacheBackend, oracle, parse_args as cache_args
 from find_config_conditions import ConfigBackend, parse_args as config_args
@@ -217,7 +217,8 @@ def start(config, root):
             if obligations is not None:
                 state["state_obligations"] = obligations
                 if any(row["status"] != "PROVED" for row in obligations.values()):
-                    raise RuntimeError("whole-domain safety/unwinding not proved; native replay disabled")
+                    code = "STATE_OBLIGATION_NOT_PROVED" if "initialization" in obligations else "SAFETY_NOT_ESTABLISHED"
+                    raise ExecutionFailure(code, "required state/safety obligations not proved; native replay disabled")
             backend.replay(backend.default_seeds(settings.state_mode))
             if obligations is None:
                 obligations = backend.state_obligations()

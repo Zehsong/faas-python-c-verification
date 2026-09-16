@@ -5,6 +5,36 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Array acceptance recorded; private-cache state admission
+
+- Recorded user-reported **C BOUNDED ARRAY ACCEPTANCE: 10/10 passed** after
+  `b1ae3d9`, preserving the transcript and archive paths. The raw archive and
+  actual binary/checkout identities remain uninspected. The requested current-
+  engine readonly-table result was not supplied; its earlier 9/9 is historical.
+- Both cache adapters now prove initialization and mode-specific preservation
+  before executing native inputs. Failed/missing proofs disable sampling and
+  discovery. Agent rounds restore this gate only under the existing identity
+  checks. The legacy stateless prime adapter retains its own behavior.
+- Added structured state scope and required-obligation declarations. The common
+  result publisher/validator refuses certificates missing required state evidence.
+  Cache native post-state fields must have valid types and satisfy the invariant,
+  in addition to probe flags. Private cache bytes remain unobserved relationally;
+  no arbitrary-stateful-C admission or sequence certificate is introduced.
+- Added a 14-check stage across both cache families: good and conditional regions,
+  empty versus invariant entries, wrong initialization, return-correct state
+  corruption, absent solver and resumed scripted agent candidates. It snapshots
+  inputs, records tool identities, checks drift and archives independently.
+- Validation: **157 local tests passed without skips** (20 oracle + 131 finder,
+  including eight new controls + six demo). Two old absent-solver expectations
+  were updated from sampled inputs to zero under the new gate. Actual absent-
+  solver stage gives expected **2/14**, all UNKNOWN/no condition/no samples.
+  [Logs and limits](docs/validation/cache-state/README.md). Native/mock controls
+  are not formal proofs; modified-ESBMC 14/14 remains pending. Syntax, links,
+  source identity and whitespace checks pass; frozen transfer is unchanged.
+- Updated status, plan, result/agent guides and usage. Assess the M3 gate after
+  separate array/cache acceptance evidence; clean-environment release and
+  held-out-case evaluation remain later gates.
+
 ## 2026-09-16 — Bounded array arguments and complete observations
 
 - Added opt-in C contract schema 2: fixed uint32_t/bool array parameters, scalar

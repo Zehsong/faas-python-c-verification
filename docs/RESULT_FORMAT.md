@@ -67,6 +67,28 @@ need not invalidate a later successful final certificate. Use the top-level
 outcome and its published obligations for the current claim, not the presence
 of a warning string alone.
 
+## Private-cache state admission
+
+The two reviewed cache adapters declare `scope.required_state_obligations` as
+initialization and preservation, plus a structured `scope.state_contract` with
+fields, call/environment inputs, initializer, private ownership and the entry
+mode covered by preservation. A missing required record becomes NOT_CHECKED with
+STATE_OBLIGATION_MISSING; no EXACT/PARTIAL claim may omit it. Present but unproved
+state evidence also blocks publication. This remains result schema version 1;
+old artifacts lacking the optional required-list field retain their old contract.
+
+Native sampling now follows both proofs. A missing solver therefore produces
+zero cache native samples, unlike the historical baseline. Source/tool identity
+checks precede restoring this gate in agent rounds. Native after_* fields are
+type-checked and checked against the invariant, not accepted from flags alone.
+
+The observation is return equality plus candidate invariant preservation, not
+byte equality between reference/candidate caches: the reference is pure and the
+candidate cache is private. `empty` preservation applies only to an empty entry;
+`invariant` preservation covers arbitrary admitted invariant states. Neither an
+EXACT condition nor this metadata claims unrestricted sequence equivalence.
+[Acceptance and commands](../cases/cache_state/README.md).
+
 ## Bounded array observations
 
 For C contract schema 2, adapter c-bounded-array-v2 records flattened initial

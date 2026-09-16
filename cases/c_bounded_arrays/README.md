@@ -22,7 +22,8 @@ bash cases/c_bounded_arrays/test_arrays.sh "$ESBMC"
 ```
 
 目标为只读表 `9/9` 和 `C BOUNDED ARRAY ACCEPTANCE: 10/10 passed`，然后打印新的
-`c-bounded-arrays-*.tar.gz` 证据路径。正式执行待 Codespace 确认。
+`c-bounded-arrays-*.tar.gz` 证据路径。用户已报告数组 **10/10**；[记录与来源](../../docs/validation/c-bounded-arrays/user-reported-results.md)。
+本次只读表重跑结果尚未提供。
 [本地记录](../../docs/validation/c-bounded-arrays/README.md)包含 149 项回归及缺少求解器的负向检查。
 
 | 检查 | 比较内容 | 期望 |
