@@ -1,0 +1,32 @@
+{
+  "schema": 2,
+  "name": "swap",
+  "original": {
+    "source": "swap.c",
+    "entry": "transform",
+    "args": [
+      "a"
+    ]
+  },
+  "candidate": {
+    "source": "identity.c",
+    "entry": "transform",
+    "args": [
+      "a"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 2,
+      "min": 0,
+      "max": 3
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 4
+}

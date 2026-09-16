@@ -21,6 +21,14 @@ see [M2 result format and acceptance](RESULT_FORMAT.md). The best certified resu
 is distinguished from the latest proposal feedback; identity drift invalidates
 displayed certificates. Start a new session after this engine update.
 
+Schema 2 C contracts now accept [fixed array parameters](../cases/c_bounded_arrays/README.md).
+Seeds/conditions refer to flattened initial fields such as a_0, a_1; scope maps
+these back to array positions. Native screening and replay compare the entire
+observation vector (return plus all final array elements), not return values
+alone. A new scripted two-round array control and formal regression are pending.
+Restart sessions after upgrading. Provider transport and invariant synthesis
+remain outside this implementation.
+
 ## Intended workflow and trust boundaries
 
 ```mermaid

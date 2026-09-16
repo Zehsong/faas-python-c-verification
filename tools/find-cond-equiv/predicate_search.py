@@ -8,6 +8,16 @@ UINT32_MAX = 2**32 - 1
 FIELDS = ("x", "valid", "key", "value")
 
 
+def observations_equal(row):
+    """Compare the adapter's complete observation, keeping scalar compatibility."""
+    keys = ("observations_original", "observations_candidate")
+    if any(key in row for key in keys):
+        if not all(isinstance(row.get(key), list) and row[key] for key in keys):
+            raise ValueError("both nonempty observation vectors are required")
+        return row[keys[0]] == row[keys[1]]
+    return row["r_original"] == row["r_cached"]
+
+
 @dataclass(frozen=True)
 class Atom:
     numeric_fields = ("x", "key", "value")
@@ -117,7 +127,7 @@ def simplify_cubes(cubes):
 def entropy(samples):
     if not samples:
         return 0.0
-    positive = sum(row["r_original"] == row["r_cached"] for row in samples)
+    positive = sum(observations_equal(row) for row in samples)
     p = positive / len(samples)
     return 0.0 if p in (0, 1) else -p * math.log2(p) - (1-p) * math.log2(1-p)
 
@@ -165,7 +175,7 @@ def search(backend, atoms, max_predicates=16):
                 signature = tuple(atom.evaluate(row) for atom in atoms)
                 groups.setdefault(signature, []).append(row)
         for group in groups.values():
-            if len({row["r_original"] == row["r_cached"] for row in group}) < 2:
+            if len({observations_equal(row) for row in group}) < 2:
                 continue
             for row in group:
                 for field in getattr(backend, "numeric_fields", Atom.numeric_fields):

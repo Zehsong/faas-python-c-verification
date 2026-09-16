@@ -1,4 +1,4 @@
-"""Contract-bound generic scalar C adapter for both discovery and agent sessions."""
+"""Contract-bound scalar/bounded-array C adapter for discovery and agent sessions."""
 import hashlib
 import itertools
 from pathlib import Path
@@ -21,7 +21,7 @@ def bind_contract(path):
         def parse(cls, text):
             if isinstance(text, str):
                 text = text.strip()
-                if text in contract.fields and contract.data["inputs"][text]["type"] == "bool":
+                if text in contract.fields and contract.input_specs[text]["type"] == "bool":
                     return cls(text)
                 if text == "valid":
                     raise ValueError("bare valid is allowed only for a declared bool input")
@@ -53,11 +53,12 @@ def bind_contract(path):
                 (self.inputs / f"{side}.c").write_bytes(source.data)
             (self.inputs / "bound_model.h").write_text(self.model, encoding="utf-8")
             (self.inputs / self.probe_filename).write_text(self.probe(), encoding="utf-8")
-            self.sketch_manifest = {"template": "c-scalar-v1", "contract": contract.data,
+            adapter_name = "c-bounded-array-v2" if contract.arrays else "c-scalar-v1"
+            self.sketch_manifest = {"template": adapter_name, "contract": contract.data,
                                     "source_identity": contract.identity,
                                     "model_sha256": hashlib.sha256(self.model.encode()).hexdigest()}
             save_json(self.workdir / "sketch-manifest.json", self.sketch_manifest)
-            self.scope = {"language": "C", "adapter": "c-scalar-v1", "inputs": contract.data["inputs"],
+            self.scope = {"language": "C", "adapter": adapter_name, "inputs": contract.input_specs,
                           "observations": "return value of one call", "return_type": contract.data["return_type"],
                           "state": "pure functions with scalar inputs/return and optional automatic const tables; no globals, pointers or external calls",
                           "memory": {"tables": {side: source.tables for side, source in contract.sources.items()},
@@ -68,6 +69,15 @@ def bind_contract(path):
                           "safety": "whole declared domain must pass safety and unwinding before native replay",
                           "condition_discovery": "finite entry-state comparison vocabulary; no completeness beyond certified domain",
                           "source_identity": contract.identity}
+            if contract.arrays:
+                self.scope.update(declared_inputs=contract.data["inputs"],
+                                  observations=contract.data["observations"],
+                                  state="one call with independent, fully initialized, non-aliasing array copies per side; no persistent globals")
+                self.scope["memory"].update(arrays=contract.arrays,
+                    policy="local const tables plus fixed array parameters; every array element observed after both calls; no pointer operations or aliasing",
+                    bounds="all array reads/writes require whole-domain safety and complete unwinding before native replay",
+                    observation_order=["return", *[f"{n}[{i}]" for n, s in contract.arrays.items() for i in range(s["length"])]],
+                    entry_field_mapping={f"{n}_{i}": f"{n}[{i}]" for n, s in contract.arrays.items() for i in range(s["length"])})
             self.esbmc, self.version = shutil.which(args.esbmc), None
             self.executable = self.inputs / ("scalar-probe.exe" if sys.platform == "win32" else "scalar-probe")
 
@@ -76,7 +86,7 @@ def bind_contract(path):
             if not isinstance(row, dict) or set(row) != set(cls.fields):
                 raise ValueError("seed must contain exactly the contract inputs")
             for name, value in row.items():
-                spec = contract.data["inputs"][name]
+                spec = contract.input_specs[name]
                 limit = 1 if spec["type"] == "bool" else UINT32_MAX
                 if type(value) is not int or not 0 <= value <= limit:
                     raise ValueError(f"invalid scalar seed: {name}")
@@ -84,19 +94,19 @@ def bind_contract(path):
 
         @staticmethod
         def seed_in_domain(row, state_mode):
-            return all(spec["min"] <= row[name] <= spec["max"] for name, spec in contract.data["inputs"].items())
+            return all(spec["min"] <= row[name] <= spec["max"] for name, spec in contract.input_specs.items())
 
         @classmethod
         def initial_atoms(cls):
             atoms = [cls.atom_type.parse(f"{a} == {b}") for a, b in itertools.combinations(cls.fields, 2)]
-            for name, spec in contract.data["inputs"].items():
+            for name, spec in contract.input_specs.items():
                 atoms += [cls.atom_type.parse(f"{name} == {n}") for n in sorted({spec["min"], spec["max"]})]
             return atoms
 
         @classmethod
         def default_seeds(cls, state_mode):
             values = [sorted({spec["min"], spec["max"], (spec["min"] + spec["max"]) // 2})
-                      for spec in contract.data["inputs"].values()]
+                      for spec in contract.input_specs.values()]
             return [dict(zip(cls.fields, row)) for row in itertools.product(*values)]
 
         def state_obligations(self):
@@ -116,20 +126,30 @@ def bind_contract(path):
         def validate_trace(self, row):
             if contract.data["return_type"] == "bool" and any(row.get(n) not in (0, 1) for n in ("r_original", "r_cached")):
                 raise RuntimeError("native boolean return outside 0/1")
+            if contract.arrays:
+                for side, return_name in (("original", "r_original"), ("candidate", "r_cached")):
+                    values = row.get("observations_" + side)
+                    types = contract.observation_types()
+                    if not isinstance(values, list) or len(values) != len(types) or any(
+                            type(v) is not int or not 0 <= v <= (1 if t == "bool" else UINT32_MAX)
+                            for v, t in zip(values, types)) or values[0] != row.get(return_name):
+                        raise RuntimeError("invalid native array observation vector")
 
         @staticmethod
         def make_harness(model, variant, state_mode, kind, condition="true", expected=None):
             if kind not in ("safety", "feasible", "equal", "different", "expected"):
                 raise ValueError("unsupported scalar obligation")
             declarations = []
-            for name, spec in contract.data["inputs"].items():
+            for name, spec in contract.input_specs.items():
                 declarations += [f"  uint32_t finder_{name} = nondet_uint32_t();",
                                  f"  __ESBMC_assume(finder_{name} >= UINT32_C({spec['min']}) && finder_{name} <= UINT32_C({spec['max']}));"]
             statements = [] if kind == "expected" else [f"  __ESBMC_assume({condition});"]
             if kind != "feasible":
+                statements += contract.argument_copies()
                 statements += [f"  volatile {contract.data['return_type']} ce_left = {contract.call('original')};",
                                f"  volatile {contract.data['return_type']} ce_right = {contract.call('candidate')};"]
-            assertion = {"safety": "true", "feasible": "false", "equal": "ce_left == ce_right", "different": "ce_left != ce_right",
+            equality = contract.equality()
+            assertion = {"safety": "true", "feasible": "false", "equal": equality, "different": f"!({equality})",
                          "expected": f"({condition}) == ({expected})"}[kind]
             statements += [f'  __ESBMC_assert({assertion}, "{ScalarBackend.properties[kind]}");']
             return model + "\nextern uint32_t nondet_uint32_t(void);\nvoid finder_entry(void) {\n" + "\n".join(declarations + statements) + "\n}\n"
@@ -143,14 +163,21 @@ def bind_contract(path):
             addresses = ", ".join("&ce_input_" + name for name in names)
             lines = [contract.model(), "#include <stdio.h>", "int main(void) {", f"  unsigned long long {temps};",
                      f'  while (scanf("{formats}", {addresses}) == {len(names)}) {{']
-            for name, spec in contract.data["inputs"].items():
+            for name, spec in contract.input_specs.items():
                 lines += [f"    if (ce_input_{name} < {spec['min']}ull || ce_input_{name} > {spec['max']}ull) return 2;",
                           f"    {spec['type']} finder_{name} = ({spec['type']})ce_input_{name};"]
+            lines += contract.argument_copies()
             lines += [f"    {contract.data['return_type']} ce_left = {contract.call('original')};",
                       f"    {contract.data['return_type']} ce_right = {contract.call('candidate')};"]
             fields = [*names, "r_original", "r_cached"]
             values = [*("finder_" + n for n in names), "ce_left", "ce_right"]
-            fmt = "{" + ",".join('\\"' + n + '\\":%llu' for n in fields) + "}\\n"
+            fragments = ['\\"' + n + '\\":%llu' for n in fields]
+            if contract.arrays:
+                for side in ("original", "candidate"):
+                    observed = contract.observation_values(side)
+                    fragments.append('\\"observations_' + side + '\\":[' + ','.join('%llu' for _ in observed) + ']')
+                    values += observed
+            fmt = "{" + ",".join(fragments) + "}\\n"
             lines += ['    printf("' + fmt + '", ' + ", ".join("(unsigned long long)" + v for v in values) + ");",
                       "  }", "  return 0;", "}"]
             return "\n".join(lines) + "\n"

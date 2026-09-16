@@ -71,9 +71,23 @@ state-copy goals. Search grammar and candidate certification remain shared.
 136 local tests pass; the user now reports **9/9 acceptance passed**, including
 the scripted agent EXACT condition n != 9 on 0..31.
 [Transcript and provenance](validation/c-readonly-tables/user-reported-results.md).
-Raw archive inspection and report review remain open. The next slice should define bounded array
-input/output bindings and observations, then independent mutable state and
-cache obligations. Do not silently infer array equality from return equality.
+Raw archive inspection and report review remain open. The subsequent bounded
+array slice is recorded below. Independent mutable cache state and sequence
+obligations remain later; array equality must not be inferred from return equality.
+
+## M3 bounded array implementation
+
+Schema 2 now defines bounded array arguments, identical initialized independent
+copies and mandatory observations of every final element plus the return. The
+first limit is four input scalar values including all array elements, with no
+aliasing or unrestricted pointer syntax. Shared native comparison now covers
+full observation vectors throughout search, agent screening and witness replay.
+[Contract, examples and commands](../cases/c_bounded_arrays/README.md).
+
+149 local tests pass. Array 10/10 and a current-engine const-table 9/9 rerun are
+pending on the existing modified ESBMC. This implements the small array part of
+M3, not cache state/sequence obligations or full release gates. The user prefers
+autonomous continuation between stages and summaries only at meaningful milestones.
 
 ## Release target
 

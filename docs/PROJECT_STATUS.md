@@ -16,8 +16,9 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
 - Latest demonstration implementation: `75dbd47`; user-reported READY (5/5).
-- Latest frontend extension: `cd2b88c` (M3 local const tables), following
-  `36f43d5` (demo result record); table acceptance is user-reported 9/9.
+- Latest implementation: bounded-array schema 2 (identify its commit in Git
+  history), following `c4fceec` (table result record). Prior table frontend
+  `cd2b88c` has user-reported 9/9; current-engine table rerun is pending.
 - Prior core implementation: `26925c7` (M2 result contract), following `133abe9` (transfer result record),
   `5502520` (scalar adapter) and `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
@@ -46,7 +47,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Cache sketch | Shared generation of initialization, preservation and relational obligations for two cache families | Invariant and bindings are supplied; no automatic invariant synthesis |
 | Prime/lookup adapter | Compares fallback, truncated and mutated tables against trial division | Boolean return, one uint32 input, CLI domain constrained to 0..255 |
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
-| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | uint32_t/bool inputs/return plus bounded local const tables; scalar 8/8 historical, table acceptance user-reported 9/9 with raw archive uninspected; no mutable memory or array parameters |
+| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Schema 1 scalars/const tables; schema 2 fixed array parameters, independent copies and all final elements observed; array 10-check formal stage pending; four input values total, no aliases or persistent state |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
 | Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
@@ -63,8 +64,9 @@ in `condition_runner.py`. The generic C adapter subclasses that base directly;
 legacy prime/config adapters retain their compatibility inheritance. See
 [C scalar usage and boundaries](C_SCALAR_TOOL.md). Three new pair families and
 one mutant are supplied entirely through C files and contracts. This does not
-admit arbitrary C, pointers or stateful programs through the generic route. The
-new M3 slice adds only bounded, fully initialized local const tables.
+admit arbitrary C, unrestricted pointers or persistent state through the generic
+route. M3 includes local const tables and opt-in bounded array arguments for one
+call; it does not yet cover mutable cache state across call sequences.
 
 Local validation: 107 distinct tests passed, no skips (105 in the full
 regression, followed by 17 targeted scalar tests including two additional controls).
@@ -142,6 +144,28 @@ The raw archive remains independently uninspected; this result is separate from
 old scalar/demo pass counts. Restart prior agent sessions after upgrading frontend identity.
 The full M3 array input/output/state goals and M4 release gates remain open.
 
+## M3 bounded array input/output slice
+
+[Schema 2](../cases/c_bounded_arrays/README.md) admits fixed uint32_t/bool array
+parameters with one scalar return, at most four scalar input values including
+all elements. Each side receives distinct, initialized arrays with identical
+entry values; every array is observed after execution alongside the return.
+No aliases, unrestricted pointers, dynamic lengths or persistent state are
+admitted. Local writable scratch arrays/array forwarding remain unsupported.
+
+Search entropy/refinement, agent native screening and solver witness replay now
+share complete observation comparison. A swap/identity fixture with equal returns
+must still find the initial equality region of the two elements. Existing scalar
+trace compatibility is preserved. Flattened entry fields and vector positions
+are explicit in scope. Session identity changes require fresh agent sessions.
+
+Local regression: 149 passed (20 oracle + 123 finder + six demo), no skips.
+[Local evidence](validation/c-bounded-arrays/README.md). An actual missing-solver
+stage yields the expected 3/10 with all outcomes UNKNOWN and no native inputs.
+The new array 10/10 and a fresh readonly-table 9/9 regression are pending on the
+modified ESBMC. Previous result counts are historical, not claims about this
+new engine. Cache initialization/preservation and sequence claims remain open.
+
 ## Current transfer experiment
 
 The three-input interval-check experiment is implemented at `52df7d1` under
@@ -216,13 +240,15 @@ Keep the working Codespace and its customized binary/source and evidence.
    The scalar demo now reports READY (5/5); preserve its separate archive.
    Inspect its overview and JSON/Markdown reports for usability and remaining
    M2 edge cases. M3 local const-table acceptance is now user-reported 9/9;
-   preserve its separate archive and the completed agent session. Review memory
-   scope/safety diagnostics, then define bounded array inputs/outputs, observed
-   contents and independent memory copies before mutable cache state. Preserve the frozen transfer baseline; raw remote
+   preserve its separate archive and completed agent session. Array input/output
+   schema 2 is now implemented: run the readonly-table regression (9/9) and
+   bounded-array stage (10/10) with separate archives and the modified ESBMC.
+   Continue authorized work directly after evidence updates; reserve summaries
+   for meaningful milestones. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `cd2b88c` when the table result was recorded.
+   branch beyond `c4fceec` when array development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

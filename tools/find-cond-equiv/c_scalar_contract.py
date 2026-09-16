@@ -1,6 +1,7 @@
 """Strict, deliberately small C frontend; source bodies are never synthesized.
 
-The parser validates scalar functions with bounded local constant tables. The harness
+The parser validates scalar functions, local constant tables and opt-in bounded
+array parameters. The harness
 uses the original bodies, with function names scoped by checked macro bindings.
 This is an admission checker, not a sandbox for hostile files or compilers.
 """
@@ -42,12 +43,13 @@ def stripped_source(source):
 
 
 class Source:
-    def __init__(self, path):
+    def __init__(self, path, *, array_parameters=False):
         try:
             from pycparser import c_ast, c_parser
         except ImportError as exc:
             raise InputFailure("DEPENDENCY_MISSING", "C scalar frontend requires: python3 -m pip install -r tools/find-cond-equiv/requirements.txt") from exc
         self.ast = c_ast
+        self.array_parameters = array_parameters
         self.path = Path(path).resolve()
         self.data = self.path.read_bytes()
         if len(self.data) > 65536:
@@ -76,14 +78,24 @@ class Source:
             result_type = self.scalar_type(decl.type.type)
             params = decl.type.args.params if decl.type.args else []
             if not 1 <= len(params) <= 4:
-                raise ValueError("functions require 1..4 scalar parameters")
+                raise ValueError("functions require 1..4 parameters")
             env = {}
             types = []
             for param in params:
-                if not isinstance(param, c_ast.Decl) or param.storage or param.quals or param.init:
+                if not isinstance(param, c_ast.Decl) or param.storage or param.init or param.funcspec or param.align:
                     raise ValueError("unsupported parameter declaration")
                 self.check_name(param.name, env)
-                env[param.name] = self.scalar_type(param.type)
+                if array_parameters and isinstance(param.type, c_ast.ArrayDecl):
+                    array = param.type
+                    if param.quals not in ([], ["const"]) or array.dim_quals:
+                        raise ValueError("unsupported array parameter qualifiers")
+                    element = self.scalar_type(array.type, const=bool(param.quals))
+                    size = self.array_size(array.dim, 4)
+                    env[param.name] = ("array", element, size, bool(param.quals))
+                else:
+                    if param.quals:
+                        raise ValueError("unsupported scalar parameter qualifier")
+                    env[param.name] = self.scalar_type(param.type)
                 types.append(env[param.name])
             # The current function is deliberately absent: recursion is rejected.
             self.statement(function.body, env, result_type)
@@ -101,6 +113,14 @@ class Source:
         if names in (["bool"], ["_Bool"]):
             return "bool"
         raise ValueError("unsupported C type: only uint32_t/bool")
+
+    def array_size(self, node, maximum):
+        if not isinstance(node, self.ast.Constant) or not re.fullmatch(r"[1-9][0-9]*[uU]?", node.value):
+            raise ValueError("array length must be an explicit positive decimal literal")
+        size = int(node.value.rstrip("uU"))
+        if not 1 <= size <= maximum:
+            raise ValueError(f"array length must be 1..{maximum}")
+        return size
 
     def table_declaration(self, node, env):
         """Admit only fully initialized, automatic, one-dimensional const tables.
@@ -152,8 +172,8 @@ class Source:
             return env[node.name]
         if isinstance(node, a.ArrayRef) and isinstance(node.name, a.ID):
             table = env.get(node.name.name)
-            if not isinstance(table, tuple) or table[0] != "table":
-                raise ValueError("indexed reads require an admitted local const table")
+            if not isinstance(table, tuple) or table[0] not in ("table", "array"):
+                raise ValueError("indexed reads require an admitted array")
             if self.expression(node.subscript, env) != "uint32_t":
                 raise ValueError("table indices must have uint32_t type")
             return table[1]
@@ -232,7 +252,9 @@ class Source:
             if self.expression(node.expr, env) != result_type:
                 raise ValueError("return type mismatch; use an explicit scalar cast")
             return
-        if isinstance(node, a.Assignment) and isinstance(node.lvalue, a.ID):
+        if isinstance(node, a.Assignment) and isinstance(node.lvalue, (a.ID, a.ArrayRef)):
+            if isinstance(node.lvalue, a.ArrayRef):
+                self.check_array_write(node.lvalue, env)
             left, right = self.expression(node.lvalue, env), self.expression(node.rvalue, env)
             if left != right or node.op not in ("=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=") or (node.op != "=" and left != "uint32_t"):
                 raise ValueError("unsupported scalar assignment")
@@ -263,6 +285,11 @@ class Source:
             return
         raise ValueError(f"unsupported C statement: {type(node).__name__}")
 
+    def check_array_write(self, node, env):
+        value = env.get(node.name.name) if isinstance(node.name, self.ast.ID) else None
+        if not isinstance(value, tuple) or value[0] != "array" or value[3]:
+            raise ValueError("writes require a mutable bounded array parameter")
+
     def returns(self, node):
         a = self.ast
         if isinstance(node, a.Return):
@@ -287,24 +314,47 @@ class Contract:
             raise ValueError("contract exceeds 64 KiB")
         self.data = d = strict_json(raw.decode("utf-8"))
         required = {"schema", "name", "original", "candidate", "inputs", "return_type", "observations", "unwind"}
-        if not isinstance(d, dict) or set(d) != required or type(d["schema"]) is not int or d["schema"] != 1:
-            raise ValueError("invalid C scalar contract schema")
-        if not identifier(d["name"]) or d["return_type"] not in ("bool", "uint32_t") or d["observations"] != ["return"]:
-            raise ValueError("contract requires a name, bool/uint32_t return, and observations: [return]")
+        if not isinstance(d, dict) or set(d) != required or type(d["schema"]) is not int or d["schema"] not in (1, 2):
+            raise ValueError("invalid C contract schema: use 1 for scalars or 2 for bounded arrays")
+        if not identifier(d["name"]) or d["return_type"] not in ("bool", "uint32_t"):
+            raise ValueError("contract requires a name and bool/uint32_t return")
         if type(d["unwind"]) is not int or not 1 <= d["unwind"] <= 1024:
             raise ValueError("unwind must be 1..1024; unwinding assertions remain enabled")
         if not isinstance(d["inputs"], dict) or not 1 <= len(d["inputs"]) <= 4:
-            raise ValueError("contract requires 1..4 scalar inputs")
-        self.fields = tuple(d["inputs"])
+            raise ValueError("contract requires 1..4 input bindings")
+        self.input_specs = {}
+        self.arrays = {}
         empty_fields = []
         for name, spec in d["inputs"].items():
-            if not identifier(name) or not isinstance(spec, dict) or set(spec) != {"type", "min", "max"} or spec["type"] not in ("bool", "uint32_t"):
-                raise ValueError("each input requires a scalar type, min and max")
-            limit = 1 if spec["type"] == "bool" else UINT32_MAX
+            if not identifier(name) or not isinstance(spec, dict):
+                raise ValueError("invalid input name or specification")
+            is_array = spec.get("type") in ("uint32_t[]", "bool[]")
+            keys = {"type", "length", "min", "max"} if is_array else {"type", "min", "max"}
+            if set(spec) != keys or (not is_array and spec["type"] not in ("bool", "uint32_t")):
+                raise ValueError("each input requires type, min/max, and length only for arrays")
+            if is_array:
+                if d["schema"] != 2 or type(spec["length"]) is not int or not 1 <= spec["length"] <= 4:
+                    raise ValueError("array inputs require schema 2 and literal length 1..4")
+                self.arrays[name] = spec
+            element = spec["type"][:-2] if is_array else spec["type"]
+            limit = 1 if element == "bool" else UINT32_MAX
             if type(spec["min"]) is not int or type(spec["max"]) is not int or not (0 <= spec["min"] <= limit and 0 <= spec["max"] <= limit):
                 raise ValueError("invalid scalar input domain")
             if spec["min"] > spec["max"]:
                 empty_fields.append(name)
+            names = [f"{name}_{i}" for i in range(spec["length"])] if is_array else [name]
+            for field in names:
+                if not identifier(field) or field in self.input_specs or field in (
+                        "r_original", "r_cached", "observations_original", "observations_candidate"):
+                    raise ValueError("flattened input names collide or exceed identifier limits")
+                self.input_specs[field] = {"type": element, "min": spec["min"], "max": spec["max"]}
+        if not 1 <= len(self.input_specs) <= 4:
+            raise ValueError("at most four scalar input values, including array elements, are supported")
+        if d["schema"] == 2 and not self.arrays:
+            raise ValueError("schema 2 requires at least one array input")
+        if d["observations"] != ["return", *self.arrays]:
+            raise ValueError("observe return followed by every array in input declaration order")
+        self.fields = tuple(self.input_specs)
         if empty_fields:
             raise InputFailure("EMPTY_DOMAIN", "empty inclusive input range: " + ", ".join(empty_fields),
                                {"language": "C", "inputs": d["inputs"], "observations": d["observations"],
@@ -315,18 +365,22 @@ class Contract:
             if not isinstance(binding, dict) or set(binding) != {"source", "entry", "args"} or not isinstance(binding["source"], str) or not identifier(binding["entry"]):
                 raise ValueError("each side requires source, entry and args")
             args = binding["args"]
-            if not isinstance(args, list) or any(not isinstance(n, str) for n in args) or len(args) != len(self.fields) or set(args) != set(self.fields):
+            if not isinstance(args, list) or any(not isinstance(n, str) for n in args) or len(args) != len(d["inputs"]) or set(args) != set(d["inputs"]):
                 raise ValueError("each side must bind every logical input exactly once")
             try:
-                source = Source(self.path.parent / binding["source"])
+                source = Source(self.path.parent / binding["source"], array_parameters=d["schema"] == 2)
             except RecursionError as exc:
                 raise InputFailure("UNSUPPORTED_INPUT", "unsupported C: nesting too deep") from exc
             except InputFailure:
                 raise
             except ValueError as exc:
                 raise InputFailure("UNSUPPORTED_INPUT", f"{side} source {binding['source']}: {exc}") from exc
-            wanted = (d["return_type"], [d["inputs"][n]["type"] for n in args])
-            if source.signatures.get(binding["entry"]) != wanted:
+            signature = source.signatures.get(binding["entry"])
+            actual = None if signature is None else (signature[0], [
+                (t[1] + "[]", t[2]) if isinstance(t, tuple) else t for t in signature[1]])
+            wanted = (d["return_type"], [(d["inputs"][n]["type"], d["inputs"][n]["length"])
+                                       if n in self.arrays else d["inputs"][n]["type"] for n in args])
+            if actual != wanted:
                 raise ValueError(f"{side} entry signature does not match contract")
             self.sources[side] = source
         self.identity = {str(self.path): hashlib.sha256(raw).hexdigest(), **{
@@ -334,7 +388,23 @@ class Contract:
 
     def call(self, side):
         binding = self.data[side]
-        return f"ce_{side}_{binding['entry']}(" + ", ".join("finder_" + n for n in binding["args"]) + ")"
+        return f"ce_{side}_{binding['entry']}(" + ", ".join(
+            f"ce_buf_{side}_{n}" if n in self.arrays else "finder_" + n for n in binding["args"]) + ")"
+
+    def argument_copies(self):
+        return [f"  {spec['type'][:-2]} ce_buf_{side}_{name}[{spec['length']}] = {{"
+                + ", ".join(f"finder_{name}_{i}" for i in range(spec["length"])) + "};"
+                for side in ("original", "candidate") for name, spec in self.arrays.items()]
+
+    def observation_values(self, side):
+        return ["ce_left" if side == "original" else "ce_right", *[
+            f"ce_buf_{side}_{name}[{i}]" for name, spec in self.arrays.items() for i in range(spec["length"])]]
+
+    def observation_types(self):
+        return [self.data["return_type"], *[spec["type"][:-2] for spec in self.arrays.values() for _ in range(spec["length"])]]
+
+    def equality(self):
+        return " && ".join(f"({a} == {b})" for a, b in zip(self.observation_values("original"), self.observation_values("candidate")))
 
     def model(self):
         return ("#include <stdint.h>\n#include <stdbool.h>\n#include <limits.h>\n"

@@ -1,0 +1,39 @@
+{
+  "schema": 2,
+  "name": "unsafe_index",
+  "original": {
+    "source": "index.c",
+    "entry": "transform",
+    "args": [
+      "a",
+      "i"
+    ]
+  },
+  "candidate": {
+    "source": "index.c",
+    "entry": "transform",
+    "args": [
+      "a",
+      "i"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 2,
+      "min": 0,
+      "max": 3
+    },
+    "i": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 2
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 4
+}

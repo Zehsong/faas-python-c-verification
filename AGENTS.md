@@ -31,6 +31,14 @@ of a development task, then inspect the actual branch, working tree and code:
   changes. Update the plan when scope changes. Report the pushed commit/branch
   to the user; if work remains local, state that explicitly.
 
+## Collaboration preference
+
+The user asked on 2026-09-16 to continue authorized development directly rather
+than ending each result update with a proposed next step or asking for another
+go-ahead. Keep progress updates brief; summarize when an experiment stage or
+meaningful objective is reached. When formal execution requires their Codespace,
+provide the pushed change and concrete test command without a permission loop.
+
 ## Research and proof boundaries
 
 - Current priority: a usable C same-language conditional-equivalence tool.

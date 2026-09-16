@@ -1,0 +1,41 @@
+{
+  "schema": 2,
+  "name": "copy_reverse",
+  "original": {
+    "source": "copy.c",
+    "entry": "transform",
+    "args": [
+      "src",
+      "dst"
+    ]
+  },
+  "candidate": {
+    "source": "copy_reverse.c",
+    "entry": "transform",
+    "args": [
+      "src",
+      "dst"
+    ]
+  },
+  "inputs": {
+    "src": {
+      "type": "uint32_t[]",
+      "length": 2,
+      "min": 0,
+      "max": 1
+    },
+    "dst": {
+      "type": "uint32_t[]",
+      "length": 2,
+      "min": 0,
+      "max": 1
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "src",
+    "dst"
+  ],
+  "unwind": 4
+}

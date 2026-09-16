@@ -5,6 +5,34 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Bounded array arguments and complete observations
+
+- Added opt-in C contract schema 2: fixed uint32_t/bool array parameters, scalar
+  return, explicit full post-call observations, four input values total counting
+  all array elements. Each side and logical array has distinct initialized memory;
+  alias bindings, pointer syntax/decay, dynamic lengths and const writes are rejected.
+  Schema 1 retains scalar inputs and local const tables. Reserved trace-field names
+  cannot be used as input fields, preventing wire-format collisions.
+- Generated harnesses compare return plus all final array elements; inequality
+  negates that complete comparison. Native probes preserve actual return fields
+  and add validated observation vectors. Shared search, agent native screening
+  and counterexample replay now use the full observation, retaining scalar behavior.
+  Reports record declared arrays, flattened initial fields and observation order.
+- Added swap/identity, independent increment, copy/reverse and return-mutant pairs,
+  real bounds/unwind controls, alias/const rejection, missing solver and a scripted
+  two-round agent check. Separate ten-check stage validates expected regions after
+  discovery and archives all artifacts. Existing readonly-table rerun is requested
+  because shared comparison paths changed. Historical transfer lock is unchanged.
+- Validation: 149 local tests passed without skips (20 oracle + 123 finder,
+  including 13 new array tests + six demo). Actual missing-solver stage gives 3/10
+  as expected, all UNKNOWN/no native input execution. Native/mocked checks are not
+  formal proofs. [Logs](docs/validation/c-bounded-arrays/README.md). Syntax, links,
+  fixture contracts and whitespace checked. Formal array 10/10 and current-engine
+  readonly-table 9/9 remain pending on modified ESBMC.
+- Recorded the user's preference to proceed directly between stages and summarize
+  at milestones. Updated interface, result, agent and handoff documentation.
+  This is single-call array behavior, not persistent cache-state/sequence support.
+
 ## 2026-09-16 — Local constant-table acceptance reported
 
 - Recorded user-reported **C READONLY TABLE ACCEPTANCE: 9/9 passed** after

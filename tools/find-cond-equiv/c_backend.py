@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import sys
 import time
-from predicate_search import FIELDS, UINT32_MAX, cube_expression, matches
+from predicate_search import FIELDS, UINT32_MAX, cube_expression, matches, observations_equal
 from cache_sketch import PROPERTIES
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/verify-equiv"))
@@ -159,7 +159,7 @@ class CBackend:
                     observed = self.replay([witness], origin=f"query-{index}-{kind}", repeat=True)
                     if not observed:
                         raise RuntimeError("solver witness is outside the declared state domain")
-                    same = observed[0]["r_original"] == observed[0]["r_cached"]
+                    same = observations_equal(observed[0])
                     if (kind == "equal" and same) or (kind == "different" and not same):
                         raise RuntimeError("solver/native observation disagreement")
                     result["native_replay"] = observed[0]

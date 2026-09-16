@@ -67,6 +67,21 @@ need not invalidate a later successful final certificate. Use the top-level
 outcome and its published obligations for the current claim, not the presence
 of a warning string alone.
 
+## Bounded array observations
+
+For C contract schema 2, adapter c-bounded-array-v2 records flattened initial
+fields in scope.inputs, the original array declarations in scope.declared_inputs,
+and element mapping/observation order in scope.memory. Claims compare the return
+and every array's final contents with independent, fully initialized storage on
+both sides. The output summary remains schema_version 1; C contract schema 2 is
+a separate input format. See [array semantics](../cases/c_bounded_arrays/README.md).
+
+Raw native traces retain r_original/r_cached as actual returns and add complete
+observations_original/observations_candidate vectors. Consumers of array traces
+must compare those vectors. The shared finder, replay and agent native screening
+do so; return equality alone is insufficient. Stateful sequence claims are not
+implied by one-call array observations.
+
 ## Important failure distinctions
 
 | Code | Interpretation |

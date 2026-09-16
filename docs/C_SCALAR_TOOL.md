@@ -21,6 +21,12 @@ nine-check acceptance is now [user-reported 9/9](validation/c-readonly-tables/us
 The raw archive remains independently uninspected; older scalar passes remain
 separate historical evidence. Start fresh agent sessions after upgrading.
 
+[Bounded array contracts (schema 2)](../cases/c_bounded_arrays/README.md) now add
+fixed array parameters and full post-call observations to the same CLI. Schema 1
+retains scalar inputs and local const tables. The array stage is implemented with
+149 local regression passes; formal 10/10 and current-engine table 9/9 rerun are
+pending. Read the array guide for initialization, non-aliasing and size limits.
+
 ## Run the acceptance stage
 
 Use the existing modified ESBMC binary; this command does not install or replace
@@ -131,7 +137,7 @@ contract, but its domain and observations define the theorem and require human
 review. Once a session starts, proposals cannot alter the sources, contract,
 safety flags or result labels. No unattended agent API is integrated.
 
-## Admission and proof boundary
+## Admission and proof boundary (schema 1)
 
 - 1..4 `uint32_t`/`bool` inputs; one scalar return; independent rectangular input
   ranges. Arithmetic operands must be unsigned scalars (use `1u`, explicit casts
@@ -146,7 +152,7 @@ safety flags or result labels. No unattended agent API is integrated.
   lengths and complete literal initializers, at most 256 elements per source.
   Only indexed reads with uint32_t indices are allowed; whole-domain safety must
   prove bounds before replay. Report scope.memory lists table declarations.
-  No table writes, address-taking, decay, array parameters/returns, static tables
+  Under schema 1: no table writes, address-taking, decay, array parameters/returns, static tables
   or implicit zero-fill. See the table guide for the precise supported syntax.
 - No globals, pointers, mutable arrays, structs, external calls, signed types,
   floating point, custom includes/macros, I/O or concurrency. Source identifiers
@@ -175,5 +181,5 @@ safety flags or result labels. No unattended agent API is integrated.
 The [post-freeze interval-check experiment](../cases/c_scalar_transfer/README.md)
 kept the engine unchanged; its [user-reported result](validation/c-transfer/user-reported-results.md)
 is 8/8 required passes and 8/12 discovery EXACT. Future
-work includes useful input diagnostics, broader C syntax, array inputs/outputs,
+work includes useful input diagnostics, broader C syntax, larger array interfaces,
 and measuring preparation effort and discovery effectiveness on unseen cases.

@@ -19,6 +19,7 @@ import uuid
 
 from agent_conditions import strict_json, validate_proposal
 from result_contract import build_summary, write_summary, failure_result
+from predicate_search import observations_equal
 from find_cache_conditions import ROOT, CacheBackend, oracle, parse_args as cache_args
 from find_config_conditions import ConfigBackend, parse_args as config_args
 from find_prime_conditions import PrimeBackend, parse_args as prime_args
@@ -90,7 +91,7 @@ def check_candidate(backend, condition, goal):
     report = {"status": "UNKNOWN", "candidate": condition.expression(),
               "candidate_c": condition.expression(c=True), "checks": {}, "feedback": []}
     inside = [row for row in backend.samples if condition.evaluate(row)]
-    bad = next((row for row in inside if row["r_original"] != row["r_cached"]), None)
+    bad = next((row for row in inside if not observations_equal(row)), None)
     if bad is not None:
         report.update(status="REFUTED", reason="native counterexample inside candidate")
         report["feedback"].append({"kind": "unequal_inside", "origin": "native", "input_and_observation": bad})
@@ -116,7 +117,7 @@ def check_candidate(backend, condition, goal):
         report["status"] = "REFUTED" if equal["status"] == "REFUTED" else "UNKNOWN"
         report["feedback"].append({"kind": "sufficiency_not_proved", "evidence": equal})
         return report
-    if any(condition.evaluate(row) and row["r_original"] != row["r_cached"] for row in backend.samples):
+    if any(condition.evaluate(row) and not observations_equal(row) for row in backend.samples):
         report["reason"] = "solver/native sufficiency disagreement"
         return report
     if feasible["status"] == "REFUTED":
@@ -126,7 +127,7 @@ def check_candidate(backend, condition, goal):
     # Replayed inputs can disprove exactness without another solver call. They
     # never certify universal inequality of the complement.
     outside_equal = next((row for row in backend.samples if not condition.evaluate(row)
-                          and row["r_original"] == row["r_cached"]), None)
+                          and observations_equal(row)), None)
     if outside_equal is not None:
         report["feedback"].append({"kind": "equal_outside", "origin": "native",
                                    "input_and_observation": outside_equal})
