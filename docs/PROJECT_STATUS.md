@@ -15,8 +15,9 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest core implementation: `5502520` (generic C scalar adapter),
-  following `23ad4af` (live trial record),
+- Latest core implementation: the 2026-09-16 M2 result-contract commit (identify
+  its hash in Git history), following `133abe9` (transfer result record),
+  `5502520` (scalar adapter) and `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
 - The working branch was explicitly fetched before this change; no newer remote
   implementation was found. Unlocated cloud edits remain unreviewed.
@@ -45,6 +46,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
 | Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Pure uint32_t/bool subset, return observation, 1..4 inputs; 8/8 acceptance user-reported, raw archive not independently inspected |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
+| Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 formal acceptance pending |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -67,6 +69,24 @@ See [local evidence](validation/c-scalar/README.md). The user subsequently repor
 **C SCALAR ACCEPTANCE: 8/8 passed** from Codespace.
 [Transcript, evidence paths and provenance](validation/c-scalar/user-reported-results.md).
 No raw archive inspection or local formal rerun accompanies this record.
+
+## M2 reporting implementation
+
+[Result format v1](RESULT_FORMAT.md) is implemented for automatic discovery and
+agent sessions. The report distinguishes EXACT with no equal inputs from an
+empty domain, requires nonempty-domain/state/proof evidence for certified claims,
+and explains solver, budget, safety, admission and identity failures. Partial
+results retain an actually proved Boolean region union if a compact presentation
+cannot be certified; mismatched complement evidence is not reused.
+
+Local regression: 120 tests passed without skips (20 oracle + 100 finder), then
+13 targeted result tests passed. An intentionally missing-solver M2 stage yields
+3/10, as expected. [Logs](validation/m2-results/README.md). The new modified-ESBMC
+10-check stage is pending; earlier scalar/transfer passes remain historical.
+
+The transfer engine lock is deliberately unchanged. Its original stage must run
+in a checkout of `52df7d1`, as documented in the result-format guide; it will reject
+current M2 code. Do not refresh it to relabel the old experiment as unchanged.
 
 ## Current transfer experiment
 
@@ -135,11 +155,13 @@ Keep the working Codespace and its customized binary/source and evidence.
 3. Scalar acceptance is user-reported 8/8; transfer now reports 8/8 required and
    8/12 EXACT. Preserve both separate archives. Inspect the transfer metrics for
    baseline statuses/reasons and actual conditions before comparing performance.
-   Next implementation: M2 versioned results and clear proof/failure diagnostics;
-   preserve the frozen transfer baseline. Raw archive inspection remains open.
+   Run the implemented M2 stage `cases/result_contract/test_results.sh` using
+   the existing modified ESBMC; target 10/10 and preserve its separate archive.
+   Inspect the new JSON/Markdown reports before expanding interfaces. Preserve
+   the frozen transfer baseline; raw remote archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `52df7d1` when its result was recorded.
+   branch beyond `133abe9` when M2 development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

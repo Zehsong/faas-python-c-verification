@@ -7,6 +7,7 @@ import sys
 from c_backend import oracle
 from c_scalar_backend import bind_contract
 from condition_runner import run
+from result_contract import failure_result
 
 
 def parse_args(argv=None):
@@ -34,7 +35,7 @@ def main(argv=None):
         report = run(args, backend)
         return 0 if report["status"] == "EXACT" else 2
     except (OSError, ValueError, RuntimeError, RecursionError) as exc:
-        print(f"UNKNOWN: unsupported or invalid C contract: {exc}", file=sys.stderr)
+        failure_result(args, exc)
         return 2
 
 

@@ -18,6 +18,7 @@ import time
 import uuid
 
 from agent_conditions import strict_json, validate_proposal
+from result_contract import build_summary, write_summary, failure_result
 from find_cache_conditions import ROOT, CacheBackend, oracle, parse_args as cache_args
 from find_config_conditions import ConfigBackend, parse_args as config_args
 from find_prime_conditions import PrimeBackend, parse_args as prime_args
@@ -169,11 +170,14 @@ def publish(directory, state):
     save(directory / "session.json", state)
     save(directory / "result.json", summary)
     save(directory / "agent-context.json", context)
+    normalized = build_summary(summary, producer="agent", samples=state.get("samples", []), state=state)
+    write_summary(directory, normalized)
     print(f"{summary['status']}: {summary['condition']}")
     print(f"Phase: {summary['phase']}; goal reached: {summary['goal_reached']}")
     if state.get("latest_feedback"):
         print(f"Latest proposal: {state['latest_feedback']['status']}")
     print(f"Agent context: {directory / 'agent-context.json'}")
+    print(f"Report: {directory / 'report.md'}")
     return summary
 
 
@@ -228,6 +232,8 @@ def start(config, root):
                 raise RuntimeError("source or tool identity changed during initialization")
         except (OSError, ValueError, RuntimeError) as exc:
             state.update(phase="UNKNOWN", latest_feedback={"status": "UNKNOWN", "reason": str(exc)})
+            if getattr(exc, "code", None):
+                state["latest_feedback"]["reason_code"] = exc.code
         finally:
             record_backend(phase, state, backend, started)
         return directory, publish(directory, state)
@@ -279,6 +285,8 @@ def step(directory, proposal_path):
             result = check_candidate(backend, condition, config["goal"])
         except (OSError, ValueError, RuntimeError, RecursionError) as exc:
             result["reason"] = str(exc)
+            if getattr(exc, "code", None):
+                result["reason_code"] = exc.code
             # Only validation failures before backend creation are REJECTED.
             if backend is not None:
                 result["status"] = "UNKNOWN"
@@ -347,6 +355,8 @@ def main(argv=None):
         print(f"Session: {directory}")
         return 0 if result["phase"] == "READY" else 2
     except (OSError, ValueError, RuntimeError) as exc:
+        if args.action == "start":
+            failure_result(args, exc, producer="agent")
         print(f"Workflow error: {exc}", file=sys.stderr)
         return 2
 

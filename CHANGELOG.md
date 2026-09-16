@@ -5,6 +5,33 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — M2 versioned results and proof diagnostics
+
+- Added verification-result.json schema v1 and report.md for finder/agent runs,
+  preserving legacy result.json, CLI flags and exit codes. Reports distinguish
+  full equality, exact no-equal-inputs, exact regions, sufficient regions, UNKNOWN
+  and EMPTY_DOMAIN, with scope, domain evidence, proof checks, diagnostics and cost.
+- Added structured query/time/startup/compile/safety/unwinding/replay reason codes.
+  Empty/rejected generic C inputs now leave report artifacts after argument
+  parsing; contradictory typed bounds are classified before program admission.
+  Unsupported C still makes no proof claim. No safety flags were relaxed.
+- Tightened partial output: when final presentation checking is UNKNOWN, retain
+  only the Boolean union of actually proved nonempty regions. A complement proof
+  for another presentation is not reused. Contradictions or source identity drift
+  remove the claim and invalidate displayed checks. Agent latest feedback remains
+  separate from its best certificate.
+- Added JSON schema, 13 reporting/failure tests and a ten-case M2 acceptance stage
+  with independent archives. Local regression: 120 passed, no skips; final 13
+  targeted tests passed. A real child-process timeout is covered, but mocked
+  certificates are not proofs. Missing-solver acceptance correctly yields 3/10.
+  [Logs/provenance](docs/validation/m2-results/README.md). Python/Bash syntax,
+  schema/output shape, links and whitespace checked; formal M2 ESBMC run pending.
+- Preserved the original transfer engine lock; documented isolated checkout of
+  52df7d1 for historical reruns. No relabelling of its 8/12 result or speedup claim.
+- Next: run [M2 acceptance](docs/RESULT_FORMAT.md), inspect reports and any remaining
+  result-interface edge cases, then prioritize broader C support. Updated handoff
+  status and development plan in the same change.
+
 ## 2026-09-16 — C transfer acceptance and discovery totals reported
 
 - Recorded the user's **8/8 required passes, 8/12 discovery EXACT**, with all

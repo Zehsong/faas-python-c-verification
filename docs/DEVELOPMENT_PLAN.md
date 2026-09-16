@@ -31,6 +31,17 @@ real-world or blind case, and establishes no paired speedup. Next implement M2
 versioned result/status/reason fields and diagnostic controls, preserving the
 frozen experiment baseline for future comparisons.
 
+## M2 implementation update
+
+Versioned JSON and human reports are now implemented for finder and agent
+sessions, with backward-compatible legacy artifacts, certified partial-union
+fallback, explicit empty domains and structured failure codes. Local regression
+passes; the [10-check M2 acceptance stage](RESULT_FORMAT.md) remains pending on
+the user's modified ESBMC. CLI usage/output-directory failures are not promised
+artifact-producing runs. The existing frozen transfer lock is preserved, so its
+old experiment must be rerun in its original checkout. After acceptance, evaluate
+the report usability and remaining M2 edge cases before M3 memory/state expansion.
+
 ## Release target
 
 A new user supplies two supported C functions, their entry points, build inputs,

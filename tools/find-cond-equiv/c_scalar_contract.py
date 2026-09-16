@@ -10,6 +10,7 @@ import re
 
 from agent_conditions import strict_json
 from predicate_search import UINT32_MAX
+from result_contract import InputFailure
 
 
 def identifier(value):
@@ -45,7 +46,7 @@ class Source:
         try:
             from pycparser import c_ast, c_parser
         except ImportError as exc:
-            raise ValueError("C scalar frontend requires: python3 -m pip install -r tools/find-cond-equiv/requirements.txt") from exc
+            raise InputFailure("DEPENDENCY_MISSING", "C scalar frontend requires: python3 -m pip install -r tools/find-cond-equiv/requirements.txt") from exc
         self.ast = c_ast
         self.path = Path(path).resolve()
         self.data = self.path.read_bytes()
@@ -252,12 +253,19 @@ class Contract:
         if not isinstance(d["inputs"], dict) or not 1 <= len(d["inputs"]) <= 4:
             raise ValueError("contract requires 1..4 scalar inputs")
         self.fields = tuple(d["inputs"])
+        empty_fields = []
         for name, spec in d["inputs"].items():
             if not identifier(name) or not isinstance(spec, dict) or set(spec) != {"type", "min", "max"} or spec["type"] not in ("bool", "uint32_t"):
                 raise ValueError("each input requires a scalar type, min and max")
             limit = 1 if spec["type"] == "bool" else UINT32_MAX
-            if type(spec["min"]) is not int or type(spec["max"]) is not int or not 0 <= spec["min"] <= spec["max"] <= limit:
+            if type(spec["min"]) is not int or type(spec["max"]) is not int or not (0 <= spec["min"] <= limit and 0 <= spec["max"] <= limit):
                 raise ValueError("invalid scalar input domain")
+            if spec["min"] > spec["max"]:
+                empty_fields.append(name)
+        if empty_fields:
+            raise InputFailure("EMPTY_DOMAIN", "empty inclusive input range: " + ", ".join(empty_fields),
+                               {"language": "C", "inputs": d["inputs"], "observations": d["observations"],
+                                "source_admission": "not completed; no program equivalence claim"})
         self.sources = {}
         for side in ("original", "candidate"):
             binding = d[side]
@@ -269,7 +277,11 @@ class Contract:
             try:
                 source = Source(self.path.parent / binding["source"])
             except RecursionError as exc:
-                raise ValueError("unsupported C: nesting too deep") from exc
+                raise InputFailure("UNSUPPORTED_INPUT", "unsupported C: nesting too deep") from exc
+            except InputFailure:
+                raise
+            except ValueError as exc:
+                raise InputFailure("UNSUPPORTED_INPUT", f"{side} source {binding['source']}: {exc}") from exc
             wanted = (d["return_type"], [d["inputs"][n]["type"] for n in args])
             if source.signatures.get(binding["entry"]) != wanted:
                 raise ValueError(f"{side} entry signature does not match contract")

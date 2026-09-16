@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/verify-equiv"))
 import verify_equiv as oracle
 from c_obligation import check as check_obligation
+from result_contract import ExecutionFailure, diagnostic_code
 
 def save_json(path, value):
     Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -72,7 +73,7 @@ class CBackend:
     def prepare(self):
         compiler = shutil.which(self.args.cc)
         if compiler is None:
-            raise RuntimeError(f"C compiler not found: {self.args.cc}")
+            raise ExecutionFailure("COMPILER_NOT_FOUND", f"C compiler not found: {self.args.cc}")
         source = str(self.inputs / self.probe_filename)
         if Path(compiler).stem.lower() == "cl":
             command = [compiler, "/nologo", "/std:c11", "/W4", source,
@@ -82,7 +83,8 @@ class CBackend:
         save_json(self.inputs / "compile-command.json", command)
         rc, timed_out = oracle.run(command, self.inputs / "compile.log", max(0.01, min(60, self.remaining())))
         if timed_out or rc != 0:
-            raise RuntimeError("native probe compilation failed; see inputs/compile.log")
+            raise ExecutionFailure("COMPILE_TIMEOUT" if timed_out else "COMPILE_FAILED",
+                                   "native probe compilation failed; see inputs/compile.log")
         if self.esbmc:
             self.esbmc = str(Path(self.esbmc).resolve())
             rc, timed_out = oracle.run([self.esbmc, "--version"], self.workdir / "version.log",
@@ -90,6 +92,7 @@ class CBackend:
             self.version = oracle.read_text(self.workdir / "version.log")
             if timed_out or rc != 0:
                 self.esbmc = None
+                self.solver_unavailable_code = "SOLVER_STARTUP_TIMEOUT" if timed_out else "SOLVER_STARTUP_FAILED"
 
 
     def replay(self, rows, origin="boundary_seeds", repeat=False):
@@ -129,9 +132,12 @@ class CBackend:
 
     def query(self, kind, condition="true", reserve=0, expected=None):
         if not self.esbmc:
-            return {"status": "UNKNOWN", "reason": f"ESBMC unavailable: {self.args.esbmc}"}
-        if len(self.queries) >= self.args.max_queries - reserve or self.remaining() <= 0:
-            return {"status": "UNKNOWN", "reason": "query or wall-clock budget exhausted"}
+            return {"status": "UNKNOWN", "reason": f"ESBMC unavailable: {self.args.esbmc}",
+                    "reason_code": getattr(self, "solver_unavailable_code", "SOLVER_NOT_FOUND"), "kind": kind}
+        if self.remaining() <= 0:
+            return {"status": "UNKNOWN", "reason": "wall-clock budget exhausted", "reason_code": "TIME_BUDGET_EXHAUSTED", "kind": kind}
+        if len(self.queries) >= self.args.max_queries - reserve:
+            return {"status": "UNKNOWN", "reason": "query budget exhausted", "reason_code": "QUERY_BUDGET_EXHAUSTED", "kind": kind}
         index = len(self.queries)
         path = self.workdir / f"query-{index:03d}-{kind}"
         path.mkdir()
@@ -158,7 +164,14 @@ class CBackend:
                         raise RuntimeError("solver/native observation disagreement")
                     result["native_replay"] = observed[0]
                 except RuntimeError as exc:
-                    result.update(status="UNKNOWN", reason=str(exc))
+                    result.update(status="UNKNOWN", reason=str(exc), reason_code="WITNESS_REPLAY_FAILED")
+        if result["status"] == "UNKNOWN" and not result.get("reason_code"):
+            if result.get("timed_out"):
+                result["reason_code"] = "SOLVER_TIMEOUT"
+            elif result.get("violation"):
+                result["reason_code"] = diagnostic_code(result)
+            else:
+                result["reason_code"] = "SOLVER_FAILED" if result.get("returncode") != 0 else "UNRECOGNIZED_SOLVER_OUTPUT"
         self.queries.append(result)
         save_json(path / "result.json", result)
         print(f"  query {index:03d} {kind}: {result['status']}", flush=True)

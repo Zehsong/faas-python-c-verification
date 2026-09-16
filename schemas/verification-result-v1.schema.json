@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Conditional equivalence result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "producer",
+    "status",
+    "legacy_status",
+    "scope",
+    "claim",
+    "domain",
+    "obligations",
+    "diagnostics",
+    "latest_candidate",
+    "metrics",
+    "artifacts"
+  ],
+  "properties": {
+    "schema": {
+      "const": "conditional-equivalence-result"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "producer": {
+      "enum": [
+        "finder",
+        "agent"
+      ]
+    },
+    "status": {
+      "enum": [
+        "EXACT",
+        "PARTIAL",
+        "UNKNOWN",
+        "EMPTY_DOMAIN"
+      ]
+    },
+    "legacy_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scope": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaning",
+        "condition",
+        "condition_c",
+        "relative_to_declared_scope"
+      ],
+      "properties": {
+        "meaning": {
+          "enum": [
+            "ALL_INPUTS",
+            "NO_INPUTS",
+            "REGION",
+            "SUFFICIENT_REGION",
+            "NO_EQUIVALENCE_CLAIM"
+          ]
+        },
+        "condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "condition_c": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "relative_to_declared_scope": {
+          "const": true
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "basis",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "NONEMPTY",
+            "EMPTY",
+            "NOT_ESTABLISHED"
+          ]
+        },
+        "basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    "obligations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "sufficiency",
+        "complement"
+      ],
+      "properties": {
+        "state": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "sufficiency": {
+          "$ref": "#/$defs/evidence"
+        },
+        "complement": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message",
+          "location",
+          "log"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "log": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "latest_candidate": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "queries",
+        "native_samples",
+        "elapsed_seconds"
+      ],
+      "properties": {
+        "queries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "native_samples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "elapsed_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "directory",
+        "legacy_result",
+        "summary",
+        "human_report"
+      ],
+      "properties": {
+        "directory": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "legacy_result": {
+          "const": "result.json"
+        },
+        "summary": {
+          "const": "verification-result.json"
+        },
+        "human_report": {
+          "const": "report.md"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "basis",
+        "log",
+        "property",
+        "reason_code",
+        "details"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PROVED",
+            "REFUTED",
+            "UNKNOWN",
+            "NOT_CHECKED",
+            "INVALIDATED"
+          ]
+        },
+        "basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "log": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "property": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "details": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

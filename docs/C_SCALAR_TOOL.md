@@ -8,6 +8,9 @@ the user has reported **8/8 scalar acceptance** from Codespace.
 [Transcript and provenance](validation/c-scalar/user-reported-results.md); raw
 logs and run-specific binary identity have not been independently inspected here.
 
+Each run now also writes [versioned verification results and a human report](RESULT_FORMAT.md).
+The legacy scalar 8/8 is historical; the new M2 stage has separate acceptance.
+
 ## Run the acceptance stage
 
 Use the existing modified ESBMC binary; this command does not install or replace

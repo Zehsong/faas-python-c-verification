@@ -10,6 +10,11 @@ Updated 2026-09-16. The user approved beginning this direction. The current
 implementation is a file-mediated candidate feedback loop over three reviewed
 C adapters and the checked scalar C frontend. No autonomous model API is integrated.
 
+Agent sessions now additionally write `verification-result.json` and `report.md`;
+see [M2 result format and acceptance](RESULT_FORMAT.md). The best certified result
+is distinguished from the latest proposal feedback; identity drift invalidates
+displayed certificates. Start a new session after this engine update.
+
 ## Intended workflow and trust boundaries
 
 ```mermaid
@@ -190,7 +195,7 @@ session if uncertain. Sessions do not automatically migrate their toolchain.
    alongside the [post-freeze interval-check stage](../cases/c_scalar_transfer/README.md) archive.
    It now reports 8/8 required passes and 8/12 discovery EXACT, without engine
    edits; see [the result record](validation/c-transfer/user-reported-results.md).
-   Inspect detailed metrics, then continue M2 results/diagnostics. This stage
+   Inspect detailed metrics, then run the implemented M2 reporting acceptance. This stage
    compares deterministic vocabularies, not autonomous agents.
 4. Add a provider transport for unattended rounds after the file protocol is
    validated. Compare it with the existing deterministic finder on held-out

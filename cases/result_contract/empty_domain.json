@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "name": "empty_input",
+  "original": {
+    "source": "../c_scalar/maximum.c",
+    "entry": "choose",
+    "args": [
+      "x",
+      "y"
+    ]
+  },
+  "candidate": {
+    "source": "../c_scalar/minimum.c",
+    "entry": "choose",
+    "args": [
+      "x",
+      "y"
+    ]
+  },
+  "inputs": {
+    "x": {
+      "type": "uint32_t",
+      "min": 2,
+      "max": 1
+    },
+    "y": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 31
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 40
+}

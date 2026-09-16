@@ -3,10 +3,13 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import tempfile
+import time
 from c_backend import save_json
 from predicate_search import search
+from result_contract import ExecutionFailure, build_summary, write_summary
 
 def run(args, backend_type):
+    started = time.monotonic()
     root = Path(args.workdir).resolve()
     root.mkdir(parents=True, exist_ok=True)
     workdir = Path(tempfile.mkdtemp(prefix=args.variant + "-", dir=root))
@@ -52,6 +55,11 @@ def run(args, backend_type):
             raise RuntimeError("initialization/invariant preservation not established; no certified condition")
         found = search(backend, atoms, args.max_predicates)
         report["search"] = found
+        if found.get("history") and found["history"][0].get("cube") in ([], ()) and found["history"][0]["status"] == "EMPTY":
+            report["domain_feasibility"] = found["history"][0]["evidence"]
+            if backend.samples:
+                raise ExecutionFailure("WITNESS_MISMATCH", "solver/native domain-feasibility disagreement")
+            raise ExecutionFailure("EMPTY_DOMAIN", "declared domain proved unreachable; no equivalence claim")
         presentation = backend.present_condition(found)
         report["condition"] = presentation["condition"]
         # Revalidate the published condition; prove its complement contains only
@@ -63,14 +71,37 @@ def run(args, backend_type):
         report["status"] = "EXACT" if report["exact"] else "PARTIAL" if found["buckets"]["EQ"] else "UNKNOWN"
         report["condition_c"] = presentation["condition_c"]
         report["condition_basis"] = presentation["basis"]
-        if final["status"] == "REFUTED" or (final["status"] == "UNKNOWN" and final.get("reason", "").startswith("solver/native")):
+        report["published_sufficiency"] = final
+        report["published_complement"] = outside
+        if final["status"] == "UNKNOWN" and found["buckets"]["EQ"]:
+            regions = [event["evidence"] for event in found.get("history", []) if event["status"] == "EQ"]
+            if len(regions) == len(found["buckets"]["EQ"]) and all(q["status"] == "PROVED" for q in regions):
+                # Keep only the union actually certified during search. A compact
+                # presentation whose final check timed out must not be promoted.
+                report.update(condition=found["condition"], condition_c=found["condition_c"],
+                              condition_basis="Boolean union of individually proved nonempty regions",
+                              published_sufficiency={"status": "PROVED", "basis": "PROVED_REGION_UNION", "regions": regions})
+                if presentation["condition_c"] != found["condition_c"]:
+                    report["published_complement"] = {"status": "NOT_CHECKED", "basis": "condition reverted to certified region union",
+                                                      "prior_presentation_check": outside}
+            else:
+                report.update(status="UNKNOWN", condition=None, condition_c=None)
+        if final["status"] == "REFUTED" or (final["status"] == "UNKNOWN" and (
+                final.get("reason", "").startswith("solver/native") or final.get("reason_code") == "WITNESS_REPLAY_FAILED")):
             report.update(status="UNKNOWN", exact=False, condition=None, condition_c=None,
-                          reason="final validation contradicted prior certificates; do not use this condition")
+                          reason="final validation contradicted prior certificates; do not use this condition", reason_code="CERTIFICATE_CONTRADICTION")
         # Do not present an empty sufficient condition as a useful discovery.
         if not found["buckets"]["EQ"] and not report["exact"]:
             report["condition"] = None
     except (OSError, ValueError, RuntimeError) as exc:
         report["reason"] = str(exc)
+        if getattr(exc, "code", None):
+            report["reason_code"] = exc.code
+        elif isinstance(exc, ValueError):
+            report["reason_code"] = "INPUT_REJECTED"
+        elif isinstance(exc, OSError):
+            report["reason_code"] = "INPUT_OR_TOOL_IO_ERROR"
+    report["elapsed_seconds"] = round(time.monotonic() - started, 6)
     if backend:
         report.update(esbmc=backend.esbmc, esbmc_version_output=backend.version,
                       queries_used=len(backend.queries), traces_collected=len(backend.samples))
@@ -84,6 +115,14 @@ def run(args, backend_type):
             "trust": "Propose only entry-state predicates or inputs; labels and proof claims are not accepted."})
     save_json(workdir / "result.json", report)
     save_json(root / "result.json", report)
+    summary = build_summary(report, samples=backend.samples if backend else (), queries=backend.queries if backend else ())
+    write_summary(workdir, summary)
+    write_summary(root, summary)
     print(f"{report['status']}: {report['condition']}")
+    print(f"Outcome: {summary['status']}; domain={summary['domain']['status']}; claim={summary['claim']['meaning']}")
+    codes = list(dict.fromkeys(d["code"] for d in summary["diagnostics"]))
+    if codes:
+        print("Diagnostics: " + ", ".join(codes))
+    print(f"Report: {workdir / 'report.md'}")
     print(f"Artifacts: {workdir}")
     return report

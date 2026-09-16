@@ -1,0 +1,97 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.3.2
+** Copyright (c) 2026 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+test_agent_best_certificate_separate_from_latest_rejection (test_result_contract.ResultContractTests.test_agent_best_certificate_separate_from_latest_rejection) ... ok
+test_contradiction_invalidates_prior_proof_display (test_result_contract.ResultContractTests.test_contradiction_invalidates_prior_proof_display) ... ok
+test_empty_and_unsupported_inputs_always_write_artifacts (test_result_contract.ResultContractTests.test_empty_and_unsupported_inputs_always_write_artifacts) ... ok
+test_exact_meanings_and_schema (test_result_contract.ResultContractTests.test_exact_meanings_and_schema) ... ok
+test_false_partial_is_not_a_useful_region (test_result_contract.ResultContractTests.test_false_partial_is_not_a_useful_region) ... ok
+test_human_report_links_to_evidence_and_keeps_scope (test_result_contract.ResultContractTests.test_human_report_links_to_evidence_and_keeps_scope) ... ok
+test_missing_complement_does_not_become_exact (test_result_contract.ResultContractTests.test_missing_complement_does_not_become_exact) ... ok
+test_missing_file_has_io_reason_and_legacy_result (test_result_contract.ResultContractTests.test_missing_file_has_io_reason_and_legacy_result) ... ok
+test_no_domain_witness_or_safety_means_no_claim (test_result_contract.ResultContractTests.test_no_domain_witness_or_safety_means_no_claim) ... ok
+test_partial_falls_back_to_certified_union (test_result_contract.ResultContractTests.test_partial_falls_back_to_certified_union) ... ok
+test_query_and_time_budget_codes_are_distinct (test_result_contract.ResultContractTests.test_query_and_time_budget_codes_are_distinct) ... ok
+test_query_failure_diagnostics_preserve_unknown (test_result_contract.ResultContractTests.test_query_failure_diagnostics_preserve_unknown) ... ok
+test_real_process_timeout_is_unknown (test_result_contract.ResultContractTests.test_real_process_timeout_is_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.158s
+
+OK
+
+all-inputs
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\all-inputs\pair-t83cp2d6\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\all-inputs\pair-t83cp2d6
+all-inputs: NOT ESTABLISHED
+
+conditional
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\conditional\pair-kvt1035l\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\conditional\pair-kvt1035l
+conditional: NOT ESTABLISHED
+
+no-inputs
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\no-inputs\pair-2h4tniqr\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\no-inputs\pair-2h4tniqr
+no-inputs: NOT ESTABLISHED
+
+query-budget
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\query-budget\pair-y5fm00lh\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\query-budget\pair-y5fm00lh
+query-budget: NOT ESTABLISHED
+
+unsafe-division
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\unsafe-division\pair-aq4wwxmz\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\unsafe-division\pair-aq4wwxmz
+unsafe-division: NOT ESTABLISHED
+
+short-unwind
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\short-unwind\pair-yvg7a223\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\short-unwind\pair-yvg7a223
+short-unwind: NOT ESTABLISHED
+
+missing-solver
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\missing-solver\pair-jtnrc1tz\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\missing-solver\pair-jtnrc1tz
+missing-solver: PASS
+
+empty-domain
+EMPTY_DOMAIN: empty inclusive input range: x
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\empty-domain\rejected-bv27mbdl\report.md
+empty-domain: PASS
+
+unsupported
+UNKNOWN: UNSUPPORTED_INPUT: original source pointer.c: unsupported C type: only unqualified uint32_t/bool scalars
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\unsupported\rejected-n71_xx80\report.md
+unsupported: PASS
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\agent-partial\session-vcz5biak\agent-context.json
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2\agent-partial\session-vcz5biak\report.md
+agent-partial: NOT ESTABLISHED
+M2 RESULT ACCEPTANCE: 3/10 passed
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\m2-missing-solver\checks-fi3beob2

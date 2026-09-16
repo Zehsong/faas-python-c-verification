@@ -65,12 +65,19 @@ are checked before/after the experiment. This does not lock all system headers,
 shared libraries or toolchain dependencies. The manifest guards experimental
 consistency; it is not a security boundary against an editor changing the lock.
 
+## M2 compatibility note
+
+This is a frozen historical experiment. Current M2 code intentionally fails its
+unchanged engine lock. Rerun in the original checkout using the commands below;
+use [the M2 stage](../../docs/RESULT_FORMAT.md) to validate the current engine.
+Do not refresh the lock to pretend the engine is unchanged.
+
 ## Run in Codespace
 
 ```bash
 cd /workspaces/faas-python-c-verification
-git switch codex/same-language-cache
-git pull --ff-only origin codex/same-language-cache
+git worktree add --detach ../faas-transfer-baseline 52df7d1
+cd ../faas-transfer-baseline
 python3 -m pip install -r tools/find-cond-equiv/requirements.txt
 bash cases/c_scalar_transfer/test_transfer.sh \
   /workspaces/esbmc-current/build/src/esbmc/esbmc
