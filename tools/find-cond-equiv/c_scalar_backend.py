@@ -59,7 +59,10 @@ def bind_contract(path):
             save_json(self.workdir / "sketch-manifest.json", self.sketch_manifest)
             self.scope = {"language": "C", "adapter": "c-scalar-v1", "inputs": contract.data["inputs"],
                           "observations": "return value of one call", "return_type": contract.data["return_type"],
-                          "state": "pure scalar functions; no globals, pointers or external calls",
+                          "state": "pure functions with scalar inputs/return and optional automatic const tables; no globals, pointers or external calls",
+                          "memory": {"tables": {side: source.tables for side, source in contract.sources.items()},
+                                     "policy": "read-only local tables, fully literal-initialized; at most 256 elements per source; no pointer decay",
+                                     "bounds": "all indexed reads require whole-domain ESBMC safety before native replay"},
                           "arithmetic": "uint32_t modulo 2^32; bool; 32-bit int/unsigned int; 8-bit bytes",
                           "bound": {"unwind": self.unwind, "unwinding_assertions": True},
                           "safety": "whole declared domain must pass safety and unwinding before native replay",

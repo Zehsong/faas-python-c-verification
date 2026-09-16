@@ -15,6 +15,11 @@ For a guided end-to-end walkthrough, use the [C demo quickstart](../cases/c_scal
 It assembles a report index, editable input copies and a replayed counterexample
 from actual finder artifacts, retaining failures and a separate archive.
 
+The first M3 extension admits [bounded local constant tables](../cases/c_readonly_tables/README.md)
+inside otherwise scalar functions. It uses the same contract and CLI; its separate
+nine-check formal acceptance is pending. Older scalar results do not certify this
+new frontend version. Start fresh agent sessions after upgrading.
+
 ## Run the acceptance stage
 
 Use the existing modified ESBMC binary; this command does not install or replace
@@ -136,12 +141,19 @@ safety flags or result labels. No unattended agent API is integrated.
   Every function must structurally return on every path. Assignments/increments
   are statement-only, avoiding side effects in expressions. Shift counts must
   be literal values 0u..31u.
-- No globals, pointers, arrays/tables, structs, external calls, signed types,
+- Local automatic const uint32_t/bool tables are admitted with explicit literal
+  lengths and complete literal initializers, at most 256 elements per source.
+  Only indexed reads with uint32_t indices are allowed; whole-domain safety must
+  prove bounds before replay. Report scope.memory lists table declarations.
+  No table writes, address-taking, decay, array parameters/returns, static tables
+  or implicit zero-fill. See the table guide for the precise supported syntax.
+- No globals, pointers, mutable arrays, structs, external calls, signed types,
   floating point, custom includes/macros, I/O or concurrency. Source identifiers
   start with lowercase letters and cannot use the reserved `ce_`/`finder_`
   prefixes; shadowing is rejected. Unsupported input gives a diagnostic and no
   equivalence claim. The existing prime-table and cache adapters remain available
-  separately; this generic scalar frontend does not yet replace them.
+  separately. The generic frontend now supports local constant lookup tables,
+  but does not yet replace the stateful cache adapters.
 - A real C parser validates the subset. The generated model preserves the
   admitted function bodies, removing only comments and approved standard include
   lines. Checked macros namespace function definitions/calls on each side; local
@@ -162,5 +174,5 @@ safety flags or result labels. No unattended agent API is integrated.
 The [post-freeze interval-check experiment](../cases/c_scalar_transfer/README.md)
 kept the engine unchanged; its [user-reported result](validation/c-transfer/user-reported-results.md)
 is 8/8 required passes and 8/12 discovery EXACT. Future
-work includes useful input diagnostics, broader C syntax, bounded arrays/tables,
+work includes useful input diagnostics, broader C syntax, array inputs/outputs,
 and measuring preparation effort and discovery effectiveness on unseen cases.

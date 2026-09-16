@@ -125,8 +125,9 @@ printf 'Read report: %s/report.md\n' "$PAIR_RUN"
 
 启动失败时部分执行文件可能不存在，以报告诊断为准。
 无需手写 harness，也无需新增 Python backend；目前通用接口支持 1..4 个
-uint32_t/bool 输入、纯函数和单个标量返回值。数组、指针、全局状态等尚不支持；
-现有 prime/table 与 cache 案例仍使用专用适配器。完整含义见[结果格式](../../docs/RESULT_FORMAT.md)。
+uint32_t/bool 输入、纯函数和单个标量返回值。最新前端另增加了[局部只读表](../c_readonly_tables/README.md)，
+有独立的待运行验收；数组参数、输出数组、指针和全局状态仍不支持。原有 prime/table 与
+cache 专用适配器继续保留。完整含义见[结果格式](../../docs/RESULT_FORMAT.md)。
 
 ## 4. 保存演示证据
 

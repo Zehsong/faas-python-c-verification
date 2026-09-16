@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "name": "readonly_write",
+  "original": {
+    "source": "prime_compute.c",
+    "entry": "isprime",
+    "args": [
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "prime_write.c",
+    "entry": "isprime",
+    "args": [
+      "n"
+    ]
+  },
+  "inputs": {
+    "n": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 31
+    }
+  },
+  "return_type": "bool",
+  "observations": [
+    "return"
+  ],
+  "unwind": 16
+}

@@ -1,6 +1,6 @@
 """Strict, deliberately small C frontend; source bodies are never synthesized.
 
-The parser validates a pure scalar subset before any compilation. The harness
+The parser validates scalar functions with bounded local constant tables. The harness
 uses the original bodies, with function names scoped by checked macro bindings.
 This is an admission checker, not a sandbox for hostile files or compilers.
 """
@@ -65,9 +65,12 @@ class Source:
         if len(set(self.names)) != len(self.names) or not all(identifier(n) for n in self.names):
             raise ValueError("unsupported or duplicate function name")
         self.signatures = {}
+        self.tables = []
+        self.table_elements = 0
         self.nodes = 0
         for function in functions:
             decl = function.decl
+            self.current_function = decl.name
             if decl.storage not in ([], ["static"]) or decl.funcspec or decl.quals or function.param_decls:
                 raise ValueError("unsupported function declaration")
             result_type = self.scalar_type(decl.type.type)
@@ -88,9 +91,9 @@ class Source:
                 raise ValueError("every function must structurally return a value on every path")
             self.signatures[decl.name] = (result_type, types)
 
-    def scalar_type(self, node):
+    def scalar_type(self, node, *, const=False):
         a = self.ast
-        if not isinstance(node, a.TypeDecl) or node.quals or not isinstance(node.type, a.IdentifierType):
+        if not isinstance(node, a.TypeDecl) or node.quals != (["const"] if const else []) or not isinstance(node.type, a.IdentifierType):
             raise ValueError("unsupported C type: only unqualified uint32_t/bool scalars")
         names = node.type.names
         if names == ["uint32_t"]:
@@ -98,6 +101,34 @@ class Source:
         if names in (["bool"], ["_Bool"]):
             return "bool"
         raise ValueError("unsupported C type: only uint32_t/bool")
+
+    def table_declaration(self, node, env):
+        """Admit only fully initialized, automatic, one-dimensional const tables.
+
+        Tables never decay to pointers in the admitted language. Index safety is
+        a whole-domain ESBMC obligation before any native input is executed.
+        """
+        a = self.ast
+        array = node.type
+        if node.storage or node.quals != ["const"] or node.funcspec or node.bitsize or node.align or array.dim_quals:
+            raise ValueError("tables must be automatic const arrays without extra qualifiers")
+        element = self.scalar_type(array.type, const=True)
+        if not isinstance(array.dim, a.Constant) or not re.fullmatch(r"[1-9][0-9]*[uU]?", array.dim.value):
+            raise ValueError("table length must be an explicit positive decimal literal")
+        size = int(array.dim.value.rstrip("uU"))
+        if not 1 <= size <= 256 or self.table_elements + size > 256:
+            raise ValueError("at most 256 table elements per source are supported")
+        if not isinstance(node.init, a.InitList) or len(node.init.exprs or []) != size:
+            raise ValueError("table initializer must explicitly provide every element")
+        for value in node.init.exprs:
+            if not (isinstance(value, a.Constant) or isinstance(value, a.ID) and value.name in ("true", "false")):
+                raise ValueError("table elements must be literal constants")
+            if self.expression(value, env) != element:
+                raise ValueError("table initializer element type mismatch")
+        self.table_elements += size
+        self.tables.append({"function": self.current_function, "name": node.name,
+                            "element_type": element, "length": size})
+        env[node.name] = ("table", element, size)
 
     def check_name(self, name, env):
         if not identifier(name) or name in env or name in self.names:
@@ -116,7 +147,16 @@ class Source:
                 return "bool"
             if node.name not in env:
                 raise ValueError(f"unknown scalar: {node.name}")
+            if isinstance(env[node.name], tuple):
+                raise ValueError("tables may only be used in indexed reads; pointer decay is unsupported")
             return env[node.name]
+        if isinstance(node, a.ArrayRef) and isinstance(node.name, a.ID):
+            table = env.get(node.name.name)
+            if not isinstance(table, tuple) or table[0] != "table":
+                raise ValueError("indexed reads require an admitted local const table")
+            if self.expression(node.subscript, env) != "uint32_t":
+                raise ValueError("table indices must have uint32_t type")
+            return table[1]
         if isinstance(node, a.Constant):
             # No signed arithmetic or implementation-dependent literal types.
             if not re.fullmatch(r"(?:0[xX][0-9a-fA-F]+|0[0-7]*|[1-9][0-9]*)[uU]", node.value):
@@ -178,6 +218,9 @@ class Source:
             return
         if isinstance(node, a.Decl):
             self.check_name(node.name, env)
+            if isinstance(node.type, a.ArrayDecl):
+                self.table_declaration(node, env)
+                return
             typ = self.scalar_type(node.type)
             if node.storage or node.quals or node.funcspec or node.bitsize or node.init is None:
                 raise ValueError("locals must be initialized automatic scalars")

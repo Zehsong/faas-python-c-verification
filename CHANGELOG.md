@@ -5,6 +5,30 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — M3 local constant-table frontend slice
+
+- Extended the generic C admission checker to automatic one-dimensional const
+  uint32_t/bool tables with explicit sizes, full literal initializers and at most
+  256 elements per source. Only indexed reads are allowed; writes, decay,
+  addresses, global/static tables and array parameters remain rejected.
+- Preserved source bodies, scalar schema/CLI, return observation and predicate
+  discovery. Existing whole-domain safety/unwinding gating remains mandatory
+  before native execution. Added scope.memory table metadata; agent source and
+  frontend identity cover table edits, so prior sessions must be restarted.
+- Added prime full/fallback/truncated/mutant C/JSON fixtures using the generic
+  adapter, plus out-of-bounds, short-unwind and rejected-write controls. New
+  nine-check stage adds missing-solver and scripted agent checks, compares found
+  formulas against expected answers only after discovery, and archives separately.
+- Validation: 136 local tests passed, no skips (20 oracle + 110 finder including
+  ten new table tests + six demo). Known-safe native fixture checks are not
+  formal proofs. Actual absent-solver stage correctly gives 2/9, with no native
+  inputs. [Logs](docs/validation/c-readonly-tables/README.md). Syntax, links,
+  fixture consistency and whitespace checked. Real modified-ESBMC 9/9 pending.
+- Updated support/agent guides, status and plan. Kept historical prime/cache
+  adapters and transfer lock; no query speedup or old-result recertification claim.
+  This is only the first M3 slice: array input/output and mutable state remain
+  future work. Next run the new Codespace stage and inspect memory diagnostics.
+
 ## 2026-09-16 — Scalar demo READY reported
 
 - Recorded user-reported **C SCALAR DEMO: READY (5/5 checks; tools unchanged=True)**

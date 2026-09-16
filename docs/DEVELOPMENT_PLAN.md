@@ -14,7 +14,8 @@ pass locally. The user has now reported 8/8 for the new scalar integration stage
 clears the first scalar acceptance gate at user-reported evidence level. The
 subsequent transfer and M2 results are recorded below. See
 [scope, commands and remaining limits](C_SCALAR_TOOL.md).
-Broader syntax, tables/arrays and unseen-case evaluation remain later gates.
+Broader syntax, array interfaces and unseen-case evaluation remain later gates;
+the local constant-table slice is recorded below.
 
 ## Post-freeze transfer check
 
@@ -57,6 +58,20 @@ capability milestone is M3 bounded arrays/state; the demo need not be rerun
 merely to record this result.
 This demonstrates the first usable slice ahead of M3. It does not claim a full
 M4 release, a disconnected-region demo or independent held-out evaluation.
+
+## M3 first implementation slice
+
+[Bounded local constant tables](../cases/c_readonly_tables/README.md) are now
+admitted by the generic scalar C frontend, enabling computation-versus-lookup
+through C/JSON alone. Full literal initialization, readonly indexed use, no
+pointer decay and whole-domain safety are required. Inputs/observations remain
+scalar. This is a preparatory part of M3, not completion of its array-output and
+state-copy goals. Search grammar and candidate certification remain shared.
+
+136 local tests pass; the nine-check formal stage is pending on modified ESBMC.
+After its result and report review, the next slice should define bounded array
+input/output bindings and observations, then independent mutable state and
+cache obligations. Do not silently infer array equality from return equality.
 
 ## Release target
 

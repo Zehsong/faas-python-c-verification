@@ -6,6 +6,11 @@ remain supported. Scalar acceptance is now [user-reported 8/8](validation/c-scal
 local controls pass, and raw remote evidence has not been independently inspected.
 
 
+The generic C route also admits [bounded local const tables](../cases/c_readonly_tables/README.md).
+This frontend extension has separate pending formal acceptance; it adds no new
+proposal grammar or autonomous provider. Old sessions must be restarted because
+frontend identity changes. Table contents remain source-bound, never proposal-editable.
+
 Updated 2026-09-16. The user approved beginning this direction. The current
 implementation is a file-mediated candidate feedback loop over three reviewed
 C adapters and the checked scalar C frontend. No autonomous model API is integrated.
