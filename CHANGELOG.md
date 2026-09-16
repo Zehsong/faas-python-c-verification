@@ -5,6 +5,36 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Unified demo accepted; isolated source/Python reproduction
+
+- Recorded user-reported **C TOOL DEMO READY (8/8; engine unchanged=True)** after
+  `ff40a6f`, preserving overview and archive paths. Raw reports, counterexample
+  and actual tool/checkout identities remain independently uninspected.
+  [Transcript](docs/validation/c-tool-demo/user-reported-results.md).
+- Added a Linux reproduction entrypoint: resolve a committed revision, create an
+  independent clone without hard links/borrowed objects, create a fresh isolated
+  Python venv, download/archive pinned wheels and install only from those copies.
+  Optional wheelhouse enables offline dependency setup. Current pycparser pin is
+  unchanged. Original dirty/untracked files and global Python are not modified.
+- The wrapper verifies modified-ESBMC help markers and actual binary identities,
+  venv/import locations, unified demo READY 8/8 and an unchanged checkout. It
+  records source, commands, dependency evidence and failures in a separate
+  checksum archive; full checkout/venv remain outside the archive. No ESBMC
+  replacement, rebuild or automatic cleanup occurs. Linux timeouts kill only
+  the invoked step's process group. Failed setup/demo/archive never reports READY.
+- Validation: **eight local lifecycle tests passed, no skips**, including real
+  Git clone/commit exclusion of dirty and untracked files, process timeout,
+  simulated lifecycle failures, tool drift and offline argument selection.
+  Actual Windows entrypoint gives INCOMPLETE/LINUX_REQUIRED before setup/proofs;
+  its archive hashes pass. [Records](docs/validation/c-reproduction/README.md).
+  Syntax, links and whitespace checked. Proof/search engine, fixtures and frozen
+  transfer lock remain unchanged; core regression was not rerun for this wrapper.
+- Full **ISOLATED C REPRODUCTION READY** is pending on Linux. This checks source
+  and Python isolation using existing host compiler, modified ESBMC and system
+  libraries; it is not clean-host/container reproduction. Independent held-out
+  cases and broader environment validation remain release gates. Current full
+  readonly-table rerun and raw historical archive review remain open.
+
 ## 2026-09-16 — Cache-state acceptance recorded; unified C demonstration
 
 - Recorded user-reported **CACHE STATE ACCEPTANCE: 14/14 passed; inputs/tools

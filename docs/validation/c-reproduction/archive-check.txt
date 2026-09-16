@@ -1,0 +1,1 @@
+Exit 2; INCOMPLETE / LINUX_REQUIRED; zero setup/proof steps. Archive SHA256 and 3 internal checksums verified; archived runner matches current source.

@@ -3,8 +3,10 @@
 The migration target is the `codex/same-language-cache` branch. The research goal
 is conditional equivalence between programs in the **same language**, with multiple
 language backends over time. C is the current backend, not the research boundary.
-Complete the pending cache/sketch acceptance before adding prime computation vs
-lookup-table cases or increasing case complexity.
+The procedure below preserves the historical recovery/build workflow and early
+cache checks. Current use is documented in the [C quickstart](C_TOOL_QUICKSTART.md)
+and [independent-checkout/venv reproduction](C_TOOL_REPRODUCTION.md); the old
+migration test alone does not cover the later table, array and unified demo stages.
 
 ## What can be recovered
 

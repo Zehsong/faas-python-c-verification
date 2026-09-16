@@ -1,0 +1,25 @@
+{
+  "status": "INCOMPLETE",
+  "created_utc": "2026-09-16T10:56:29.518348+00:00",
+  "request": {
+    "esbmc": "intentionally-missing-reproduction-esbmc",
+    "cc": "cc",
+    "revision": "HEAD",
+    "wheelhouse": null,
+    "workdir": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\reproduction-local-final-verified",
+    "setup_timeout": 600,
+    "demo_timeout": 3600
+  },
+  "source_repository": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification",
+  "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\reproduction-local-final-verified\\reproduction-olkezniy\\evidence",
+  "isolation": "committed independent checkout and fresh venv; host compiler, modified ESBMC and system libraries reused",
+  "clean_machine_claim": false,
+  "held_out_claim": false,
+  "checks": {},
+  "diagnostic": {
+    "code": "LINUX_REQUIRED",
+    "message": "This reproduction entrypoint targets Linux/Codespaces"
+  },
+  "elapsed_seconds": 0.0,
+  "steps": []
+}

@@ -15,12 +15,14 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest demonstration: unified scalar/table/array/cache showcase (identify this
-  commit in Git history), formal READY 8/8 pending. Earlier scalar-only demo
+- Latest demonstration: `ff40a6f`, unified scalar/table/array/cache showcase, now
+  user-reported READY 8/8 with unchanged engine. Earlier scalar-only demo
   `75dbd47` has user-reported READY (5/5).
+- Latest wrapper: committed-checkout/fresh-venv Linux reproduction (identify its
+  commit in Git history); full Linux execution pending.
 - Latest core implementation: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
-  This unified-demo change leaves the proof/search engine unchanged.
+  The demonstration and reproduction wrappers leave the proof/search engine unchanged.
   Prior table frontend `cd2b88c` has user-reported 9/9; the current-engine table
   rerun remains unreported.
 - Prior core implementation: `26925c7` (M2 result contract), following `133abe9` (transfer result record),
@@ -55,7 +57,8 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
 | Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
-| Unified C demonstration | One command and portable Chinese overview for seven executed cases plus a same-return/different-array solver replay | New 8/8 formal target pending; engine unchanged; known integration cases, not a held-out or clean-environment release |
+| Unified C demonstration | One command and portable Chinese overview for seven executed cases plus a same-return/different-array solver replay | User-reported READY 8/8; engine unchanged; known integration cases, not a held-out or clean-environment release |
+| Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | Linux execution pending; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -216,10 +219,31 @@ input-copy and executable identities must remain unchanged for demo READY.
 
 Eight new local assembly tests pass. An actual MSVC/missing-ESBMC run remains
 INCOMPLETE 0/8, all seven cases UNKNOWN with no native samples or conditions.
-[Local evidence](validation/c-tool-demo/README.md). Formal READY 8/8 is pending.
+[Local evidence](validation/c-tool-demo/README.md). The user now reports
+**C TOOL DEMO READY 8/8; engine unchanged=True**.
+[Transcript, overview and archive paths](validation/c-tool-demo/user-reported-results.md).
+The raw overview, witness and actual run identities remain independently uninspected.
 The proof engine and fixtures were not modified. This packages known examples;
 clean Linux environment reproduction, held-out integration and raw archive audit
 remain open M4/review work. No new agent or discovery-performance claim is made.
+
+## M4 independent checkout / Python environment reproduction
+
+[The Linux reproduction entrypoint](C_TOOL_REPRODUCTION.md) fixes a Git commit,
+clones it without hard links or borrowed objects, creates a fresh venv without
+system/user site packages, installs pinned wheels, and runs the unified demo.
+It checks custom ESBMC help markers, executable identity, clean checkout and
+actual imported dependency location. Input source, wheels, commands, failures and
+demo artifacts receive a separate checksum archive; checkout/venv remain outside
+that archive for inspection. Uncommitted source files are excluded and untouched.
+
+Eight local lifecycle tests pass, including a real Git dirty/untracked exclusion
+check. Windows execution correctly produces INCOMPLETE/LINUX_REQUIRED before any
+installation or solver steps. [Local records](validation/c-reproduction/README.md).
+Full Linux READY is pending. This is source/Python isolation on the existing host,
+not a fresh OS or container; compiler, modified ESBMC and system libraries remain
+external dependencies. No backend replacement or automatic solver build occurs.
+Independent held-out integration and clean-host release validation remain open.
 
 ## Current transfer experiment
 
@@ -270,6 +294,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Generic C local const tables | 9/9 passed; scripted agent EXACT n != 9 on 0..31 | [User-pasted summary](validation/c-readonly-tables/user-reported-results.md); includes expected UNKNOWN/rejection controls, raw archive uninspected |
 | Generic C bounded arrays | 10/10 passed | [User-pasted summary](validation/c-bounded-arrays/user-reported-results.md); includes negative controls, raw archive uninspected |
 | Private-cache state | 14/14 passed; inputs/tools unchanged=True | [User-pasted summary](validation/cache-state/user-reported-results.md); negative controls and scripted agent resumes included, archive uninspected |
+| Unified C demonstration | READY 8/8; engine unchanged=True | [User-pasted summary](validation/c-tool-demo/user-reported-results.md); seven examples plus replay check, raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -300,15 +325,16 @@ Keep the working Codespace and its customized binary/source and evidence.
    preserve its separate archive and completed agent session. Array input/output
    schema 2 now has user-reported 10/10; the readonly-table rerun remains
    unreported. Cache-state is now user-reported 14/14 with unchanged inputs/tools.
-   These separate results meet the implemented M3 baseline gate. Run the unified
-   C demonstration (READY 8/8 target) to obtain one browsable overview and a new
-   archive. Clean-environment/held-out release gates remain open.
+   These separate results meet the implemented M3 baseline gate. The unified
+   C demonstration now has user-reported READY 8/8. Run the independent-checkout/
+   fresh-venv reproduction with the existing modified ESBMC and keep its archive.
+   Full clean-host/held-out release gates remain open.
    Continue authorized work directly after evidence updates; reserve summaries
    for meaningful milestones. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `33af517` when unified-demo development began.
+   branch beyond `ff40a6f` when reproduction development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

@@ -17,7 +17,9 @@
   The archive retains relative overview links after relocation;
   underlying raw log paths continue to identify the original machine.
 
-Formal **C TOOL DEMO READY (8/8)** remains pending on the modified ESBMC.
+The user subsequently reported **C TOOL DEMO READY (8/8; engine unchanged=True)**.
+[Transcript and archive paths](user-reported-results.md). The actual raw reports,
+witness and tool identities remain independently uninspected.
 [Commands and scope](../../../cases/c_tool_demo/README.md).
 This is a presentation/reproduction slice of M4. A clean Linux environment run,
 independent held-out case and raw historical archive audit are not established.

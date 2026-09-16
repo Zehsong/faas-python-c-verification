@@ -22,7 +22,9 @@
 
 新增 [M3 私有缓存状态验收](cases/cache_state/README.md)：两个缓存家族在初始化与状态保持证明通过后才执行原生输入；公共报告明确必需状态义务与单次调用范围，缺失证据不能发布认证条件。本地 **157 项检查通过**，用户已报告 **14/14 passed; inputs/tools unchanged=True**（[输出与证据](docs/validation/cache-state/user-reported-results.md)）。结合数组 10/10，M3 基础验收在用户报告的证据层面已达成；不代表任意状态 C 或调用序列等价。
 
-新增[统一 C 演示](cases/c_tool_demo/README.md)：七个已有案例与一项数组反例检查，共用一份中文总览；核心引擎未改。本地八项组装检查通过，正式 READY 8/8 待修改版 ESBMC 运行。全新环境复现、独立新案例验证和历史归档审阅仍未完成。
+新增[统一 C 演示](cases/c_tool_demo/README.md)：七个已有案例与一项数组反例检查，共用一份中文总览；核心引擎未改。本地八项组装检查通过，用户已报告 **READY 8/8; engine unchanged=True**（[记录](docs/validation/c-tool-demo/user-reported-results.md)）。全新环境复现、独立新案例验证和历史归档审阅仍未完成。
+
+新增[独立源码与 Python 环境复现](docs/C_TOOL_REPRODUCTION.md)：固定 Git 提交，在新副本和 venv 中安装固定依赖并重跑演示，单独归档源码、wheel 与结果。本地八项流程检查通过，完整 Linux 复现待确认；仍复用主机编译器、修改版 ESBMC 与系统库。
 
 ## 1. 研究目标
 

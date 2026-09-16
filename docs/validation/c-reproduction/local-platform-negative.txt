@@ -1,0 +1,5 @@
+Actual Windows invocation; expected exit 2.
+ISOLATED C REPRODUCTION: INCOMPLETE
+Diagnostic: LINUX_REQUIRED — This reproduction entrypoint targets Linux/Codespaces
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\reproduction-local-final-verified\reproduction-olkezniy\evidence\README.md
+Downloadable archive: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\reproduction-local-final-verified\reproduction-olkezniy\reproduction-olkezniy.tar.gz

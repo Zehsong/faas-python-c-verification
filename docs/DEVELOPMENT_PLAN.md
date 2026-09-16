@@ -114,10 +114,22 @@ Only actual result conditions are displayed; budget/tool failures remain distinc
 inputs and tool identities are checked, and overview links survive archiving.
 
 Eight assembly tests pass and the absent-solver run correctly stays INCOMPLETE
-0/8. The engine and fixtures are unchanged. Formal READY 8/8 is pending. This is a
+0/8. The engine and fixtures are unchanged. The user now reports **READY 8/8;
+engine unchanged=True** ([record](validation/c-tool-demo/user-reported-results.md)). This is a
 presentation/reproduction slice: clean Linux setup, an independently held-out
 case and evidence audit are still required before calling M4 complete. Do not
 relabel the known demo cases as unseen research evaluation.
+
+## M4 isolated reproduction implementation
+
+A [Linux wrapper](C_TOOL_REPRODUCTION.md) now fixes the source commit, creates an
+independent checkout and fresh Python venv, installs/archives pinned dependency
+wheels, and reruns the unified demonstration. Host compiler and modified ESBMC
+identities are recorded and checked; both remain external rather than rebuilt.
+Eight lifecycle tests and a real local Git exclusion control pass; full Linux
+execution is pending. This addresses workspace/Python contamination. It must not
+be relabelled as fresh-host/container reproduction or completion of all M4 gates.
+Held-out integration and broader environment validation remain separate work.
 
 ## Release target
 
