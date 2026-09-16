@@ -1,0 +1,11 @@
+name,repeat,width,maximum,status,condition,full_domain_certified,measurement_valid,queries,seconds,timeouts,timeout_kinds,diagnostics,error
+r1-b8,1,8,255,EXACT,true,True,True,5,1.116534,0,,,
+r1-b12,1,12,4095,EXACT,true,True,True,5,1.158889,0,,,
+r1-b16,1,16,65535,EXACT,true,True,True,5,1.868488,0,,,
+r1-b24,1,24,16777215,EXACT,true,True,True,5,36.61107,0,,,
+r1-b32,1,32,4294967295,UNKNOWN,,False,True,5,30.852673,1,equal,SOLVER_TIMEOUT,
+r2-b32,2,32,4294967295,UNKNOWN,,False,True,5,30.965475,1,equal,SOLVER_TIMEOUT,
+r2-b24,2,24,16777215,EXACT,true,True,True,5,35.155166,0,,,
+r2-b16,2,16,65535,EXACT,true,True,True,5,1.818997,0,,,
+r2-b12,2,12,4095,EXACT,true,True,True,5,1.269177,0,,,
+r2-b8,2,8,255,EXACT,true,True,True,5,1.065957,0,,,

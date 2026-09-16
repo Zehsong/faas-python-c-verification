@@ -1,0 +1,4 @@
+Internal SHA-256 checks: 140/140 passed
+Archived overview links: 8/8 exist
+Archive sidecar SHA-256: PASS
+Local missing-solver evidence only; no formal budget-comparison result.

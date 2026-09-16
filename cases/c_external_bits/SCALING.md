@@ -67,7 +67,9 @@ continues.
 
 Local unit and missing-solver controls are separate from formal measurements;
 the user now reports 10/10 valid measurements and 8/10 full-domain certificates.
-Only r2-b8 is individually identified (EXACT) in the supplied excerpt. The other
-rows and timing/diagnostic details are not yet inspected; do not infer that both
-uncertified runs were 32-bit timeouts. See the repository's
+The subsequent CSV identifies EXACT true twice at each of 8/12/16/24 bits and
+UNKNOWN/equal-query timeout twice at 32 bits, with five queries in every run.
+Raw query logs and archives remain uninspected. A separate [timeout comparison](BUDGET.md)
+tests 30/120-second query limits without retuning this original schedule.
+The shared measurement wrapper additionally prints per-run CSV and timeout values. See the repository's
 [validation record](https://github.com/Zehsong/faas-python-c-verification/blob/codex/same-language-cache/docs/validation/popcount-scaling/README.md).

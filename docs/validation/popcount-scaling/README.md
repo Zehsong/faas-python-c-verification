@@ -18,7 +18,8 @@
 
 Formal measurements are now [user reported](user-reported-results.md): 10/10
 valid runs and 8/10 full-domain certificates, with r2-b8 explicitly EXACT.
-The other per-width outcomes, timings and raw archive remain uninspected. The
+The subsequent CSV identifies both 32-bit equality-query timeouts and all eight
+EXACT true runs at 8/12/16/24 bits. Raw query logs and archive remain uninspected. The
 earlier user-reported 32-bit timeout is [separate evidence](../c-external-bits/user-reported-results.md).
 No performance threshold, speedup or ten-run proof claim follows from local
 checks. [Fixed protocol](../../../cases/c_external_bits/SCALING.md).

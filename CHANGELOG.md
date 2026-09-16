@@ -5,6 +5,33 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Resolve scaling failures and compare query time budgets
+
+- Preserved all ten [user-supplied scaling CSV rows](docs/validation/popcount-scaling/user-reported-metrics.csv).
+  Both repeats at 8/12/16/24 bits are EXACT true; both 32-bit runs are UNKNOWN
+  with one equal-query SOLVER_TIMEOUT. All use five queries. Raw solver logs,
+  source/tool identities and archives remain independently uninspected.
+- Successful 24-bit discovery averages 35.883 seconds across two runs; this is
+  total discovery time, not a single query exceeding the 30-second limit. The
+  32-bit times are censored failure observations, not proof completion times.
+  Evidence points to per-query backend cost; it does not isolate solver phases.
+- Added a separate full-width 30/120-second query-timeout comparison, twice in
+  opposite order, preserving original C sources, engine, unwind and 300-second/
+  96-query discovery budgets. Shared measurement runner now accepts an explicit
+  protocol, reports its denominator and prints CSV automatically. The default
+  ten-run width schedule and budgets remain unchanged; no finder/core changes.
+- Validation: 14 local tests pass without skips (three new protocol/argument/
+  accounting controls plus the existing 11 native/integration/scaling controls).
+  Actual missing-solver comparison retains all four UNKNOWN rows, zero queries/
+  native discovery samples, INCOMPLETE 0/4 and no certificates.
+  [Records](docs/validation/popcount-budget/README.md). Frozen hashes remain intact.
+- Four formal comparison runs are pending with the user's modified ESBMC.
+  A larger-budget success would establish sensitivity on this pair, not faster
+  solving or general C scalability. No automatic retry or revised claim about
+  the old runs. Next: compare actual statuses/reasons before choosing an encoding,
+  query-reuse or decomposition intervention. Independent held-out, clean-host and
+  raw evidence audit gates remain open.
+
 ## 2026-09-16 — Record scaling outcome and C prototype milestone
 
 - Recorded user-reported **POPCOUNT SCALING RECORDED (10/10 valid runs;

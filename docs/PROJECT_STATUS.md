@@ -26,8 +26,12 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 - New stage: fixed-budget popcount input-domain scaling at 8/12/16/24/32 bits,
   two reversed-order repetitions; original programs, engine and budgets retained.
   Now user-reported RECORDED 10/10 valid runs and 8/10 full-domain certificates.
-  Only r2-b8 is individually identified (EXACT); other width/status/time details
-  and raw artifacts remain uninspected. Do not infer both failures were 32-bit.
+  User-supplied CSV now identifies EXACT true twice at 8/12/16/24 bits, and
+  UNKNOWN/equal-query SOLVER_TIMEOUT twice at 32 bits. All runs use five queries.
+  Raw archives, query harnesses and binary identities remain uninspected.
+- New stage: full-width popcount timeout comparison at 30/120 seconds, twice
+  in opposite order; same 300-second/96-query discovery limits and frozen engine.
+  Four formal runs pending; 14 local tests pass.
 - Latest core implementation: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
   The demonstration and reproduction wrappers leave the proof/search engine unchanged.
@@ -68,7 +72,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Unified C demonstration | One command and portable Chinese overview for seven executed cases plus a same-return/different-array solver replay | User-reported READY 8/8; engine unchanged; known integration cases, not a held-out or clean-environment release |
 | Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | User-reported READY; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
 | External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | User-reported READY 5/5 required; full-width popcount UNKNOWN/SOLVER_TIMEOUT; not blind evaluation |
-| Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; per-width breakdown pending; not a blind or statistical performance evaluation |
+| Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; 8/12/16/24 bits EXACT twice each, 32 bits equal-query timeout twice; five queries throughout; not a blind/statistical evaluation |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -307,7 +311,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Unified C demonstration | READY 8/8; engine unchanged=True | [User-pasted summary](validation/c-tool-demo/user-reported-results.md); seven examples plus replay check, raw archive uninspected |
 | Isolated source/Python reproduction | READY | [User-pasted transcript](validation/c-reproduction/user-reported-results.md); host toolchain reused, raw archive and identities uninspected |
 | External-source C integration | READY 5/5 required; exploratory 0/1 EXACT; engine frozen=True | [User-pasted summary](validation/c-external-bits/user-reported-results.md); popcount_32 UNKNOWN/SOLVER_TIMEOUT, raw archive uninspected |
-| Popcount scaling | RECORDED 10/10 valid; full-domain certified 8/10; r2-b8 EXACT | [User-pasted summary](validation/popcount-scaling/user-reported-results.md); other row statuses, times and raw archive uninspected |
+| Popcount scaling | RECORDED 10/10 valid; full-domain certified 8/10; r2-b8 EXACT | [User-pasted summary](validation/popcount-scaling/user-reported-results.md); subsequent CSV identifies 8/12/16/24-bit EXACT and 32-bit timeout twice each; raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -344,11 +348,13 @@ Keep the working Codespace and its customized binary/source and evidence.
    integration now reports READY 5/5 required; full-width popcount stays UNKNOWN
    due to solver timeout. Preserve that original archive. The separate
    [popcount scaling run](validation/popcount-scaling/user-reported-results.md)
-   now reports 10/10 valid measurements and 8/10 full-domain certificates. Read
-   its existing metrics.csv before assigning widths or reasons to the other two
-   rows; no solver rerun is needed. Inspect full_domain_check in results.json
-   if an EXACT row is uncertified. This is repeated measurement of one pair,
-   not eight successes among ten independent programs.
+   now reports 10/10 valid measurements and 8/10 full-domain certificates. The
+   supplied CSV now identifies both uncertified rows as 32-bit UNKNOWN with
+   equal-query SOLVER_TIMEOUT. All widths use five queries; the 24-bit successful
+   discovery mean is 35.883 seconds (multiple queries). Run the separate
+   [30/120-second comparison](../cases/c_external_bits/BUDGET.md) to test budget
+   sensitivity without changing C sources or engine. Retain all outcomes.
+   This is one repeated program pair, not ten independent programs.
    [C prototype milestone](C_TOOL_MILESTONE.md) summarizes the current capability.
    Full clean-host/independently held-out release gates remain open; new external
    cases are known algorithms selected after the engine freeze, not blind tests.
@@ -357,7 +363,7 @@ Keep the working Codespace and its customized binary/source and evidence.
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `ed1fe9b` when this result-record update began.
+   branch beyond `40dba03` when timeout-comparison development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

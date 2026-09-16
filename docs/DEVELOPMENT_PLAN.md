@@ -161,17 +161,23 @@ The C arithmetic stays 32-bit, loops and unwind remain unchanged, and the old
 experiment is not retuned. Six new measurement controls and five existing
 native/integration controls pass locally. The user now reports RECORDED 10/10
 valid measurements and 8/10 full-domain certificates; r2-b8 is explicitly EXACT.
-[Transcript](validation/popcount-scaling/user-reported-results.md). The remaining
-per-width outcomes, timing, diagnostics and raw evidence have not been inspected.
+[Transcript and subsequently supplied CSV](validation/popcount-scaling/user-reported-results.md)
+identify 8/12/16/24-bit EXACT true twice each and 32-bit UNKNOWN/equal-query timeout
+twice. All runs use five queries. Raw query logs and archive remain uninspected.
 
 This starts failure/scale characterization while M4's clean-host/independently
 held-out gates remain open. RECORDED indicates valid measurements, not proof
 success; certificate counts remain separate. Censored timeout observations and
 two repetitions do not establish a precise complexity threshold. Use their
 actual reports to choose further work; do not tune or claim improvement first.
-Retrieve the existing metrics.csv without rerunning the solver. The two missing
-full-domain certificates must not be assumed to be 32-bit discovery timeouts;
-a failed final expected-condition check is also possible.
+The supplied CSV now resolves the uncertified cases as 32-bit equality-query
+timeouts. Constant query count points to per-query backend cost on this pair;
+individual solver phases and a precise threshold remain unknown. A separate
+[query-timeout comparison](../cases/c_external_bits/BUDGET.md) uses 30/120 seconds
+in two opposite-order repetitions, with full domain, programs, engine, unwind
+and 300-second/96-query discovery limits fixed. Four formal runs are pending.
+Fourteen local controls pass. A larger-budget success would be budget sensitivity,
+not a solver improvement; preserve original runs and all incomplete results.
 [C prototype milestone](C_TOOL_MILESTONE.md) separates capability from open gates.
 
 ## Release target
