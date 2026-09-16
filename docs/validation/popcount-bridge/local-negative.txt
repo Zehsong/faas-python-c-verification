@@ -1,0 +1,34 @@
+
+edge_0
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\edge_0\pair-52qu4xd5\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\edge_0\pair-52qu4xd5
+edge_0: UNKNOWN; full-domain certified=False
+
+edge_1
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\edge_1\pair-e_tof4v6\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\edge_1\pair-e_tof4v6
+edge_1: UNKNOWN; full-domain certified=False
+
+edge_2
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\edge_2\pair-2n8rkpka\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\edge_2\pair-2n8rkpka
+edge_2: UNKNOWN; full-domain certified=False
+
+mutant
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\mutant\pair-uwv2gggm\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\mutant\pair-uwv2gggm
+mutant: UNKNOWN; full-domain certified=False
+POPCOUNT BRIDGE: INCOMPLETE (links certified=0/3; endpoint equivalence=UNKNOWN; mutant rejected=False)
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\bridge-local\bridge-v4jertiu\README.md

@@ -31,7 +31,13 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
   Raw archives, query harnesses and binary identities remain uninspected.
 - New stage: full-width popcount timeout comparison at 30/120 seconds, twice
   in opposite order; same 300-second/96-query discovery limits and frozen engine.
-  Four formal runs pending; 14 local tests pass.
+  Now user-reported RECORDED 4/4 valid, full-domain certified 0/4. Both settings
+  time out in query 002 equal in both repeats; all rows have five queries.
+- New experiment: proposed byte-loop and byte-parallel intermediate programs,
+  three full-domain edges through the existing C frontend, original endpoints
+  pinned to `129df96`. Only complete edge certification plus identity and mutant
+  control gates permits a transitive endpoint claim. Seven local tests pass; formal
+  bridge results pending. No core engine changes or assumed helper lemmas.
 - Latest core implementation: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
   The demonstration and reproduction wrappers leave the proof/search engine unchanged.
@@ -73,6 +79,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | User-reported READY; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
 | External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | User-reported READY 5/5 required; full-width popcount UNKNOWN/SOLVER_TIMEOUT; not blind evaluation |
 | Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; 8/12/16/24 bits EXACT twice each, 32 bits equal-query timeout twice; five queries throughout; not a blind/statistical evaluation |
+| Proposed intermediate-program chain | Three full-domain C edges with scope/source/identity gates and a negative control; endpoint equality derived only by certified transitivity | Fixture-specific stateless experiment; formal execution pending, no automatic decomposition or partial-region composition |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -312,6 +319,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Isolated source/Python reproduction | READY | [User-pasted transcript](validation/c-reproduction/user-reported-results.md); host toolchain reused, raw archive and identities uninspected |
 | External-source C integration | READY 5/5 required; exploratory 0/1 EXACT; engine frozen=True | [User-pasted summary](validation/c-external-bits/user-reported-results.md); popcount_32 UNKNOWN/SOLVER_TIMEOUT, raw archive uninspected |
 | Popcount scaling | RECORDED 10/10 valid; full-domain certified 8/10; r2-b8 EXACT | [User-pasted summary](validation/popcount-scaling/user-reported-results.md); subsequent CSV identifies 8/12/16/24-bit EXACT and 32-bit timeout twice each; raw archive uninspected |
+| Popcount query-timeout comparison | RECORDED 4/4 valid, certified 0/4; 30/120 seconds both UNKNOWN twice | [Supplied traces and CSV](validation/popcount-budget/user-reported-results.md); equal-query timeouts, raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -351,9 +359,13 @@ Keep the working Codespace and its customized binary/source and evidence.
    now reports 10/10 valid measurements and 8/10 full-domain certificates. The
    supplied CSV now identifies both uncertified rows as 32-bit UNKNOWN with
    equal-query SOLVER_TIMEOUT. All widths use five queries; the 24-bit successful
-   discovery mean is 35.883 seconds (multiple queries). Run the separate
-   [30/120-second comparison](../cases/c_external_bits/BUDGET.md) to test budget
-   sensitivity without changing C sources or engine. Retain all outcomes.
+   discovery mean is 35.883 seconds (multiple queries). The subsequent
+   [30/120-second comparison](validation/popcount-budget/user-reported-results.md)
+   now reports UNKNOWN for all four rows, with the same equal-query timeout.
+   Retain those failures; run the separate
+   [intermediate-program chain](../cases/c_popcount_bridge/README.md). Three
+   certified full-domain edges and a rejected mutant are required for an endpoint
+   claim. A failed proposed link does not refute the original endpoints.
    This is one repeated program pair, not ten independent programs.
    [C prototype milestone](C_TOOL_MILESTONE.md) summarizes the current capability.
    Full clean-host/independently held-out release gates remain open; new external
@@ -363,7 +375,7 @@ Keep the working Codespace and its customized binary/source and evidence.
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `40dba03` when timeout-comparison development began.
+   branch beyond `9f1b907` when bridge development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

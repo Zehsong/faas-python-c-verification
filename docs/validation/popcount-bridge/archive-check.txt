@@ -1,0 +1,4 @@
+Internal SHA-256 checks: 253/253 passed
+Archived overview links: 6/6 exist
+Archive sidecar SHA-256: PASS
+Local missing-solver evidence only; no formal bridge certificates.

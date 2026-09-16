@@ -5,6 +5,39 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Budget comparison inconclusive; certify proposed intermediate programs
+
+- Recorded user-reported **POPCOUNT BUDGET RECORDED 4/4 valid, certified 0/4**
+  after `9f1b907`, preserving all four supplied CSV rows, repeated query statuses
+  and archive paths. Both 30/120-second settings time out on query 002 equal in
+  both repeats. All remain UNKNOWN, not inequivalent; raw harnesses, solver
+  phase timings, identities and archives remain uninspected.
+  [Record](docs/validation/popcount-budget/user-reported-results.md).
+- Added a separate popcount bridge experiment: original bit loop -> byte-loop
+  counts -> byte-parallel counts -> original parallel algorithm. Original
+  endpoints are copied unchanged and text-pinned to `129df96`; the 17-file core
+  engine lock remains intact. Ordinary C/JSON contracts certify every adjacent
+  edge on the same full uint32 domain. No helper lemma or sample is assumed.
+- A scoped experimental report derives endpoint equality by transitivity only
+  when all three ordered edges have safety, EXACT and full-domain post-checks,
+  matching source/contract identities, common scope and unchanged tools. A wrong
+  program must be rejected by a separate negative control. Any missing/failed
+  link or control leaves endpoint UNKNOWN; it never refutes the original pair.
+  Partial-region composition and automatic bridge generation are not implemented.
+- Validation: seven local tests pass without skips, including native MSVC checks
+  on byte inputs, full-width patterns and deterministic random inputs; missing
+  edge/identity, domain/bridge/binding mismatch and incomplete certificates are
+  rejected. Actual missing-solver run keeps all four UNKNOWN reports with zero
+  queries/native discovery samples, INCOMPLETE and no endpoint claim.
+  [Records](docs/validation/popcount-bridge/README.md). Original core regression
+  was not repeated because its implementation is unchanged.
+- Formal bridge execution is pending: three edge runs and one mutant control,
+  each at 30-second query timeout and 120-second/96-query discovery budget.
+  This manually proposed strategy is not yet a full-width proof, an automatic
+  decomposition method, an autonomous-agent result or a speedup measurement.
+  Inspect any unresolved link without assuming it correct. Earlier experiments
+  and clean-host/held-out/raw-evidence limitations remain unchanged.
+
 ## 2026-09-16 — Resolve scaling failures and compare query time budgets
 
 - Preserved all ten [user-supplied scaling CSV rows](docs/validation/popcount-scaling/user-reported-metrics.csv).

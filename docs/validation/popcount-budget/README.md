@@ -19,8 +19,11 @@
   unchanged. No production backend or finder parameters change except the
   explicitly declared per-run timeout in the new comparison.
 
-Formal measurements await the user's existing modified ESBMC in Codespace.
+Formal measurements are now [user reported](user-reported-results.md): RECORDED
+4/4 valid, full-domain certified 0/4. Both timeouts produce UNKNOWN twice, each
+with one equal-query timeout. Raw query logs and archive are uninspected.
 The [user-supplied earlier CSV](../popcount-scaling/user-reported-metrics.csv)
-motivates this test but is not a result of the new protocol. No budget sensitivity
-or performance improvement is claimed before execution.
+motivates this test but is not a result of the new protocol. Increasing the limit
+to 120 seconds did not establish a certificate in either
+reported repeat; no performance improvement or impossibility claim follows.
 [Protocol](../../../cases/c_external_bits/BUDGET.md).

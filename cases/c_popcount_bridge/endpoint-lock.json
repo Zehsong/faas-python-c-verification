@@ -1,0 +1,8 @@
+{
+  "baseline_commit": "129df967c909b56428dd3d48cb80796e7a4c98de",
+  "hash_format": "sha256 of UTF-8 text with universal newlines normalized to LF",
+  "files": {
+    "cases/c_external_bits/popcount_reference.c": "e8e0509069ae7260a1716803d1109cc2bcf3ef361ad8c0e27e1efc4c19186941",
+    "cases/c_external_bits/popcount_parallel.c": "aaff97dfc5da6e56caf980e190c5fa030bfcb971252d8f6d0ef18466e4c25cf9"
+  }
+}

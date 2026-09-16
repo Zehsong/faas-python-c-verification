@@ -1,0 +1,12 @@
+test_composition_requires_every_edge_and_identity (test_bridge.BridgeTests.test_composition_requires_every_edge_and_identity) ... ok
+test_domain_gap_and_bridge_gap_rejected (test_bridge.BridgeTests.test_domain_gap_and_bridge_gap_rejected) ... ok
+test_native_nodes_and_mutant (test_bridge.BridgeTests.test_native_nodes_and_mutant) ... ok
+test_negative_control_gates_publication_but_unknown_link_is_recorded (test_bridge.BridgeTests.test_negative_control_gates_publication_but_unknown_link_is_recorded) ... ok
+test_original_endpoints_and_shared_bridges (test_bridge.BridgeTests.test_original_endpoints_and_shared_bridges) ... ok
+test_partial_unknown_and_failed_postcheck_cannot_compose (test_bridge.BridgeTests.test_partial_unknown_and_failed_postcheck_cannot_compose) ... ok
+test_source_identity_and_safety_are_required (test_bridge.BridgeTests.test_source_identity_and_safety_are_required) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.814s
+
+OK

@@ -175,10 +175,30 @@ timeouts. Constant query count points to per-query backend cost on this pair;
 individual solver phases and a precise threshold remain unknown. A separate
 [query-timeout comparison](../cases/c_external_bits/BUDGET.md) uses 30/120 seconds
 in two opposite-order repetitions, with full domain, programs, engine, unwind
-and 300-second/96-query discovery limits fixed. Four formal runs are pending.
-Fourteen local controls pass. A larger-budget success would be budget sensitivity,
-not a solver improvement; preserve original runs and all incomplete results.
+and 300-second/96-query discovery limits fixed. All four runs are now
+[user-reported UNKNOWN](validation/popcount-budget/user-reported-results.md), with
+one equal-query timeout in each; neither setting established a certificate.
+Fourteen local controls remain separate local evidence. No further automatic
+timeout escalation follows; retain the original censored measurements.
 [C prototype milestone](C_TOOL_MILESTONE.md) separates capability from open gates.
+
+## Proposed intermediate-program proof chain
+
+A separate [bridge experiment](../cases/c_popcount_bridge/README.md) proposes
+byte-loop and byte-parallel implementations between the original loop/parallel
+endpoints. Each adjacent pair is checked on the same complete uint32 domain
+through the existing C frontend. The endpoint text and engine are pinned;
+bridge identity, common scope, safety, EXACT and full-domain expected-condition
+proofs are mandatory. A deliberately wrong control must be rejected. Only then
+can a report derive endpoint equality by transitivity. There are no assumed
+helper lemmas, no automatic decomposition and no partial-condition composition.
+
+Seven local admission/native/composition controls pass; formal results are pending.
+The three edge runs and negative control use 30-second query timeouts and
+120-second/96-query discovery budgets. This is a manually proposed proof
+strategy, not a demonstrated optimization or autonomous-agent study. If an edge
+fails, keep endpoint UNKNOWN and inspect that connection rather than bypassing
+its proof. Original direct/scaling/budget results remain separate baselines.
 
 ## Release target
 

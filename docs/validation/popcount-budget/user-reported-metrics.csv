@@ -1,0 +1,5 @@
+name,repeat,width,query_timeout,maximum,status,condition,full_domain_certified,measurement_valid,queries,seconds,timeouts,timeout_kinds,diagnostics,error
+r1-t30,1,32,30,4294967295,UNKNOWN,,False,True,5,30.913635,1,equal,SOLVER_TIMEOUT,
+r1-t120,1,32,120,4294967295,UNKNOWN,,False,True,5,120.913565,1,equal,SOLVER_TIMEOUT,
+r2-t120,2,32,120,4294967295,UNKNOWN,,False,True,5,120.865056,1,equal,SOLVER_TIMEOUT,
+r2-t30,2,32,30,4294967295,UNKNOWN,,False,True,5,30.961838,1,equal,SOLVER_TIMEOUT,

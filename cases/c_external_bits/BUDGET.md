@@ -58,5 +58,7 @@ budgets sum to 20 minutes, plus setup/post-check/archive overhead; this is a bou
 not a predicted duration. Solver and compiler identities, original source,
 generated contracts, engine snapshot, schedule and failures are retained.
 
-Formal comparison is pending. The supplied prior metrics are stored in the
+The user now reports RECORDED 4/4 valid measurements and zero full-domain
+certificates: both settings remain UNKNOWN with an equality-query timeout in
+both repeats. Raw query logs and archives are uninspected. The supplied prior metrics are stored in the
 [scaling evidence record](https://github.com/Zehsong/faas-python-c-verification/blob/codex/same-language-cache/docs/validation/popcount-scaling/user-reported-results.md).
