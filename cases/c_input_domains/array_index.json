@@ -1,0 +1,46 @@
+{
+  "schema": 3,
+  "name": "array_index",
+  "original": {
+    "source": "index.c",
+    "entry": "get",
+    "args": [
+      "a",
+      "n",
+      "capacity"
+    ]
+  },
+  "candidate": {
+    "source": "guarded_index.c",
+    "entry": "get",
+    "args": [
+      "a",
+      "n",
+      "capacity"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 2
+    },
+    "n": {
+      "type": "uint32_t"
+    },
+    "capacity": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 8,
+  "constraints": {
+    "all": [
+      "n < capacity",
+      "capacity <= 2"
+    ]
+  }
+}

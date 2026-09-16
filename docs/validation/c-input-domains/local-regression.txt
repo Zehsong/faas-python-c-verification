@@ -1,0 +1,216 @@
+test_empty_candidate_is_not_useful_but_can_be_exact_for_all_unequal (test_agent_workflow.CandidateTests.test_empty_candidate_is_not_useful_but_can_be_exact_for_all_unequal) ... ok
+test_exact_requires_both_proofs (test_agent_workflow.CandidateTests.test_exact_requires_both_proofs) ... ok
+test_native_refutation_requires_no_solver (test_agent_workflow.CandidateTests.test_native_refutation_requires_no_solver) ... ok
+test_out_of_region_solver_witness_fails_closed (test_agent_workflow.CandidateTests.test_out_of_region_solver_witness_fails_closed) ... ok
+test_partial_has_a_proof_and_native_equal_outside_feedback (test_agent_workflow.CandidateTests.test_partial_has_a_proof_and_native_equal_outside_feedback) ... ok
+test_sufficient_goal_does_not_query_complement (test_agent_workflow.CandidateTests.test_sufficient_goal_does_not_query_complement) ... ok
+test_unproved_sufficiency_never_publishes_partial (test_agent_workflow.CandidateTests.test_unproved_sufficiency_never_publishes_partial) ... ok
+test_boolean_tree_and_uint_boundaries (test_agent_workflow.ConditionTests.test_boolean_tree_and_uint_boundaries) ... ok
+test_code_outputs_invalid_operators_and_sizes_rejected (test_agent_workflow.ConditionTests.test_code_outputs_invalid_operators_and_sizes_rejected) ... ok
+test_contract_scope_and_labels_cannot_be_proposed (test_agent_workflow.ConditionTests.test_contract_scope_and_labels_cannot_be_proposed) ... ok
+test_duplicate_json_keys_and_nonfinite_values_rejected (test_agent_workflow.ConditionTests.test_duplicate_json_keys_and_nonfinite_values_rejected) ... ok
+test_active_time_budget_does_not_reset_on_resume (test_agent_workflow.NativeWorkflowTests.test_active_time_budget_does_not_reset_on_resume) ... ok
+test_contract_file_drift_is_detected (test_agent_workflow.NativeWorkflowTests.test_contract_file_drift_is_detected) ... ok
+test_drift_on_failed_round_withdraws_prior_current_certificate (test_agent_workflow.NativeWorkflowTests.test_drift_on_failed_round_withdraws_prior_current_certificate) ... ok
+test_generated_boolean_tree_matches_native_c (test_agent_workflow.NativeWorkflowTests.test_generated_boolean_tree_matches_native_c) ... ok
+test_missing_solver_produces_context_but_no_certificate (test_agent_workflow.NativeWorkflowTests.test_missing_solver_produces_context_but_no_certificate) ... ok
+test_native_seed_refutes_wrong_candidate_without_queries (test_agent_workflow.NativeWorkflowTests.test_native_seed_refutes_wrong_candidate_without_queries) ... ok
+test_query_budget_is_shared_across_rounds (test_agent_workflow.NativeWorkflowTests.test_query_budget_is_shared_across_rounds) ... ok
+test_resume_refine_and_rejected_data_preserve_prior_proof (test_agent_workflow.NativeWorkflowTests.test_resume_refine_and_rejected_data_preserve_prior_proof) ... ok
+test_round_budget_and_session_lock_prevent_extra_updates (test_agent_workflow.NativeWorkflowTests.test_round_budget_and_session_lock_prevent_extra_updates) ... ok
+test_source_identity_drift_blocks_resume (test_agent_workflow.NativeWorkflowTests.test_source_identity_drift_blocks_resume) ... ok
+test_array_parameters_require_opt_in_and_keep_bounds_types (test_c_bounded_arrays.ArrayTests.test_array_parameters_require_opt_in_and_keep_bounds_types) ... ok
+test_bool_array_and_scalar_binding_native (test_c_bounded_arrays.ArrayTests.test_bool_array_and_scalar_binding_native) ... ok
+test_contract_flattening_observations_and_rejections (test_c_bounded_arrays.ArrayTests.test_contract_flattening_observations_and_rejections) ... ok
+test_harness_copies_and_full_observation_comparison (test_c_bounded_arrays.ArrayTests.test_harness_copies_and_full_observation_comparison) ... ok
+test_independent_memory_and_repeated_inputs_native (test_c_bounded_arrays.ArrayTests.test_independent_memory_and_repeated_inputs_native) ... ok
+test_input_names_cannot_collide_with_observation_metadata (test_c_bounded_arrays.ArrayTests.test_input_names_cannot_collide_with_observation_metadata) ... ok
+test_native_swap_detects_different_arrays_with_equal_returns (test_c_bounded_arrays.ArrayTests.test_native_swap_detects_different_arrays_with_equal_returns) ... ok
+test_no_native_execution_without_safety (test_c_bounded_arrays.ArrayTests.test_no_native_execution_without_safety) ... ok
+test_rejects_pointer_decay_array_forwarding_and_const_writes (test_c_bounded_arrays.ArrayTests.test_rejects_pointer_decay_array_forwarding_and_const_writes) ... ok
+test_return_is_still_observed (test_c_bounded_arrays.ArrayTests.test_return_is_still_observed) ... ok
+  query 000 equal: REFUTED
+  query 001 different: UNKNOWN
+test_solver_witness_uses_array_observations (test_c_bounded_arrays.ArrayTests.test_solver_witness_uses_array_observations) ... ok
+test_two_arrays_and_const_source_native (test_c_bounded_arrays.ArrayTests.test_two_arrays_and_const_source_native) ... ok
+test_vector_shape_type_and_return_consistency (test_c_bounded_arrays.ArrayTests.test_vector_shape_type_and_return_consistency) ... ok
+test_agent_seeds_cannot_escape_contract_constraints (test_c_input_domains.InputDomainTests.test_agent_seeds_cannot_escape_contract_constraints) ... ok
+test_all_new_contracts_and_legacy_contracts_admitted (test_c_input_domains.InputDomainTests.test_all_new_contracts_and_legacy_contracts_admitted) ... ok
+test_all_obligation_kinds_assume_same_domain_before_program_calls (test_c_input_domains.InputDomainTests.test_all_obligation_kinds_assume_same_domain_before_program_calls) ... ok
+test_boolean_composition_and_flattened_array_fields (test_c_input_domains.InputDomainTests.test_boolean_composition_and_flattened_array_fields) ... ok
+test_constraint_change_invalidates_binding_and_agent_identity (test_c_input_domains.InputDomainTests.test_constraint_change_invalidates_binding_and_agent_identity) ... ok
+test_contradiction_is_reported_empty_only_after_solver_evidence (test_c_input_domains.InputDomainTests.test_contradiction_is_reported_empty_only_after_solver_evidence) ... ok
+test_declared_scope_keeps_raw_and_effective_domain (test_c_input_domains.InputDomainTests.test_declared_scope_keeps_raw_and_effective_domain) ... ok
+test_empty_seed_set_does_not_establish_empty_domain (test_c_input_domains.InputDomainTests.test_empty_seed_set_does_not_establish_empty_domain) ... ok
+test_legacy_schemas_do_not_silently_gain_defaults_or_constraints (test_c_input_domains.InputDomainTests.test_legacy_schemas_do_not_silently_gain_defaults_or_constraints) ... ok
+test_missing_solver_blocks_native_execution_with_constraints (test_c_input_domains.InputDomainTests.test_missing_solver_blocks_native_execution_with_constraints) ... ok
+test_native_boolean_and_array_constraints_match_python_domain (test_c_input_domains.InputDomainTests.test_native_boolean_and_array_constraints_match_python_domain) ... ok
+test_native_probe_rejects_outside_domain_before_unsafe_execution (test_c_input_domains.InputDomainTests.test_native_probe_rejects_outside_domain_before_unsafe_execution) ... ok
+test_rejects_undeclared_fields_code_and_unbounded_expression_trees (test_c_input_domains.InputDomainTests.test_rejects_undeclared_fields_code_and_unbounded_expression_trees) ... ok
+test_type_domains_and_partial_bounds (test_c_input_domains.InputDomainTests.test_type_domains_and_partial_bounds) ... ok
+test_aggregate_table_limit_across_functions (test_c_readonly_tables.ReadonlyTableTests.test_aggregate_table_limit_across_functions) ... ok
+test_fixture_admission_scope_and_safety_gating (test_c_readonly_tables.ReadonlyTableTests.test_fixture_admission_scope_and_safety_gating) ... ok
+test_local_table_names_cannot_shadow_and_do_not_escape_scope (test_c_readonly_tables.ReadonlyTableTests.test_local_table_names_cannot_shadow_and_do_not_escape_scope) ... ok
+test_native_prime_fixtures_exhaustively_on_declared_domains (test_c_readonly_tables.ReadonlyTableTests.test_native_prime_fixtures_exhaustively_on_declared_domains) ... ok
+test_nonprime_uint32_table_and_same_names_native (test_c_readonly_tables.ReadonlyTableTests.test_nonprime_uint32_table_and_same_names_native) ... ok
+test_rejects_global_and_parameter_tables (test_c_readonly_tables.ReadonlyTableTests.test_rejects_global_and_parameter_tables) ... ok
+test_rejects_incomplete_or_dynamic_or_oversized_tables (test_c_readonly_tables.ReadonlyTableTests.test_rejects_incomplete_or_dynamic_or_oversized_tables) ... ok
+test_rejects_writes_addresses_and_array_decay (test_c_readonly_tables.ReadonlyTableTests.test_rejects_writes_addresses_and_array_decay) ... ok
+test_table_content_is_part_of_agent_identity (test_c_readonly_tables.ReadonlyTableTests.test_table_content_is_part_of_agent_identity) ... ok
+test_table_metadata_and_original_body_preserved (test_c_readonly_tables.ReadonlyTableTests.test_table_metadata_and_original_body_preserved) ... ok
+test_agent_scalar_session_with_mock_certificates (test_c_scalar.ScalarTests.test_agent_scalar_session_with_mock_certificates) ... ok
+test_all_fixture_signatures (test_c_scalar.ScalarTests.test_all_fixture_signatures) ... ok
+test_comments_and_unsigned_operations (test_c_scalar.ScalarTests.test_comments_and_unsigned_operations) ... ok
+test_contract_rejects_empty_and_out_of_type_domain (test_c_scalar.ScalarTests.test_contract_rejects_empty_and_out_of_type_domain) ... ok
+test_contract_rejects_wrong_binding_and_signature (test_c_scalar.ScalarTests.test_contract_rejects_wrong_binding_and_signature) ... ok
+test_harness_checks_full_domain_without_disabling_safety (test_c_scalar.ScalarTests.test_harness_checks_full_domain_without_disabling_safety) ... ok
+test_native_bool_input_and_condition (test_c_scalar.ScalarTests.test_native_bool_input_and_condition) ... ok
+test_native_fixtures (test_c_scalar.ScalarTests.test_native_fixtures) ... ok
+test_native_same_name_helpers_and_permuted_binding (test_c_scalar.ScalarTests.test_native_same_name_helpers_and_permuted_binding) ... ok
+test_predicates_use_only_declared_fields (test_c_scalar.ScalarTests.test_predicates_use_only_declared_fields) ... ok
+test_rejects_preprocessor_bypasses (test_c_scalar.ScalarTests.test_rejects_preprocessor_bypasses) ... ok
+test_rejects_unsupported_effects_and_types (test_c_scalar.ScalarTests.test_rejects_unsupported_effects_and_types) ... ok
+test_replay_refuses_before_safety (test_c_scalar.ScalarTests.test_replay_refuses_before_safety) ... ok
+test_seed_validation_and_domain (test_c_scalar.ScalarTests.test_seed_validation_and_domain) ... ok
+test_source_and_contract_identity_drift (test_c_scalar.ScalarTests.test_source_and_contract_identity_drift) ... ok
+test_unknown_safety_prevents_agent_replay (test_c_scalar.ScalarTests.test_unknown_safety_prevents_agent_replay) ... ok
+test_unknown_safety_prevents_finder_replay_and_search (test_c_scalar.ScalarTests.test_unknown_safety_prevents_finder_replay_and_search) ... ok
+test_failed_state_obligation_prevents_search (test_cache_sketch.SketchTests.test_failed_state_obligation_prevents_search) ... ok
+test_generated_obligations_bind_environment_and_state_explicitly (test_cache_sketch.SketchTests.test_generated_obligations_bind_environment_and_state_explicitly) ... ok
+test_invalid_or_executable_bindings_are_rejected (test_cache_sketch.SketchTests.test_invalid_or_executable_bindings_are_rejected) ... ok
+test_manifest_distinguishes_template_from_instance (test_cache_sketch.SketchTests.test_manifest_distinguishes_template_from_instance) ... ok
+test_native_positive_and_negative_controls (test_cache_sketch.SketchTests.test_native_positive_and_negative_controls) ... ok
+test_agent_resume_restores_state_gate (test_cache_state.CacheStateTests.test_agent_resume_restores_state_gate) ... ok
+test_cache_scope_does_not_claim_byte_or_sequence_equality (test_cache_state.CacheStateTests.test_cache_scope_does_not_claim_byte_or_sequence_equality) ... ok
+test_failed_state_check_blocks_samples_and_search (test_cache_state.CacheStateTests.test_failed_state_check_blocks_samples_and_search) ... ok
+test_gate_requires_both_obligations_and_can_be_revoked (test_cache_state.CacheStateTests.test_gate_requires_both_obligations_and_can_be_revoked) ... ok
+test_missing_required_evidence_cannot_publish_exact (test_cache_state.CacheStateTests.test_missing_required_evidence_cannot_publish_exact) ... ok
+test_missing_solver_blocks_agent_initial_samples (test_cache_state.CacheStateTests.test_missing_solver_blocks_agent_initial_samples) ... ok
+test_native_inputs_reinitialize_private_cache (test_cache_state.CacheStateTests.test_native_inputs_reinitialize_private_cache) ... ok
+test_post_state_values_checked_in_addition_to_flags (test_cache_state.CacheStateTests.test_post_state_values_checked_in_addition_to_flags) ... ok
+test_configuration_is_not_assumed_fresh (test_config_conditions.ConfigTests.test_configuration_is_not_assumed_fresh) ... ok
+test_input_only_vocabulary_cannot_separate_stale_configuration (test_config_conditions.ConfigTests.test_input_only_vocabulary_cannot_separate_stale_configuration) ... ok
+test_witness_requires_both_environment_fields (test_config_conditions.ConfigTests.test_witness_requires_both_environment_fields) ... ok
+test_all_formal_templates_compile (test_config_conditions.NativeConfigTests.test_all_formal_templates_compile) ... ok
+test_missing_solver_blocks_native_results (test_config_conditions.NativeConfigTests.test_missing_solver_blocks_native_results) ... ok
+test_native_variants_and_finite_search (test_config_conditions.NativeConfigTests.test_native_variants_and_finite_search) ... ok
+test_plain_probe_matches_instrumented_state_and_returns (test_config_conditions.NativeConfigTests.test_plain_probe_matches_instrumented_state_and_returns) ... ok
+test_two_calls_with_environment_change_reproduce_stale_bug (test_config_conditions.NativeConfigTests.test_two_calls_with_environment_change_reproduce_stale_bug) ... ok
+test_compaction_understands_certified_modulo_regions (test_modulo_conditions.ModuloTests.test_compaction_understands_certified_modulo_regions) ... ok
+test_modulo_c_semantics_and_native_search (test_modulo_conditions.ModuloTests.test_modulo_c_semantics_and_native_search) ... ok
+test_repeat_order_is_balanced (test_modulo_conditions.ModuloTests.test_repeat_order_is_balanced) ... ok
+test_safe_modulo_grammar_and_bounds (test_modulo_conditions.ModuloTests.test_safe_modulo_grammar_and_bounds) ... ok
+test_same_seeds_and_budgets_different_vocabulary (test_modulo_conditions.ModuloTests.test_same_seeds_and_budgets_different_vocabulary) ... ok
+test_unknown_runs_are_included_in_summaries (test_modulo_conditions.ModuloTests.test_unknown_runs_are_included_in_summaries) ... ok
+test_generated_solver_harnesses_compile_as_c (test_predicate_search.NativeSearchTests.test_generated_solver_harnesses_compile_as_c) ... ok
+test_instrumentation_preserves_native_outputs_and_state (test_predicate_search.NativeSearchTests.test_instrumentation_preserves_native_outputs_and_state) ... ok
+test_missing_esbmc_blocks_native_evidence (test_predicate_search.NativeSearchTests.test_missing_esbmc_blocks_native_evidence) ... ok
+test_real_trace_guided_partitions_for_four_variants (test_predicate_search.NativeSearchTests.test_real_trace_guided_partitions_for_four_variants) ... ok
+test_counterexample_can_add_a_non_boundary_constant (test_predicate_search.PredicateTests.test_counterexample_can_add_a_non_boundary_constant) ... ok
+test_exhausted_vocabulary_keeps_mixed_unknown (test_predicate_search.PredicateTests.test_exhausted_vocabulary_keeps_mixed_unknown) ... ok
+test_harness_has_shared_input_separate_inequality_property_and_no_golden_condition (test_predicate_search.PredicateTests.test_harness_has_shared_input_separate_inequality_property_and_no_golden_condition) ... ok
+test_misleading_positive_hints_cannot_certify_a_region (test_predicate_search.PredicateTests.test_misleading_positive_hints_cannot_certify_a_region) ... ok
+test_mixed_region_is_refined_not_marked_all_neq (test_predicate_search.PredicateTests.test_mixed_region_is_refined_not_marked_all_neq) ... ok
+test_negative_assertion_needs_its_own_proof (test_predicate_search.PredicateTests.test_negative_assertion_needs_its_own_proof) ... ok
+test_proposed_verdict_is_rejected (test_predicate_search.PredicateTests.test_proposed_verdict_is_rejected) ... ok
+test_query_and_wall_clock_budget_fail_closed (test_predicate_search.PredicateTests.test_query_and_wall_clock_budget_fail_closed) ... ok
+test_replayed_witness_must_reach_target_region (test_predicate_search.PredicateTests.test_replayed_witness_must_reach_target_region) ... ok
+test_safe_predicate_grammar (test_predicate_search.PredicateTests.test_safe_predicate_grammar) ... ok
+test_seed_validation (test_predicate_search.PredicateTests.test_seed_validation) ... ok
+test_simplification_preserves_truth_table (test_predicate_search.PredicateTests.test_simplification_preserves_truth_table) ... ok
+test_simplification_random_covers (test_predicate_search.PredicateTests.test_simplification_random_covers) ... ok
+test_uint32_boundary_and_state_predicates (test_predicate_search.PredicateTests.test_uint32_boundary_and_state_predicates) ... ok
+test_unknown_never_becomes_eq (test_predicate_search.PredicateTests.test_unknown_never_becomes_eq) ... ok
+test_witness_parser_uses_entry_variables_only (test_predicate_search.PredicateTests.test_witness_parser_uses_entry_variables_only) ... ok
+test_all_generated_harnesses_compile (test_prime_conditions.NativePrimeTests.test_all_generated_harnesses_compile) ... ok
+test_missing_solver_stays_unknown (test_prime_conditions.NativePrimeTests.test_missing_solver_stays_unknown) ... ok
+test_native_algorithms_against_independent_sieve (test_prime_conditions.NativePrimeTests.test_native_algorithms_against_independent_sieve) ... ok
+test_trace_guided_discovery_includes_out_of_table_composites (test_prime_conditions.NativePrimeTests.test_trace_guided_discovery_includes_out_of_table_composites) ... ok
+test_compact_condition_does_not_promote_unknown_points (test_prime_conditions.PrimeTests.test_compact_condition_does_not_promote_unknown_points) ... ok
+test_compact_condition_preserves_certified_union (test_prime_conditions.PrimeTests.test_compact_condition_preserves_certified_union) ... ok
+test_domain_validation (test_prime_conditions.PrimeTests.test_domain_validation) ... ok
+test_formal_template_has_domain_and_no_cache_assumptions (test_prime_conditions.PrimeTests.test_formal_template_has_domain_and_no_cache_assumptions) ... ok
+test_stateless_backend_has_no_dummy_state_proofs (test_prime_conditions.PrimeTests.test_stateless_backend_has_no_dummy_state_proofs) ... ok
+test_stateless_predicates_and_witness (test_prime_conditions.PrimeTests.test_stateless_predicates_and_witness) ... ok
+test_agent_best_certificate_separate_from_latest_rejection (test_result_contract.ResultContractTests.test_agent_best_certificate_separate_from_latest_rejection) ... ok
+test_contradiction_invalidates_prior_proof_display (test_result_contract.ResultContractTests.test_contradiction_invalidates_prior_proof_display) ... ok
+test_empty_and_unsupported_inputs_always_write_artifacts (test_result_contract.ResultContractTests.test_empty_and_unsupported_inputs_always_write_artifacts) ... ok
+test_exact_meanings_and_schema (test_result_contract.ResultContractTests.test_exact_meanings_and_schema) ... ok
+test_false_partial_is_not_a_useful_region (test_result_contract.ResultContractTests.test_false_partial_is_not_a_useful_region) ... ok
+test_human_report_links_to_evidence_and_keeps_scope (test_result_contract.ResultContractTests.test_human_report_links_to_evidence_and_keeps_scope) ... ok
+test_missing_complement_does_not_become_exact (test_result_contract.ResultContractTests.test_missing_complement_does_not_become_exact) ... ok
+test_missing_file_has_io_reason_and_legacy_result (test_result_contract.ResultContractTests.test_missing_file_has_io_reason_and_legacy_result) ... ok
+test_no_domain_witness_or_safety_means_no_claim (test_result_contract.ResultContractTests.test_no_domain_witness_or_safety_means_no_claim) ... ok
+test_partial_falls_back_to_certified_union (test_result_contract.ResultContractTests.test_partial_falls_back_to_certified_union) ... ok
+test_query_and_time_budget_codes_are_distinct (test_result_contract.ResultContractTests.test_query_and_time_budget_codes_are_distinct) ... ok
+test_query_failure_diagnostics_preserve_unknown (test_result_contract.ResultContractTests.test_query_failure_diagnostics_preserve_unknown) ... ok
+test_real_process_timeout_is_unknown (test_result_contract.ResultContractTests.test_real_process_timeout_is_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 145 tests in 15.948s
+
+OK
+UNKNOWN: None
+Outcome: EMPTY_DOMAIN; domain=EMPTY; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: EMPTY_DOMAIN
+Report: C:\Users\Administrator\AppData\Local\Temp\tmpp23mfi36\empty_relation\pair-i2syoam_\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmpp23mfi36\empty_relation\pair-i2syoam_
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmpet06_qvb\no_boundary_seed\pair-owpbtb8a\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmpet06_qvb\no_boundary_seed\pair-owpbtb8a
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp1moqp7bs\safe_division\pair-0j_o8dwd\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp1moqp7bs\safe_division\pair-0j_o8dwd
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\fallback_63\pair-fxadex_0\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\fallback_63\pair-fxadex_0
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\full_31\pair-i3l4cpk1\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\full_31\pair-i3l4cpk1
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\mutant_31\pair-3xli93sv\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\mutant_31\pair-3xli93sv
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\short_unwind\pair-ds8bt3vt\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\short_unwind\pair-ds8bt3vt
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\truncated_63\pair-04pymw9v\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\truncated_63\pair-04pymw9v
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\unsafe_index\pair-a359jf3w\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp_w_rh1wm\unsafe_index\pair-a359jf3w
+UNKNOWN: None
+Phase: READY; goal reached: False
+Agent context: C:\Users\Administrator\AppData\Local\Temp\tmp6jc_9mi1\session-o6ols66o\agent-context.json
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp6jc_9mi1\session-o6ols66o\report.md
+EXACT: x == y
+Phase: READY; goal reached: True
+Latest proposal: EXACT
+Agent context: C:\Users\Administrator\AppData\Local\Temp\tmp6jc_9mi1\session-o6ols66o\agent-context.json
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp6jc_9mi1\session-o6ols66o\report.md
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\AppData\Local\Temp\tmp3_4lb19r\session-9rtgi9ot\agent-context.json
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp3_4lb19r\session-9rtgi9ot\report.md
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmpsoa3dl3q\pair-c1v8tw32\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmpsoa3dl3q\pair-c1v8tw32

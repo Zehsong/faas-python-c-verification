@@ -1,0 +1,35 @@
+test_agent_seeds_cannot_escape_contract_constraints (test_c_input_domains.InputDomainTests.test_agent_seeds_cannot_escape_contract_constraints) ... ok
+test_all_new_contracts_and_legacy_contracts_admitted (test_c_input_domains.InputDomainTests.test_all_new_contracts_and_legacy_contracts_admitted) ... ok
+test_all_obligation_kinds_assume_same_domain_before_program_calls (test_c_input_domains.InputDomainTests.test_all_obligation_kinds_assume_same_domain_before_program_calls) ... ok
+test_boolean_composition_and_flattened_array_fields (test_c_input_domains.InputDomainTests.test_boolean_composition_and_flattened_array_fields) ... ok
+test_constraint_change_invalidates_binding_and_agent_identity (test_c_input_domains.InputDomainTests.test_constraint_change_invalidates_binding_and_agent_identity) ... ok
+test_contradiction_is_reported_empty_only_after_solver_evidence (test_c_input_domains.InputDomainTests.test_contradiction_is_reported_empty_only_after_solver_evidence) ... ok
+test_declared_scope_keeps_raw_and_effective_domain (test_c_input_domains.InputDomainTests.test_declared_scope_keeps_raw_and_effective_domain) ... ok
+test_empty_seed_set_does_not_establish_empty_domain (test_c_input_domains.InputDomainTests.test_empty_seed_set_does_not_establish_empty_domain) ... ok
+test_legacy_schemas_do_not_silently_gain_defaults_or_constraints (test_c_input_domains.InputDomainTests.test_legacy_schemas_do_not_silently_gain_defaults_or_constraints) ... ok
+test_missing_solver_blocks_native_execution_with_constraints (test_c_input_domains.InputDomainTests.test_missing_solver_blocks_native_execution_with_constraints) ... ok
+test_native_boolean_and_array_constraints_match_python_domain (test_c_input_domains.InputDomainTests.test_native_boolean_and_array_constraints_match_python_domain) ... ok
+test_native_guard_matches_nested_boolean_semantics_on_all_small_inputs (test_c_input_domains.InputDomainTests.test_native_guard_matches_nested_boolean_semantics_on_all_small_inputs) ... ok
+test_native_probe_rejects_outside_domain_before_unsafe_execution (test_c_input_domains.InputDomainTests.test_native_probe_rejects_outside_domain_before_unsafe_execution) ... ok
+test_rejects_undeclared_fields_code_and_unbounded_expression_trees (test_c_input_domains.InputDomainTests.test_rejects_undeclared_fields_code_and_unbounded_expression_trees) ... ok
+test_type_domains_and_partial_bounds (test_c_input_domains.InputDomainTests.test_type_domains_and_partial_bounds) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.924s
+
+OK
+UNKNOWN: None
+Outcome: EMPTY_DOMAIN; domain=EMPTY; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: EMPTY_DOMAIN
+Report: C:\Users\Administrator\AppData\Local\Temp\tmpzja9b2k1\empty_relation\pair-fwvqlw3c\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmpzja9b2k1\empty_relation\pair-fwvqlw3c
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmphs_90l3g\no_boundary_seed\pair-1b27pjs_\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmphs_90l3g\no_boundary_seed\pair-1b27pjs_
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\AppData\Local\Temp\tmp3uwzh9zn\safe_division\pair-h4t82b64\report.md
+Artifacts: C:\Users\Administrator\AppData\Local\Temp\tmp3uwzh9zn\safe_division\pair-h4t82b64

@@ -8,24 +8,13 @@ import time
 
 from c_backend import CBackend, save_json
 from c_scalar_contract import Contract
-from predicate_search import Atom, UINT32_MAX
+from predicate_search import UINT32_MAX
 
 
 def bind_contract(path):
     contract = Contract(path)
 
-    class ScalarAtom(Atom):
-        numeric_fields = contract.fields
-
-        @classmethod
-        def parse(cls, text):
-            if isinstance(text, str):
-                text = text.strip()
-                if text in contract.fields and contract.input_specs[text]["type"] == "bool":
-                    return cls(text)
-                if text == "valid":
-                    raise ValueError("bare valid is allowed only for a declared bool input")
-            return super().parse(text)
+    ScalarAtom = contract.domain.atom_type
 
     class ScalarBackend(CBackend):
         proof_before_replay = True
@@ -54,6 +43,8 @@ def bind_contract(path):
             (self.inputs / "bound_model.h").write_text(self.model, encoding="utf-8")
             (self.inputs / self.probe_filename).write_text(self.probe(), encoding="utf-8")
             adapter_name = "c-bounded-array-v2" if contract.arrays else "c-scalar-v1"
+            if contract.data["schema"] == 3:
+                adapter_name = "c-domain-v3"
             self.sketch_manifest = {"template": adapter_name, "contract": contract.data,
                                     "source_identity": contract.identity,
                                     "model_sha256": hashlib.sha256(self.model.encode()).hexdigest()}
@@ -69,6 +60,13 @@ def bind_contract(path):
                           "safety": "whole declared domain must pass safety and unwinding before native replay",
                           "condition_discovery": "finite entry-state comparison vocabulary; no completeness beyond certified domain",
                           "source_identity": contract.identity}
+            if contract.data["schema"] == 3:
+                self.scope.update(declared_inputs=contract.data["inputs"],
+                    input_domain={"constraints": contract.data.get("constraints", True),
+                                  "expression": contract.domain.expression(),
+                                  "expression_c": contract.domain.expression(c=True),
+                                  "bounds": "omitted bounds use the complete declared type range",
+                                  "meaning": "normalized input bounds AND constraints; all claims are relative to this domain"})
             if contract.arrays:
                 self.scope.update(declared_inputs=contract.data["inputs"],
                                   observations=contract.data["observations"],
@@ -94,7 +92,7 @@ def bind_contract(path):
 
         @staticmethod
         def seed_in_domain(row, state_mode):
-            return all(spec["min"] <= row[name] <= spec["max"] for name, spec in contract.input_specs.items())
+            return contract.domain.contains(row)
 
         @classmethod
         def initial_atoms(cls):
@@ -107,7 +105,8 @@ def bind_contract(path):
         def default_seeds(cls, state_mode):
             values = [sorted({spec["min"], spec["max"], (spec["min"] + spec["max"]) // 2})
                       for spec in contract.input_specs.values()]
-            return [dict(zip(cls.fields, row)) for row in itertools.product(*values)]
+            return [seed for row in itertools.product(*values)
+                    if contract.domain.contains(seed := dict(zip(cls.fields, row)))]
 
         def state_obligations(self):
             result = self.query("safety", reserve=2)
@@ -143,6 +142,8 @@ def bind_contract(path):
             for name, spec in contract.input_specs.items():
                 declarations += [f"  uint32_t finder_{name} = nondet_uint32_t();",
                                  f"  __ESBMC_assume(finder_{name} >= UINT32_C({spec['min']}) && finder_{name} <= UINT32_C({spec['max']}));"]
+            if contract.data["schema"] == 3:
+                declarations.append(f"  __ESBMC_assume({contract.domain.expression(c=True)});")
             statements = [] if kind == "expected" else [f"  __ESBMC_assume({condition});"]
             if kind != "feasible":
                 statements += contract.argument_copies()
@@ -166,6 +167,8 @@ def bind_contract(path):
             for name, spec in contract.input_specs.items():
                 lines += [f"    if (ce_input_{name} < {spec['min']}ull || ce_input_{name} > {spec['max']}ull) return 2;",
                           f"    {spec['type']} finder_{name} = ({spec['type']})ce_input_{name};"]
+            if contract.data["schema"] == 3:
+                lines.append(f"    if (!({contract.domain.expression(c=True)})) return 2;")
             lines += contract.argument_copies()
             lines += [f"    {contract.data['return_type']} ce_left = {contract.call('original')};",
                       f"    {contract.data['return_type']} ce_right = {contract.call('candidate')};"]

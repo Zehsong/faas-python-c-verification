@@ -10,6 +10,29 @@ explicit contract, discovers sufficient equivalence conditions, and certifies
 the exact equivalence region when possible. Then evaluate its limitations and
 reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 
+## Active expansion: composable input contracts
+
+The user approved broader input support after the popcount milestone. Priority
+now shifts from a generic bridge interface to a composable type/memory/constraint
+frontend, then floating-point semantics and agent-assisted induction. These
+larger milestones remain planned; they are not enabled by this first patch.
+
+First slice: [schema 3 input domains](../cases/c_input_domains/README.md) now
+normalizes omitted bounds to full uint32_t/bool ranges and admits checked
+all/any/not combinations of comparisons among initial scalar/array fields.
+Every symbolic obligation, native probe/replay and agent seed check shares this
+domain. Existing schema 1/2 semantics and source restrictions remain intact.
+Reports preserve declared inputs, normalized ranges and the extra constraints.
+New 13-check modified-ESBMC acceptance is pending. Local controls and regression
+are recorded in [validation](validation/c-input-domains/README.md).
+
+This is a core/frontend change: old frozen engine locks are intentionally not
+updated. Reproduce frozen external/popcount stages in an independent checkout
+of `79e6aa0` (or their recorded original commits). Their old pass counts are
+historical and cannot be relabeled as acceptance of the new engine. Restart
+agent sessions after updating. New types, structs, larger/variable arrays,
+floating point and induction are still unsupported by the generic route.
+
 ## Repository audit
 
 Repository: https://github.com/Zehsong/faas-python-c-verification
@@ -46,7 +69,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
   times sum to 7.302194 seconds; post-check/setup time is excluded. Eleven local
   controls passed before the run. Raw archive remains uninspected.
   Core engine, original endpoints and original bridge programs remain unchanged.
-- Latest core implementation: `33af517`, cache state admission/reporting, now
+- Previous core baseline: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
   The demonstration and reproduction wrappers leave the proof/search engine unchanged.
   Prior table frontend `cd2b88c` has user-reported 9/9; the current-engine table
@@ -88,6 +111,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | User-reported READY 5/5 required; full-width popcount UNKNOWN/SOLVER_TIMEOUT; not blind evaluation |
 | Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; 8/12/16/24 bits EXACT twice each, 32 bits equal-query timeout twice; five queries throughout; not a blind/statistical evaluation |
 | Certified intermediate-program chain | Full-domain C edges with scope/source/identity gates and a negative control; endpoint equality derived by certified transitivity | Original three-edge experiment 2/3; refined six-edge experiment user-reported 6/6 and endpoint PROVED; no automatic decomposition or partial-region composition |
+| Composable input domains | Schema 3 type-default bounds plus Boolean combinations of entry-field comparisons, shared by all proof/native/agent paths | First slice only; current scalar/fixed-array limits retained; new formal acceptance pending |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -380,9 +404,10 @@ Keep the working Codespace and its customized binary/source and evidence.
    now reports all six links certified, endpoint PROVED and mutant rejected=True.
    This completes the manually guided full-width proof milestone. Preserve the
    archive and all earlier failed attempts; a documentation update needs no rerun.
-   Next development priority: generalize checked chain proposals and feedback,
-   retaining source/scope/identity and all-link certification gates. Autonomous
-   proposal generation and partial-region composition remain unimplemented.
+   Current priority has shifted to the user-approved input-support expansion.
+   Run schema 3 domain acceptance first, then extend typed/structured inputs.
+   Reusable chain proposals remain planned; autonomous proposal generation and
+   partial-region composition remain unimplemented.
    This is one repeated program pair, not ten independent programs.
    [C prototype milestone](C_TOOL_MILESTONE.md) summarizes the current capability.
    Full clean-host/independently held-out release gates remain open; new external

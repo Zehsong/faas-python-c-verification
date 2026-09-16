@@ -1,0 +1,54 @@
+{
+  "schema": 3,
+  "name": "array_equal",
+  "original": {
+    "source": "index.c",
+    "entry": "get",
+    "args": [
+      "a",
+      "n",
+      "capacity"
+    ]
+  },
+  "candidate": {
+    "source": "guarded_index.c",
+    "entry": "get",
+    "args": [
+      "a",
+      "n",
+      "capacity"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 2
+    },
+    "n": {
+      "type": "uint32_t",
+      "max": 1
+    },
+    "capacity": {
+      "type": "uint32_t",
+      "min": 2,
+      "max": 2
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 8,
+  "constraints": {
+    "all": [
+      "a_0 == a_1",
+      {
+        "any": [
+          "n == 0",
+          "n == 1"
+        ]
+      }
+    ]
+  }
+}

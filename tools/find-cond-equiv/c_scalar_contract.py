@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 
 from agent_conditions import strict_json
+from c_input_domain import InputDomain, normalize_bounds
 from predicate_search import UINT32_MAX
 from result_contract import InputFailure
 
@@ -314,8 +315,10 @@ class Contract:
             raise ValueError("contract exceeds 64 KiB")
         self.data = d = strict_json(raw.decode("utf-8"))
         required = {"schema", "name", "original", "candidate", "inputs", "return_type", "observations", "unwind"}
-        if not isinstance(d, dict) or set(d) != required or type(d["schema"]) is not int or d["schema"] not in (1, 2):
-            raise ValueError("invalid C contract schema: use 1 for scalars or 2 for bounded arrays")
+        if (not isinstance(d, dict) or not required <= d.keys() or type(d["schema"]) is not int
+                or d["schema"] not in (1, 2, 3)
+                or set(d) - required - ({"constraints"} if d["schema"] == 3 else set())):
+            raise ValueError("invalid C contract schema: use 1 for scalars, 2 for arrays, 3 for constrained domains")
         if not identifier(d["name"]) or d["return_type"] not in ("bool", "uint32_t"):
             raise ValueError("contract requires a name and bool/uint32_t return")
         if type(d["unwind"]) is not int or not 1 <= d["unwind"] <= 1024:
@@ -329,25 +332,25 @@ class Contract:
             if not identifier(name) or not isinstance(spec, dict):
                 raise ValueError("invalid input name or specification")
             is_array = spec.get("type") in ("uint32_t[]", "bool[]")
-            keys = {"type", "length", "min", "max"} if is_array else {"type", "min", "max"}
-            if set(spec) != keys or (not is_array and spec["type"] not in ("bool", "uint32_t")):
-                raise ValueError("each input requires type, min/max, and length only for arrays")
+            keys = {"type", "length"} if is_array else {"type"}
+            if d["schema"] != 3:
+                keys |= {"min", "max"}
+            if (not keys <= spec.keys() or set(spec) - keys - {"min", "max"}
+                    or (not is_array and spec["type"] not in ("bool", "uint32_t"))):
+                raise ValueError("input requires type, array length, and explicit min/max for schemas 1/2")
             if is_array:
-                if d["schema"] != 2 or type(spec["length"]) is not int or not 1 <= spec["length"] <= 4:
-                    raise ValueError("array inputs require schema 2 and literal length 1..4")
+                if d["schema"] not in (2, 3) or type(spec["length"]) is not int or not 1 <= spec["length"] <= 4:
+                    raise ValueError("array inputs require schema 2/3 and literal length 1..4")
                 self.arrays[name] = spec
-            element = spec["type"][:-2] if is_array else spec["type"]
-            limit = 1 if element == "bool" else UINT32_MAX
-            if type(spec["min"]) is not int or type(spec["max"]) is not int or not (0 <= spec["min"] <= limit and 0 <= spec["max"] <= limit):
-                raise ValueError("invalid scalar input domain")
-            if spec["min"] > spec["max"]:
+            normalized = normalize_bounds(spec, defaults=d["schema"] == 3)
+            if normalized["min"] > normalized["max"]:
                 empty_fields.append(name)
             names = [f"{name}_{i}" for i in range(spec["length"])] if is_array else [name]
             for field in names:
                 if not identifier(field) or field in self.input_specs or field in (
                         "r_original", "r_cached", "observations_original", "observations_candidate"):
                     raise ValueError("flattened input names collide or exceed identifier limits")
-                self.input_specs[field] = {"type": element, "min": spec["min"], "max": spec["max"]}
+                self.input_specs[field] = dict(normalized)
         if not 1 <= len(self.input_specs) <= 4:
             raise ValueError("at most four scalar input values, including array elements, are supported")
         if d["schema"] == 2 and not self.arrays:
@@ -355,6 +358,7 @@ class Contract:
         if d["observations"] != ["return", *self.arrays]:
             raise ValueError("observe return followed by every array in input declaration order")
         self.fields = tuple(self.input_specs)
+        self.domain = InputDomain(self.input_specs, d.get("constraints", True))
         if empty_fields:
             raise InputFailure("EMPTY_DOMAIN", "empty inclusive input range: " + ", ".join(empty_fields),
                                {"language": "C", "inputs": d["inputs"], "observations": d["observations"],
@@ -368,7 +372,7 @@ class Contract:
             if not isinstance(args, list) or any(not isinstance(n, str) for n in args) or len(args) != len(d["inputs"]) or set(args) != set(d["inputs"]):
                 raise ValueError("each side must bind every logical input exactly once")
             try:
-                source = Source(self.path.parent / binding["source"], array_parameters=d["schema"] == 2)
+                source = Source(self.path.parent / binding["source"], array_parameters=d["schema"] in (2, 3))
             except RecursionError as exc:
                 raise InputFailure("UNSUPPORTED_INPUT", "unsupported C: nesting too deep") from exc
             except InputFailure:

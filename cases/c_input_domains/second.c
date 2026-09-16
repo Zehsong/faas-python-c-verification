@@ -1,0 +1,2 @@
+#include <stdint.h>
+uint32_t choose(uint32_t x, uint32_t y) { return y; }

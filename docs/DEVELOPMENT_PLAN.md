@@ -224,7 +224,7 @@ The direct timeout and three-edge results remain unchanged historical evidence.
 This completes the manually guided full-width proof milestone for one pair,
 not automatic proposal synthesis or a repeated end-to-end speedup evaluation.
 
-The next implementation priority is a reusable checked chain-proposal interface:
+The proposed follow-on (now behind the input-expansion priority below) is a reusable checked chain-proposal interface:
 explicit ordered sources, common contract scope, immutable original endpoints,
 per-link feedback and cumulative budget accounting. Require all links and
 negative controls before publishing composition, and preserve UNKNOWN otherwise.
@@ -232,6 +232,34 @@ Start with full-domain equality; partial-region composition needs a separate
 soundness design. Later assess agent-generated proposals on separately selected
 cases, recording proposal effort and failed attempts as well as solver cost.
 These are planned capabilities, not implemented features.
+
+## Approved input expansion after the popcount milestone
+
+The user approved replacing the narrow set of input forms with a composable
+contract architecture. Current priority order:
+
+1. Normalize complete type domains and explicit relations; then extend integer
+   types, record fields and configurable-capacity arrays with logical lengths.
+   Preserve C promotions, overflow policy, independent storage and observations.
+2. Admit explicitly modeled floating-point semantics, starting with strict
+   comparison under a declared format/rounding policy. Approximate relations
+   and their error composition require a separate design.
+3. Let agents propose checked invariants, relational loop alignment, summaries
+   and intermediate programs. Induction and termination obligations require
+   backend support checks on the pinned modified ESBMC. No agent prose is a proof.
+
+The first implemented slice is schema 3: optional type-derived bounds plus
+checked Boolean relation constraints on current uint32_t/bool scalar and fixed
+array fields. One shared domain representation drives symbolic assumptions,
+native guards/replay and agent validation. Empty sampled sets do not establish
+empty domains; solver feasibility remains authoritative. All results retain
+scope constraints. A 13-check acceptance stage includes full-width defaults,
+relation-dependent safety, contradictory domains, mixed bool/array constraints
+and an out-of-domain agent seed control. Formal execution is pending.
+
+This is not completion of the first milestone: new integer types, structs,
+configurable array capacities and richer expression syntax still require work.
+Retain historical fixed-engine experiments in their original checkouts.
 
 ## Release target
 

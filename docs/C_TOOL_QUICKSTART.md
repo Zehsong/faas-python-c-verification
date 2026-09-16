@@ -45,6 +45,7 @@ python3 tools/find-cond-equiv/find_c_conditions.py \
 |---|---|---|
 | schema 1 | uint32_t/bool 标量输入和返回，局部只读表 | [完整约定](C_SCALAR_TOOL.md) |
 | schema 2 | 固定长度数组与标量输入，标量返回，观察全部数组最终元素 | [数组约定](../cases/c_bounded_arrays/README.md) |
+| schema 3 | 类型默认完整域、初始字段间的关系及布尔组合约束；可搭配现有固定数组 | [新契约和验收](../cases/c_input_domains/README.md)，正式验收待运行 |
 | 私有缓存 | 已有两个经过检查的 adapter，显式 invariant 与状态义务 | [缓存范围](../cases/cache_state/README.md)；不是任意状态 C 输入接口 |
 
 通用接口合计最多四个初始标量值，数组元素计入总数；数组长度 1..4，无别名、任意指针、

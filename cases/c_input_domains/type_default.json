@@ -1,0 +1,28 @@
+{
+  "schema": 3,
+  "name": "type_default",
+  "original": {
+    "source": "parity_mod.c",
+    "entry": "odd",
+    "args": [
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "parity_bit.c",
+    "entry": "odd",
+    "args": [
+      "n"
+    ]
+  },
+  "inputs": {
+    "n": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "bool",
+  "observations": [
+    "return"
+  ],
+  "unwind": 40
+}

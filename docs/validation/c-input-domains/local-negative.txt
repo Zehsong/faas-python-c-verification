@@ -1,0 +1,104 @@
+
+type_default
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\type_default\pair-qj0orj90\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\type_default\pair-qj0orj90
+type_default: NOT ESTABLISHED
+
+ordered_full
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\ordered_full\pair-wgualbo_\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\ordered_full\pair-wgualbo_
+ordered_full: NOT ESTABLISHED
+
+ordered_region
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\ordered_region\pair-ckycs_ix\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\ordered_region\pair-ckycs_ix
+ordered_region: NOT ESTABLISHED
+
+safe_division
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\safe_division\pair-f8knw3hn\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\safe_division\pair-f8knw3hn
+safe_division: NOT ESTABLISHED
+
+array_index
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\array_index\pair-s01a_y9c\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\array_index\pair-s01a_y9c
+array_index: NOT ESTABLISHED
+
+array_equal
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\array_equal\pair-0n01n4ul\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\array_equal\pair-0n01n4ul
+array_equal: NOT ESTABLISHED
+
+mixed_bool
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\mixed_bool\pair-btk9yq3z\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\mixed_bool\pair-btk9yq3z
+mixed_bool: NOT ESTABLISHED
+
+no_boundary_seed
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\no_boundary_seed\pair-k0ldshbw\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\no_boundary_seed\pair-k0ldshbw
+no_boundary_seed: NOT ESTABLISHED
+
+empty_relation
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\empty_relation\pair-xh_jcnkn\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\empty_relation\pair-xh_jcnkn
+empty_relation: NOT ESTABLISHED
+
+unsafe_division
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\unsafe_division\pair-_jfwd33b\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\unsafe_division\pair-_jfwd33b
+unsafe_division: NOT ESTABLISHED
+
+unsafe_index
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\unsafe_index\pair-wtds2av_\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\unsafe_index\pair-wtds2av_
+unsafe_index: NOT ESTABLISHED
+
+missing-solver
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\missing-solver\pair-7_7ykedm\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\missing-solver\pair-7_7ykedm
+missing-solver: PASS
+UNKNOWN: None
+Phase: UNKNOWN; goal reached: False
+Latest proposal: UNKNOWN
+Agent context: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\agent-domain\session-ck1fgra0\agent-context.json
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\agent-domain\session-ck1fgra0\report.md
+agent-domain: NOT ESTABLISHED
+C INPUT DOMAIN ACCEPTANCE: 1/13 passed; inputs/tools unchanged=True
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\domain-local\negative\checks-1legcglu\README.md

@@ -1,0 +1,2 @@
+Actual negative run: all 13 UNKNOWN, zero solver queries/native samples; 1/13 is only the intended missing-solver control. Overview: 13/13 links. Engine dependency included. Archive: 618/618 hashes and archive sidecar PASS.
+Archive: .verify-equiv-runs/domain-local/archives/c-input-domains-local-20260916T143429Z-Mwmghn.tar.gz

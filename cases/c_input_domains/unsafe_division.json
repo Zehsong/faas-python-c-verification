@@ -1,0 +1,33 @@
+{
+  "schema": 3,
+  "name": "unsafe_division",
+  "original": {
+    "source": "division.c",
+    "entry": "quotient",
+    "args": [
+      "x",
+      "y"
+    ]
+  },
+  "candidate": {
+    "source": "zero.c",
+    "entry": "quotient",
+    "args": [
+      "x",
+      "y"
+    ]
+  },
+  "inputs": {
+    "x": {
+      "type": "uint32_t"
+    },
+    "y": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 8
+}

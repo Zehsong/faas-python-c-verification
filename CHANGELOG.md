@@ -5,6 +5,28 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Add type-default domains and composable input constraints
+
+- Added opt-in C contract schema 3. Omitted min/max use the full uint32_t/bool
+  type range; checked Boolean all/any/not expressions combine comparisons over
+  initial scalar and flattened array fields. Schemas 1/2 retain explicit bounds.
+- Added a shared input-domain module used by every symbolic obligation, native
+  probe guard/replay and agent seed validation. Scope retains both raw input
+  declarations and effective constraints; source/contract changes invalidate
+  agent sessions. No arbitrary agent code or implicit safety restriction is used.
+- Added thirteen formal acceptance checks, including constrained division/index
+  safety and unconstrained failing counterparts, exact conditional regions,
+  contradictory constraints, no initial boundary witness and scripted agent
+  seed rejection. Expected formulas are checked after discovery only.
+- Local tests, actual missing-solver negative run and archive checks are recorded
+  in [validation](docs/validation/c-input-domains/README.md). Formal acceptance
+  with the user's modified ESBMC is pending; local/mocked results are not proofs.
+- User-approved priority is now composable input support, then floating-point
+  semantics and agent-assisted induction. This is the domain foundation only;
+  new scalar types, structs, larger arrays and unbounded loops are not implemented.
+  Historical external/popcount engine locks are unchanged; rerun those frozen
+  experiments at `79e6aa0` or their original commits, not against this new engine.
+
 ## 2026-09-16 — Record complete full-width popcount bridge milestone
 
 - Recorded user-reported refined-chain result after `388a2c3`: RECORDED,

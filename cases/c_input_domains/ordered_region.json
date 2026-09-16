@@ -1,0 +1,34 @@
+{
+  "schema": 3,
+  "name": "ordered_region",
+  "original": {
+    "source": "maximum.c",
+    "entry": "choose",
+    "args": [
+      "x",
+      "y"
+    ]
+  },
+  "candidate": {
+    "source": "minimum.c",
+    "entry": "choose",
+    "args": [
+      "x",
+      "y"
+    ]
+  },
+  "inputs": {
+    "x": {
+      "type": "uint32_t"
+    },
+    "y": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 8,
+  "constraints": "x <= y"
+}

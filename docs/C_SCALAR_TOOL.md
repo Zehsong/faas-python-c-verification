@@ -28,6 +28,22 @@ local regression passes and [user-reported formal 10/10](validation/c-bounded-ar
 the current-engine table 9/9 rerun remains unreported. Read the array guide for
 initialization, non-aliasing and size limits.
 
+## Composable input domains (schema 3)
+
+The new [input-domain contract](../cases/c_input_domains/README.md) allows omitted
+min/max bounds (full uint32_t/bool type ranges by default) and an optional typed
+Boolean `constraints` expression over initial fields, including array elements.
+The admissible domain is normalized bounds AND constraints. Safety, feasibility,
+equality, complement, expected-condition checks, native execution and agent seeds
+all use that same domain. Reports retain raw declarations and effective scope.
+Old schemas 1/2 still require explicit bounds and reject this additional field.
+
+This first slice does not add new C types, structures, arbitrary pointers,
+variable physical array sizes or unbounded-loop proofs. Four initial scalar
+values including array elements remains the limit. Constraints do not accept
+arbitrary C, arithmetic expressions or output references. New formal acceptance
+is pending; historical results below are not reruns of this changed frontend.
+
 ## Run the acceptance stage
 
 Use the existing modified ESBMC binary; this command does not install or replace
