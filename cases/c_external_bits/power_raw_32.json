@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "name": "power_raw_32",
+  "original": {
+    "source": "power_reference.c",
+    "entry": "power",
+    "args": [
+      "x"
+    ]
+  },
+  "candidate": {
+    "source": "power_raw.c",
+    "entry": "power",
+    "args": [
+      "x"
+    ]
+  },
+  "inputs": {
+    "x": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 4294967295
+    }
+  },
+  "return_type": "bool",
+  "observations": [
+    "return"
+  ],
+  "unwind": 34
+}

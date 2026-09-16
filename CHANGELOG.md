@@ -5,6 +5,33 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Isolated reproduction accepted; external-source C integration
+
+- Recorded user-reported **ISOLATED C REPRODUCTION READY** after `7cc44b5`, with
+  overview/archive paths. Raw artifacts and actual run identities are not
+  independently inspected. This reuses the host compiler, modified ESBMC and
+  system libraries; it is not a fresh-machine/container claim.
+  [Transcript](docs/validation/c-reproduction/user-reported-results.md).
+- Added public-domain power-of-two and population-count snippets with original
+  source links, explicit adaptations and project-authored loop references.
+  Ordinary C/JSON contracts use the unchanged generic frontend. A separate lock
+  freezes 17 engine/dependency files at `7cc44b5`; the older transfer lock remains.
+- Added five required and one exploratory discovery runs with fixed budgets,
+  safety/unwind gating, separate post-discovery expected-region proofs, identity
+  checks, portable overview and separate checksum archive. Missing solver and
+  incomplete results remain UNKNOWN; exploratory failures stay in the results.
+  No proposed condition, seeds or custom predicate file is passed to discovery.
+- Validation: five local tests pass without skips, including compiled native
+  checks over 0..255 and 32-bit boundaries. An actual missing-solver run retains
+  all six UNKNOWN reports, zero solver queries/native discovery samples, and
+  INCOMPLETE 0/5. These are native/protocol checks, not formal ESBMC evidence.
+  [Records](docs/validation/c-external-bits/README.md).
+- Formal execution of this stage is pending. These known algorithms exercise
+  external-source integration after freezing; they are not a blind held-out
+  experiment, autonomous-agent study or performance comparison. Next: inspect
+  all six actual outcomes before making capability/cost claims. Full clean-host,
+  independently held-out and raw evidence audit gates remain open.
+
 ## 2026-09-16 — Unified demo accepted; isolated source/Python reproduction
 
 - Recorded user-reported **C TOOL DEMO READY (8/8; engine unchanged=True)** after

@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "name": "popcount_32",
+  "original": {
+    "source": "popcount_reference.c",
+    "entry": "popcount",
+    "args": [
+      "x"
+    ]
+  },
+  "candidate": {
+    "source": "popcount_parallel.c",
+    "entry": "popcount",
+    "args": [
+      "x"
+    ]
+  },
+  "inputs": {
+    "x": {
+      "type": "uint32_t",
+      "min": 0,
+      "max": 4294967295
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return"
+  ],
+  "unwind": 34
+}

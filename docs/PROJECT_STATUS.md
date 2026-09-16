@@ -18,8 +18,11 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 - Latest demonstration: `ff40a6f`, unified scalar/table/array/cache showcase, now
   user-reported READY 8/8 with unchanged engine. Earlier scalar-only demo
   `75dbd47` has user-reported READY (5/5).
-- Latest wrapper: committed-checkout/fresh-venv Linux reproduction (identify its
-  commit in Git history); full Linux execution pending.
+- Latest wrapper: `7cc44b5`, committed-checkout/fresh-venv Linux reproduction,
+  now user-reported READY. Host compiler/modified ESBMC/system libraries are reused.
+- New stage: external-source bit algorithms against project-authored references,
+  with the current engine frozen at `7cc44b5`; five required and one exploratory
+  contract-only runs. Local/native checks pass; formal results pending.
 - Latest core implementation: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
   The demonstration and reproduction wrappers leave the proof/search engine unchanged.
@@ -58,7 +61,8 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
 | Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
 | Unified C demonstration | One command and portable Chinese overview for seven executed cases plus a same-return/different-array solver replay | User-reported READY 8/8; engine unchanged; known integration cases, not a held-out or clean-environment release |
-| Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | Linux execution pending; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
+| Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | User-reported READY; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
+| External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | Five required plus one exploratory run; local controls pass, formal pending; not blind evaluation |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -295,6 +299,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Generic C bounded arrays | 10/10 passed | [User-pasted summary](validation/c-bounded-arrays/user-reported-results.md); includes negative controls, raw archive uninspected |
 | Private-cache state | 14/14 passed; inputs/tools unchanged=True | [User-pasted summary](validation/cache-state/user-reported-results.md); negative controls and scripted agent resumes included, archive uninspected |
 | Unified C demonstration | READY 8/8; engine unchanged=True | [User-pasted summary](validation/c-tool-demo/user-reported-results.md); seven examples plus replay check, raw archive uninspected |
+| Isolated source/Python reproduction | READY | [User-pasted transcript](validation/c-reproduction/user-reported-results.md); host toolchain reused, raw archive and identities uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -326,15 +331,18 @@ Keep the working Codespace and its customized binary/source and evidence.
    schema 2 now has user-reported 10/10; the readonly-table rerun remains
    unreported. Cache-state is now user-reported 14/14 with unchanged inputs/tools.
    These separate results meet the implemented M3 baseline gate. The unified
-   C demonstration now has user-reported READY 8/8. Run the independent-checkout/
-   fresh-venv reproduction with the existing modified ESBMC and keep its archive.
-   Full clean-host/held-out release gates remain open.
+   C demonstration now has user-reported READY 8/8. Independent-checkout/fresh-venv
+   reproduction is now user-reported READY; preserve its archive. Run the new
+   [external-source integration](../cases/c_external_bits/README.md) with the same
+   modified ESBMC; retain all six results, including exploratory UNKNOWN/PARTIAL.
+   Full clean-host/independently held-out release gates remain open; new external
+   cases are known algorithms selected after the engine freeze, not blind tests.
    Continue authorized work directly after evidence updates; reserve summaries
    for meaningful milestones. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `ff40a6f` when reproduction development began.
+   branch beyond `7cc44b5` when external-source integration development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

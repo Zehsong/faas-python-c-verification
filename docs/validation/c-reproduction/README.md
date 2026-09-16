@@ -16,7 +16,8 @@
   was completed locally. The core proof/search engine and fixtures are unchanged;
   the earlier core regression is historical and was not rerun for this wrapper.
 
-Full **ISOLATED C REPRODUCTION: READY** remains pending on Linux using the existing
-modified ESBMC. Even success reuses the host compiler/ESBMC/system libraries; it
+Full **ISOLATED C REPRODUCTION: READY** is now [user reported](user-reported-results.md)
+on Linux using the existing modified ESBMC; its raw archive is uninspected.
+This run reuses the host compiler/ESBMC/system libraries; it
 must not be described as clean-machine or container reproduction.
 [Commands and evidence layout](../../C_TOOL_REPRODUCTION.md).

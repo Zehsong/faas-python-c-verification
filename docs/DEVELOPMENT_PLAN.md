@@ -126,10 +126,28 @@ A [Linux wrapper](C_TOOL_REPRODUCTION.md) now fixes the source commit, creates a
 independent checkout and fresh Python venv, installs/archives pinned dependency
 wheels, and reruns the unified demonstration. Host compiler and modified ESBMC
 identities are recorded and checked; both remain external rather than rebuilt.
-Eight lifecycle tests and a real local Git exclusion control pass; full Linux
-execution is pending. This addresses workspace/Python contamination. It must not
+Eight lifecycle tests and a real local Git exclusion control pass. Linux
+execution is now [user-reported READY](validation/c-reproduction/user-reported-results.md);
+the original archive and run identities have not been independently inspected.
+This addresses workspace/Python contamination. It must not
 be relabelled as fresh-host/container reproduction or completion of all M4 gates.
 Held-out integration and broader environment validation remain separate work.
+
+## M4 external-source integration implementation
+
+[Bit-algorithm cases](../cases/c_external_bits/README.md) now compare public-domain
+external snippets with authored loop references through ordinary C/JSON files.
+The engine is frozen at `7cc44b5` in a new lock; the older transfer lock remains
+unchanged. Five required cases cover full-width power-of-two variants and a
+byte-domain population count; full-width population count is an exploratory
+sixth run. Fixed budgets and roles precede formal execution. Expected regions
+are checked separately after discovery. No finder/backend edits or proposals
+are supplied. Five local/native controls pass; formal execution is pending.
+
+This exercises the new-case integration requirement with an external source;
+it does not meet the stronger independently held-out/blind evaluation gate.
+Known answers, documented adaptations and authored references remain explicit.
+Broader environment validation and an independently selected case remain open.
 
 ## Release target
 

@@ -1,0 +1,4 @@
+Internal SHA-256 checks: 329/329 passed
+Archived overview links: 8/8 exist
+Archive sidecar SHA-256: PASS
+This archive contains local missing-solver evidence only, not formal results.

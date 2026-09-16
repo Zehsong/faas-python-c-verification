@@ -1,0 +1,10 @@
+test_acceptance_requires_exact_safety_and_postcheck (test_external_bits.ExternalBitsTests.test_acceptance_requires_exact_safety_and_postcheck) ... ok
+test_contracts_and_locked_sources (test_external_bits.ExternalBitsTests.test_contracts_and_locked_sources) ... ok
+test_engine_drift_blocks_all_discovery (test_external_bits.ExternalBitsTests.test_engine_drift_blocks_all_discovery) ... ok
+test_native_references_and_adaptations (test_external_bits.ExternalBitsTests.test_native_references_and_adaptations) ... ok
+test_overview_retains_unknown_and_marks_exploratory (test_external_bits.ExternalBitsTests.test_overview_retains_unknown_and_marks_exploratory) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.429s
+
+OK
