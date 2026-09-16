@@ -269,7 +269,10 @@ conditional mutations, inactive-tail differences, empty lengths and safety contr
 whole-domain safety passed, but equality and later complement checks timed out.
 A checked finite-length partition fallback is now implemented; it requires
 coverage and every sub-obligation and does not narrow array-element domains.
-Its formal rerun is pending before further capability expansion.
+Its user-reported rerun after `441fd89` is still 10/11: copy8 coverage and n=0..3
+equality prove, but n=4 times out. The next harness change initializes the
+partition length with its constant value while leaving all other inputs symbolic;
+formal acceptance of that change is pending before further capability expansion.
 
 This is not completion of the first milestone: new integer types, structs,
 richer expressions and dynamic memory still require work.

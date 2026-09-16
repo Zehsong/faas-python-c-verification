@@ -5,6 +5,24 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-17 — Bind partition lengths as harness constants
+
+- Recorded [user-reported `441fd89` result](docs/validation/c-length-partition/user-reported-results.md):
+  10/11, identities unchanged. copy8 remains UNKNOWN: coverage and n=0..3 equal
+  pass, n=4 equal times out; later different query times out at n=0. 13 queries,
+  38 native samples, 130.785482 seconds. No expected-condition post-check ran.
+- Each partition harness now initializes its length to the corresponding
+  constant, retaining the exact matching partition conjunct, original constraints
+  and all other symbolic inputs. The shared harness hook defaults to unchanged
+  generation; fixed bindings are confined to C-adapter subqueries and restored
+  in finally. The original programs, array observations and proof budgets remain.
+- [Local validation](docs/validation/c-length-partition/constant-binding.md):
+  172 finder tests, including generated native harnesses and a tail-mutation
+  control; one evidence-assembly test. Mock/native results are not formal proof.
+- Expected benefit is easier simplification of fixed-count loops; not a measured
+  speedup. Modified-ESBMC rerun remains necessary; the same 11/11 gate stays open.
+  No unsafe relaxation, partial-region publishing or unbounded induction added.
+
 ## 2026-09-16 — Diagnose copy8 timeouts and add checked length partitions
 
 - Recorded user-supplied summary and overview after `7ad167b`: **10/11 passed**,

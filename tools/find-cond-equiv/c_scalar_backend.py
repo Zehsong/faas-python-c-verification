@@ -87,6 +87,7 @@ def bind_contract(path):
                 self.scope["proof_decomposition"] = {
                     "strategy": "after equal/different timeout, partition one explicit logical length",
                     "max_parts": 17,
+                    "binding": "each part initializes its logical length to a constant; coverage retains symbolic inputs",
                     "requirements": "whole-domain safety, solver-proved coverage and every part proved; shared query/time budgets",
                     "observations": "unchanged complete observation vector; all other inputs remain symbolic"}
             self.esbmc, self.version = shutil.which(args.esbmc), None
@@ -153,6 +154,11 @@ def bind_contract(path):
             # Called only after agent_workflow checks source/contract/tool identity.
             self.safety_established = obligations.get("safety", {}).get("status") == "PROVED"
 
+        def query_harness(self, kind, condition="true", expected=None):
+            return self.make_harness(self.model, self.args.variant, self.args.state_mode,
+                                     kind, condition, expected,
+                                     fixed_length=getattr(self, '_fixed_length', None))
+
         def query(self, kind, condition="true", reserve=0, expected=None):
             direct = super().query(kind, condition, reserve, expected)
             if (kind not in ("equal", "different") or not self.safety_established
@@ -180,11 +186,18 @@ def bind_contract(path):
             coverage = super().query("feasible", f"({condition}) && !({union})", reserve)
             result = {"status": "UNKNOWN", "basis": "EXHAUSTIVE_LENGTH_PARTITION",
                       "kind": kind, "condition_c": condition, "field": field,
+                      "binding": "constant initializer for the partition length only; all remaining inputs symbolic",
                       "parts": parts, "direct_attempt": direct, "coverage": coverage,
                       "checks": [], "evidence_file": str(proof_path)}
             if coverage['status'] == 'PROVED':
-                for part in parts:
-                    checked = super().query(kind, f"({condition}) && ({part})", reserve, expected)
+                for value, part in zip(range(lower, upper + 1), parts):
+                    # Exact substitution under this part's explicit equality.
+                    # Keep the immutable program model, domain and observations.
+                    self._fixed_length = (field, value, condition)
+                    try:
+                        checked = super().query(kind, f"({condition}) && ({part})", reserve, expected)
+                    finally:
+                        self._fixed_length = None
                     result['checks'].append(checked)
                     if checked['status'] == 'REFUTED':
                         # This is also a counterexample in the parent region.
@@ -219,12 +232,23 @@ def bind_contract(path):
                         raise RuntimeError("invalid native array observation vector")
 
         @staticmethod
-        def make_harness(model, variant, state_mode, kind, condition="true", expected=None):
+        def make_harness(model, variant, state_mode, kind, condition="true", expected=None, *, fixed_length=None):
             if kind not in ("safety", "feasible", "equal", "different", "expected"):
                 raise ValueError("unsupported scalar obligation")
+            bindings = {}
+            if fixed_length is not None:
+                field, value, parent = fixed_length
+                guard = f"finder_{field} == UINT32_C({value})"
+                if (kind not in ('equal', 'different')
+                        or field not in contract.logical_lengths.values()
+                        or type(value) is not int or not 0 <= value <= UINT32_MAX
+                        or condition != f"({parent}) && ({guard})"):
+                    raise ValueError('constant length binding requires the matching partition conjunct')
+                bindings[field] = value
             declarations = []
             for name, spec in contract.input_specs.items():
-                declarations += [f"  uint32_t finder_{name} = nondet_uint32_t();",
+                initializer = f"UINT32_C({bindings[name]})" if name in bindings else "nondet_uint32_t()"
+                declarations += [f"  uint32_t finder_{name} = {initializer};",
                                  f"  __ESBMC_assume(finder_{name} >= UINT32_C({spec['min']}) && finder_{name} <= UINT32_C({spec['max']}));"]
             if contract.data["schema"] == 3:
                 declarations.append(f"  __ESBMC_assume({contract.domain.expression(c=True)});")

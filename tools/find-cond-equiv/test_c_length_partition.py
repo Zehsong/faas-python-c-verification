@@ -1,6 +1,9 @@
 """Proof composition controls with scripted oracle responses, not formal evidence."""
 import json
+import os
 from pathlib import Path
+import shutil
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -58,6 +61,11 @@ class LengthPartitionTests(unittest.TestCase):
         self.assertEqual(result['direct_attempt']['status'], 'UNKNOWN')
         self.assertEqual(result['coverage']['status'], 'PROVED')
         for index, (harness, _) in enumerate(self.calls[2:]):
+            self.assertIn(f'uint32_t finder_n = UINT32_C({index});', harness)
+            self.assertNotIn('finder_n = nondet_uint32_t()', harness)
+            for field in backend.fields:
+                if field != 'n':
+                    self.assertIn(f'finder_{field} = nondet_uint32_t()', harness)
             self.assertIn(f'finder_n == UINT32_C({index})', harness)
             self.assertIn('finder_n <= UINT32_C(8)', harness)
             self.assertIn('finder_src_0 != UINT32_C(7)', harness)
@@ -65,8 +73,86 @@ class LengthPartitionTests(unittest.TestCase):
             self.assertIn('ce_buf_original_dst[7]', harness)
             self.assertIn('ce_buf_candidate_src[7]', harness)
         coverage = self.calls[1][0]
+        self.assertIn('finder_n = nondet_uint32_t()', coverage)
+        self.assertIn('finder_n = nondet_uint32_t()', self.calls[0][0])
         self.assertIn('&& !(', coverage)
         self.assertIn('finder_n == UINT32_C(8)', coverage)
+
+    def test_constant_binding_requires_exact_partition_condition(self):
+        bound, _, backend = self.backend()
+        for binding, condition in (
+                (('n', 4, 'true'), 'true'),
+                (('n', 4, 'true'), '(true) && (finder_n == UINT32_C(3))'),
+                (('n', True, 'true'), '(true) && (finder_n == UINT32_C(True))'),
+                (('dst_0', 4, 'true'), '(true) && (finder_dst_0 == UINT32_C(4))'),
+                (('n', 4, 'true'), '(true) || (false) && (finder_n == UINT32_C(4))')):
+            with self.subTest(binding=binding, condition=condition), self.assertRaises(ValueError):
+                bound.make_harness(backend.model, 'pair', 'stateless', 'equal', condition,
+                                   fixed_length=binding)
+        for kind in ('safety', 'feasible', 'expected'):
+            with self.assertRaises(ValueError):
+                bound.make_harness(backend.model, 'pair', 'stateless', kind,
+                    '(true) && (finder_n == UINT32_C(4))', fixed_length=('n', 4, 'true'))
+
+    def test_partition_binding_does_not_leak_after_failure(self):
+        _, _, backend = self.backend()
+        with self.oracle(['TIMEOUT', 'PROVED']):
+            # A third oracle call exhausts the scripted responses while a fixed
+            # binding is active. The backend must restore symbolic generation.
+            with self.assertRaises(StopIteration):
+                backend.query('equal')
+        self.assertIsNone(backend._fixed_length)
+        self.assertIn('finder_n = nondet_uint32_t()', backend.query_harness('equal'))
+
+    def test_all_other_query_harnesses_preserve_legacy_generation(self):
+        bound, _, backend = self.backend()
+        for kind in ('safety', 'feasible', 'equal', 'different', 'expected'):
+            self.assertEqual(backend.query_harness(kind, 'true', 'true'),
+                             bound.make_harness(backend.model, 'pair', 'stateless', kind, 'true', 'true'))
+
+    def test_generated_constant_harnesses_execute_with_native_controls(self):
+        # Exercises actual generated C with deterministic full-width sample
+        # values. This checks construction, not universal equivalence.
+        bound, _, backend = self.backend()
+        functions = []
+        for value in range(9):
+            parent = 'true'
+            condition = f'({parent}) && (finder_n == UINT32_C({value}))'
+            harness = bound.make_harness(backend.model, 'pair', 'stateless', 'equal',
+                condition, fixed_length=('n', value, parent))
+            self.assertTrue(harness.startswith(backend.model))
+            functions.append(harness[len(backend.model):].replace(
+                'void finder_entry(void)', f'void finder_entry_{value}(void)'))
+        prefix = '''#include <stdint.h>
+#include <stdlib.h>
+static uint32_t test_seed, test_index;
+void __ESBMC_assume(int ok) { if (!ok) exit(2); }
+void __ESBMC_assert(int ok, const char *message) { (void)message; if (!ok) exit(3); }
+uint32_t nondet_uint32_t(void) { return test_seed + (test_index++) * UINT32_C(2654435761); }
+'''
+        main = 'int main(void) { for (test_seed=0; test_seed<5; ++test_seed) {\n'
+        for value in range(9):
+            main += f'test_index=0; finder_entry_{value}(); if (test_index != 16) return 4;\n'
+        main += '} return 0; }\n'
+        source = self.root / 'constant-harness.c'
+        source.write_text(prefix + backend.model + '\n'.join(functions) + main)
+        compiler = shutil.which(os.environ.get('FINDER_CC', 'cc'))
+        self.assertIsNotNone(compiler, 'native compiler required')
+        executable = self.root / 'constant-harness.exe'
+        command = ([compiler, '/nologo', '/std:c11', str(source), '/Fe:' + str(executable),
+                    '/Fo:' + str(self.root / 'constant-harness.obj')]
+                   if Path(compiler).stem.lower() == 'cl' else
+                   [compiler, '-std=c11', '-O0', str(source), '-o', str(executable)])
+        result = subprocess.run(command, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(subprocess.run([str(executable)], timeout=10).returncode, 0)
+        # Keep the specialized program and all observations, but deliberately
+        # corrupt the candidate's last element immediately before its assertion.
+        source.write_text(source.read_text().replace(
+            '__ESBMC_assert((ce_left', 'ce_buf_candidate_dst[7] ^= 1u; __ESBMC_assert((ce_left'))
+        result = subprocess.run(command, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(subprocess.run([str(executable)], timeout=10).returncode, 3)
 
     def test_unknown_part_never_promotes_remaining_parts(self):
         _, _, backend = self.backend()

@@ -130,6 +130,10 @@ class CBackend:
             raise RuntimeError(f"native replay failed: {exc}") from exc
 
 
+    def query_harness(self, kind, condition="true", expected=None):
+        return self.make_harness(self.model, self.args.variant, self.args.state_mode,
+                                 kind, condition, expected)
+
     def query(self, kind, condition="true", reserve=0, expected=None):
         if not self.esbmc:
             return {"status": "UNKNOWN", "reason": f"ESBMC unavailable: {self.args.esbmc}",
@@ -142,8 +146,7 @@ class CBackend:
         path = self.workdir / f"query-{index:03d}-{kind}"
         path.mkdir()
         source = path / "harness.c"
-        source.write_text(self.make_harness(self.model, self.args.variant, self.args.state_mode,
-                                      kind, condition, expected), encoding="utf-8")
+        source.write_text(self.query_harness(kind, condition, expected), encoding="utf-8")
         command = [self.esbmc, str(source), "--function", "finder_entry", "--z3",
                    "--unwind", str(self.unwind), "--overflow-check", *self.command_extra]
         result = check_obligation(oracle, command, path / "verify.log",

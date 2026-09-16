@@ -1,5 +1,10 @@
 # Checked logical-length partition: local validation — 2026-09-16
 
+This page records the initial `441fd89` implementation's local checks. Its
+subsequent [user-reported run](user-reported-results.md) remains 10/11 with a
+copy8 timeout at n=4. See [constant-binding validation](constant-binding.md)
+for the next harness refinement; do not treat the earlier 168 tests as its rerun.
+
 The prior user-reported capacity run is [10/11](../c-array-capacity/user-reported-results.md).
 copy8 safety passed; whole-domain equal and later different queries timed out.
 No original contract, C source, unwind limit, timeout or acceptance target changes.

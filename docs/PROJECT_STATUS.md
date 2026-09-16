@@ -1,6 +1,6 @@
 # Project status and handoff
 
-Updated: 2026-09-16. This is the primary handoff entry point; Git and source code
+Updated: 2026-09-17. This is the primary handoff entry point; Git and source code
 remain authoritative. Roadmap items are not implemented capabilities.
 
 ## Current objective
@@ -42,7 +42,14 @@ with safety PROVED and domain NONEMPTY. The remaining ten checks meet expectatio
 Added a fallback that partitions one explicit logical length after an equal/different
 timeout, requires solver-proved coverage and every part, and preserves budgets and
 full observations. It admits at most 17 parts; no nested partition or loop induction.
-The capacity gate remains open pending formal rerun of this fallback.
+The fallback run after `441fd89` is also user-reported **10/11**: copy8 coverage
+and n=0..3 equality pass, but n=4 equality times out; later complementary
+inequality times out even for n=0. It remains UNKNOWN (13 queries, 130.785482s).
+[Detailed supplied results](validation/c-length-partition/user-reported-results.md).
+The next patch binds each subquery's length as a constant initializer in the
+harness, retaining the explicit partition conjunct and symbolic coverage query.
+All array values, program sources, observations and budgets stay unchanged.
+Its modified-ESBMC acceptance is pending; the 11/11 capacity gate remains open.
 [Reported evidence](validation/c-array-capacity/user-reported-results.md)
 and [local evidence](validation/c-array-capacity/README.md).
 Schema 1/2 limits remain unchanged.
