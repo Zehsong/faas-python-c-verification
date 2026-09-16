@@ -272,7 +272,11 @@ coverage and every sub-obligation and does not narrow array-element domains.
 Its user-reported rerun after `441fd89` is still 10/11: copy8 coverage and n=0..3
 equality prove, but n=4 times out. The next harness change initializes the
 partition length with its constant value while leaving all other inputs symbolic;
-formal acceptance of that change is pending before further capability expansion.
+after `0059a05`, the user now reports **11/11 passed; inputs/tools unchanged=True**.
+[Accepted result](validation/c-array-capacity/accepted-results.md). This clears
+the capacity gate at user-reported evidence level; the raw archive is uninspected.
+The user ended the session at this milestone. Further capability work is deferred
+until the user resumes; no additional implementation was started.
 
 This is not completion of the first milestone: new integer types, structs,
 richer expressions and dynamic memory still require work.

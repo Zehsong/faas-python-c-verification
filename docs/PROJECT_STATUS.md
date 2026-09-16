@@ -49,7 +49,11 @@ inequality times out even for n=0. It remains UNKNOWN (13 queries, 130.785482s).
 The next patch binds each subquery's length as a constant initializer in the
 harness, retaining the explicit partition conjunct and symbolic coverage query.
 All array values, program sources, observations and budgets stay unchanged.
-Its modified-ESBMC acceptance is pending; the 11/11 capacity gate remains open.
+After `0059a05`, the user reports **11/11 passed; inputs/tools unchanged=True**,
+including scripted agent EXACT n != 0. The capacity gate is cleared at
+user-reported evidence level. [Accepted result and archive paths](validation/c-array-capacity/accepted-results.md).
+The raw archive and individual query timings remain uninspected; no speedup claim.
+The user stopped for the day at this milestone; no next feature was started.
 [Reported evidence](validation/c-array-capacity/user-reported-results.md)
 and [local evidence](validation/c-array-capacity/README.md).
 Schema 1/2 limits remain unchanged.

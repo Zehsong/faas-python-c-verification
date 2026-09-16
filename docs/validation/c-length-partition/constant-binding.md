@@ -26,6 +26,9 @@ not rewritten. Query reserves, timeouts and unwind/safety checks remain active.
 - One evidence-assembly check passes. Documentation links, Bash syntax and diff
   whitespace checked; historical frozen locks and original C/JSON inputs unchanged.
 
-No local modified ESBMC is available. The performance explanation is a hypothesis;
-formal acceptance and the original 11/11 gate remain pending in Codespace. This
-patch does not add partial-region extraction from an incomplete length partition.
+No local modified ESBMC is available. The user subsequently reports
+[11/11 acceptance after `0059a05`](../c-array-capacity/accepted-results.md), clearing
+the capacity gate at user-reported evidence level. Per-query results and timings
+are not supplied, so the performance explanation remains a hypothesis and no
+speedup is claimed. This patch does not add partial-region extraction from an
+incomplete length partition.

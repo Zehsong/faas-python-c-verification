@@ -4,7 +4,9 @@
 合计最多 128 个标量值；入口仍最多四个参数。支持 uint32_t/bool 数组与标量组合。
 schema 1/2 继续保留原先四个初始值的限制。首次用户报告为 10/11：copy8 安全检查
 通过，但等价查询超时。长度分解首次实测仍为 10/11：copy8 在 n=0..3 通过，
-n=4 超时。现在改为在子查询 harness 中直接初始化常量长度，正式验收待运行。
+n=4 超时。在子查询 harness 中直接初始化常量长度后，用户报告 `0059a05`
+验收 **11/11 passed; inputs/tools unchanged=True**。
+[结果和证据路径](../../docs/validation/c-array-capacity/accepted-results.md)；原始归档尚未独立审阅。
 
 ## 运行
 

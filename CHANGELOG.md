@@ -5,6 +5,17 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-17 — Record capacity acceptance and end-of-session handoff
+
+- User reports **11/11 passed; inputs/tools unchanged=True** after `0059a05`,
+  including scripted agent EXACT n != 0. Recorded
+  [evidence/archive paths and provenance](docs/validation/c-array-capacity/accepted-results.md).
+  This clears the capacity gate at user-reported evidence level. Raw archive,
+  individual queries and timings remain uninspected; no measured speedup claim.
+- Preserved earlier failed runs and updated status/plan/usage documentation.
+  User ended the session at this milestone; no new feature or formal rerun.
+- Documentation-only validation: relative links and diff consistency checked.
+
 ## 2026-09-17 — Bind partition lengths as harness constants
 
 - Recorded [user-reported `441fd89` result](docs/validation/c-length-partition/user-reported-results.md):
