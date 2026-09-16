@@ -1,0 +1,6 @@
+test_snapshots_new_dependency_using_real_platform_fingerprint (test_acceptance.EvidenceTests.test_snapshots_new_dependency_using_real_platform_fingerprint) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.101s
+
+OK

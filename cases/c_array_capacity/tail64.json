@@ -1,0 +1,36 @@
+{
+  "schema": 3,
+  "name": "tail64",
+  "original": {
+    "source": "bool_identity.c",
+    "entry": "tail",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "bool_tail_mutant.c",
+    "entry": "tail",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "bool[]",
+      "length": 64,
+      "length_field": "n"
+    },
+    "n": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 20
+}

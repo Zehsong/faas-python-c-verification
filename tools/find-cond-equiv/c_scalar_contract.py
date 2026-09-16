@@ -44,7 +44,7 @@ def stripped_source(source):
 
 
 class Source:
-    def __init__(self, path, *, array_parameters=False):
+    def __init__(self, path, *, array_parameters=False, array_capacity_limit=4):
         try:
             from pycparser import c_ast, c_parser
         except ImportError as exc:
@@ -91,7 +91,7 @@ class Source:
                     if param.quals not in ([], ["const"]) or array.dim_quals:
                         raise ValueError("unsupported array parameter qualifiers")
                     element = self.scalar_type(array.type, const=bool(param.quals))
-                    size = self.array_size(array.dim, 4)
+                    size = self.array_size(array.dim, array_capacity_limit)
                     env[param.name] = ("array", element, size, bool(param.quals))
                 else:
                     if param.quals:
@@ -327,21 +327,32 @@ class Contract:
             raise ValueError("contract requires 1..4 input bindings")
         self.input_specs = {}
         self.arrays = {}
+        self.logical_lengths = {}
+        array_limit = 64 if d["schema"] == 3 else 4
+        value_limit = 128 if d["schema"] == 3 else 4
         empty_fields = []
         for name, spec in d["inputs"].items():
             if not identifier(name) or not isinstance(spec, dict):
                 raise ValueError("invalid input name or specification")
             is_array = spec.get("type") in ("uint32_t[]", "bool[]")
             keys = {"type", "length"} if is_array else {"type"}
+            optional = {"min", "max"}
+            if is_array and d["schema"] == 3:
+                optional.add("length_field")
             if d["schema"] != 3:
                 keys |= {"min", "max"}
-            if (not keys <= spec.keys() or set(spec) - keys - {"min", "max"}
+            if (not keys <= spec.keys() or set(spec) - keys - optional
                     or (not is_array and spec["type"] not in ("bool", "uint32_t"))):
                 raise ValueError("input requires type, array length, and explicit min/max for schemas 1/2")
             if is_array:
-                if d["schema"] not in (2, 3) or type(spec["length"]) is not int or not 1 <= spec["length"] <= 4:
-                    raise ValueError("array inputs require schema 2/3 and literal length 1..4")
+                if d["schema"] not in (2, 3) or type(spec["length"]) is not int or not 1 <= spec["length"] <= array_limit:
+                    raise ValueError(f"array inputs require schema 2/3 and literal length 1..{array_limit}")
                 self.arrays[name] = spec
+                if "length_field" in spec:
+                    field = spec["length_field"]
+                    if not identifier(field):
+                        raise ValueError("length_field must name a declared uint32_t scalar input")
+                    self.logical_lengths[name] = field
             normalized = normalize_bounds(spec, defaults=d["schema"] == 3)
             if normalized["min"] > normalized["max"]:
                 empty_fields.append(name)
@@ -351,14 +362,22 @@ class Contract:
                         "r_original", "r_cached", "observations_original", "observations_candidate"):
                     raise ValueError("flattened input names collide or exceed identifier limits")
                 self.input_specs[field] = dict(normalized)
-        if not 1 <= len(self.input_specs) <= 4:
-            raise ValueError("at most four scalar input values, including array elements, are supported")
+        if not 1 <= len(self.input_specs) <= value_limit:
+            raise ValueError(f"at most {value_limit} scalar input values, including array elements, are supported")
         if d["schema"] == 2 and not self.arrays:
             raise ValueError("schema 2 requires at least one array input")
         if d["observations"] != ["return", *self.arrays]:
             raise ValueError("observe return followed by every array in input declaration order")
         self.fields = tuple(self.input_specs)
-        self.domain = InputDomain(self.input_specs, d.get("constraints", True))
+        for field in self.logical_lengths.values():
+            if field not in d["inputs"] or field in self.arrays or d["inputs"][field].get("type") != "uint32_t":
+                raise ValueError("length_field must name a declared uint32_t scalar input")
+        self.structural_constraints = [f"{field} <= {self.arrays[name]['length']}"
+                                       for name, field in self.logical_lengths.items()]
+        constraints = d.get("constraints", True)
+        if self.structural_constraints:
+            constraints = {"all": [constraints, *self.structural_constraints]}
+        self.domain = InputDomain(self.input_specs, constraints)
         if empty_fields:
             raise InputFailure("EMPTY_DOMAIN", "empty inclusive input range: " + ", ".join(empty_fields),
                                {"language": "C", "inputs": d["inputs"], "observations": d["observations"],
@@ -372,7 +391,8 @@ class Contract:
             if not isinstance(args, list) or any(not isinstance(n, str) for n in args) or len(args) != len(d["inputs"]) or set(args) != set(d["inputs"]):
                 raise ValueError("each side must bind every logical input exactly once")
             try:
-                source = Source(self.path.parent / binding["source"], array_parameters=d["schema"] in (2, 3))
+                source = Source(self.path.parent / binding["source"], array_parameters=d["schema"] in (2, 3),
+                                array_capacity_limit=array_limit)
             except RecursionError as exc:
                 raise InputFailure("UNSUPPORTED_INPUT", "unsupported C: nesting too deep") from exc
             except InputFailure:

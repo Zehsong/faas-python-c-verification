@@ -63,10 +63,11 @@ def bind_contract(path):
             if contract.data["schema"] == 3:
                 self.scope.update(declared_inputs=contract.data["inputs"],
                     input_domain={"constraints": contract.data.get("constraints", True),
+                                  "structural_constraints": contract.structural_constraints,
                                   "expression": contract.domain.expression(),
                                   "expression_c": contract.domain.expression(c=True),
                                   "bounds": "omitted bounds use the complete declared type range",
-                                  "meaning": "normalized input bounds AND constraints; all claims are relative to this domain"})
+                                  "meaning": "normalized input bounds AND user constraints AND structural constraints; all claims are relative to this domain"})
             if contract.arrays:
                 self.scope.update(declared_inputs=contract.data["inputs"],
                                   observations=contract.data["observations"],
@@ -76,6 +77,12 @@ def bind_contract(path):
                     bounds="all array reads/writes require whole-domain safety and complete unwinding before native replay",
                     observation_order=["return", *[f"{n}[{i}]" for n, s in contract.arrays.items() for i in range(s["length"])]],
                     entry_field_mapping={f"{n}_{i}": f"{n}[{i}]" for n, s in contract.arrays.items() for i in range(s["length"])})
+                if contract.data["schema"] == 3:
+                    self.scope["memory"].update(logical_lengths=contract.logical_lengths,
+                        observation_extent="entire physical capacity, including elements beyond the logical length",
+                        limits={"array_capacity": 64, "total_initial_values": 128})
+            if len(contract.fields) > 4:
+                self.scope["condition_discovery"] = "at most 24 initial predicates; at most 256 sparse boundary seeds; solver queries still cover the entire declared domain"
             self.esbmc, self.version = shutil.which(args.esbmc), None
             self.executable = self.inputs / ("scalar-probe.exe" if sys.platform == "win32" else "scalar-probe")
 
@@ -96,6 +103,17 @@ def bind_contract(path):
 
         @classmethod
         def initial_atoms(cls):
+            if len(cls.fields) > 4:
+                # Prioritize scalar controls, then both ends of each array.
+                # This is a heuristic vocabulary, never an input restriction.
+                priority = [n for n in contract.data["inputs"] if n not in contract.arrays]
+                for name, spec in contract.arrays.items():
+                    priority += [f"{name}_0", f"{name}_{spec['length'] - 1}"]
+                priority = list(dict.fromkeys(priority))
+                texts = [f"{n} == {v}" for n in priority
+                         for v in sorted({contract.input_specs[n]['min'], contract.input_specs[n]['max']})]
+                texts += [f"{a} == {b}" for a, b in itertools.combinations(priority, 2)]
+                return [cls.atom_type.parse(text) for text in texts[:24]]
             atoms = [cls.atom_type.parse(f"{a} == {b}") for a, b in itertools.combinations(cls.fields, 2)]
             for name, spec in contract.input_specs.items():
                 atoms += [cls.atom_type.parse(f"{name} == {n}") for n in sorted({spec["min"], spec["max"]})]
@@ -103,10 +121,22 @@ def bind_contract(path):
 
         @classmethod
         def default_seeds(cls, state_mode):
-            values = [sorted({spec["min"], spec["max"], (spec["min"] + spec["max"]) // 2})
-                      for spec in contract.input_specs.values()]
-            return [seed for row in itertools.product(*values)
-                    if contract.domain.contains(seed := dict(zip(cls.fields, row)))]
+            values = []
+            for name, spec in contract.input_specs.items():
+                upper = min([spec['max'], *[contract.arrays[a]['length']
+                            for a, field in contract.logical_lengths.items() if field == name]])
+                if spec['min'] > upper:
+                    return []  # Feasibility still requires a solver query.
+                values.append(sorted({spec['min'], upper, (spec['min'] + upper) // 2}))
+            if len(cls.fields) <= 4:
+                rows = itertools.product(*values)
+            else:
+                base = tuple(v[0] for v in values)
+                rows = [base, tuple(v[-1] for v in values), tuple(v[len(v)//2] for v in values)]
+                for index, choices in enumerate(values):
+                    rows += [base[:index] + (value,) + base[index+1:] for value in choices[1:]]
+                rows = list(dict.fromkeys(rows))[:256]
+            return [seed for row in rows if contract.domain.contains(seed := dict(zip(cls.fields, row)))]
 
         def state_obligations(self):
             result = self.query("safety", reserve=2)

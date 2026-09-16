@@ -1,0 +1,38 @@
+{
+  "schema": 3,
+  "name": "conditional16",
+  "original": {
+    "source": "mark_prefix.c",
+    "entry": "mark",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "mark_identity.c",
+    "entry": "mark",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 16,
+      "length_field": "n",
+      "min": 0,
+      "max": 0
+    },
+    "n": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 20
+}

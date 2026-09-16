@@ -1,0 +1,44 @@
+{
+  "schema": 3,
+  "name": "copy8",
+  "original": {
+    "source": "copy_forward.c",
+    "entry": "copy",
+    "args": [
+      "dst",
+      "src",
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "copy_reverse.c",
+    "entry": "copy",
+    "args": [
+      "dst",
+      "src",
+      "n"
+    ]
+  },
+  "inputs": {
+    "dst": {
+      "type": "uint32_t[]",
+      "length": 8,
+      "length_field": "n"
+    },
+    "src": {
+      "type": "uint32_t[]",
+      "length": 8,
+      "length_field": "n"
+    },
+    "n": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "dst",
+    "src"
+  ],
+  "unwind": 20
+}

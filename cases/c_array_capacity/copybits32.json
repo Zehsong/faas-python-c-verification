@@ -1,0 +1,37 @@
+{
+  "schema": 3,
+  "name": "copybits32",
+  "original": {
+    "source": "bool_copy32.c",
+    "entry": "copybits",
+    "args": [
+      "dst",
+      "src"
+    ]
+  },
+  "candidate": {
+    "source": "bool_copy32_alt.c",
+    "entry": "copybits",
+    "args": [
+      "dst",
+      "src"
+    ]
+  },
+  "inputs": {
+    "dst": {
+      "type": "bool[]",
+      "length": 32
+    },
+    "src": {
+      "type": "bool[]",
+      "length": 32
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "dst",
+    "src"
+  ],
+  "unwind": 20
+}

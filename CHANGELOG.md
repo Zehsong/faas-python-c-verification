@@ -5,6 +5,30 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Record domain acceptance and extend array capacity/logical length
+
+- Recorded user-reported schema 3 domain **13/13 passed; inputs/tools unchanged=True**
+  after `5446b31`, including agent-domain PASS and supplied evidence/archive paths.
+  [Record](docs/validation/c-input-domains/user-reported-results.md). Raw archive
+  remains uninspected; these are not reruns of the new capacity implementation.
+- Schema 3 now admits fixed array capacities 1..64 and 128 total initial values,
+  retaining up to four logical parameters. Optional length_field must name a
+  declared uint32 scalar and contributes an explicit structural capacity bound.
+  All physical elements remain initialized and observed, including inactive tails.
+  Existing schema 1/2 limits and C safety/unwinding requirements remain unchanged.
+- For more than four values, use at most 256 sparse seeds and 24 initial predicates
+  rather than a Cartesian seed product/quadratic unbounded vocabulary. These are
+  discovery heuristics; every symbolic query still covers the full declared domain.
+- Added eleven formal checks for copy/clear/conditional updates at capacities
+  8/16/32/64, empty prefixes/domains, inactive-tail mutation, insufficient unwind,
+  unsafe indexing, missing solver and scripted agent length-seed rejection.
+  Expected formulas are post-checks only. Formal acceptance is pending.
+- [Local validation](docs/validation/c-array-capacity/README.md): full finder
+  regression 158/158, native array controls and cross-platform evidence checks.
+  Missing-solver execution must keep every report UNKNOWN with no native samples.
+  No new scalar types, structs, aliasing, dynamic allocation or induction support.
+  Historical external/popcount engine locks remain untouched.
+
 ## 2026-09-16 — Add type-default domains and composable input constraints
 
 - Added opt-in C contract schema 3. Omitted min/max use the full uint32_t/bool

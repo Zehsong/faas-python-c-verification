@@ -38,11 +38,18 @@ equality, complement, expected-condition checks, native execution and agent seed
 all use that same domain. Reports retain raw declarations and effective scope.
 Old schemas 1/2 still require explicit bounds and reject this additional field.
 
-This first slice does not add new C types, structures, arbitrary pointers,
-variable physical array sizes or unbounded-loop proofs. Four initial scalar
-values including array elements remains the limit. Constraints do not accept
-arbitrary C, arithmetic expressions or output references. New formal acceptance
-is pending; historical results below are not reruns of this changed frontend.
+The first domain slice now has user-reported **13/13 acceptance** after `5446b31`.
+[Summary](validation/c-input-domains/user-reported-results.md). The subsequent
+[capacity/length extension](../cases/c_array_capacity/README.md) permits schema 3
+array capacities 1..64, with 128 total initial values across up to four inputs.
+An optional length_field contributes an explicit capacity constraint; the whole
+physical array remains observed. Larger inputs use bounded sparse seeds and
+initial predicates. Its eleven-check formal stage is pending.
+
+Schemas 1/2 retain their four-value limit. This does not add new scalar types,
+structs, arbitrary pointers, runtime allocation or unbounded-loop proofs.
+Constraints still reject arbitrary C, arithmetic expressions and output references.
+Historical results below are not reruns of this changed frontend.
 
 ## Run the acceptance stage
 

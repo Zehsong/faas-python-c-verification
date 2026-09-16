@@ -1,0 +1,36 @@
+{
+  "schema": 3,
+  "name": "unsafe_index",
+  "original": {
+    "source": "unsafe_at_length.c",
+    "entry": "readat",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "unsafe_at_length.c",
+    "entry": "readat",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 8,
+      "length_field": "n"
+    },
+    "n": {
+      "type": "uint32_t"
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 20
+}

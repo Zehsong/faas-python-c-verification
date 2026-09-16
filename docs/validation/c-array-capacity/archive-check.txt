@@ -1,0 +1,2 @@
+Negative execution: exit 2, 1/11 expected missing-solver control only; all 11 UNKNOWN with zero queries/native samples. Overview 11/11 links. Engine dependency included. Archive 278/278 hashes and sidecar PASS.
+Archive: .verify-equiv-runs/capacity-local/archives/c-array-capacity-local-20260916T150814Z-ZTQTE6.tar.gz

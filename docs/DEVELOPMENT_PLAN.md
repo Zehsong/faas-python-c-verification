@@ -255,10 +255,20 @@ native guards/replay and agent validation. Empty sampled sets do not establish
 empty domains; solver feasibility remains authoritative. All results retain
 scope constraints. A 13-check acceptance stage includes full-width defaults,
 relation-dependent safety, contradictory domains, mixed bool/array constraints
-and an out-of-domain agent seed control. Formal execution is pending.
+and an out-of-domain agent seed control. The user now reports **13/13 passed;
+inputs/tools unchanged=True** after `5446b31`.
+[Summary and evidence paths](validation/c-input-domains/user-reported-results.md).
+
+The next capacity slice is implemented: schema 3 physical array sizes 1..64,
+128 total initial values, optional explicit length_field with capacity guards,
+and unchanged complete physical-array observations. Sparse bounded seed and
+predicate preparation avoids a Cartesian explosion without restricting the
+symbolic domain. Eleven formal checks are pending, including prefix copies,
+conditional mutations, inactive-tail differences, empty lengths and safety controls.
+[Protocol](../cases/c_array_capacity/README.md).
 
 This is not completion of the first milestone: new integer types, structs,
-configurable array capacities and richer expression syntax still require work.
+richer expressions and dynamic memory still require work.
 Retain historical fixed-engine experiments in their original checkouts.
 
 ## Release target

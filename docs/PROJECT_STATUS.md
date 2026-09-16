@@ -23,15 +23,27 @@ all/any/not combinations of comparisons among initial scalar/array fields.
 Every symbolic obligation, native probe/replay and agent seed check shares this
 domain. Existing schema 1/2 semantics and source restrictions remain intact.
 Reports preserve declared inputs, normalized ranges and the extra constraints.
-New 13-check modified-ESBMC acceptance is pending. Local controls and regression
-are recorded in [validation](validation/c-input-domains/README.md).
+The user now reports **13/13 passed; inputs/tools unchanged=True** after
+`5446b31`, including agent-domain PASS.
+[Supplied summary and archive paths](validation/c-input-domains/user-reported-results.md).
+Raw archive remains uninspected; this is not a formal rerun of later changes.
+
+The next [capacity/length slice](../cases/c_array_capacity/README.md) admits
+schema 3 arrays up to 64 elements and 128 total initial values, while retaining
+four logical parameters. Optional length_field binds an explicit uint32 scalar
+and contributes a recorded structural capacity constraint. All physical elements
+remain initialized and observed, including the inactive tail. Larger inputs use
+at most 256 sparse seeds and 24 initial predicates instead of exponential
+Cartesian preparation. Symbolic queries still cover the entire declared domain.
+New eleven-check formal acceptance is pending; [local evidence](validation/c-array-capacity/README.md).
+Schema 1/2 limits remain unchanged.
 
 This is a core/frontend change: old frozen engine locks are intentionally not
 updated. Reproduce frozen external/popcount stages in an independent checkout
 of `79e6aa0` (or their recorded original commits). Their old pass counts are
 historical and cannot be relabeled as acceptance of the new engine. Restart
-agent sessions after updating. New types, structs, larger/variable arrays,
-floating point and induction are still unsupported by the generic route.
+agent sessions after updating. New scalar types, structs, dynamic allocation,
+unbounded-size arrays, floating point and induction remain unsupported.
 
 ## Repository audit
 
@@ -111,7 +123,8 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | User-reported READY 5/5 required; full-width popcount UNKNOWN/SOLVER_TIMEOUT; not blind evaluation |
 | Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; 8/12/16/24 bits EXACT twice each, 32 bits equal-query timeout twice; five queries throughout; not a blind/statistical evaluation |
 | Certified intermediate-program chain | Full-domain C edges with scope/source/identity gates and a negative control; endpoint equality derived by certified transitivity | Original three-edge experiment 2/3; refined six-edge experiment user-reported 6/6 and endpoint PROVED; no automatic decomposition or partial-region composition |
-| Composable input domains | Schema 3 type-default bounds plus Boolean combinations of entry-field comparisons, shared by all proof/native/agent paths | First slice only; current scalar/fixed-array limits retained; new formal acceptance pending |
+| Composable input domains | Schema 3 type-default bounds plus Boolean combinations of entry-field comparisons, shared by all proof/native/agent paths | First domain slice user-reported 13/13 after 5446b31; raw archive uninspected |
+| Array capacity/logical length | Schema 3 fixed capacities 1..64, 128 total initial values, optional uint32 length fields; all physical elements observed | Eleven-check formal acceptance pending; no dynamic/unbounded memory or aliasing |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -405,7 +418,8 @@ Keep the working Codespace and its customized binary/source and evidence.
    This completes the manually guided full-width proof milestone. Preserve the
    archive and all earlier failed attempts; a documentation update needs no rerun.
    Current priority has shifted to the user-approved input-support expansion.
-   Run schema 3 domain acceptance first, then extend typed/structured inputs.
+   Schema 3 domain acceptance is user-reported 13/13. Run the new capacity/length
+   stage, then continue integer types and structured inputs.
    Reusable chain proposals remain planned; autonomous proposal generation and
    partial-region composition remain unimplemented.
    This is one repeated program pair, not ten independent programs.
@@ -417,7 +431,7 @@ Keep the working Codespace and its customized binary/source and evidence.
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `388a2c3` when this result was recorded.
+   branch beyond `5446b31` when capacity/length development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

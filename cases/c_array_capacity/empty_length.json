@@ -1,0 +1,37 @@
+{
+  "schema": 3,
+  "name": "empty_length",
+  "original": {
+    "source": "zero_prefix.c",
+    "entry": "clear",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "candidate": {
+    "source": "zero_guarded.c",
+    "entry": "clear",
+    "args": [
+      "a",
+      "n"
+    ]
+  },
+  "inputs": {
+    "a": {
+      "type": "uint32_t[]",
+      "length": 16,
+      "length_field": "n"
+    },
+    "n": {
+      "type": "uint32_t",
+      "min": 17
+    }
+  },
+  "return_type": "uint32_t",
+  "observations": [
+    "return",
+    "a"
+  ],
+  "unwind": 20
+}

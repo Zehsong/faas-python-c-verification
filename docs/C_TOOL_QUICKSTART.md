@@ -45,11 +45,12 @@ python3 tools/find-cond-equiv/find_c_conditions.py \
 |---|---|---|
 | schema 1 | uint32_t/bool 标量输入和返回，局部只读表 | [完整约定](C_SCALAR_TOOL.md) |
 | schema 2 | 固定长度数组与标量输入，标量返回，观察全部数组最终元素 | [数组约定](../cases/c_bounded_arrays/README.md) |
-| schema 3 | 类型默认完整域、初始字段间的关系及布尔组合约束；可搭配现有固定数组 | [新契约和验收](../cases/c_input_domains/README.md)，正式验收待运行 |
+| schema 3 | 完整类型域与关系约束；可配置容量数组和有效长度字段 | [域验收 13/13](validation/c-input-domains/user-reported-results.md)；[新容量验收待运行](../cases/c_array_capacity/README.md) |
 | 私有缓存 | 已有两个经过检查的 adapter，显式 invariant 与状态义务 | [缓存范围](../cases/cache_state/README.md)；不是任意状态 C 输入接口 |
 
-通用接口合计最多四个初始标量值，数组元素计入总数；数组长度 1..4，无别名、任意指针、
-堆或全局状态。循环须在声明的展开界限内完成。未支持的语义会被拒绝或保留 UNKNOWN。
+schema 1/2 合计最多四个初始标量值；schema 3 最多 128 个，数组元素计入总数。
+schema 3 每个数组容量 1..64，仍最多四个逻辑输入参数；可用 length_field 声明有效长度，
+始终观察整个数组。无别名、任意指针、堆或全局状态。循环须完整展开，不支持的语义保留 UNKNOWN。
 工具不会默默排除越界等不安全输入以宣称等价。
 
 ## 读结果
