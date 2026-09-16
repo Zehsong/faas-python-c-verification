@@ -5,6 +5,36 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Locate unresolved bridge and refine one byte at a time
+
+- Recorded user-reported **POPCOUNT BRIDGE RECORDED, links certified 2/3,
+  endpoint UNKNOWN, mutant rejected=True** after `0cf3fbe`, including supplied
+  artifact/archive paths and overview. edge_0/edge_2 are full-domain certified
+  (1.120228/1.768853 seconds); edge_1 is UNKNOWN/SOLVER_TIMEOUT (30.912715 seconds).
+  Raw query kind/index, harnesses, identities and archive remain uninspected.
+  [Evidence](docs/validation/popcount-bridge/user-reported-results.md).
+- Added three proposed mixed byte implementations. The separate refined chain
+  changes one byte per middle step, yielding six full-domain edges plus the
+  original mutant control. All links are rerun with 30-second query timeouts,
+  120-second discovery budgets and 96 queries; no historical certificate or
+  byte-level equivalence lemma is assumed. Original endpoints/bridge programs,
+  proof engine and frozen locks are unchanged.
+- Extended only the experiment wrapper to count the declared edges and preserve
+  its original three-edge default. Every edge, source/scope/identity check and
+  rejected mutant is still mandatory for endpoint PROVED. Per-edge CSV now
+  separates discovery from full-domain post-check status/reason and is printed
+  automatically. Original three-edge numbering differs from the refined chain.
+- Validation: **11 local tests pass, no skips** (seven original plus four refined
+  controls), including native MSVC checks, all-six-edge gating, drift blocking,
+  preserved default nodes and post-check diagnostics. Actual missing-solver run
+  keeps all seven UNKNOWN rows, zero queries/native discovery samples,
+  INCOMPLETE and UNKNOWN endpoint equivalence.
+  [Records](docs/validation/popcount-refined/README.md). No core engine changes.
+- Formal refinement is pending with the existing modified ESBMC. This is manual
+  proposal refinement after an observed failure, not autonomous synthesis,
+  a completed endpoint proof, or a measured optimization. One unresolved edge
+  still blocks composition; a failed bridge does not refute the original pair.
+
 ## 2026-09-16 — Budget comparison inconclusive; certify proposed intermediate programs
 
 - Recorded user-reported **POPCOUNT BUDGET RECORDED 4/4 valid, certified 0/4**

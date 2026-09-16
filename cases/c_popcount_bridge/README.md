@@ -67,3 +67,13 @@ This is a manually proposed proof strategy inspired by the possibility of agent
 assistance: proposing a bridge can be untrusted; certifying every connection is
 mandatory. No autonomous agent, assumed algebraic lemma, successful full-width
 proof or performance improvement is claimed before formal execution.
+
+## Reported outcome and separate refinement
+
+The user now reports RECORDED, links certified 2/3, endpoint UNKNOWN and mutant
+rejected=True. The supplied overview identifies edge_0 and edge_2 as certified;
+edge_1 (byte loops -> byte parallel counts) is UNKNOWN/SOLVER_TIMEOUT. Raw logs
+and identities remain uninspected. A separate [six-edge refinement](REFINED.md)
+changes one byte at a time and reruns all connections, keeping this original
+protocol intact. The shared runner now also writes/prints per-edge metrics.csv,
+including the separate full-domain post-check status and reason.

@@ -193,12 +193,33 @@ proofs are mandatory. A deliberately wrong control must be rejected. Only then
 can a report derive endpoint equality by transitivity. There are no assumed
 helper lemmas, no automatic decomposition and no partial-condition composition.
 
-Seven local admission/native/composition controls pass; formal results are pending.
+Seven initial local controls pass. The user now reports RECORDED, links
+certified 2/3, endpoint UNKNOWN and mutant rejected=True. The supplied overview
+identifies edge_0/edge_2 as certified in 1.120228/1.768853 seconds; edge_1 is
+UNKNOWN/SOLVER_TIMEOUT after 30.912715 seconds. Raw evidence remains uninspected.
+[Record](validation/popcount-bridge/user-reported-results.md).
 The three edge runs and negative control use 30-second query timeouts and
 120-second/96-query discovery budgets. This is a manually proposed proof
 strategy, not a demonstrated optimization or autonomous-agent study. If an edge
 fails, keep endpoint UNKNOWN and inspect that connection rather than bypassing
 its proof. Original direct/scaling/budget results remain separate baselines.
+
+## Refine the unresolved middle edge
+
+A separate [six-edge protocol](../cases/c_popcount_bridge/REFINED.md) proposes
+three mixed implementations, replacing one byte at a time between the existing
+byte-loop and byte-parallel programs. Each adjacent equality remains a full
+uint32-domain obligation. All six links, including both end connections, are
+rerun; no old certificate or byte-level lemma is imported. The original three-
+edge default and its results remain intact. Per-edge CSV now shows discovery
+and full-domain post-check status independently and is printed automatically.
+
+Eleven local checks pass, including the original seven composition/native
+controls; formal refinement is pending. Query/wall/count limits remain
+30 seconds / 120 seconds / 96 per run. A valid proposed decomposition requires
+every connection and the mutant control; five of six would still leave the
+endpoint UNKNOWN. This is manual proposal refinement, not an autonomous agent
+or a demonstrated encoding optimization.
 
 ## Release target
 

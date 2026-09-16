@@ -1,0 +1,66 @@
+
+edge_0
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_0\pair-xgowm71o\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_0\pair-xgowm71o
+edge_0: UNKNOWN; full-domain certified=False
+
+edge_1
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_1\pair-tsmdbczy\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_1\pair-tsmdbczy
+edge_1: UNKNOWN; full-domain certified=False
+
+edge_2
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_2\pair-i0wy71pt\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_2\pair-i0wy71pt
+edge_2: UNKNOWN; full-domain certified=False
+
+edge_3
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_3\pair-muupru8v\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_3\pair-muupru8v
+edge_3: UNKNOWN; full-domain certified=False
+
+edge_4
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_4\pair-96j1vpp8\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_4\pair-96j1vpp8
+edge_4: UNKNOWN; full-domain certified=False
+
+edge_5
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_5\pair-i3d7wnzq\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\edge_5\pair-i3d7wnzq
+edge_5: UNKNOWN; full-domain certified=False
+
+mutant
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\mutant\pair-23hqg45y\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\mutant\pair-23hqg45y
+mutant: UNKNOWN; full-domain certified=False
+POPCOUNT REFINED BRIDGE: INCOMPLETE (links certified=0/6; endpoint equivalence=UNKNOWN; mutant rejected=False)
+name,status,full_domain_certified,queries,seconds,post_check,post_check_reason,diagnostics,error
+edge_0,UNKNOWN,False,0,0.11,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_1,UNKNOWN,False,0,0.094,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_2,UNKNOWN,False,0,0.094,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_3,UNKNOWN,False,0,0.094,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_4,UNKNOWN,False,0,0.093,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_5,UNKNOWN,False,0,0.094,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+mutant,UNKNOWN,False,0,0.094,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-local\refined-aklfngii\README.md

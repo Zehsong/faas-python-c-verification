@@ -36,8 +36,13 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 - New experiment: proposed byte-loop and byte-parallel intermediate programs,
   three full-domain edges through the existing C frontend, original endpoints
   pinned to `129df96`. Only complete edge certification plus identity and mutant
-  control gates permits a transitive endpoint claim. Seven local tests pass; formal
-  bridge results pending. No core engine changes or assumed helper lemmas.
+  control gates permits a transitive endpoint claim. Now user-reported RECORDED,
+  links certified 2/3, endpoint UNKNOWN, mutant rejected=True. Supplied overview
+  identifies edge_0 and edge_2 as certified; edge_1 is UNKNOWN/SOLVER_TIMEOUT.
+- New refinement: change one byte implementation at a time, producing six full-
+  domain edges plus a mutant control. All links are rerun; no old certificate or
+  byte lemma is assumed. Eleven local checks pass; formal refinement pending.
+  Core engine, original endpoints and original bridge programs remain unchanged.
 - Latest core implementation: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
   The demonstration and reproduction wrappers leave the proof/search engine unchanged.
@@ -79,7 +84,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | User-reported READY; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
 | External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | User-reported READY 5/5 required; full-width popcount UNKNOWN/SOLVER_TIMEOUT; not blind evaluation |
 | Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; 8/12/16/24 bits EXACT twice each, 32 bits equal-query timeout twice; five queries throughout; not a blind/statistical evaluation |
-| Proposed intermediate-program chain | Three full-domain C edges with scope/source/identity gates and a negative control; endpoint equality derived only by certified transitivity | Fixture-specific stateless experiment; formal execution pending, no automatic decomposition or partial-region composition |
+| Proposed intermediate-program chain | Three full-domain C edges with scope/source/identity gates and a negative control; endpoint equality derived only by certified transitivity | Original 2/3 links user-reported certified, middle edge UNKNOWN; six-edge refinement pending; no automatic decomposition or partial-region composition |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -320,6 +325,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | External-source C integration | READY 5/5 required; exploratory 0/1 EXACT; engine frozen=True | [User-pasted summary](validation/c-external-bits/user-reported-results.md); popcount_32 UNKNOWN/SOLVER_TIMEOUT, raw archive uninspected |
 | Popcount scaling | RECORDED 10/10 valid; full-domain certified 8/10; r2-b8 EXACT | [User-pasted summary](validation/popcount-scaling/user-reported-results.md); subsequent CSV identifies 8/12/16/24-bit EXACT and 32-bit timeout twice each; raw archive uninspected |
 | Popcount query-timeout comparison | RECORDED 4/4 valid, certified 0/4; 30/120 seconds both UNKNOWN twice | [Supplied traces and CSV](validation/popcount-budget/user-reported-results.md); equal-query timeouts, raw archive uninspected |
+| Popcount three-edge bridge | RECORDED, links certified 2/3, endpoint UNKNOWN, mutant rejected=True | [Supplied summary/overview](validation/popcount-bridge/user-reported-results.md); edge_1 UNKNOWN/SOLVER_TIMEOUT, end links certified, raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -362,10 +368,14 @@ Keep the working Codespace and its customized binary/source and evidence.
    discovery mean is 35.883 seconds (multiple queries). The subsequent
    [30/120-second comparison](validation/popcount-budget/user-reported-results.md)
    now reports UNKNOWN for all four rows, with the same equal-query timeout.
-   Retain those failures; run the separate
-   [intermediate-program chain](../cases/c_popcount_bridge/README.md). Three
-   certified full-domain edges and a rejected mutant are required for an endpoint
-   claim. A failed proposed link does not refute the original endpoints.
+   Retain those failures. The subsequent
+   [intermediate-program chain](validation/popcount-bridge/user-reported-results.md)
+   reports 2/3 certified links; only its middle edge (all four byte replacements
+   together) remains UNKNOWN/SOLVER_TIMEOUT. Run the separate
+   [six-edge refinement](../cases/c_popcount_bridge/REFINED.md), replacing one
+   byte at a time. All six links and the negative control must pass before an
+   endpoint claim. Prior remote certificates are not imported; no byte lemma is
+   assumed. A failed proposed link does not refute the original endpoints.
    This is one repeated program pair, not ten independent programs.
    [C prototype milestone](C_TOOL_MILESTONE.md) summarizes the current capability.
    Full clean-host/independently held-out release gates remain open; new external
@@ -375,7 +385,7 @@ Keep the working Codespace and its customized binary/source and evidence.
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `9f1b907` when bridge development began.
+   branch beyond `0cf3fbe` when refined-chain development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

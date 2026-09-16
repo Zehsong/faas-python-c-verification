@@ -1,0 +1,39 @@
+
+edge_0
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\edge_0\pair-xqa0r3nk\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\edge_0\pair-xqa0r3nk
+edge_0: UNKNOWN; full-domain certified=False
+
+edge_1
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\edge_1\pair-ktlelm0h\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\edge_1\pair-ktlelm0h
+edge_1: UNKNOWN; full-domain certified=False
+
+edge_2
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\edge_2\pair-rutxg87c\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\edge_2\pair-rutxg87c
+edge_2: UNKNOWN; full-domain certified=False
+
+mutant
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\mutant\pair-5gtgjk6d\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\mutant\pair-5gtgjk6d
+mutant: UNKNOWN; full-domain certified=False
+POPCOUNT BRIDGE: INCOMPLETE (links certified=0/3; endpoint equivalence=UNKNOWN; mutant rejected=False)
+name,status,full_domain_certified,queries,seconds,post_check,post_check_reason,diagnostics,error
+edge_0,UNKNOWN,False,0,0.109,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_1,UNKNOWN,False,0,0.11,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+edge_2,UNKNOWN,False,0,0.109,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+mutant,UNKNOWN,False,0,0.093,NOT_CHECKED,,"SAFETY_NOT_ESTABLISHED,SOLVER_NOT_FOUND",
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\refined-default-negative\bridge-enerlemz\README.md

@@ -22,6 +22,7 @@
   the existing C/JSON frontend for every edge; no assumptions or algebraic
   lemmas are inserted. Existing core regression was not rerun for this wrapper.
 
-Formal edge certificates and negative-control rejection are pending in Codespace
-with the user's modified ESBMC. No successful full-width composition or speedup
+Formal execution is now [user reported](user-reported-results.md): RECORDED,
+two certified edges, endpoint UNKNOWN and mutant rejected=True. The overview
+identifies only the middle edge as UNKNOWN/SOLVER_TIMEOUT; raw logs are uninspected. No successful full-width composition or speedup
 has been measured locally. [Protocol](../../../cases/c_popcount_bridge/README.md).

@@ -1,0 +1,4 @@
+Internal SHA-256 checks: 208/208 passed
+Archived overview links: 9/9 exist
+Archive sidecar SHA-256: PASS
+Local missing-solver evidence only; no refined-chain formal certificates.

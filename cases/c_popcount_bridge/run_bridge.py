@@ -5,6 +5,7 @@ This experimental composition report is separate from the core result schema.
 No assumptions about helpers, sampled values, or bridge correctness are injected.
 """
 import argparse
+import csv
 import hashlib
 from pathlib import Path
 import shutil
@@ -25,14 +26,20 @@ REQUIRED_IDENTITIES = {'engine_frozen', 'endpoints_locked', 'connected', 'engine
                        'inputs_unchanged', 'contracts_unchanged', 'tools_unchanged', 'tools_present'}
 
 
-def snapshot(destination):
+def default_protocol():
+    return dict(nodes=NODES, label='POPCOUNT BRIDGE', guide='README.md', prefix='bridge-',
+                title='Popcount：经认证的中间程序链实验')
+
+
+def snapshot(destination, nodes=NODES):
     destination.mkdir()
-    for index, source in enumerate(NODES):
+    edge_count = len(nodes) - 1
+    for index, source in enumerate(nodes):
         shutil.copyfile(source, destination / f'node-{index}.c')
     shutil.copyfile(CASE / 'mutant.c', destination / 'mutant.c')
     paths = []
-    for index in range(4):
-        control = index == 3
+    for index in range(edge_count + 1):
+        control = index == edge_count
         original = 'node-0.c' if control else f'node-{index}.c'
         candidate = 'mutant.c' if control else f'node-{index+1}.c'
         name = 'mutant' if control else f'edge_{index}'
@@ -48,8 +55,8 @@ def snapshot(destination):
     return paths
 
 
-def input_files():
-    files = set(NODES) | {p for p in CASE.iterdir() if p.is_file()}
+def input_files(nodes=NODES):
+    files = set(nodes) | set(NODES) | {p for p in CASE.iterdir() if p.is_file()}
     files |= {ROOT / 'cases/c_external_bits' / n for n in ('run_checks.py', 'run_scaling.py', 'engine-lock.json')}
     return {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(files)}
 
@@ -62,9 +69,9 @@ def endpoints_locked():
                for name, digest in lock['files'].items())
 
 
-def connected(contracts):
+def connected(contracts, edge_count=3):
     """Check byte identity, call bindings and a common stateless observation domain."""
-    if len(contracts) != 3:
+    if edge_count < 1 or len(contracts) != edge_count:
         return False
     for index, c in enumerate(contracts):
         if (c.data['schema'] != 1 or c.data['inputs'] != INPUTS or c.data['return_type'] != 'uint32_t'
@@ -79,9 +86,9 @@ def connected(contracts):
             and contracts[-1].sources['candidate'].data == NODES[-1].read_bytes())
 
 
-def compose(rows, contracts, identities):
+def compose(rows, contracts, identities, edge_count=3):
     if (any(identities.get(key) is not True for key in REQUIRED_IDENTITIES)
-            or not connected(contracts) or len(rows) != 3):
+            or not connected(contracts, edge_count) or len(rows) != edge_count):
         return False
     for index, (row, contract) in enumerate(zip(rows, contracts)):
         summary = row.get('summary')
@@ -124,21 +131,34 @@ def execute(contract, work, args):
     return row
 
 
-def outcome(rows, contracts, identities):
-    control = rows[-1] if len(rows) == 4 else {}
+def outcome(rows, contracts, identities, edge_count=3):
+    control = rows[-1] if len(rows) == edge_count + 1 else {}
     rejected = bool(control.get('name') == 'mutant' and control.get('measurement_valid')
                     and control.get('summary', {}).get('status') == 'EXACT'
                     and control['summary']['claim']['meaning'] == 'NO_INPUTS'
                     and (control.get('full_domain_check') or {}).get('status') == 'REFUTED')
-    recorded = (len(rows) == 4 and all(r['measurement_valid'] for r in rows) and rejected
+    recorded = (len(rows) == edge_count + 1 and all(r['measurement_valid'] for r in rows) and rejected
                 and all(identities.get(key) is True for key in REQUIRED_IDENTITIES))
-    return recorded, recorded and compose(rows[:3], contracts, identities), rejected
+    return recorded, recorded and compose(rows[:edge_count], contracts, identities, edge_count), rejected
+
+
+def metric_rows(report):
+    for row in report['results']:
+        s = row.get('summary', {})
+        m = s.get('metrics', {})
+        post = row.get('full_domain_check') or {}
+        yield dict(name=row['name'], status=s.get('status', 'ERROR'),
+                   full_domain_certified=row['full_domain_certified'], queries=m.get('queries'),
+                   seconds=m.get('elapsed_seconds'), post_check=post.get('status', 'NOT_CHECKED'),
+                   post_check_reason=post.get('reason_code', ''),
+                   diagnostics=','.join(sorted({d['code'] for d in s.get('diagnostics', [])})),
+                   error=row.get('error', ''))
 
 
 def overview(report):
-    lines = ['# Popcount：经认证的中间程序链实验', '',
+    lines = ['# ' + report.get('title', default_protocol()['title']), '',
              f"实验记录：{report['status']}；原始端点结论：{report['endpoint_claim']['status']}。", '',
-             '只有三段在同一个完整输入域上全部认证，才按等价关系的传递性连接原始端点。',
+             f"只有全部 {report.get('edge_count', 3)} 段在同一个完整输入域上认证，才按传递性连接原始端点。",
              '任一连接 UNKNOWN 或失败都不能推出原始端点不等价。中间程序不作为假设。', '',
              '| 连接 | 发现结果 | 全域证书 | 查询数 | 秒 | 诊断 |', '|---|---|---|---|---|---|']
     for row in report['results']:
@@ -151,11 +171,16 @@ def overview(report):
     lines += ['', f"错误版本拒绝检查：{report['mutant_rejected']}。", '',
               'RECORDED 表示实验测量与控制检查完成；端点只有 PROVED 才有组合证明。',
               '这是人工提出中间程序的实验，不是自动分解或 agent 性能评估。', '',
-              '[完整证据](results.json) · [实验说明](experiment/README.md)', '']
+              f"[完整证据](results.json) · [实验说明](experiment/{report.get('guide', 'README.md')})", '']
     return '\n'.join(lines)
 
 
-def main(argv=None):
+def main(argv=None, *, protocol=None):
+    protocol = protocol if protocol is not None else default_protocol()
+    nodes = tuple(protocol['nodes'])
+    edge_count = len(nodes) - 1
+    if not 1 <= edge_count <= 16:
+        raise ValueError('chain requires 1..16 edges')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--esbmc', required=True)
     parser.add_argument('--cc', default='cc')
@@ -163,8 +188,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     root = Path(args.workdir).resolve()
     root.mkdir(parents=True, exist_ok=True)
-    directory = Path(tempfile.mkdtemp(prefix='bridge-', dir=root))
-    before_inputs, before_engine = input_files(), baseline.engine_hashes()
+    directory = Path(tempfile.mkdtemp(prefix=protocol['prefix'], dir=root))
+    before_inputs, before_engine = input_files(nodes), baseline.engine_hashes()
     lock = baseline.read_json(ROOT / 'cases/c_external_bits/engine-lock.json')
     tools = lambda: {n: baseline.binary_identity(cmd) for n, cmd in (('esbmc', args.esbmc), ('cc', args.cc))}
     before_tools = tools()
@@ -179,11 +204,11 @@ def main(argv=None):
         shutil.copyfile(ROOT / relative, target)
     for name in ('run_checks.py', 'run_scaling.py', 'engine-lock.json'):
         shutil.copyfile(ROOT / 'cases/c_external_bits' / name, experiment / ('external-' + name))
-    paths = snapshot(directory / 'contracts')
+    paths = snapshot(directory / 'contracts', nodes)
     contract_hashes = support.hashes(directory / 'contracts')
-    contracts = [Contract(p) for p in paths[:3]]
+    contracts = [Contract(p) for p in paths[:edge_count]]
     identities = dict(engine_frozen=before_engine == lock['files'], endpoints_locked=endpoints_locked(),
-                      connected=connected(contracts))
+                      connected=connected(contracts, edge_count))
     rows = []
     if all(identities.values()):
         for path in paths:
@@ -194,15 +219,17 @@ def main(argv=None):
                   f"full-domain certified={row['full_domain_certified']}", flush=True)
     after_tools = tools()
     identities.update(engine_unchanged=baseline.engine_hashes() == before_engine,
-                      inputs_unchanged=input_files() == before_inputs,
+                      inputs_unchanged=input_files(nodes) == before_inputs,
                       contracts_unchanged=support.hashes(directory / 'contracts') == contract_hashes,
                       tools_unchanged=before_tools == after_tools,
                       tools_present=all(v['path'] is not None for v in before_tools.values()))
-    recorded, proved, rejected = outcome(rows, contracts, identities)
+    recorded, proved, rejected = outcome(rows, contracts, identities, edge_count)
     report = dict(schema='popcount-bridge-experiment-v1', status='RECORDED' if recorded else 'INCOMPLETE',
+                  edge_count=edge_count, title=protocol['title'], guide=protocol['guide'],
+                  node_sources=[str(p.relative_to(ROOT)) for p in nodes],
                   endpoint_claim=dict(status='PROVED' if proved else 'UNKNOWN', condition='true' if proved else None,
                                       inputs=INPUTS, observations=['return'], unwind=34,
-                                      basis='Transitivity of three independently certified full-domain edges; not a direct endpoint query'),
+                                      basis=f'Transitivity of {edge_count} independently certified full-domain edges; not a direct endpoint query'),
                   results=rows, mutant_rejected=bool(rejected), identities=identities,
                   engine_lock=lock, endpoint_lock=baseline.read_json(CASE / 'endpoint-lock.json'),
                   source_hashes={str(p.relative_to(ROOT)): h for p, h in before_inputs.items()},
@@ -211,8 +238,15 @@ def main(argv=None):
     baseline.save_json(directory / 'results.json', report)
     baseline.save_json(root / 'results.json', report)
     (directory / 'README.md').write_text(overview(report), encoding='utf-8')
-    print(f"POPCOUNT BRIDGE: {report['status']} (links certified={sum(r['full_domain_certified'] for r in rows[:3])}/3; "
+    metrics = list(metric_rows(report))
+    with (directory / 'metrics.csv').open('w', encoding='utf-8', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=['name', 'status', 'full_domain_certified', 'queries', 'seconds',
+                                                   'post_check', 'post_check_reason', 'diagnostics', 'error'])
+        writer.writeheader()
+        writer.writerows(metrics)
+    print(f"{protocol['label']}: {report['status']} (links certified={sum(r['full_domain_certified'] for r in rows[:edge_count])}/{edge_count}; "
           f"endpoint equivalence={report['endpoint_claim']['status']}; mutant rejected={bool(rejected)})")
+    print((directory / 'metrics.csv').read_text(encoding='utf-8'), end='')
     print(f'Open overview: {directory / "README.md"}')
     return 0 if recorded else 2
 
