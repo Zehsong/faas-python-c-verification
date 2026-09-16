@@ -11,6 +11,10 @@ logs and run-specific binary identity have not been independently inspected here
 Each run now also writes [versioned verification results and a human report](RESULT_FORMAT.md).
 The legacy scalar 8/8 is historical; the new M2 stage has separate acceptance.
 
+For a guided end-to-end walkthrough, use the [C demo quickstart](../cases/c_scalar_demo/README.md).
+It assembles a report index, editable input copies and a replayed counterexample
+from actual finder artifacts, retaining failures and a separate archive.
+
 ## Run the acceptance stage
 
 Use the existing modified ESBMC binary; this command does not install or replace

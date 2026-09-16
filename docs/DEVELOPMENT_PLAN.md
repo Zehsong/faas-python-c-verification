@@ -44,6 +44,16 @@ transfer lock is preserved, so its old experiment must be rerun in its original
 checkout. Next evaluate report usability and remaining M2 edge cases, and
 demonstrate the M1/M2 scalar workflow before M3 memory/state expansion.
 
+## M1/M2 demonstration update
+
+A [guided scalar demo](../cases/c_scalar_demo/README.md) is implemented without
+engine changes: four existing result scenarios, a report index, editable C/JSON
+copies, a backend-replayed counterexample and a separate evidence archive.
+Six local assembly controls and a real missing-solver negative run are checked;
+formal demo execution and user review of the reports remain next in Codespace.
+This demonstrates the first usable slice ahead of M3. It does not claim a full
+M4 release, a disconnected-region demo or independent held-out evaluation.
+
 ## Release target
 
 A new user supplies two supported C functions, their entry points, build inputs,

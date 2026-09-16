@@ -1,0 +1,11 @@
+test_copied_pairs_remain_admissible_and_portable (test_demo.DemoTests.test_copied_pairs_remain_admissible_and_portable) ... ok
+test_failed_assembly_has_no_success_or_fabricated_condition (test_demo.DemoTests.test_failed_assembly_has_no_success_or_fabricated_condition) ... ok
+test_missing_or_inconsistent_replay_cannot_be_presented (test_demo.DemoTests.test_missing_or_inconsistent_replay_cannot_be_presented) ... ok
+test_only_replayed_equality_counterexample_is_selected (test_demo.DemoTests.test_only_replayed_equality_counterexample_is_selected) ... ok
+test_overview_keeps_actual_condition_and_relative_evidence_links (test_demo.DemoTests.test_overview_keeps_actual_condition_and_relative_evidence_links) ... ok
+test_safety_failure_invalidates_demo_replay (test_demo.DemoTests.test_safety_failure_invalidates_demo_replay) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.037s
+
+OK

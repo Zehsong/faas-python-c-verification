@@ -13,6 +13,10 @@ Its JSON schema is [verification-result-v1.schema.json](../schemas/verification-
 The producer validates proof invariants before writing. No JSON Schema runtime
 package is required; local tests also check output structure against the schema.
 
+The [C demo](../cases/c_scalar_demo/README.md) provides a browsable overview of
+actual reports and links a solver counterexample to its native replay. Its
+expected outcomes are presentation checks, not inputs to condition discovery.
+
 ## Read the outcome
 
 | Status | Meaning |

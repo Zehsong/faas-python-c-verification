@@ -5,6 +5,29 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Guided scalar C demonstration
+
+- Added `cases/c_scalar_demo/run_demo.sh` and its Python assembly driver, reusing
+  four existing fixtures for full equality, a conditional region, no equal
+  inputs and deliberately query-limited UNKNOWN. Copies portable editable C/JSON
+  inputs, records commands/tool hashes and links actual reports in a Markdown
+  overview. A fifth check requires an equality counterexample already replayed
+  by the backend; absent or inconsistent replay is never fabricated.
+- Conditions are taken from versioned results. Expected statuses are checked
+  only after discovery, and expected formulas are not injected. The proof engine,
+  result schema, C subset and historical transfer lock remain unchanged.
+- Added Chinese quickstart, a three-file editable example, report/harness reading
+  instructions and evidence-download steps. Each run uses a fresh directory;
+  failed runs retain reports and can be archived. No new solver is installed.
+- Validation: six local assembly controls; actual MSVC/missing-ESBMC run gives
+  four UNKNOWN results, no native samples, INCOMPLETE (0/5). An earlier unresolved
+  compiler-name run also remained INCOMPLETE. Archive checksums, relative links,
+  Bash/Python syntax and whitespace checked. [Evidence](docs/validation/c-demo/README.md).
+  No local ESBMC proof or demo READY claim; the dedicated Codespace run is pending.
+- Next: run the demo with the existing modified ESBMC, inspect report usability,
+  then proceed to bounded memory/state. This is not a new research benchmark or
+  completion of all M4 release requirements. Updated README, status and plan.
+
 ## 2026-09-16 — M2 acceptance reported
 
 - Recorded the user's **M2 RESULT ACCEPTANCE: 10/10 passed**, including the

@@ -46,6 +46,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Pure uint32_t/bool subset, return observation, 1..4 inputs; 8/8 acceptance user-reported, raw archive not independently inspected |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
+| Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | Presentation workflow only; dedicated demo solver run pending; no engine or C-subset expansion |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -89,6 +90,25 @@ independently inspected. Earlier scalar/transfer passes remain historical.
 The transfer engine lock is deliberately unchanged. Its original stage must run
 in a checkout of `52df7d1`, as documented in the result-format guide; it will reject
 current M2 code. Do not refresh it to relabel the old experiment as unchanged.
+
+## M1/M2 demonstration workflow
+
+The [C demo quickstart](../cases/c_scalar_demo/README.md) now provides one command
+for all-input equality, a conditional region, no equal inputs and budget-limited
+UNKNOWN. An overview links actual reports, copied C/JSON inputs and a solver
+counterexample already replayed by the native backend. It never substitutes an
+expected formula or a native sample for a certificate. Runs and failures receive
+separate archives. The guide includes editing and running a new three-file pair.
+
+Six local assembly controls pass. An actual MSVC/missing-ESBMC run produces
+UNKNOWN for all four examples, zero native samples and INCOMPLETE (0/5), as
+required; local archive/checksum and relative-link checks pass.
+[Local validation](validation/c-demo/README.md). No local formal demo run was
+possible. Codespace should run `cases/c_scalar_demo/run_demo.sh` with the existing
+modified ESBMC and inspect the printed overview. READY requires all four
+expected outcomes, one replayed counterexample and unchanged tool binaries.
+This does not fulfill all M4 release gates: clean-environment reproduction,
+held-out cases and broader state/memory support remain future work.
 
 ## Current transfer experiment
 
@@ -159,13 +179,13 @@ Keep the working Codespace and its customized binary/source and evidence.
    8/12 EXACT. Preserve both separate archives. Inspect the transfer metrics for
    baseline statuses/reasons and actual conditions before comparing performance.
    M2 acceptance is now user-reported 10/10; preserve its separate archive.
-   Inspect the new JSON/Markdown reports for usability and remaining M2 edge
-   cases, and demonstrate the M1/M2 scalar workflow before expanding to M3
-   bounded memory/state. Preserve the frozen transfer baseline; raw remote
+   Run the new `cases/c_scalar_demo/run_demo.sh` stage and inspect its overview
+   plus JSON/Markdown reports for usability and remaining M2 edge cases, before
+   expanding to M3 bounded memory/state. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `26925c7` when this M2 result was recorded.
+   branch beyond `a1621d5` when this demo development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

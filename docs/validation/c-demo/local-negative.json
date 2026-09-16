@@ -1,0 +1,80 @@
+{
+  "provenance": "Executed Windows negative demo run; no ESBMC installed. Native probes compiled with MSVC but never executed.",
+  "ready": false,
+  "passed": 0,
+  "total": 5,
+  "tools_before": {
+    "esbmc": {
+      "requested": "intentionally-missing-demo-esbmc",
+      "path": null,
+      "sha256": null
+    },
+    "cc": {
+      "requested": "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe",
+      "sha256": "3516d835aa768f13ee55c426e7c845e79c97eec3e8c9fad632896fde4676794c"
+    }
+  },
+  "tools_unchanged": true,
+  "results": [
+    {
+      "name": "all-inputs",
+      "passed": false,
+      "status": "UNKNOWN",
+      "diagnostics": [
+        "SAFETY_NOT_ESTABLISHED",
+        "SOLVER_NOT_FOUND"
+      ],
+      "metrics": {
+        "queries": 0,
+        "native_samples": 0,
+        "elapsed_seconds": 0.391
+      }
+    },
+    {
+      "name": "conditional",
+      "passed": false,
+      "status": "UNKNOWN",
+      "diagnostics": [
+        "SAFETY_NOT_ESTABLISHED",
+        "SOLVER_NOT_FOUND"
+      ],
+      "metrics": {
+        "queries": 0,
+        "native_samples": 0,
+        "elapsed_seconds": 0.156
+      }
+    },
+    {
+      "name": "no-equal-inputs",
+      "passed": false,
+      "status": "UNKNOWN",
+      "diagnostics": [
+        "SAFETY_NOT_ESTABLISHED",
+        "SOLVER_NOT_FOUND"
+      ],
+      "metrics": {
+        "queries": 0,
+        "native_samples": 0,
+        "elapsed_seconds": 0.14
+      }
+    },
+    {
+      "name": "budget-limited",
+      "passed": false,
+      "status": "UNKNOWN",
+      "diagnostics": [
+        "SAFETY_NOT_ESTABLISHED",
+        "SOLVER_NOT_FOUND"
+      ],
+      "metrics": {
+        "queries": 0,
+        "native_samples": 0,
+        "elapsed_seconds": 0.14
+      }
+    }
+  ],
+  "archive_sha256": "abbc847d6fc17a5069a9c98e50edead81eb7d09b2fa5757770807a5a0077c42f",
+  "archive_checksum_and_relative_links": "PASS",
+  "artifacts": "C:\\Users\\Administrator\\OneDrive\\Documents\\ChatGPT\\Conditional Equivalence\\faas-python-c-verification\\.verify-equiv-runs\\demo-local-check\\demo-r04xa2l2"
+}
