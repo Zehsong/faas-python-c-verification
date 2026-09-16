@@ -55,9 +55,13 @@ measurements and controls; endpoint equivalence is reported independently.
 Seven discovery wall budgets total 14 minutes plus setup/post-check overhead,
 not a predicted runtime.
 
-This is a manually proposed refinement following an observed failure. It is
-not autonomous lemma synthesis, a completed full-width proof, a general
-conditional-composition engine or evidence of a speedup until executed. Raw
-historical solver logs/identities remain uninspected; the supplied summaries
-are kept in the repository's
-[evidence record](https://github.com/Zehsong/faas-python-c-verification/blob/codex/same-language-cache/docs/validation/popcount-bridge/user-reported-results.md).
+The user now reports **6/6 certified links, endpoint PROVED and mutant rejected=True**
+after `388a2c3`. Six discovery times sum to 7.302194 seconds, excluding post-checks,
+setup and archiving. The raw archive and run identities remain uninspected here.
+[Supplied summary, CSV and interpretation](../../docs/validation/popcount-refined/user-reported-results.md).
+
+This is a manually proposed refinement following an observed failure. It
+establishes a reported full-width endpoint proof through this chain, not
+autonomous lemma synthesis, a general conditional-composition engine or a
+repeated performance result. Original direct and three-edge timeout records
+remain intact; no numerical speedup is inferred from censored runs.

@@ -5,6 +5,25 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Record complete full-width popcount bridge milestone
+
+- Recorded user-reported refined-chain result after `388a2c3`: RECORDED,
+  **6/6 certified links, endpoint PROVED, mutant rejected=True**. Preserved all
+  seven supplied CSV rows and the overview/evidence/archive paths.
+  [Evidence and limits](docs/validation/popcount-refined/user-reported-results.md).
+- All six full-domain post-checks are PROVED. Six discovery times sum to
+  7.302194 seconds and 30 discovery queries; with the mutant, 8.629407 seconds
+  and 36 discovery queries. These exclude separate post-checks and setup and
+  do not constitute an end-to-end speedup measurement.
+- Updated status, milestone, protocol and plan: manually guided proof chaining
+  succeeds on this full uint32 pair; automatic intermediate synthesis and
+  conditional-region composition remain unimplemented. Next priority is a
+  reusable checked proposal/feedback interface with explicit cumulative budgets.
+- Documentation/data only: validated CSV structure, counts, decimal totals,
+  local links and whitespace. No engine/program changes or formal rerun.
+  Raw remote certificates, harnesses and identities remain uninspected.
+  Original direct timeouts and three-edge UNKNOWN remain historical results.
+
 ## 2026-09-16 — Locate unresolved bridge and refine one byte at a time
 
 - Recorded user-reported **POPCOUNT BRIDGE RECORDED, links certified 2/3,

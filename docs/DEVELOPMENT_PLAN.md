@@ -215,11 +215,23 @@ edge default and its results remain intact. Per-edge CSV now shows discovery
 and full-domain post-check status independently and is printed automatically.
 
 Eleven local checks pass, including the original seven composition/native
-controls; formal refinement is pending. Query/wall/count limits remain
-30 seconds / 120 seconds / 96 per run. A valid proposed decomposition requires
-every connection and the mutant control; five of six would still leave the
-endpoint UNKNOWN. This is manual proposal refinement, not an autonomous agent
-or a demonstrated encoding optimization.
+controls. The user now reports RECORDED, all six links certified, endpoint PROVED
+and mutant rejected=True after `388a2c3`.
+[Summary, CSV and limits](validation/popcount-refined/user-reported-results.md).
+Query/wall/count limits remain 30 seconds / 120 seconds / 96 per run. The six
+reported discovery times sum to 7.302194 seconds, excluding post-checks/setup.
+The direct timeout and three-edge results remain unchanged historical evidence.
+This completes the manually guided full-width proof milestone for one pair,
+not automatic proposal synthesis or a repeated end-to-end speedup evaluation.
+
+The next implementation priority is a reusable checked chain-proposal interface:
+explicit ordered sources, common contract scope, immutable original endpoints,
+per-link feedback and cumulative budget accounting. Require all links and
+negative controls before publishing composition, and preserve UNKNOWN otherwise.
+Start with full-domain equality; partial-region composition needs a separate
+soundness design. Later assess agent-generated proposals on separately selected
+cases, recording proposal effort and failed attempts as well as solver cost.
+These are planned capabilities, not implemented features.
 
 ## Release target
 

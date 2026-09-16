@@ -23,6 +23,8 @@
   programs are new proposals, not automatically accepted transformations.
 
 The [original bridge summary and supplied overview](../popcount-bridge/user-reported-results.md)
-report two certified links and an unresolved middle link. Formal execution of
-this refinement is pending with the user's modified ESBMC; no full-width endpoint
-proof or improvement is claimed yet. [Protocol](../../../cases/c_popcount_bridge/REFINED.md).
+report two certified links and an unresolved middle link. The user subsequently
+reported **6/6 certified links, endpoint PROVED and mutant rejected=True** for
+this refinement. [Supplied summary and CSV](user-reported-results.md) are recorded
+separately from these local controls; the raw archive remains uninspected.
+[Protocol](../../../cases/c_popcount_bridge/REFINED.md).

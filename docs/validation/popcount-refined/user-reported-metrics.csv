@@ -1,0 +1,8 @@
+name,status,full_domain_certified,queries,seconds,post_check,post_check_reason,diagnostics,error
+edge_0,EXACT,True,5,1.114616,PROVED,,,
+edge_1,EXACT,True,5,1.1099,PROVED,,,
+edge_2,EXACT,True,5,1.068105,PROVED,,,
+edge_3,EXACT,True,5,1.068382,PROVED,,,
+edge_4,EXACT,True,5,1.17099,PROVED,,,
+edge_5,EXACT,True,5,1.770201,PROVED,,,
+mutant,EXACT,False,6,1.327213,REFUTED,,,
