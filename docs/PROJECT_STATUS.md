@@ -15,6 +15,7 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
+- Latest demonstration implementation: `75dbd47`; user-reported READY (5/5).
 - Latest core implementation: `26925c7` (M2 result contract), following `133abe9` (transfer result record),
   `5502520` (scalar adapter) and `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
@@ -46,7 +47,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | Pure uint32_t/bool subset, return observation, 1..4 inputs; 8/8 acceptance user-reported, raw archive not independently inspected |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
-| Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | Presentation workflow only; dedicated demo solver run pending; no engine or C-subset expansion |
+| Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -104,9 +105,12 @@ Six local assembly controls pass. An actual MSVC/missing-ESBMC run produces
 UNKNOWN for all four examples, zero native samples and INCOMPLETE (0/5), as
 required; local archive/checksum and relative-link checks pass.
 [Local validation](validation/c-demo/README.md). No local formal demo run was
-possible. Codespace should run `cases/c_scalar_demo/run_demo.sh` with the existing
-modified ESBMC and inspect the printed overview. READY requires all four
-expected outcomes, one replayed counterexample and unchanged tool binaries.
+possible. The user subsequently reported **READY (5/5 checks; tools unchanged=True)**,
+including explicit budget-limited and replay PASS lines.
+[Transcript and archive paths](validation/c-demo/user-reported-results.md). The
+raw archive remains independently uninspected. READY requires all four expected
+outcomes, one replayed counterexample and unchanged compiler/ESBMC executable
+identities; it is not a frozen-engine or full dependency-closure check.
 This does not fulfill all M4 release gates: clean-environment reproduction,
 held-out cases and broader state/memory support remain future work.
 
@@ -155,6 +159,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | C scalar integration | 8/8 passed | [User-pasted summary](validation/c-scalar/user-reported-results.md); run-specific source/binary hashes and raw logs not independently inspected |
 | C scalar transfer | 8/8 required passed; 8/12 discovery EXACT; engine/inputs/tools unchanged | [User-pasted summary](validation/c-transfer/user-reported-results.md); baseline PARTIAL/UNKNOWN breakdown and raw logs not supplied |
 | M2 result contract | 10/10 passed, including agent-partial | [User-pasted summary](validation/m2-results/user-reported-results.md); includes expected failure/UNKNOWN controls, raw archive not independently inspected |
+| Scalar demonstration | READY, 5/5 checks, tools unchanged=True | [User-pasted summary](validation/c-demo/user-reported-results.md); raw overview, formula and witness not independently inspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -179,13 +184,13 @@ Keep the working Codespace and its customized binary/source and evidence.
    8/12 EXACT. Preserve both separate archives. Inspect the transfer metrics for
    baseline statuses/reasons and actual conditions before comparing performance.
    M2 acceptance is now user-reported 10/10; preserve its separate archive.
-   Run the new `cases/c_scalar_demo/run_demo.sh` stage and inspect its overview
-   plus JSON/Markdown reports for usability and remaining M2 edge cases, before
-   expanding to M3 bounded memory/state. Preserve the frozen transfer baseline; raw remote
+   The scalar demo now reports READY (5/5); preserve its separate archive.
+   Inspect its overview and JSON/Markdown reports for usability and remaining
+   M2 edge cases. The next capability milestone is M3 bounded memory/state. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `a1621d5` when this demo development began.
+   branch beyond `75dbd47` when this demo result was recorded.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

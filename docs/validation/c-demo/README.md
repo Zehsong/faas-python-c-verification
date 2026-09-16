@@ -20,9 +20,11 @@
   schema, existing fixture or transfer-lock file changed. The old 120-test M2
   regression was not relabelled as a new demo regression.
 
-There is no local ESBMC installation. The dedicated demo READY run remains
-pending on the user's modified ESBMC in Codespace. Earlier user-reported M2
-10/10 and scalar 8/8 results are separate evidence, not this run. A successful
+There is no local ESBMC installation. The user subsequently reported the
+dedicated Codespace demo **READY (5/5 checks; tools unchanged=True)**.
+[Transcript, paths and provenance](user-reported-results.md). Its raw archive
+remains independently uninspected. Earlier M2 10/10 and scalar 8/8 results are
+separate evidence, not this run. A successful
 demo still does not establish held-out discovery or autonomous-agent performance.
 
 See [quickstart and commands](../../../cases/c_scalar_demo/README.md).

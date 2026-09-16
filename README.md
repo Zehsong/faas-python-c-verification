@@ -12,7 +12,7 @@
 
 已实现 [M2 统一结果与诊断报告](docs/RESULT_FORMAT.md)：保留旧 JSON，新增版本化结果和可读报告，区分精确区域、充分区域、未知与空输入域。本地 120 项回归通过，用户已报告 Codespace **M2 验收 10/10 通过**（[结果与证据路径](docs/validation/m2-results/user-reported-results.md)，原始归档尚未独立审阅）。旧冻结引擎实验需在原提交的独立 checkout 重跑。
 
-新增[可演示的 C 端到端流程](cases/c_scalar_demo/README.md)：一条命令生成四种结果的总览、已实际重放的反例和独立归档；也提供复制两个 C 文件与 JSON 约定后直接接入的步骤。证明引擎不变，演示正式运行待 Codespace 确认。
+新增[可演示的 C 端到端流程](cases/c_scalar_demo/README.md)：一条命令生成四种结果的总览、已实际重放的反例和独立归档；也提供复制两个 C 文件与 JSON 约定后直接接入的步骤。证明引擎不变，用户已报告 **READY，5/5 检查通过**（[结果与证据路径](docs/validation/c-demo/user-reported-results.md)，原始归档尚未独立审阅）。
 
 ## 1. 研究目标
 

@@ -41,8 +41,8 @@ passes; the user now reports **10/10 passed** for the
 The raw archive and actual run identities remain uninspected. CLI usage/output-
 directory failures are not promised artifact-producing runs. The existing frozen
 transfer lock is preserved, so its old experiment must be rerun in its original
-checkout. Next evaluate report usability and remaining M2 edge cases, and
-demonstrate the M1/M2 scalar workflow before M3 memory/state expansion.
+checkout. The subsequent scalar demonstration result is recorded below.
+Report usability and remaining M2 edge-case review precede M3 memory/state expansion.
 
 ## M1/M2 demonstration update
 
@@ -50,7 +50,11 @@ A [guided scalar demo](../cases/c_scalar_demo/README.md) is implemented without
 engine changes: four existing result scenarios, a report index, editable C/JSON
 copies, a backend-replayed counterexample and a separate evidence archive.
 Six local assembly controls and a real missing-solver negative run are checked;
-formal demo execution and user review of the reports remain next in Codespace.
+the user subsequently reports **READY (5/5 checks; tools unchanged=True)** from
+Codespace. [Transcript and provenance](validation/c-demo/user-reported-results.md).
+Raw archive inspection and report usability review remain open. The next
+capability milestone is M3 bounded arrays/state; the demo need not be rerun
+merely to record this result.
 This demonstrates the first usable slice ahead of M3. It does not claim a full
 M4 release, a disconnected-region demo or independent held-out evaluation.
 

@@ -5,6 +5,21 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Scalar demo READY reported
+
+- Recorded user-reported **C SCALAR DEMO: READY (5/5 checks; tools unchanged=True)**
+  after implementation `75dbd47`, including explicit budget-limited and replay
+  PASS lines. [Transcript and archive paths](docs/validation/c-demo/user-reported-results.md).
+- The actual formulas, witness values, run checkout and binary hashes are not in
+  the excerpt; raw evidence remains independently uninspected. Unchanged tools
+  refers to compiler/ESBMC executable identities, not the frozen transfer engine
+  or full dependencies. Five passing checks are not five equivalence certificates.
+- Updated README, quickstart, status, validation index and plan. Preserve this
+  archive, review report usability and proceed toward M3 bounded arrays/state.
+  This does not complete all M4 release gates or expand the C support contract.
+- Documentation only: checked transcript, local links, consistency and whitespace;
+  no runtime edits or formal rerun.
+
 ## 2026-09-16 — Guided scalar C demonstration
 
 - Added `cases/c_scalar_demo/run_demo.sh` and its Python assembly driver, reusing
