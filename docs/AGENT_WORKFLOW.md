@@ -7,8 +7,9 @@ local controls pass, and raw remote evidence has not been independently inspecte
 
 
 The generic C route also admits [bounded local const tables](../cases/c_readonly_tables/README.md).
-This frontend extension has separate pending formal acceptance; it adds no new
-proposal grammar or autonomous provider. Old sessions must be restarted because
+This extension has [user-reported 9/9 acceptance](validation/c-readonly-tables/user-reported-results.md),
+including the scripted n != 9 agent candidate. It adds no new proposal grammar or
+autonomous provider; raw evidence remains independently uninspected. Old sessions must be restarted because
 frontend identity changes. Table contents remain source-bound, never proposal-editable.
 
 Updated 2026-09-16. The user approved beginning this direction. The current

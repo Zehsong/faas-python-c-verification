@@ -17,8 +17,9 @@ from actual finder artifacts, retaining failures and a separate archive.
 
 The first M3 extension admits [bounded local constant tables](../cases/c_readonly_tables/README.md)
 inside otherwise scalar functions. It uses the same contract and CLI; its separate
-nine-check formal acceptance is pending. Older scalar results do not certify this
-new frontend version. Start fresh agent sessions after upgrading.
+nine-check acceptance is now [user-reported 9/9](validation/c-readonly-tables/user-reported-results.md).
+The raw archive remains independently uninspected; older scalar passes remain
+separate historical evidence. Start fresh agent sessions after upgrading.
 
 ## Run the acceptance stage
 

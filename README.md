@@ -14,7 +14,7 @@
 
 新增[可演示的 C 端到端流程](cases/c_scalar_demo/README.md)：一条命令生成四种结果的总览、已实际重放的反例和独立归档；也提供复制两个 C 文件与 JSON 约定后直接接入的步骤。证明引擎不变，用户已报告 **READY，5/5 检查通过**（[结果与证据路径](docs/validation/c-demo/user-reported-results.md)，原始归档尚未独立审阅）。
 
-新增 [M3 第一步：通用 C 只读表](cases/c_readonly_tables/README.md)。函数内部固定长度、完整初始化的 const 数组已接入通用接口，可直接比较质数计算与查表，不需专用 Python adapter。本地 136 项回归通过；新增 9 项正式验收待 Codespace 运行。数组参数、输出数组与可变状态仍待后续开发。
+新增 [M3 第一步：通用 C 只读表](cases/c_readonly_tables/README.md)。函数内部固定长度、完整初始化的 const 数组已接入通用接口，可直接比较质数计算与查表，不需专用 Python adapter。本地 136 项回归通过；用户已报告 Codespace **9/9 验收通过**（[输出与证据路径](docs/validation/c-readonly-tables/user-reported-results.md)，原始归档尚未独立审阅）。数组参数、输出数组与可变状态仍待后续开发。
 
 ## 1. 研究目标
 

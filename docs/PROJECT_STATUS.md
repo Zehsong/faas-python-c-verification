@@ -16,8 +16,8 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
 - Latest demonstration implementation: `75dbd47`; user-reported READY (5/5).
-- Latest frontend extension: the M3 local const-table commit (identify in Git
-  history), following `36f43d5` (demo result record).
+- Latest frontend extension: `cd2b88c` (M3 local const tables), following
+  `36f43d5` (demo result record); table acceptance is user-reported 9/9.
 - Prior core implementation: `26925c7` (M2 result contract), following `133abe9` (transfer result record),
   `5502520` (scalar adapter) and `23ad4af` (live trial record),
   `62ea51e` (agent workflow) and finder baseline `8e85664`.
@@ -46,7 +46,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Cache sketch | Shared generation of initialization, preservation and relational obligations for two cache families | Invariant and bindings are supplied; no automatic invariant synthesis |
 | Prime/lookup adapter | Compares fallback, truncated and mutated tables against trial division | Boolean return, one uint32 input, CLI domain constrained to 0..255 |
 | Vocabulary comparison | Paired baseline/modulo experiments, shared initial seeds/budgets, alternating order | No adaptive vocabulary yet |
-| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | uint32_t/bool inputs/return plus bounded local const tables; scalar 8/8 historical, new table 9-check formal stage pending; no mutable memory or array parameters |
+| Generic C scalar adapter | Two C files plus checked JSON contract; native probe/harness generation; shared automatic discovery and agent sessions | uint32_t/bool inputs/return plus bounded local const tables; scalar 8/8 historical, table acceptance user-reported 9/9 with raw archive uninspected; no mutable memory or array parameters |
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
 | Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
@@ -134,9 +134,12 @@ rejected writes, missing solver and one scripted agent candidate.
 
 Local regression: 136 passed without skips (20 oracle + 110 finder + six demo).
 The actual missing-solver stage gives the expected 2/9 and no native inputs.
-[Local evidence](validation/c-readonly-tables/README.md). Formal 9/9 is pending
-on the user's modified ESBMC; do not apply old scalar/demo pass counts to this
-extension. Restart prior agent sessions after upgrading frontend identity.
+[Local evidence](validation/c-readonly-tables/README.md). The user subsequently
+reported **C READONLY TABLE ACCEPTANCE: 9/9 passed**, with the scripted agent
+result EXACT: n != 9 on n in 0..31.
+[Transcript and archive paths](validation/c-readonly-tables/user-reported-results.md).
+The raw archive remains independently uninspected; this result is separate from
+old scalar/demo pass counts. Restart prior agent sessions after upgrading frontend identity.
 The full M3 array input/output/state goals and M4 release gates remain open.
 
 ## Current transfer experiment
@@ -185,6 +188,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | C scalar transfer | 8/8 required passed; 8/12 discovery EXACT; engine/inputs/tools unchanged | [User-pasted summary](validation/c-transfer/user-reported-results.md); baseline PARTIAL/UNKNOWN breakdown and raw logs not supplied |
 | M2 result contract | 10/10 passed, including agent-partial | [User-pasted summary](validation/m2-results/user-reported-results.md); includes expected failure/UNKNOWN controls, raw archive not independently inspected |
 | Scalar demonstration | READY, 5/5 checks, tools unchanged=True | [User-pasted summary](validation/c-demo/user-reported-results.md); raw overview, formula and witness not independently inspected |
+| Generic C local const tables | 9/9 passed; scripted agent EXACT n != 9 on 0..31 | [User-pasted summary](validation/c-readonly-tables/user-reported-results.md); includes expected UNKNOWN/rejection controls, raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -211,14 +215,14 @@ Keep the working Codespace and its customized binary/source and evidence.
    M2 acceptance is now user-reported 10/10; preserve its separate archive.
    The scalar demo now reports READY (5/5); preserve its separate archive.
    Inspect its overview and JSON/Markdown reports for usability and remaining
-   M2 edge cases. M3 now has a local const-table slice: run
-   `cases/c_readonly_tables/test_tables.sh` with the existing modified ESBMC
-   (target 9/9), preserving its separate archive before expanding array
-   inputs/outputs and state. Preserve the frozen transfer baseline; raw remote
+   M2 edge cases. M3 local const-table acceptance is now user-reported 9/9;
+   preserve its separate archive and the completed agent session. Review memory
+   scope/safety diagnostics, then define bounded array inputs/outputs, observed
+   contents and independent memory copies before mutable cache state. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `36f43d5` when the table extension began.
+   branch beyond `cd2b88c` when the table result was recorded.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

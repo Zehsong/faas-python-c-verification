@@ -19,9 +19,11 @@
   are checked. Existing transfer locks remain unchanged; the frozen transfer
   stage requires its historical checkout and is not rerun on the changed frontend.
 
-There is no local ESBMC installation. Formal **9/9** remains pending on the
-user's existing modified ESBMC. Historical scalar/demo/M2 successes do not certify
-the newly admitted memory reads. No scaling, autonomous-agent or blind-case claim
+There is no local ESBMC installation. The user subsequently reported **9/9
+passed** from Codespace, with the scripted agent result EXACT: n != 9.
+[Transcript, scope and archive paths](user-reported-results.md). The raw archive
+and actual run identities remain independently uninspected. Historical
+scalar/demo/M2 successes remain separate from this new table evidence. No scaling, autonomous-agent or blind-case claim
 follows from this implementation.
 
 [Scope and Codespace commands](../../../cases/c_readonly_tables/README.md).

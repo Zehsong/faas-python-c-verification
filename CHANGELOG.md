@@ -5,6 +5,23 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Local constant-table acceptance reported
+
+- Recorded user-reported **C READONLY TABLE ACCEPTANCE: 9/9 passed** after
+  implementation `cd2b88c`, including agent-table PASS and EXACT: n != 9.
+  [Transcript and archive paths](docs/validation/c-readonly-tables/user-reported-results.md).
+  That condition applies to the declared 0..31 domain and Boolean return; it was
+  a scripted candidate, not an autonomous-agent discovery claim.
+- Preserved the separate evidence and completed session locations. Raw solver
+  logs, actual checkout/binary identities and other individual conditions remain
+  independently uninspected. The aggregate includes expected safety/unwind,
+  rejection and missing-solver outcomes; local 2/9 negative evidence is separate.
+- Updated support guides, README, status and plan. Next review memory diagnostics
+  and define bounded array inputs/outputs, observations and independent copies;
+  mutable cache state and the full M3/M4 release goals remain future work.
+- Documentation only: checked transcript, local links, consistency and whitespace;
+  no runtime edits or formal rerun.
+
 ## 2026-09-16 — M3 local constant-table frontend slice
 
 - Extended the generic C admission checker to automatic one-dimensional const

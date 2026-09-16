@@ -68,8 +68,10 @@ pointer decay and whole-domain safety are required. Inputs/observations remain
 scalar. This is a preparatory part of M3, not completion of its array-output and
 state-copy goals. Search grammar and candidate certification remain shared.
 
-136 local tests pass; the nine-check formal stage is pending on modified ESBMC.
-After its result and report review, the next slice should define bounded array
+136 local tests pass; the user now reports **9/9 acceptance passed**, including
+the scripted agent EXACT condition n != 9 on 0..31.
+[Transcript and provenance](validation/c-readonly-tables/user-reported-results.md).
+Raw archive inspection and report review remain open. The next slice should define bounded array
 input/output bindings and observations, then independent mutable state and
 cache obligations. Do not silently infer array equality from return equality.
 

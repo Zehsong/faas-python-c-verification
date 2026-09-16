@@ -21,7 +21,9 @@ bash cases/c_readonly_tables/test_tables.sh \
 
 目标输出：`C READONLY TABLE ACCEPTANCE: 9/9 passed`。脚本另存
 `c-readonly-tables-时间-后缀.tar.gz`，其中有原始 C/JSON、生成代码、求解器日志、报告、
-查询及重放记录。失败结果也保留。正式 9/9 尚待 Codespace 运行；
+查询及重放记录。失败结果也保留。2026-09-16 用户已报告 **9/9 通过**，
+包含 agent 对 0..31 域内 `n != 9` 的认证；[输出与证据路径](../../docs/validation/c-readonly-tables/user-reported-results.md)。
+原始归档尚未独立审阅；
 [本地验证](../../docs/validation/c-readonly-tables/README.md)不替代 ESBMC 证明。
 
 | 检查 | 输入域 | 期望结果 |
