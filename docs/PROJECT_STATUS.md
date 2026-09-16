@@ -25,7 +25,9 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
   exploratory EXACT); safety PROVED and domain NONEMPTY. Raw archive uninspected.
 - New stage: fixed-budget popcount input-domain scaling at 8/12/16/24/32 bits,
   two reversed-order repetitions; original programs, engine and budgets retained.
-  Local controls pass; the ten formal measurements are pending.
+  Now user-reported RECORDED 10/10 valid runs and 8/10 full-domain certificates.
+  Only r2-b8 is individually identified (EXACT); other width/status/time details
+  and raw artifacts remain uninspected. Do not infer both failures were 32-bit.
 - Latest core implementation: `33af517`, cache state admission/reporting, now
   user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
   The demonstration and reproduction wrappers leave the proof/search engine unchanged.
@@ -66,7 +68,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Unified C demonstration | One command and portable Chinese overview for seven executed cases plus a same-return/different-array solver replay | User-reported READY 8/8; engine unchanged; known integration cases, not a held-out or clean-environment release |
 | Isolated reproduction | Fixed commit in an independent clone, fresh venv, pinned wheel installation, demo and identity checks, separate archive | User-reported READY; reuses host compiler, modified ESBMC and system libraries; not clean-machine reproduction |
 | External-source integration | New power-of-two and population-count C pairs using the existing generic contract; frozen engine and separate evidence | User-reported READY 5/5 required; full-width popcount UNKNOWN/SOLVER_TIMEOUT; not blind evaluation |
-| Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | Ten runs, formal pending; follows a known timeout, not a blind or statistical performance evaluation |
+| Popcount scaling | Fixed budgets and input-width schedule, CSV/overview with all outcomes and timeout kinds; separate measurement and certificate counts | User-reported 10/10 valid measurements and 8/10 full-domain certificates; per-width breakdown pending; not a blind or statistical performance evaluation |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -305,6 +307,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Unified C demonstration | READY 8/8; engine unchanged=True | [User-pasted summary](validation/c-tool-demo/user-reported-results.md); seven examples plus replay check, raw archive uninspected |
 | Isolated source/Python reproduction | READY | [User-pasted transcript](validation/c-reproduction/user-reported-results.md); host toolchain reused, raw archive and identities uninspected |
 | External-source C integration | READY 5/5 required; exploratory 0/1 EXACT; engine frozen=True | [User-pasted summary](validation/c-external-bits/user-reported-results.md); popcount_32 UNKNOWN/SOLVER_TIMEOUT, raw archive uninspected |
+| Popcount scaling | RECORDED 10/10 valid; full-domain certified 8/10; r2-b8 EXACT | [User-pasted summary](validation/popcount-scaling/user-reported-results.md); other row statuses, times and raw archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -339,10 +342,14 @@ Keep the working Codespace and its customized binary/source and evidence.
    C demonstration now has user-reported READY 8/8. Independent-checkout/fresh-venv
    reproduction is now user-reported READY; preserve its archive. External-source
    integration now reports READY 5/5 required; full-width popcount stays UNKNOWN
-   due to solver timeout. Preserve that original archive. Run the separate
-   [popcount scaling protocol](../cases/c_external_bits/SCALING.md) with the same
-   modified ESBMC; keep all ten outcomes, including UNKNOWN/PARTIAL. RECORDED
-   means measurements collected, not that all runs produced equivalence proofs.
+   due to solver timeout. Preserve that original archive. The separate
+   [popcount scaling run](validation/popcount-scaling/user-reported-results.md)
+   now reports 10/10 valid measurements and 8/10 full-domain certificates. Read
+   its existing metrics.csv before assigning widths or reasons to the other two
+   rows; no solver rerun is needed. Inspect full_domain_check in results.json
+   if an EXACT row is uncertified. This is repeated measurement of one pair,
+   not eight successes among ten independent programs.
+   [C prototype milestone](C_TOOL_MILESTONE.md) summarizes the current capability.
    Full clean-host/independently held-out release gates remain open; new external
    cases are known algorithms selected after the engine freeze, not blind tests.
    Continue authorized work directly after evidence updates; reserve summaries
@@ -350,7 +357,7 @@ Keep the working Codespace and its customized binary/source and evidence.
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `129df96` when scaling development began.
+   branch beyond `ed1fe9b` when this result-record update began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

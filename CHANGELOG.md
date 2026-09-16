@@ -5,6 +5,26 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Record scaling outcome and C prototype milestone
+
+- Recorded user-reported **POPCOUNT SCALING RECORDED (10/10 valid runs;
+  full-domain certified=8/10)** after `ed1fe9b`, including the supplied r2-b8
+  EXACT/post-check PROVED excerpt and original artifact/archive paths.
+  [Transcript](docs/validation/popcount-scaling/user-reported-results.md).
+- Other widths, statuses, timings, diagnostics and post-checks remain uninspected.
+  Do not infer that both uncertified runs are 32-bit timeouts or treat repeated
+  measurements of one pair as success on ten independent programs. Existing
+  metrics.csv is the next evidence to inspect; no solver rerun is needed.
+- Added a [C prototype milestone note](docs/C_TOOL_MILESTONE.md) linking current
+  capabilities, proof meanings, observed integration/reproduction evidence and
+  unresolved research gates. Updated handoff/plan and corrected stale quickstart
+  reproduction and array-acceptance status while preserving the unreported
+  current-engine readonly-table rerun.
+- Documentation-only update: links, whitespace and unchanged implementation/
+  protocol checked. No new local native tests or formal execution; no finder,
+  fixture, budget, schedule or frozen-lock changes. Raw remote archive inspection,
+  clean-host reproduction and independently held-out evaluation remain open.
+
 ## 2026-09-16 — External integration accepted; characterize popcount scaling
 
 - Recorded user-reported **EXTERNAL C INTEGRATION READY (5/5 required; engine

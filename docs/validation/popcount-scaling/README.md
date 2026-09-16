@@ -16,7 +16,9 @@
   and both historical lock files are unchanged. Generated contracts differ from
   the full-width template only by name and input upper bound.
 
-Formal measurements await Codespace using the existing modified ESBMC. The
+Formal measurements are now [user reported](user-reported-results.md): 10/10
+valid runs and 8/10 full-domain certificates, with r2-b8 explicitly EXACT.
+The other per-width outcomes, timings and raw archive remain uninspected. The
 earlier user-reported 32-bit timeout is [separate evidence](../c-external-bits/user-reported-results.md).
 No performance threshold, speedup or ten-run proof claim follows from local
 checks. [Fixed protocol](../../../cases/c_external_bits/SCALING.md).

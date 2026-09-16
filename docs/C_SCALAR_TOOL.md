@@ -23,9 +23,10 @@ separate historical evidence. Start fresh agent sessions after upgrading.
 
 [Bounded array contracts (schema 2)](../cases/c_bounded_arrays/README.md) now add
 fixed array parameters and full post-call observations to the same CLI. Schema 1
-retains scalar inputs and local const tables. The array stage is implemented with
-149 local regression passes; formal 10/10 and current-engine table 9/9 rerun are
-pending. Read the array guide for initialization, non-aliasing and size limits.
+retains scalar inputs and local const tables. The array stage has 149 historical
+local regression passes and [user-reported formal 10/10](validation/c-bounded-arrays/user-reported-results.md);
+the current-engine table 9/9 rerun remains unreported. Read the array guide for
+initialization, non-aliasing and size limits.
 
 ## Run the acceptance stage
 

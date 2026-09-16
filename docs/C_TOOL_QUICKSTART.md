@@ -66,5 +66,6 @@ python3 tools/find-cond-equiv/find_c_conditions.py \
 
 目前的演示基于已知集成案例，用户已报告 READY 8/8。
 [独立源码与 Python 环境复现](C_TOOL_REPRODUCTION.md)提供固定提交、新 venv 和依赖证据，
-该复现的完整 Linux 运行仍待确认；全新主机复现与独立新案例验证也未完成。
+该复现已获用户回传 READY；外部来源案例也已回传必要项 5/5。全新主机复现与独立盲测仍未完成。
+[当前 C 原型阶段总结](C_TOOL_MILESTONE.md)列出已具备的能力、规模实验结果和研究边界。
 [结果格式](RESULT_FORMAT.md) · [agent 提案接口](AGENT_WORKFLOW.md) · [最新状态](PROJECT_STATUS.md)。

@@ -66,5 +66,8 @@ just because a 32-bit case times out: it is retained and the next scheduled run
 continues.
 
 Local unit and missing-solver controls are separate from formal measurements;
-formal results are pending. See the repository's
+the user now reports 10/10 valid measurements and 8/10 full-domain certificates.
+Only r2-b8 is individually identified (EXACT) in the supplied excerpt. The other
+rows and timing/diagnostic details are not yet inspected; do not infer that both
+uncertified runs were 32-bit timeouts. See the repository's
 [validation record](https://github.com/Zehsong/faas-python-c-verification/blob/codex/same-language-cache/docs/validation/popcount-scaling/README.md).
