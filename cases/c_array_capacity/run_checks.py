@@ -62,6 +62,12 @@ def main(argv=None):
     def record(name, passed, **details):
         results.append(dict(name=name,passed=bool(passed),**details))
         print(f"{name}: {'PASS' if passed else 'NOT ESTABLISHED'}",flush=True)
+        if not passed:
+            summary = details['summary']
+            print('  Diagnostics: ' + ', '.join(dict.fromkeys(d['code'] for d in summary['diagnostics'])), flush=True)
+            if details.get('expected_condition_check'):
+                print('  Expected-condition check: ' + details['expected_condition_check']['status'], flush=True)
+            print('  Report: ' + str(Path(summary['artifacts']['directory']) / 'report.md'), flush=True)
 
     cases=[('copy8','true',None),('clear16','true',None),('empty_prefix','true',None),
            ('conditional16','finder_n == 0',None),('tail64','finder_n != 0',None),
@@ -137,10 +143,13 @@ def main(argv=None):
            'Each condition is relative to type bounds, user constraints AND explicit logical-length capacity bounds.',
            'All physical elements remain observed, including inactive tails. Unsafe accesses/unwinding must fail; empty length domains give EMPTY_DOMAIN.',
            'Expected conditions are checked separately, never supplied to discovery. The agent control is scripted.','',
-           '| Case | Check | Outcome | Report |','|---|---|---|---|']
+           '| Case | Check | Outcome | Diagnostics (including earlier attempts) | Expected post-check | Report |',
+           '|---|---|---|---|---|---|']
     for row in results:
         link=Path(row['summary']['artifacts']['directory']).relative_to(directory).as_posix()+'/report.md'
-        lines.append(f"| {row['name']} | {'PASS' if row['passed'] else 'NOT ESTABLISHED'} | {row['summary']['status']} | [report]({link}) |")
+        codes = ', '.join(dict.fromkeys(d['code'] for d in row['summary']['diagnostics']))
+        post = (row.get('expected_condition_check') or {}).get('status', 'not run')
+        lines.append(f"| {row['name']} | {'PASS' if row['passed'] else 'NOT ESTABLISHED'} | {row['summary']['status']} | {codes} | {post} | [report]({link}) |")
     (directory/'README.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     print(f"C ARRAY CAPACITY ACCEPTANCE: {report['passed']}/{report['total']} passed; inputs/tools unchanged={unchanged}")
     print(f'Open overview: {directory / "README.md"}')

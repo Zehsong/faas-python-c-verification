@@ -5,6 +5,32 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Diagnose copy8 timeouts and add checked length partitions
+
+- Recorded user-supplied summary and overview after `7ad167b`: **10/11 passed**,
+  inputs/tools unchanged=True. Only copy8 is UNKNOWN and NOT ESTABLISHED; all
+  other checks, including expected negative controls and scripted agent, pass.
+- [Evidence paths and provenance](docs/validation/c-array-capacity/user-reported-results.md).
+  The supplied copy8 report identifies two SOLVER_TIMEOUTs (equal and different),
+  safety PROVED, NONEMPTY domain, 5 queries and 60.718313 elapsed seconds. Raw
+  archive remains uninspected. No inequivalence is inferred from UNKNOWN.
+- Added a C-adapter fallback after equal/different timeout with proved safety:
+  partition one explicit logical-length field into at most 17 values, prove
+  coverage with the solver, and require every part for a composed proof. A valid
+  part counterexample refutes the parent; incomplete coverage or a part UNKNOWN
+  cannot yield PROVED. Preserve complete array observations and other symbolic
+  inputs, caller query reserves and global time budgets. Each decomposition has
+  a JSON evidence record; direct failures remain visible in diagnostics.
+- No source/contract, timeout, unwind or expected-answer changes. Existing final
+  sufficiency/complement checks use the same fallback and remain required.
+  No safety bypass, recursive decomposition, arbitrary agent proof or induction.
+- Capacity overview now includes diagnostics and expected-condition post-check
+  status; failed rows print the report path. The same 11/11 gate remains open.
+- [Local validation](docs/validation/c-length-partition/README.md): 168 finder
+  tests without skips, including ten new scripted composition controls; one
+  evidence assembly check and actual missing-solver negative execution. These
+  are not formal acceptance. Next: rerun the capacity stage with modified ESBMC.
+
 ## 2026-09-16 — Record domain acceptance and extend array capacity/logical length
 
 - Recorded user-reported schema 3 domain **13/13 passed; inputs/tools unchanged=True**

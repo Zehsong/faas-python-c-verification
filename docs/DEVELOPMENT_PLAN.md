@@ -263,9 +263,13 @@ The next capacity slice is implemented: schema 3 physical array sizes 1..64,
 128 total initial values, optional explicit length_field with capacity guards,
 and unchanged complete physical-array observations. Sparse bounded seed and
 predicate preparation avoids a Cartesian explosion without restricting the
-symbolic domain. Eleven formal checks are pending, including prefix copies,
+symbolic domain. The user reports 10/11 checks passing after `7ad167b`, including
 conditional mutations, inactive-tail differences, empty lengths and safety controls.
-[Protocol](../cases/c_array_capacity/README.md).
+[Protocol](../cases/c_array_capacity/README.md). Only copy8 remains UNKNOWN:
+whole-domain safety passed, but equality and later complement checks timed out.
+A checked finite-length partition fallback is now implemented; it requires
+coverage and every sub-obligation and does not narrow array-element domains.
+Its formal rerun is pending before further capability expansion.
 
 This is not completion of the first milestone: new integer types, structs,
 richer expressions and dynamic memory still require work.

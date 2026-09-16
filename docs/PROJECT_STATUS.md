@@ -35,7 +35,16 @@ and contributes a recorded structural capacity constraint. All physical elements
 remain initialized and observed, including the inactive tail. Larger inputs use
 at most 256 sparse seeds and 24 initial predicates instead of exponential
 Cartesian preparation. Symbolic queries still cover the entire declared domain.
-New eleven-check formal acceptance is pending; [local evidence](validation/c-array-capacity/README.md).
+User-reported acceptance after `7ad167b` is **10/11; inputs/tools unchanged=True**.
+Only `copy8` (forward/reverse prefix copy) is NOT ESTABLISHED, with UNKNOWN;
+the supplied report identifies timeouts in query-002-equal and query-004-different,
+with safety PROVED and domain NONEMPTY. The remaining ten checks meet expectations.
+Added a fallback that partitions one explicit logical length after an equal/different
+timeout, requires solver-proved coverage and every part, and preserves budgets and
+full observations. It admits at most 17 parts; no nested partition or loop induction.
+The capacity gate remains open pending formal rerun of this fallback.
+[Reported evidence](validation/c-array-capacity/user-reported-results.md)
+and [local evidence](validation/c-array-capacity/README.md).
 Schema 1/2 limits remain unchanged.
 
 This is a core/frontend change: old frozen engine locks are intentionally not

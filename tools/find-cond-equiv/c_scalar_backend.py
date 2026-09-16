@@ -83,6 +83,12 @@ def bind_contract(path):
                         limits={"array_capacity": 64, "total_initial_values": 128})
             if len(contract.fields) > 4:
                 self.scope["condition_discovery"] = "at most 24 initial predicates; at most 256 sparse boundary seeds; solver queries still cover the entire declared domain"
+            if contract.logical_lengths:
+                self.scope["proof_decomposition"] = {
+                    "strategy": "after equal/different timeout, partition one explicit logical length",
+                    "max_parts": 17,
+                    "requirements": "whole-domain safety, solver-proved coverage and every part proved; shared query/time budgets",
+                    "observations": "unchanged complete observation vector; all other inputs remain symbolic"}
             self.esbmc, self.version = shutil.which(args.esbmc), None
             self.executable = self.inputs / ("scalar-probe.exe" if sys.platform == "win32" else "scalar-probe")
 
@@ -146,6 +152,54 @@ def bind_contract(path):
         def restore_obligations(self, obligations):
             # Called only after agent_workflow checks source/contract/tool identity.
             self.safety_established = obligations.get("safety", {}).get("status") == "PROVED"
+
+        def query(self, kind, condition="true", reserve=0, expected=None):
+            direct = super().query(kind, condition, reserve, expected)
+            if (kind not in ("equal", "different") or not self.safety_established
+                    or direct.get("status") != "UNKNOWN"
+                    or direct.get("reason_code") != "SOLVER_TIMEOUT"):
+                return direct
+            choices = []
+            for field in sorted(set(contract.logical_lengths.values())):
+                spec = contract.input_specs[field]
+                upper = min([spec['max'], *[contract.arrays[a]['length']
+                            for a, name in contract.logical_lengths.items() if name == field]])
+                count = upper - spec['min'] + 1
+                if 2 <= count <= 17:
+                    choices.append((count, field, spec['min'], upper))
+            if not choices:
+                return direct
+            count, field, lower, upper = min(choices)
+            # One coverage obligation plus each part, preserving caller reserves.
+            # All actual calls still enforce both budgets in CBackend.query.
+            if self.remaining() <= 0 or len(self.queries) + count + 1 > self.args.max_queries - reserve:
+                return direct
+            parts = [f"finder_{field} == UINT32_C({value})" for value in range(lower, upper + 1)]
+            union = " || ".join(f"({part})" for part in parts)
+            proof_path = self.workdir / f"length-partition-{len(self.queries):03d}.json"
+            coverage = super().query("feasible", f"({condition}) && !({union})", reserve)
+            result = {"status": "UNKNOWN", "basis": "EXHAUSTIVE_LENGTH_PARTITION",
+                      "kind": kind, "condition_c": condition, "field": field,
+                      "parts": parts, "direct_attempt": direct, "coverage": coverage,
+                      "checks": [], "evidence_file": str(proof_path)}
+            if coverage['status'] == 'PROVED':
+                for part in parts:
+                    checked = super().query(kind, f"({condition}) && ({part})", reserve, expected)
+                    result['checks'].append(checked)
+                    if checked['status'] == 'REFUTED':
+                        # This is also a counterexample in the parent region.
+                        result.update(status='REFUTED', witness=checked.get('witness'),
+                                      native_replay=checked.get('native_replay'))
+                        break
+                    if checked['status'] != 'PROVED':
+                        break
+                if len(result['checks']) == count and all(q['status'] == 'PROVED' for q in result['checks']):
+                    result['status'] = 'PROVED'
+            if result['status'] == 'UNKNOWN':
+                result['reason'] = 'Length partition did not establish coverage and every part; no composed proof'
+            save_json(proof_path, result)
+            print(f"  length partition {field} [{lower}, {upper}] {kind}: {result['status']}", flush=True)
+            return result
 
         def replay(self, rows, origin="boundary_seeds", repeat=False):
             if not self.safety_established:

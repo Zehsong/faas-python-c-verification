@@ -7,6 +7,7 @@ mkdir -p .verify-equiv-runs/c-array-capacity-stage
 CAPACITY_RUN="$(mktemp -d "$PWD/.verify-equiv-runs/c-array-capacity-stage/run-XXXXXX")"
 CAPACITY_STATUS=0
 python3 -m unittest discover -s tools/find-cond-equiv -p 'test_c_array_capacity.py' -v 2>&1 | tee "$CAPACITY_RUN/unit-tests.txt" || CAPACITY_STATUS=2
+python3 -m unittest discover -s tools/find-cond-equiv -p 'test_c_length_partition.py' -v 2>&1 | tee "$CAPACITY_RUN/partition-tests.txt" || CAPACITY_STATUS=2
 python3 -m unittest discover -s cases/c_array_capacity -p 'test_*.py' -v 2>&1 | tee "$CAPACITY_RUN/assembly-tests.txt" || CAPACITY_STATUS=2
 python3 cases/c_array_capacity/run_checks.py --esbmc "$CAPACITY_ESBMC" --cc "$FINDER_CC" --workdir "$CAPACITY_RUN" 2>&1 | tee "$CAPACITY_RUN/console.txt" || CAPACITY_STATUS=2
 if [[ -f "$CAPACITY_RUN/results.json" ]]; then

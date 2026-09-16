@@ -19,6 +19,11 @@
   documentation links are checked. Historical engine locks remain unchanged.
 
 The [new eleven-check formal stage](../../../cases/c_array_capacity/README.md)
-is pending in Codespace. The prior schema 3 domain result is separately
+now has [user-reported 10/11](user-reported-results.md): only copy8 is UNKNOWN
+and fails its acceptance check; its report shows equal/different timeouts after
+successful safety. The gate remains open. The subsequent
+[length-partition fallback](../c-length-partition/README.md) has separate local
+validation and awaits modified-ESBMC acceptance.
+The prior schema 3 domain result is separately
 [user-reported 13/13](../c-input-domains/user-reported-results.md) after `5446b31`;
 it does not certify this later capacity implementation.
