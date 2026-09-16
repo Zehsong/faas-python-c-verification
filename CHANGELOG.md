@@ -5,6 +5,34 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — Cache-state acceptance recorded; unified C demonstration
+
+- Recorded user-reported **CACHE STATE ACCEPTANCE: 14/14 passed; inputs/tools
+  unchanged=True**, including agent-config-cache PASS, after `33af517`.
+  [Transcript and archive paths](docs/validation/cache-state/user-reported-results.md).
+  Raw artifacts and actual identities remain uninspected. Together with array
+  10/10, this meets the implemented M3 baseline at user-reported evidence level;
+  arbitrary stateful C and unrestricted sequence claims are not established.
+- Added a single C demonstration/quickstart spanning scalar, prime lookup, array
+  and both private-cache adapters, plus no-equal-input and budget UNKNOWN examples.
+  An eighth check requires an ESBMC equality counterexample replayed natively with
+  identical returns but unequal arrays. Chinese overview copies actual conditions
+  and shows domain/observations/state proof scope with archive-relative links.
+- Inputs are copied before running; C bodies remain unchanged, cache backends bind
+  to their copied models/sketches. Engine/source/input-copy/tool identities gate
+  READY. Original run requests, reports and evidence are retained. The new demo
+  does not alter search, proof engine, fixtures or the historical transfer lock.
+- Validation: eight new local assembly tests passed without skips. Actual MSVC/
+  absent-ESBMC execution gives expected INCOMPLETE 0/8, seven UNKNOWN summaries,
+  zero native samples and no certified condition. Native compilation/mock assembly
+  is not formal proof. [Local records](docs/validation/c-tool-demo/README.md).
+  Syntax, relative links, negative reports, local archive/checksum round trip and
+  whitespace checked. Earlier 157-test engine regression was not rerun.
+- Formal **C TOOL DEMO READY 8/8** remains pending. This is an M4 presentation and
+  reproduction slice, not completion: clean Linux environment execution, held-out
+  integration and independent raw archive review remain open. The requested full
+  current-engine readonly-table rerun is still unreported.
+
 ## 2026-09-16 — Array acceptance recorded; private-cache state admission
 
 - Recorded user-reported **C BOUNDED ARRAY ACCEPTANCE: 10/10 passed** after

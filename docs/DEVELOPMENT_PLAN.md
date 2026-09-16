@@ -96,13 +96,28 @@ The existing two cache families now gate all native inputs on initialization and
 mode-specific preservation, validate typed post-state values, and declare required
 state evidence in the common result contract. Resumed agent sessions restore the
 gate under unchanged identity. The [14-check acceptance](../cases/cache_state/README.md)
-is implemented; formal execution is pending. It includes real invalid-state
+now has user-reported **14/14 passed; inputs/tools unchanged=True**.
+[Evidence record](validation/cache-state/user-reported-results.md). It includes real invalid-state
 obligations rather than assuming a successful return establishes preservation.
 
-After this acceptance, the M3 gate can be assessed using separate array and cache
-archives. Arbitrary stateful C admission and sequence-equivalence certificates are
+The separate array 10/10 and cache-state 14/14 reports meet the implemented
+M3 baseline gate at user-reported evidence level. Their raw archives remain uninspected. Arbitrary stateful C admission and sequence-equivalence certificates are
 not implied. Preserve the earlier frozen transfer baseline and use current result
 reports for the demonstration release.
+
+## M4 unified demonstration implementation
+
+A [single quickstart](C_TOOL_QUICKSTART.md) now packages scalar, computation/lookup,
+array and private-cache reports into a Chinese overview. Seven existing scenarios
+plus one same-return/different-array replay check form an 8-check demonstration.
+Only actual result conditions are displayed; budget/tool failures remain distinct,
+inputs and tool identities are checked, and overview links survive archiving.
+
+Eight assembly tests pass and the absent-solver run correctly stays INCOMPLETE
+0/8. The engine and fixtures are unchanged. Formal READY 8/8 is pending. This is a
+presentation/reproduction slice: clean Linux setup, an independently held-out
+case and evidence audit are still required before calling M4 complete. Do not
+relabel the known demo cases as unseen research evaluation.
 
 ## Release target
 

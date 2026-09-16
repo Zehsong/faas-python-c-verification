@@ -1,0 +1,17 @@
+Command: python -m unittest discover -s cases/c_tool_demo -p test_showcase.py -v
+Captured from the Windows bundled Python run, 2026-09-16.
+Synthetic certificates exercise assembly only; this is not an ESBMC run.
+
+test_assembly_errors_never_report_ready_or_invent_conditions (test_showcase.ShowcaseTests.test_assembly_errors_never_report_ready_or_invent_conditions) ... ok
+test_cache_snapshot_is_used_for_model_and_harness (test_showcase.ShowcaseTests.test_cache_snapshot_is_used_for_model_and_harness) ... ok
+test_complete_assembly_portable_links_and_drift_gate (test_showcase.ShowcaseTests.test_complete_assembly_portable_links_and_drift_gate) ... ok
+test_complete_typed_observation_and_safety_are_required (test_showcase.ShowcaseTests.test_complete_typed_observation_and_safety_are_required) ... ok
+test_missing_mismatched_or_unreplayed_witness_is_rejected (test_showcase.ShowcaseTests.test_missing_mismatched_or_unreplayed_witness_is_rejected) ... ok
+test_same_return_different_array_is_a_counterexample (test_showcase.ShowcaseTests.test_same_return_different_array_is_a_counterexample) ... ok
+test_snapshot_pairs_preserve_contract_and_bodies (test_showcase.ShowcaseTests.test_snapshot_pairs_preserve_contract_and_bodies) ... ok
+test_unknown_must_be_the_requested_budget_failure (test_showcase.ShowcaseTests.test_unknown_must_be_the_requested_budget_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.562s
+
+OK

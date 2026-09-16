@@ -16,7 +16,8 @@ bash cases/cache_state/test_state.sh "$ESBMC"
 
 目标输出：`CACHE STATE ACCEPTANCE: 14/14 passed; inputs/tools unchanged=True`。
 脚本单独保存 `cache-state-*.tar.gz`，不覆盖数组或之前的缓存归档。
-使用现有修改版 ESBMC；正式结果待 Codespace 验收。
+使用现有修改版 ESBMC；用户已报告 **14/14 passed; inputs/tools unchanged=True**；
+[原始输出与证据路径](../../docs/validation/cache-state/user-reported-results.md)，归档尚未独立审阅。
 
 ## 14 项验收
 

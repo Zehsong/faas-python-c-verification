@@ -21,6 +21,8 @@
   whitespace checked; frozen transfer files remain untouched.
 
 [Codespace commands and proof boundaries](../../../cases/cache_state/README.md).
-The formal 14/14 target remains pending. Array 10/10 is separately
+The user subsequently reported **14/14 passed; inputs/tools unchanged=True**.
+[Transcript and archive paths](user-reported-results.md). The raw archive and
+actual run identities have not been independently inspected. Array 10/10 is separately
 [user reported](../c-bounded-arrays/user-reported-results.md); its raw archive is
 uninspected and the requested readonly-table rerun remains unreported.

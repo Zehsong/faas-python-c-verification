@@ -1,0 +1,1 @@
+Actual negative run: INCOMPLETE 0/8; seven UNKNOWN/no-condition/zero-sample results. Engine/input/tool identities stable. Archive SHA256 verified; 183 internal checksums verified after relocation; 48 overview links resolve.

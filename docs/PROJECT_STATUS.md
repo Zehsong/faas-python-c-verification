@@ -15,9 +15,12 @@ reuse in other same-language backends. See [the plan](DEVELOPMENT_PLAN.md).
 Repository: https://github.com/Zehsong/faas-python-c-verification
 
 - Working branch: `codex/same-language-cache`.
-- Latest demonstration implementation: `75dbd47`; user-reported READY (5/5).
-- Latest implementation: cache state admission/reporting (identify this commit
-  in Git history), following `b1ae3d9` (bounded arrays, user-reported 10/10).
+- Latest demonstration: unified scalar/table/array/cache showcase (identify this
+  commit in Git history), formal READY 8/8 pending. Earlier scalar-only demo
+  `75dbd47` has user-reported READY (5/5).
+- Latest core implementation: `33af517`, cache state admission/reporting, now
+  user-reported 14/14; preceded by `b1ae3d9` (arrays, user-reported 10/10).
+  This unified-demo change leaves the proof/search engine unchanged.
   Prior table frontend `cd2b88c` has user-reported 9/9; the current-engine table
   rerun remains unreported.
 - Prior core implementation: `26925c7` (M2 result contract), following `133abe9` (transfer result record),
@@ -52,6 +55,7 @@ Repository: https://github.com/Zehsong/faas-python-c-verification
 | Agent workflow | Persistent JSON proposal/check/feedback sessions; typed Boolean conditions, native screening, backend certification, cumulative budgets and source/contract/tool drift checks | Built-in adapters plus checked generic scalar C contracts; external chat authors proposals; no automatic model API |
 | Versioned result contract | verification-result.json v1 and report.md for finder/agent runs; explicit scope, domain, proof basis and diagnostics | Legacy result.json retained; M2 acceptance user-reported 10/10, raw archive not independently inspected |
 | Scalar demonstration | Four existing C pairs/runs, archive-relative report index, editable inputs and a solver counterexample already replayed by the backend | User-reported READY (5/5), raw archive uninspected; no engine or C-subset expansion |
+| Unified C demonstration | One command and portable Chinese overview for seven executed cases plus a same-return/different-array solver replay | New 8/8 formal target pending; engine unchanged; known integration cases, not a held-out or clean-environment release |
 | Evidence tooling | Source/command snapshots, JSON/CSV results, archived runs and checksums | Historical archives are in the user's Codespace, not automatically in Git |
 
 Key code: [oracle](../tools/verify-equiv/verify_equiv.py),
@@ -143,7 +147,8 @@ result EXACT: n != 9 on n in 0..31.
 [Transcript and archive paths](validation/c-readonly-tables/user-reported-results.md).
 The raw archive remains independently uninspected; this result is separate from
 old scalar/demo pass counts. Restart prior agent sessions after upgrading frontend identity.
-The full M3 array input/output/state goals and M4 release gates remain open.
+The later array/cache results below meet the implemented M3 baseline at the
+user-reported evidence level; broader state/sequence support and M4 gates remain open.
 
 ## M3 bounded array input/output slice
 
@@ -184,12 +189,37 @@ published as EXACT/PARTIAL. Equality observes the return; private cache bytes ar
 not compared to a fictitious reference cache. A new [14-check stage](../cases/cache_state/README.md)
 uses both families, both entry modes, invalid initialization/preservation, missing
 solver and resumed scripted agent sessions. Local evidence is recorded
-[here](validation/cache-state/README.md); formal acceptance is pending.
+[here](validation/cache-state/README.md). The user now reports **14/14 passed;
+inputs/tools unchanged=True**, including agent-config-cache PASS.
+[Transcript and archive paths](validation/cache-state/user-reported-results.md).
+The raw archive and actual checkout/binary identities remain independently uninspected.
 
 This strengthens the existing reviewed cache adapters. It does not admit arbitrary
 stateful C contracts, synthesize invariants or establish unrestricted sequence
 equivalence. In `empty` mode, preservation covers an empty entry only, not all
 invariant states. Frozen transfer experiments retain their original checkout.
+
+## M3 baseline gate and M4 demonstration slice
+
+The recorded array 10/10 and cache-state 14/14 meet the implemented M3 baseline
+acceptance at the user-reported evidence level. This does not complete the future
+arbitrary-stateful-C or sequence-equivalence research goals. The current-engine
+full readonly-table rerun remains unreported; its earlier 9/9 is historical.
+
+The [unified C quickstart](C_TOOL_QUICKSTART.md) now runs seven existing scenarios:
+scalar all-input equality, prime lookup, array swap, both cache families, no equal
+inputs and a real query-budget limit. An eighth check requires a solver equality
+counterexample with identical returns but different arrays, already replayed by
+the backend. Its Chinese overview shows actual conditions, domains, observations,
+state obligations and archive-relative report/input/evidence links. Engine, source,
+input-copy and executable identities must remain unchanged for demo READY.
+
+Eight new local assembly tests pass. An actual MSVC/missing-ESBMC run remains
+INCOMPLETE 0/8, all seven cases UNKNOWN with no native samples or conditions.
+[Local evidence](validation/c-tool-demo/README.md). Formal READY 8/8 is pending.
+The proof engine and fixtures were not modified. This packages known examples;
+clean Linux environment reproduction, held-out integration and raw archive audit
+remain open M4/review work. No new agent or discovery-performance claim is made.
 
 ## Current transfer experiment
 
@@ -239,6 +269,7 @@ These are historical results, **not a fresh 2026-09-15 formal rerun**.
 | Scalar demonstration | READY, 5/5 checks, tools unchanged=True | [User-pasted summary](validation/c-demo/user-reported-results.md); raw overview, formula and witness not independently inspected |
 | Generic C local const tables | 9/9 passed; scripted agent EXACT n != 9 on 0..31 | [User-pasted summary](validation/c-readonly-tables/user-reported-results.md); includes expected UNKNOWN/rejection controls, raw archive uninspected |
 | Generic C bounded arrays | 10/10 passed | [User-pasted summary](validation/c-bounded-arrays/user-reported-results.md); includes negative controls, raw archive uninspected |
+| Private-cache state | 14/14 passed; inputs/tools unchanged=True | [User-pasted summary](validation/cache-state/user-reported-results.md); negative controls and scripted agent resumes included, archive uninspected |
 | External-chat prime trial | EXACT in 1 round, 4 total queries, 1.118 reported active seconds | [Reported context, assistant proposal and result](validation/agent-workflow/live-prime-trial/README.md); familiar candidate, integration evidence only |
 
 Formal environment: existing Codespace project at
@@ -268,14 +299,16 @@ Keep the working Codespace and its customized binary/source and evidence.
    M2 edge cases. M3 local const-table acceptance is now user-reported 9/9;
    preserve its separate archive and completed agent session. Array input/output
    schema 2 now has user-reported 10/10; the readonly-table rerun remains
-   unreported. Run the new cache-state stage (14/14 target) with a separate
-   archive and modified ESBMC. Keep array and state evidence separate.
+   unreported. Cache-state is now user-reported 14/14 with unchanged inputs/tools.
+   These separate results meet the implemented M3 baseline gate. Run the unified
+   C demonstration (READY 8/8 target) to obtain one browsable overview and a new
+   archive. Clean-environment/held-out release gates remain open.
    Continue authorized work directly after evidence updates; reserve summaries
    for meaningful milestones. Preserve the frozen transfer baseline; raw remote
    archive inspection remains open.
 4. The school/cloud changes remain unlocated; inspect any supplied branch/patch
    before integrating overlapping work. No remote update was found on the working
-   branch beyond `b1ae3d9` when cache-state development began.
+   branch beyond `33af517` when unified-demo development began.
 
 The workflow is recorded in [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md). It is a working
 file protocol, not an autonomous API client or automatic invariant synthesizer.

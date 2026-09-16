@@ -4,6 +4,8 @@
 >
 > 本文说明当前研究目标、方法设想与验证计划，供导师、研究成员和开发 agent 阅读。实现细节见交接文档及仓库代码；本文不代表完整系统已经实现。
 
+直接使用请看 [C 工具快速使用](docs/C_TOOL_QUICKSTART.md)：统一运行标量、查表、数组和缓存，并生成可下载的中文报告总览。
+
 接续开发请先读[当前状态与交接](docs/PROJECT_STATUS.md)、[开发记录](CHANGELOG.md)及[C 工具开发计划（提议）](docs/DEVELOPMENT_PLAN.md)。近期优先完成可复现、可接入新案例的 C 条件等价工具，再评估局限与其他语言复用；下文保留长期研究背景。
 
 已开始实现 [agent 辅助条件等价工作流](docs/AGENT_WORKFLOW.md)：外部 agent 通过 JSON 提议条件和输入，工具提供原生执行筛查、后端认证与跨轮反馈。现已增加[通用 C 标量接入](docs/C_SCALAR_TOOL.md)：两份受支持的 C 源码加契约配置即可生成 harness，并复用查区域和 agent 会话；本地测试通过，用户已反馈 Codespace 的新增验收 **8/8 通过**（[结果与证据路径](docs/validation/c-scalar/user-reported-results.md)，原始归档尚未独立审阅）。尚未支持任意 C 程序或自动模型 API。
@@ -18,7 +20,9 @@
 
 新增 [M3 有界数组输入／输出](cases/c_bounded_arrays/README.md)：schema 2 约定绑定固定数组参数，两边使用独立初值副本，比较返回值及全部数组最终内容。搜索、agent 筛查和反例重放使用完整观察；本地 149 项回归通过，用户已报告 **10/10 验收通过**（[证据记录](docs/validation/c-bounded-arrays/user-reported-results.md)）；当前版本只读表重跑结果尚未提供。
 
-新增 [M3 私有缓存状态验收](cases/cache_state/README.md)：两个缓存家族在初始化与状态保持证明通过后才执行原生输入；公共报告明确必需状态义务与单次调用范围，缺失证据不能发布认证条件。本地 **157 项检查通过**，14 项正式验收待修改版 ESBMC 运行。
+新增 [M3 私有缓存状态验收](cases/cache_state/README.md)：两个缓存家族在初始化与状态保持证明通过后才执行原生输入；公共报告明确必需状态义务与单次调用范围，缺失证据不能发布认证条件。本地 **157 项检查通过**，用户已报告 **14/14 passed; inputs/tools unchanged=True**（[输出与证据](docs/validation/cache-state/user-reported-results.md)）。结合数组 10/10，M3 基础验收在用户报告的证据层面已达成；不代表任意状态 C 或调用序列等价。
+
+新增[统一 C 演示](cases/c_tool_demo/README.md)：七个已有案例与一项数组反例检查，共用一份中文总览；核心引擎未改。本地八项组装检查通过，正式 READY 8/8 待修改版 ESBMC 运行。全新环境复现、独立新案例验证和历史归档审阅仍未完成。
 
 ## 1. 研究目标
 

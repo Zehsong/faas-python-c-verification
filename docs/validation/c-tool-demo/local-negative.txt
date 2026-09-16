@@ -1,0 +1,58 @@
+
+scalar-all
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\scalar-all\pair-uw18bovl\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\scalar-all\pair-uw18bovl
+scalar-all: NOT ESTABLISHED
+
+prime-lookup
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\prime-lookup\pair-zzj6g54_\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\prime-lookup\pair-zzj6g54_
+prime-lookup: NOT ESTABLISHED
+
+array-swap
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\array-swap\pair-3scz9w0g\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\array-swap\pair-3scz9w0g
+array-swap: NOT ESTABLISHED
+
+cache-miss
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: STATE_OBLIGATION_NOT_PROVED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\cache-miss\bad_miss-h6xc06kk\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\cache-miss\bad_miss-h6xc06kk
+cache-miss: NOT ESTABLISHED
+
+config-cache
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: STATE_OBLIGATION_NOT_PROVED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\config-cache\stale-ewt_2v0b\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\config-cache\stale-ewt_2v0b
+config-cache: NOT ESTABLISHED
+
+no-equal-inputs
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\no-equal-inputs\pair-wbbsg20z\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\no-equal-inputs\pair-wbbsg20z
+no-equal-inputs: NOT ESTABLISHED
+
+budget-limited
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\budget-limited\pair-akbfix8r\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\budget-limited\pair-akbfix8r
+budget-limited: NOT ESTABLISHED
+C TOOL DEMO: INCOMPLETE (0/8 checks; engine unchanged=True)
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\c-tool-demo-local\demo-c7ifx04y\README.md
