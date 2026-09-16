@@ -75,6 +75,9 @@ measured engine files, actual compiler/solver identities, commands and reports.
 Default evidence output is `$HOME/equiv-evidence`. Keep both the archive and its
 checksum sidecar. This stage does not rerun the known unified demonstration.
 
-Formal results are pending. See
+The user reports READY 5/5 required with a frozen engine. Full-width exploratory
+popcount remains UNKNOWN/SOLVER_TIMEOUT; the raw archive is uninspected locally.
+A separate [scaling protocol](SCALING.md) retains this original experiment and
+measures five input domains with fixed budgets. See
 [local validation](https://github.com/Zehsong/faas-python-c-verification/blob/codex/same-language-cache/docs/validation/c-external-bits/README.md)
 and [project status](https://github.com/Zehsong/faas-python-c-verification/blob/codex/same-language-cache/docs/PROJECT_STATUS.md).

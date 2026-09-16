@@ -1,0 +1,82 @@
+
+r1-b8
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b8\pair-dztcbqj6\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b8\pair-dztcbqj6
+r1-b8: UNKNOWN; full-domain certified=False
+
+r1-b12
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b12\pair-opf6ovth\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b12\pair-opf6ovth
+r1-b12: UNKNOWN; full-domain certified=False
+
+r1-b16
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b16\pair-h10i0g9t\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b16\pair-h10i0g9t
+r1-b16: UNKNOWN; full-domain certified=False
+
+r1-b24
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b24\pair-rm7drixa\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b24\pair-rm7drixa
+r1-b24: UNKNOWN; full-domain certified=False
+
+r1-b32
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b32\pair-g4wltzxc\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r1-b32\pair-g4wltzxc
+r1-b32: UNKNOWN; full-domain certified=False
+
+r2-b32
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b32\pair-bcc8cgfq\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b32\pair-bcc8cgfq
+r2-b32: UNKNOWN; full-domain certified=False
+
+r2-b24
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b24\pair-24kg64d7\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b24\pair-24kg64d7
+r2-b24: UNKNOWN; full-domain certified=False
+
+r2-b16
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b16\pair-oxqudl7t\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b16\pair-oxqudl7t
+r2-b16: UNKNOWN; full-domain certified=False
+
+r2-b12
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b12\pair-qzywo81b\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b12\pair-qzywo81b
+r2-b12: UNKNOWN; full-domain certified=False
+
+r2-b8
+UNKNOWN: None
+Outcome: UNKNOWN; domain=NOT_ESTABLISHED; claim=NO_EQUIVALENCE_CLAIM
+Diagnostics: SAFETY_NOT_ESTABLISHED, SOLVER_NOT_FOUND
+Report: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b8\pair-pvbtizao\report.md
+Artifacts: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\r2-b8\pair-pvbtizao
+r2-b8: UNKNOWN; full-domain certified=False
+POPCOUNT SCALING: INCOMPLETE (0/10 valid runs; full-domain certified=0/10)
+Open overview: C:\Users\Administrator\OneDrive\Documents\ChatGPT\Conditional Equivalence\faas-python-c-verification\.verify-equiv-runs\scaling-local\scaling-6liw6_lw\README.md

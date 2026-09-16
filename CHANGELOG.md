@@ -5,6 +5,35 @@ supplies the commit identity. Distinguish implementation, local checks, formal
 solver results and user-reported evidence. Current state is summarized in
 [PROJECT_STATUS](docs/PROJECT_STATUS.md).
 
+## 2026-09-16 — External integration accepted; characterize popcount scaling
+
+- Recorded user-reported **EXTERNAL C INTEGRATION READY (5/5 required; engine
+  frozen=True)** after `129df96`. The full-width exploratory popcount result is
+  UNKNOWN/SOLVER_TIMEOUT with safety PROVED and a nonempty domain; it is not
+  inequivalence. Kept the complete supplied transcript and archive paths, without
+  claiming independent raw artifact inspection or a local formal rerun.
+  [Record](docs/validation/c-external-bits/user-reported-results.md).
+- Added a separate fixed-budget domain sweep: 8/12/16/24/32-bit input ranges,
+  two repetitions in opposite order, unchanged uint32 C sources, unwind 34,
+  30-second query timeout, 300-second discovery budget and 96 queries. Existing
+  acceptance logic, fixtures and both historical engine locks are unchanged.
+- All outcomes, actual formulas, query/elapsed metrics and timeout kinds are
+  retained in JSON, CSV and a portable overview. Full-domain expected conditions
+  are checked only after EXACT, separately from discovery. RECORDED means ten
+  valid measurement records, never ten proofs; missing tools/infrastructure
+  failures or identity drift keep the stage INCOMPLETE. Separate archive includes
+  source/engine snapshots, generated contracts, schedule and identities.
+- Validation: **11 local tests passed, no skips** (six new measurement controls
+  plus five existing native/integration controls). Actual missing-solver run
+  retains ten UNKNOWN reports, zero queries/native discovery samples, INCOMPLETE
+  0/10 and no certificates. [Local evidence](docs/validation/popcount-scaling/README.md).
+  No core engine edits or formal rerun; full core regression was not repeated.
+- Ten formal scaling measurements are pending with the user's modified ESBMC.
+  This follows an observed known-case timeout; it is not blind evaluation,
+  autonomous-agent performance or a measured optimization. Preserve censored
+  failures and examine actual results before selecting a remedy. M4 clean-host,
+  independent held-out and raw evidence-audit limitations remain open.
+
 ## 2026-09-16 — Isolated reproduction accepted; external-source C integration
 
 - Recorded user-reported **ISOLATED C REPRODUCTION READY** after `7cc44b5`, with

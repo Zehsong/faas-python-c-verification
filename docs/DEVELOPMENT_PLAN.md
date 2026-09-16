@@ -142,12 +142,30 @@ unchanged. Five required cases cover full-width power-of-two variants and a
 byte-domain population count; full-width population count is an exploratory
 sixth run. Fixed budgets and roles precede formal execution. Expected regions
 are checked separately after discovery. No finder/backend edits or proposals
-are supplied. Five local/native controls pass; formal execution is pending.
+are supplied. Five local/native controls pass. The user now reports READY
+5/5 required, engine frozen=True; the full-width exploratory run remains
+UNKNOWN/SOLVER_TIMEOUT (safety PROVED, nonempty domain).
+[Transcript](validation/c-external-bits/user-reported-results.md); raw archive uninspected.
 
 This exercises the new-case integration requirement with an external source;
 it does not meet the stronger independently held-out/blind evaluation gate.
 Known answers, documented adaptations and authored references remain explicit.
 Broader environment validation and an independently selected case remain open.
+
+## Scaling follow-up to the first full-width timeout
+
+A [separate fixed-budget sweep](../cases/c_external_bits/SCALING.md) now varies
+only the popcount input upper bound through 8/12/16/24/32 bits. Two opposite-order
+repetitions retain every outcome, query count, elapsed time and timeout kind.
+The C arithmetic stays 32-bit, loops and unwind remain unchanged, and the old
+experiment is not retuned. Six new measurement controls and five existing
+native/integration controls pass locally. Ten formal measurements are pending.
+
+This starts failure/scale characterization while M4's clean-host/independently
+held-out gates remain open. RECORDED indicates valid measurements, not proof
+success; certificate counts remain separate. Censored timeout observations and
+two repetitions do not establish a precise complexity threshold. Use their
+actual reports to choose further work; do not tune or claim improvement first.
 
 ## Release target
 

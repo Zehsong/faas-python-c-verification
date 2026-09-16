@@ -1,0 +1,16 @@
+test_acceptance_requires_exact_safety_and_postcheck (test_external_bits.ExternalBitsTests.test_acceptance_requires_exact_safety_and_postcheck) ... ok
+test_contracts_and_locked_sources (test_external_bits.ExternalBitsTests.test_contracts_and_locked_sources) ... ok
+test_engine_drift_blocks_all_discovery (test_external_bits.ExternalBitsTests.test_engine_drift_blocks_all_discovery) ... ok
+test_native_references_and_adaptations (test_external_bits.ExternalBitsTests.test_native_references_and_adaptations) ... ok
+test_overview_retains_unknown_and_marks_exploratory (test_external_bits.ExternalBitsTests.test_overview_retains_unknown_and_marks_exploratory) ... ok
+test_balanced_fixed_schedule (test_scaling.ScalingTests.test_balanced_fixed_schedule) ... ok
+test_drift_blocks_run_but_preserves_evidence (test_scaling.ScalingTests.test_drift_blocks_run_but_preserves_evidence) ... ok
+test_metrics_preserve_timeout_kinds_and_unknown (test_scaling.ScalingTests.test_metrics_preserve_timeout_kinds_and_unknown) ... ok
+test_only_domain_and_name_change (test_scaling.ScalingTests.test_only_domain_and_name_change) ... ok
+test_overview_distinguishes_recording_from_proofs (test_scaling.ScalingTests.test_overview_distinguishes_recording_from_proofs) ... ok
+test_timeouts_are_measurements_not_certificates (test_scaling.ScalingTests.test_timeouts_are_measurements_not_certificates) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.805s
+
+OK

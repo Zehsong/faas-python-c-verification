@@ -1,0 +1,4 @@
+Internal SHA-256 checks: 265/265 passed
+Archived overview links: 14/14 exist
+Archive sidecar SHA-256: PASS
+All ten missing-solver measurements retained; this is not formal proof evidence.

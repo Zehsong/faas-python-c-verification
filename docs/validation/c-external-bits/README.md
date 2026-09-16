@@ -18,7 +18,9 @@
   transfer lock is preserved. This is a new external-source integration stage,
   not a rerun or repair of that historical experiment.
 
-Formal ESBMC execution is pending in Codespace. This stage uses the existing
+Formal execution is now [user-reported READY 5/5 required](user-reported-results.md);
+full-width exploratory popcount remains UNKNOWN/SOLVER_TIMEOUT. The original
+archive and identities are uninspected locally. This stage uses the existing
 modified binary; no stock replacement was installed. The known algorithms and
 authored reference functions are not an independent blind evaluation. See the
 [source/adaptation record and fixed schedule](../../../cases/c_external_bits/README.md).
